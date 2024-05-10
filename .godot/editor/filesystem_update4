@@ -1,0 +1,6 @@
+res://main.tscn
+res://Scripts/CollisionShape2D.gd
+res://Scripts/movement.gd
+res://movent.gd
+res://hud.tscn
+res://shop.tscn

@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=3 uid="uid://6xnon7mt5nee"]
+
+[ext_resource type="Texture2D" uid="uid://bc35ryqt34r6x" path="res://assets/interface/shop1.png" id="1_y0bcl"]
+[ext_resource type="Texture2D" uid="uid://cqgax8wsvih6c" path="res://assets/interface/pingicon.png" id="2_u46gn"]
+[ext_resource type="Texture2D" uid="uid://dk1tqv3rap8sp" path="res://assets/interface/sellbutton.png" id="3_thn2r"]
+[ext_resource type="Texture2D" uid="uid://b53v1iodgybwr" path="res://assets/interface/buybutton.png" id="4_skoxh"]
+[ext_resource type="Texture2D" uid="uid://cpqe4l277k3fg" path="res://assets/interface/Key1.png" id="5_yp380"]
+
+[node name="Shop" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="shop_plate" type="CanvasLayer" parent="."]
+
+[node name="shop_plate_texture" type="TextureRect" parent="shop_plate"]
+offset_left = 549.0
+offset_top = 81.0
+offset_right = 1049.0
+offset_bottom = 581.0
+texture = ExtResource("1_y0bcl")
+
+[node name="ping_icon_texture" type="TextureRect" parent="shop_plate"]
+z_index = -1
+offset_left = 588.0
+offset_top = 173.0
+offset_right = 628.0
+offset_bottom = 213.0
+scale = Vector2(3, 3)
+texture = ExtResource("2_u46gn")
+
+[node name="buttons" type="CanvasLayer" parent="."]
+
+[node name="sell_button_texture" type="TextureRect" parent="buttons"]
+offset_left = 737.0
+offset_top = 352.0
+offset_right = 865.0
+offset_bottom = 416.0
+texture = ExtResource("3_thn2r")
+
+[node name="buy_button_texture" type="TextureRect" parent="buttons"]
+offset_left = 598.0
+offset_top = 352.0
+offset_right = 726.0
+offset_bottom = 416.0
+texture = ExtResource("4_skoxh")
+
+[node name="items" type="CanvasLayer" parent="."]
+
+[node name="key_item_texture" type="TextureRect" parent="items"]
+offset_left = 741.0
+offset_top = 199.0
+offset_right = 781.0
+offset_bottom = 239.0
+texture = ExtResource("5_yp380")

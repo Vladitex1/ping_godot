@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmha2u8dlg5o1"]
+
+[ext_resource type="Texture2D" uid="uid://nljeostoi8ah" path="res://assets/interface/hud.png" id="1_0ampe"]
+[ext_resource type="Texture2D" uid="uid://cqgax8wsvih6c" path="res://assets/interface/pingicon.png" id="1_kscqi"]
+
+[node name="hud" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -110.0
+offset_top = 13.0
+offset_right = -110.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="icon" type="CanvasLayer" parent="."]
+
+[node name="icon_texture" type="TextureRect" parent="icon"]
+clip_contents = true
+anchors_preset = -1
+anchor_left = 0.00747664
+anchor_top = 0.72029
+anchor_right = 0.231776
+anchor_bottom = 1.02464
+offset_left = 17.0
+offset_top = 32.0001
+offset_right = -311.0
+offset_bottom = -145.0
+grow_vertical = 0
+scale = Vector2(4, 4)
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("1_kscqi")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="plate" type="CanvasLayer" parent="."]
+
+[node name="plate_texture" type="TextureRect" parent="plate"]
+clip_contents = true
+anchors_preset = -1
+anchor_left = 0.00747664
+anchor_top = 0.634783
+anchor_right = 0.262928
+anchor_bottom = 0.975362
+offset_top = 3.05176e-05
+offset_right = -328.0
+offset_bottom = -188.0
+grow_vertical = 0
+scale = Vector2(5, 5)
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("1_0ampe")
+expand_mode = 2
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
