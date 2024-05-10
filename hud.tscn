@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dmha2u8dlg5o1"]
 
-[ext_resource type="Texture2D" uid="uid://nljeostoi8ah" path="res://assets/interface/hud.png" id="1_0ampe"]
-[ext_resource type="Texture2D" uid="uid://cqgax8wsvih6c" path="res://assets/interface/pingicon.png" id="1_kscqi"]
+[ext_resource type="Texture2D" uid="uid://k5742llj4gq2" path="res://assets/interface/ping_icon_1024x1024.png" id="1_21nmr"]
+[ext_resource type="Texture2D" uid="uid://djcncwbhginso" path="res://assets/interface/hud_1900x1000.png" id="2_hce25"]
 
 [node name="hud" type="Control"]
 layout_mode = 3
@@ -25,13 +25,13 @@ anchor_top = 0.72029
 anchor_right = 0.231776
 anchor_bottom = 1.02464
 offset_left = 17.0
-offset_top = 32.0001
-offset_right = -311.0
-offset_bottom = -145.0
+offset_top = 25.9999
+offset_right = 681.0
+offset_bottom = 839.998
 grow_vertical = 0
-scale = Vector2(4, 4)
+scale = Vector2(0.12, 0.12)
 size_flags_stretch_ratio = 0.0
-texture = ExtResource("1_kscqi")
+texture = ExtResource("1_21nmr")
 stretch_mode = 2
 metadata/_edit_use_anchors_ = true
 
@@ -39,18 +39,10 @@ metadata/_edit_use_anchors_ = true
 
 [node name="plate_texture" type="TextureRect" parent="plate"]
 clip_contents = true
-anchors_preset = -1
-anchor_left = 0.00747664
-anchor_top = 0.634783
-anchor_right = 0.262928
-anchor_bottom = 0.975362
-offset_top = 3.05176e-05
-offset_right = -328.0
-offset_bottom = -188.0
-grow_vertical = 0
-scale = Vector2(5, 5)
+offset_left = -10.0
+offset_top = 417.0
+offset_right = 1990.0
+offset_bottom = 1517.0
+scale = Vector2(0.23, 0.23)
 size_flags_stretch_ratio = 0.0
-texture = ExtResource("1_0ampe")
-expand_mode = 2
-stretch_mode = 2
-metadata/_edit_use_anchors_ = true
+texture = ExtResource("2_hce25")

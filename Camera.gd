@@ -1,8 +1,6 @@
 extends Camera2D
 
 
-
-
 func zoom():
 	var step = 0.5
 	var min_zoom = 3
