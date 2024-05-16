@@ -1,0 +1,159 @@
+[gd_scene load_steps=12 format=3 uid="uid://dmha2u8dlg5o1"]
+
+[ext_resource type="Texture2D" uid="uid://k5742llj4gq2" path="res://assets/interface/ping_icon_1024x1024.png" id="1_21nmr"]
+[ext_resource type="FontFile" uid="uid://8atws0pc47sn" path="res://fonts/Font1.ttf" id="3_h8id7"]
+[ext_resource type="Texture2D" uid="uid://ddb813dlvbuyj" path="res://assets/interface/hud_status_large.png" id="4_7qmn3"]
+[ext_resource type="Script" path="res://Scripts/FPS.gd" id="4_cs6lk"]
+[ext_resource type="Texture2D" uid="uid://cx2ip8bilhrg5" path="res://assets/interface/hud_base_large.png" id="5_5t2uc"]
+[ext_resource type="Texture2D" uid="uid://pl513b6xupyn" path="res://assets/interface/hb1.png" id="6_f1kwn"]
+[ext_resource type="Texture2D" uid="uid://cpqe4l277k3fg" path="res://assets/interface/Key1.png" id="7_2srnd"]
+[ext_resource type="Texture2D" uid="uid://bv6wmrh28yfy8" path="res://assets/interface/coin.png" id="8_e6d1a"]
+[ext_resource type="Script" path="res://Scripts/health_label.gd" id="9_napmk"]
+[ext_resource type="Script" path="res://Scripts/coins_label.gd" id="10_jnfc6"]
+[ext_resource type="Script" path="res://Scripts/keys_label.gd" id="11_v22gr"]
+
+[node name="hud" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -110.0
+offset_top = 13.0
+offset_right = -110.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="icon" type="CanvasLayer" parent="."]
+
+[node name="icon_texture" type="TextureRect" parent="icon"]
+clip_contents = true
+anchors_preset = -1
+anchor_left = 0.0421875
+anchor_top = 0.772222
+anchor_right = 0.124714
+anchor_bottom = 0.924159
+offset_right = 897.886
+offset_bottom = 929.855
+grow_vertical = 0
+scale = Vector2(0.15, 0.15)
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("1_21nmr")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="plate" type="CanvasLayer" parent="."]
+
+[node name="FPS" type="Label" parent="plate"]
+anchors_preset = -1
+anchor_left = 0.001
+anchor_top = 0.002
+anchor_right = 0.021
+anchor_bottom = 0.032
+offset_left = -0.92
+offset_top = -0.16
+offset_right = 0.679996
+offset_bottom = 0.439999
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_h8id7")
+theme_override_font_sizes/font_size = 20
+script = ExtResource("4_cs6lk")
+metadata/_edit_use_anchors_ = true
+
+[node name="plate_status_texture" type="TextureRect" parent="plate"]
+offset_left = 48.0
+offset_top = 695.0
+offset_right = 1004.0
+offset_bottom = 1051.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("4_7qmn3")
+
+[node name="plate_texture" type="TextureRect" parent="plate"]
+offset_left = 55.0
+offset_top = 813.0
+offset_right = 1536.0
+offset_bottom = 1349.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("5_5t2uc")
+
+[node name="heath_bar" type="TextureRect" parent="plate"]
+visibility_layer = 2
+offset_left = 259.0
+offset_top = 852.0
+offset_right = 759.0
+offset_bottom = 916.0
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("6_f1kwn")
+
+[node name="key_texture" type="TextureRect" parent="plate"]
+visibility_layer = 4
+offset_left = 294.0
+offset_top = 908.0
+offset_right = 334.0
+offset_bottom = 948.0
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("7_2srnd")
+
+[node name="coin_texture" type="TextureRect" parent="plate"]
+offset_left = 405.0
+offset_top = 908.0
+offset_right = 445.0
+offset_bottom = 948.0
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("8_e6d1a")
+
+[node name="labels" type="CanvasLayer" parent="plate"]
+
+[node name="healh_count_label" type="Label" parent="plate/labels"]
+light_mask = 4
+anchors_preset = -1
+anchor_left = 0.00100001
+anchor_top = 0.00199998
+anchor_right = 0.0532917
+anchor_bottom = 0.032
+offset_left = 356.08
+offset_top = 857.84
+offset_right = 318.68
+offset_bottom = 858.44
+scale = Vector2(0.6, 0.6)
+theme_override_colors/font_color = Color(0.0962047, 0.0962048, 0.0962047, 1)
+theme_override_fonts/font = ExtResource("3_h8id7")
+theme_override_font_sizes/font_size = 20
+script = ExtResource("9_napmk")
+metadata/_edit_use_anchors_ = true
+
+[node name="coins_count_label" type="Label" parent="plate/labels"]
+light_mask = 4
+anchors_preset = -1
+anchor_left = 0.00100001
+anchor_top = 0.00199998
+anchor_right = 0.0532917
+anchor_bottom = 0.032
+offset_left = 443.08
+offset_top = 907.84
+offset_right = 343.68
+offset_bottom = 908.44
+scale = Vector2(0.9, 0.9)
+theme_override_colors/font_color = Color(0.0962047, 0.0962048, 0.0962047, 1)
+theme_override_fonts/font = ExtResource("3_h8id7")
+theme_override_font_sizes/font_size = 20
+script = ExtResource("10_jnfc6")
+metadata/_edit_use_anchors_ = true
+
+[node name="keys_count_label" type="Label" parent="plate/labels"]
+light_mask = 4
+anchors_preset = -1
+anchor_left = 0.00100001
+anchor_top = 0.00199998
+anchor_right = 0.0532917
+anchor_bottom = 0.032
+offset_left = 331.08
+offset_top = 907.84
+offset_right = 231.68
+offset_bottom = 908.44
+scale = Vector2(0.9, 0.9)
+theme_override_colors/font_color = Color(0.0962047, 0.0962048, 0.0962047, 1)
+theme_override_fonts/font = ExtResource("3_h8id7")
+theme_override_font_sizes/font_size = 20
+script = ExtResource("11_v22gr")
+metadata/_edit_use_anchors_ = true

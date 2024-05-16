@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://bc63lj3rqdmyq"]
+
+[ext_resource type="Texture2D" uid="uid://cox6xqgcbinmp" path="res://assets/LVL/shop1.png" id="1_xt8la"]
+[ext_resource type="Texture2D" uid="uid://knkg3hrtqc35" path="res://assets/LVL/shop2.png" id="2_2wknm"]
+[ext_resource type="Script" path="res://Scripts/shop_interface.gd" id="3_4twxb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2lhi3"]
+size = Vector2(56, 76)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2x15u"]
+radius = 30.0
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Shop" type="Area2D" parent="."]
+light_mask = 8
+visibility_layer = 8
+position = Vector2(-48, -197)
+
+[node name="Textures" type="Node2D" parent="Shop"]
+
+[node name="Shop1" type="Sprite2D" parent="Shop/Textures"]
+position = Vector2(244, 294)
+texture = ExtResource("1_xt8la")
+
+[node name="Shop2" type="Sprite2D" parent="Shop/Textures"]
+position = Vector2(244, 357)
+texture = ExtResource("2_2wknm")
+
+[node name="Colision" type="StaticBody2D" parent="Shop"]
+position = Vector2(154, 260)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shop/Colision"]
+z_index = 1
+position = Vector2(89, 59)
+shape = SubResource("RectangleShape2D_2lhi3")
+one_way_collision_margin = 2.3
+
+[node name="Area2D" type="Area2D" parent="Shop/Colision"]
+script = ExtResource("3_4twxb")
+
+[node name="enter_shop_cycle_colision" type="CollisionShape2D" parent="Shop/Colision/Area2D"]
+light_mask = 0
+position = Vector2(91, 117)
+shape = SubResource("CircleShape2D_2x15u")
+
+[connection signal="area_entered" from="Shop/Colision/Area2D" to="Shop/Colision/Area2D" method="_on_area_entered"]
+[connection signal="area_exited" from="Shop/Colision/Area2D" to="Shop/Colision/Area2D" method="_on_area_exited"]
+[connection signal="body_entered" from="Shop/Colision/Area2D" to="Shop/Colision/Area2D" method="_on_body_entered"]
+[connection signal="body_exited" from="Shop/Colision/Area2D" to="Shop/Colision/Area2D" method="_on_body_exited"]

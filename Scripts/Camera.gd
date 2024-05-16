@@ -1,10 +1,10 @@
 extends Camera2D
 
+static var step = 0.5
+static var min_zoom = 3
+static var max_zoom = 1
 
 func zoom():
-	var step = 0.5
-	var min_zoom = 3
-	var max_zoom = 1
 	
 	if Input.is_action_just_released('wheel_down'):
 		set_zoom(get_zoom() - Vector2(step, step))
@@ -16,7 +16,7 @@ func zoom():
 		if get_zoom() == Vector2(min_zoom,min_zoom):
 			set_zoom(get_zoom() - Vector2(step, step))
 
-func _physics_process(delta):
+func _process(delta):
 	zoom()
 
 

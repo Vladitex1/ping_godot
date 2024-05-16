@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://brnv3y6cu0cfg"]
+
+[ext_resource type="Texture2D" uid="uid://bebfv6ulkwc7" path="res://assets/interface/inventory_large.png" id="1_nbj8i"]
+[ext_resource type="Script" path="res://Scripts/inventory_script.gd" id="2_bi0ni"]
+
+[node name="inventory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="inventory" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="inventory"]
+light_mask = 0
+visibility_layer = 512
+offset_left = 1166.0
+offset_top = 582.0
+offset_right = 2166.0
+offset_bottom = 1582.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_nbj8i")
+script = ExtResource("2_bi0ni")

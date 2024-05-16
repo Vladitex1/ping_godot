@@ -1,7 +1,8 @@
 res://
-res://assets/interface
 res://assets/Tilemap
-res://img
-G:/godot/ping/Scripts
-G:/godot/ping
 res://Scripts
+res://Scenes
+G:/godot/ping/Scripts
+res://assets/interface
+res://img
+G:/godot/ping

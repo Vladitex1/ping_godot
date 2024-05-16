@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://do42rlis6it6d"]
+
+[ext_resource type="Script" path="res://Scripts/loading_script.gd" id="1_v0uja"]
+[ext_resource type="PackedScene" uid="uid://f36nk3c5t4au" path="res://test_level.tscn" id="1_ve3ty"]
+[ext_resource type="PackedScene" uid="uid://codphaex78n4y" path="res://Scenes/Player.tscn" id="4_77xg7"]
+[ext_resource type="PackedScene" uid="uid://dx4bhoi4ir7k1" path="res://Scenes/enemy.tscn" id="5_8yc8t"]
+[ext_resource type="PackedScene" uid="uid://bc63lj3rqdmyq" path="res://Scenes/Shop_object.tscn" id="5_ktltc"]
+[ext_resource type="PackedScene" uid="uid://qwoq8hai53h2" path="res://Scenes/Door.tscn" id="6_hegnr"]
+
+[node name="main" type="Node2D"]
+
+[node name="game_script" type="Node2D" parent="."]
+script = ExtResource("1_v0uja")
+
+[node name="Test_level" parent="." instance=ExtResource("1_ve3ty")]
+
+[node name="Creatures" type="Node2D" parent="."]
+
+[node name="Player" parent="Creatures" instance=ExtResource("4_77xg7")]
+position = Vector2(172, 146)
+
+[node name="enemy_npc" parent="Creatures" instance=ExtResource("5_8yc8t")]
+position = Vector2(538, 120)
+
+[node name="Objects" type="Node2D" parent="."]
+
+[node name="Doors" type="Node2D" parent="Objects"]
+
+[node name="door_1" parent="Objects/Doors" instance=ExtResource("6_hegnr")]
+position = Vector2(409, 215)
+
+[node name="door_2" parent="Objects/Doors" instance=ExtResource("6_hegnr")]
+position = Vector2(409, 473)
+
+[node name="Shops" type="Node2D" parent="Objects"]
+
+[node name="shop_1" parent="Objects/Shops" instance=ExtResource("5_ktltc")]
+position = Vector2(77, 43)

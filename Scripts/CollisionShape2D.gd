@@ -1,21 +1,37 @@
 extends CharacterBody2D
 
-var speed = 4
+static var speed = 150
+static var sprint = 100
+static var temp_sprit = sprint
 var delta = 1
-var sprint = 2
+
+@onready var player_animation = $AnimatedSprite2D
+
+#anim walk_right
 
 	
 func get_input():
 	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	
 	if Input.is_action_pressed("move_shift"):
-		sprint	= 2
+		sprint	= temp_sprit
 	else:
 		sprint = 0
-		
 	velocity = input_dir * (speed + sprint)
-
+	
+func animation():
+	if Input.is_action_pressed("move_right"):
+		player_animation.play("walk_right")
+	elif Input.is_action_pressed("move_left"):
+		player_animation.play("walk_left")
+	elif Input.is_action_pressed("move_up"):
+		player_animation.play("walk_up")
+	elif Input.is_action_pressed("move_down"):
+		player_animation.play("walk_down")
+	else:
+		player_animation.stop()
+	
 
 func _physics_process(delta):
 	get_input()
-	move_and_collide(velocity)
+	move_and_slide()
+	animation()
