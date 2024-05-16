@@ -9,8 +9,6 @@ res://Scenes/hud.tscn
 res://Scenes/Player.tscn
 res://Scenes/enemy.tscn
 res://inventory.tscn
+res://Scripts/Camera.gd
 res://Scripts/inventory_script.gd
-res://Scripts/loading_script.gd
-res://Scripts/global.gd
-res://Scripts/exit_shop_button.gd
-res://Scripts/shop_interface.gd
+res://Scripts/shop_inventory_script.gd

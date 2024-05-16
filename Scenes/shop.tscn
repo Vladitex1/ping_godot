@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://6xnon7mt5nee"]
+[gd_scene load_steps=12 format=3 uid="uid://6xnon7mt5nee"]
 
 [ext_resource type="Texture2D" uid="uid://bc35ryqt34r6x" path="res://assets/interface/shop1.png" id="1_y0bcl"]
 [ext_resource type="Texture2D" uid="uid://k5742llj4gq2" path="res://assets/interface/ping_icon_1024x1024.png" id="2_kimur"]
@@ -9,7 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://cpqe4l277k3fg" path="res://assets/interface/Key1.png" id="5_yp380"]
 [ext_resource type="Theme" uid="uid://7xlrsebp7r3g" path="res://font_gray_theme.tres" id="6_xbq1c"]
 [ext_resource type="FontFile" uid="uid://8atws0pc47sn" path="res://fonts/Font1.ttf" id="7_u30p0"]
-[ext_resource type="PackedScene" uid="uid://brnv3y6cu0cfg" path="res://inventory.tscn" id="10_600xh"]
+[ext_resource type="Texture2D" uid="uid://bebfv6ulkwc7" path="res://assets/interface/inventory_large.png" id="10_tsnn7"]
+[ext_resource type="Script" path="res://Scripts/shop_inventory_script.gd" id="11_ji5sh"]
 
 [node name="Shop" type="Control"]
 layout_mode = 3
@@ -138,4 +139,13 @@ text = "SHOP"
 
 [node name="inventory_plate" type="CanvasLayer" parent="."]
 
-[node name="inventory" parent="inventory_plate" instance=ExtResource("10_600xh")]
+[node name="TextureRect" type="TextureRect" parent="inventory_plate"]
+light_mask = 0
+visibility_layer = 512
+offset_left = 1052.0
+offset_top = 219.0
+offset_right = 2052.0
+offset_bottom = 1219.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("10_tsnn7")
+script = ExtResource("11_ji5sh")
