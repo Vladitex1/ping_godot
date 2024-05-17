@@ -262,22 +262,20 @@ radius = 38.5714
 [node name="Node2D" type="Node2D"]
 
 [node name="Enemy" type="CharacterBody2D" parent="."]
-position = Vector2(3.8147e-06, -2.00001)
-scale = Vector2(0.7, 0.7)
-collision_layer = 11
-collision_mask = 11
+position = Vector2(9.09495e-13, 1.90735e-06)
+scale = Vector2(0.999999, 0.999999)
 script = ExtResource("1_kwda8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy"]
 z_index = 2
-position = Vector2(282.485, 171.114)
-scale = Vector2(1.4, 1.41203)
+position = Vector2(197.74, 117.78)
+scale = Vector2(0.980001, 0.988422)
 sprite_frames = SubResource("SpriteFrames_5mw0w")
 animation = &"walk_down"
 
-[node name="PingColision" type="CollisionShape2D" parent="Enemy"]
-position = Vector2(282.857, 170)
-scale = Vector2(0.98, 0.98)
+[node name="EnemyPing" type="CollisionShape2D" parent="Enemy"]
+position = Vector2(198, 117)
+scale = Vector2(0.686001, 0.686001)
 shape = SubResource("RectangleShape2D_rsbu1")
 
 [node name="AttackTimer" type="Timer" parent="Enemy"]
@@ -285,8 +283,6 @@ wait_time = 2.0
 one_shot = true
 
 [node name="detection" type="Area2D" parent="Enemy"]
-position = Vector2(-5.44957e-06, 2.85716)
-scale = Vector2(1.42857, 1.42857)
 collision_layer = 7
 collision_mask = 7
 
@@ -298,14 +294,11 @@ position = Vector2(198, 115)
 shape = SubResource("CircleShape2D_hgotk")
 
 [node name="close_detection" type="Area2D" parent="Enemy"]
+position = Vector2(3.8147e-06, -2.00001)
+scale = Vector2(0.700001, 0.700001)
 collision_layer = 7
 collision_mask = 7
 
 [node name="enemy_close_colision" type="CollisionShape2D" parent="Enemy/close_detection"]
 position = Vector2(282.857, 170)
 shape = SubResource("CircleShape2D_i0pi7")
-
-[connection signal="body_entered" from="Enemy/detection" to="Enemy" method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Enemy/detection" to="Enemy" method="_on_area_2d_body_exited"]
-[connection signal="body_entered" from="Enemy/close_detection" to="Enemy" method="_on_close_detection_body_entered"]
-[connection signal="body_exited" from="Enemy/close_detection" to="Enemy" method="_on_close_detection_body_exited"]

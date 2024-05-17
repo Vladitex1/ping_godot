@@ -16,6 +16,7 @@ radius = 46.0
 position = Vector2(-508, -436)
 collision_layer = 8
 collision_mask = 8
+script = ExtResource("3_ec11f")
 
 [node name="Textures" type="Node2D" parent="Door"]
 
@@ -45,7 +46,5 @@ script = ExtResource("3_ec11f")
 position = Vector2(26, -5)
 shape = SubResource("CircleShape2D_axr4c")
 
-[connection signal="area_entered" from="Door/door_real_colision_area/Area2D" to="Door/door_real_colision_area/Area2D" method="_on_area_entered"]
-[connection signal="area_exited" from="Door/door_real_colision_area/Area2D" to="Door/door_real_colision_area/Area2D" method="_on_area_exited"]
 [connection signal="body_entered" from="Door/door_real_colision_area/Area2D" to="Door/door_real_colision_area/Area2D" method="_on_body_entered"]
 [connection signal="body_exited" from="Door/door_real_colision_area/Area2D" to="Door/door_real_colision_area/Area2D" method="_on_body_exited"]

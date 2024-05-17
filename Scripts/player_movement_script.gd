@@ -32,9 +32,18 @@ func animation():
 func update_player_position():
 	global.set_player_pos(player.get_global_position())
 	
+#func _on_hands_body_entered(body):
+	#pass # Replace with function body.
+
+
+#func _on_hands_body_exited(body):
+	#pass # Replace with function body.
 	
 func _process(delta):
 	get_input()
 	move_and_slide()
 	animation()
 	update_player_position()
+
+
+

@@ -16,13 +16,13 @@ var player = null
 var player_chase = false
 var speed = 0
 
-func _on_area_2d_body_entered(body:CharacterBody2D):
+func _on_detection_body_entered(body:CharacterBody2D):
 	if str(body.name) == "Player":
 		player = body
 		state = CHASE
 		print("Enter_enemy_col")
 
-func _on_area_2d_body_exited(body:CharacterBody2D):
+func _on_detection_body_exited(body:CharacterBody2D):
 	if str(body.name) == "Player":
 		player = null
 		state = PATROL

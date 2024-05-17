@@ -1,14 +1,10 @@
-res://Scenes/main1.tscn
+res://Scenes/skeleton.tscn
 res://Scripts/CollisionShape2D.gd
 res://Scripts/movement.gd
 res://Scripts/player_movement_script.gd
+res://Scripts/skeleton_script.gd
+res://Scenes/main1.tscn
 res://Scenes/Door.tscn
 res://Scenes/Shop_object.tscn
-res://Scenes/shop.tscn
-res://Scenes/hud.tscn
 res://Scenes/Player.tscn
 res://Scenes/enemy.tscn
-res://inventory.tscn
-res://Scripts/Camera.gd
-res://Scripts/inventory_script.gd
-res://Scripts/shop_inventory_script.gd

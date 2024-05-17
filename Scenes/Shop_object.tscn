@@ -5,10 +5,10 @@
 [ext_resource type="Script" path="res://Scripts/shop_interface.gd" id="3_4twxb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2lhi3"]
-size = Vector2(56, 76)
+size = Vector2(58, 75)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_2x15u"]
-radius = 30.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l2tgv"]
+size = Vector2(58, 46)
 
 [node name="Node2D" type="Node2D"]
 
@@ -32,7 +32,7 @@ position = Vector2(154, 260)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shop/Colision"]
 z_index = 1
-position = Vector2(89, 59)
+position = Vector2(90, 59.5)
 shape = SubResource("RectangleShape2D_2lhi3")
 one_way_collision_margin = 2.3
 
@@ -41,8 +41,8 @@ script = ExtResource("3_4twxb")
 
 [node name="enter_shop_cycle_colision" type="CollisionShape2D" parent="Shop/Colision/Area2D"]
 light_mask = 0
-position = Vector2(91, 117)
-shape = SubResource("CircleShape2D_2x15u")
+position = Vector2(90, 120)
+shape = SubResource("RectangleShape2D_l2tgv")
 
 [connection signal="area_entered" from="Shop/Colision/Area2D" to="Shop/Colision/Area2D" method="_on_area_entered"]
 [connection signal="area_exited" from="Shop/Colision/Area2D" to="Shop/Colision/Area2D" method="_on_area_exited"]

@@ -7,11 +7,10 @@ var door_tougle = false
 var door_ready = false
 
 func _on_body_entered(body:CharacterBody2D):
-	#print(str(body.name))
 	if str(body.name) == "Player":
 		print("вход в территорию двери")
 		global.set_tougle(3,true)
-		door_ready = true	
+		door_ready = true
 
 func _on_body_exited(body:CharacterBody2D):
 	if str(body.name) == "Player":
