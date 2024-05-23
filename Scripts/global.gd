@@ -6,6 +6,7 @@ static var scene3 = preload("res://Scenes/inventory.tscn").instantiate()
 
 var shop_tougle = false
 var action_tougle = false
+var loading_tougle = false
 var heat_tougle = false
 static var ret: bool = false
 var door_list = {}
@@ -39,6 +40,8 @@ func set_tougle(num,status):
 	match num:
 		1:
 			shop_tougle = status
+		2:
+			loading_tougle = status
 		3:
 			action_tougle = status
 		4:
@@ -48,6 +51,8 @@ func get_tougle(num):
 	match num:
 		1:
 			ret = shop_tougle
+		2:
+			ret = loading_tougle
 		3:
 			ret = action_tougle
 		4: 

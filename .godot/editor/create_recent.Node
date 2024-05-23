@@ -1,8 +1,8 @@
+CanvasLayer
 CollisionShape2D
 Area2D
 CharacterBody2D
 AnimatedSprite2D
-CanvasLayer
 Node2D
 TileMap
 CollisionPolygon2D

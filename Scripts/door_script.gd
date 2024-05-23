@@ -20,6 +20,7 @@ func _on_body_exited(body:CharacterBody2D):
 		
 func _process(delta):
 	if Input.is_action_just_released("press_key_event_on") and door_ready == true:
+		global.set_tougle(2,true)
 		if door_tougle == false:
 			print("Дверь открыта")
 			door_tex_1.hide()
