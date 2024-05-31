@@ -267,7 +267,7 @@ scale = Vector2(0.999999, 0.999999)
 script = ExtResource("1_kwda8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy"]
-z_index = 2
+z_index = 3
 position = Vector2(197.74, 117.78)
 scale = Vector2(0.980001, 0.988422)
 sprite_frames = SubResource("SpriteFrames_5mw0w")

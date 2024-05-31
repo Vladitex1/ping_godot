@@ -1,7 +1,6 @@
 extends Area2D
-
-@onready var door_tex_1 = $"../../Textures/Door1"
-@onready var door_tex_2 = $"../../Textures/Door2"
+@onready var door_timer =  $"../../Textures/Door_Timer"
+@onready var door_animation = $"../../Textures/door_open_animation"
 @onready var door_colision = $"../door_real_colision"
 var door_tougle = false
 var door_ready = false
@@ -18,18 +17,31 @@ func _on_body_exited(body:CharacterBody2D):
 		door_ready = false
 		global.set_tougle(3,false)
 		
+func animation(animation_bool):
+	if !animation_bool:
+		door_animation.play("door_open")
+	else:
+		door_animation.play("door_close")
+		
 func _process(delta):
 	if Input.is_action_just_released("press_key_event_on") and door_ready == true:
 		global.set_tougle(2,true)
 		if door_tougle == false:
 			print("Дверь открыта")
-			door_tex_1.hide()
-			door_tex_2.hide()
+			animation(door_tougle)
 			door_tougle = true
+			await get_tree().create_timer(1).timeout
+
 		else:
 			print("Дверь закрыта")
-			door_tex_1.show()
-			door_tex_2.show()
+			animation(door_tougle)
 			door_tougle = false
-		door_colision.set_deferred("disabled",door_tougle)
+		
+		
+		global.set_tougle(2,false)
+			
+		door_colision.set_deferred("disabled",door_tougle)	
+			
+			
+		
 

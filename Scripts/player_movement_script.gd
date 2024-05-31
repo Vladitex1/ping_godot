@@ -5,7 +5,7 @@ static var sprint = 100
 static var temp_sprit = sprint
 var delta = 1
 var is_first_try = true
-@onready var player_animation = $AnimatedSprite2D
+@onready var player_animation = $Ping_Aimation
 @onready var player = $PingColision
 
 	
@@ -16,6 +16,10 @@ func get_input():
 	else:
 		sprint = 0
 	velocity = input_dir * (speed + sprint)
+	
+	if Input.is_action_just_released("special_back"):
+		print("stop_screen")
+		global.add_scene("stop_screen")
 	
 func animation():
 	if Input.is_action_pressed("move_right"):

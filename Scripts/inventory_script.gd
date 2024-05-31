@@ -17,7 +17,7 @@ func inventory_tougle(open):
 func _ready():
 	set_position(hiden_inventory_pos)
 	open = true
-
+	
 func position_up():
 	set_position(hiden_inventory_pos)
 	open = true
