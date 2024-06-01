@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7g1iscpfufv4"]
+
+[ext_resource type="FontFile" uid="uid://b4oj5sigrnidv" path="res://fonts/Font2.ttf" id="1_t4cjv"]
+[ext_resource type="Script" path="res://Scripts/debug/plus_debug_button.gd" id="2_qvyed"]
+[ext_resource type="FontFile" uid="uid://8atws0pc47sn" path="res://fonts/Font1.ttf" id="3_871ms"]
+[ext_resource type="Script" path="res://Scripts/debug/minus_debug_button.gd" id="4_hyn8x"]
+
+[node name="Control" type="Control"]
+light_mask = 512
+visibility_layer = 512
+z_index = 4
+layout_mode = 3
+anchors_preset = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 126.0
+offset_bottom = 75.0
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+columns = 3
+
+[node name="+ button" type="Button" parent="PanelContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_t4cjv")
+text = "+"
+script = ExtResource("2_qvyed")
+
+[node name="size label" type="Label" parent="PanelContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_871ms")
+theme_override_font_sizes/font_size = 10
+text = "scale"
+
+[node name="- button" type="Button" parent="PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_t4cjv")
+text = "-"
+script = ExtResource("4_hyn8x")

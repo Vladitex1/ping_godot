@@ -1,5 +1,7 @@
-res://Scripts
 res://Scenes
+res://Scripts/stop_screen
+res://Scripts/debug
+res://Scripts
 res://assets/Tilemap
 res://
 G:/godot/ping/Scripts

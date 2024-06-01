@@ -4,6 +4,7 @@ static var scene1 = preload("res://Scenes/shop.tscn").instantiate()
 static var scene2 = preload("res://Scenes/hud.tscn").instantiate()
 static var scene3 = preload("res://Scenes/inventory.tscn").instantiate()
 static var scene4 = preload("res://Scenes/stop_screen.tscn").instantiate()
+static var scene5 = preload("res://Scenes/debug.tscn").instantiate()
 
 var shop_tougle = false
 var action_tougle = false
@@ -30,6 +31,8 @@ func add_scene(name):
 			get_tree().root.add_child(scene3)
 		"stop_screen":
 			get_tree().root.add_child(scene4)
+		"debug":
+			get_tree().root.add_child(scene5)
 func del_scene(name):
 	match name:
 		"shop":
@@ -74,6 +77,7 @@ func hud_load():
 	#return 0
 	global.add_scene("hud")
 	global.add_scene("inventory")
+	#global.add_scene("debug")
 
 func set_player_pos(vector):
 	player_position = vector
@@ -90,5 +94,9 @@ func get_camera_position(num):
 			return camera_position
 		2:
 			return camera_zoom
+	
+#func set_camera_zoom_plus():
+
+#func set_camera_zoom_minus():
 	
 	

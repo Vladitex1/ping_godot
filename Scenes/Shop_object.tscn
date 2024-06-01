@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Scripts/shop_interface.gd" id="3_4twxb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2lhi3"]
-size = Vector2(58, 90)
+size = Vector2(58, 92)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l2tgv"]
 size = Vector2(58, 46)
@@ -32,7 +32,7 @@ position = Vector2(154, 260)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shop/Colision"]
 z_index = 1
-position = Vector2(90, 67)
+position = Vector2(90, 66)
 shape = SubResource("RectangleShape2D_2lhi3")
 one_way_collision_margin = 2.3
 

@@ -1,7 +1,30 @@
-[gd_scene load_steps=3 format=3 uid="uid://jt7xwcv3m7ec"]
+[gd_scene load_steps=6 format=3 uid="uid://jt7xwcv3m7ec"]
 
 [ext_resource type="Texture2D" uid="uid://bebfv6ulkwc7" path="res://assets/interface/inventory_large.png" id="1_nbj8i"]
 [ext_resource type="Script" path="res://Scripts/inventory_script.gd" id="2_bi0ni"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fssyc"]
+texture = ExtResource("1_nbj8i")
+
+[sub_resource type="Animation" id="Animation_uh4gh"]
+resource_name = "inventory_show_animation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6, 0.7),
+"transitions": PackedFloat32Array(1.7411, 1.54923, 1, 315.172),
+"update": 0,
+"values": [Vector2(1156, 1052), Vector2(1156, 600), Vector2(1156, 625), Vector2(1156, 650)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b8sek"]
+_data = {
+"inventory_show_animation": SubResource("Animation_uh4gh")
+}
 
 [node name="inventory" type="Control"]
 layout_mode = 3
@@ -13,13 +36,18 @@ grow_vertical = 2
 
 [node name="inventory" type="CanvasLayer" parent="."]
 
-[node name="TextureRect" type="TextureRect" parent="inventory"]
-light_mask = 0
-visibility_layer = 512
-offset_left = 1166.0
-offset_top = 582.0
-offset_right = 2166.0
-offset_bottom = 1582.0
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_nbj8i")
+[node name="PanelContainer" type="PanelContainer" parent="inventory"]
+offset_left = 1156.0
+offset_top = 1052.0
+offset_right = 1623.0
+offset_bottom = 1541.01
+theme_override_styles/panel = SubResource("StyleBoxTexture_fssyc")
 script = ExtResource("2_bi0ni")
+
+[node name="GridContainer" type="GridContainer" parent="inventory/PanelContainer"]
+layout_mode = 2
+
+[node name="inventory_pos_animation" type="AnimationPlayer" parent="inventory/PanelContainer"]
+libraries = {
+"": SubResource("AnimationLibrary_b8sek")
+}

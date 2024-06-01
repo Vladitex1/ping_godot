@@ -31,13 +31,12 @@ func _process(delta):
 			animation(door_tougle)
 			door_tougle = true
 			await get_tree().create_timer(1).timeout
-
 		else:
 			print("Дверь закрыта")
 			animation(door_tougle)
 			door_tougle = false
 		
-		
+		door_ready = false
 		global.set_tougle(2,false)
 			
 		door_colision.set_deferred("disabled",door_tougle)	

@@ -1,31 +1,18 @@
-extends TextureRect
+extends PanelContainer
 
 var open = true
 
-var hiden_inventory_pos = Vector2(1156,1052)
-var show_inventory_pos = Vector2(1116,630)
-var step = 100
+@onready var show_animation = $inventory_pos_animation
 
-func inventory_tougle(open):
-	if open == false:
-		position_up()
+func inventory_tougle():
+	if open:
+		open = false
+		show_animation.play("inventory_show_animation")
 	else:
-		position_down()
+		open = true
+		show_animation.play_backwards("inventory_show_animation")	
 
-
-
-func _ready():
-	set_position(hiden_inventory_pos)
-	open = true
-	
-func position_up():
-	set_position(hiden_inventory_pos)
-	open = true
-func position_down():
-	set_position(show_inventory_pos)
-	open = false
-	
 func _process(delta):
 	if Input.is_action_just_released("special_tab"):
-		inventory_tougle(open)
+		inventory_tougle()
 
