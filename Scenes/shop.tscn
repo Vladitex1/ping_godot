@@ -42,8 +42,9 @@ texture = ExtResource("2_kimur")
 [node name="buy_button" type="Button" parent="shop_plate/buttons"]
 offset_left = 470.0
 offset_top = 494.0
-offset_right = 590.0
-offset_bottom = 551.0
+offset_right = 610.0
+offset_bottom = 572.0
+scale = Vector2(0.849685, 0.735017)
 button_mask = 7
 
 [node name="sell_button" type="Button" parent="shop_plate/buttons"]

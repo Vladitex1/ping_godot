@@ -22,7 +22,7 @@ func zoom():
 func get_camera_target_position():
 	global.set_camera_position(get_target_position(),get_zoom())
 
-func _process(delta):
+func _process(_delta):
 	zoom()
 	
 	get_camera_target_position()

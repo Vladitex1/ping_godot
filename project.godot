@@ -18,6 +18,7 @@ config/icon="res://assets/interface/pingicon.png"
 [autoload]
 
 global="*res://Scripts/global.gd"
+inventory="res://Scenes/inventory.tscn"
 
 [display]
 
@@ -26,7 +27,9 @@ window/size/viewport_height=1080
 window/size/resizable=false
 window/size/window_width_override=1920
 window/size/window_height_override=1080
+window/stretch/mode="viewport"
 window/stretch/aspect="ignore"
+window/stretch/scale_mode="integer"
 
 [importer_defaults]
 

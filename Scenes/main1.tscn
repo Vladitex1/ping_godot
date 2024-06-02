@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bc63lj3rqdmyq" path="res://Scenes/Shop_object.tscn" id="5_ktltc"]
 [ext_resource type="PackedScene" uid="uid://ddu8mykivdltg" path="res://Scenes/skeleton.tscn" id="5_nrxgp"]
 [ext_resource type="Texture2D" uid="uid://c56bavk2ib8of" path="res://assets/LVL/upper_for_door.png" id="6_1rop5"]
-[ext_resource type="PackedScene" uid="uid://qwoq8hai53h2" path="res://Scenes/Door.tscn" id="6_hegnr"]
+[ext_resource type="PackedScene" uid="uid://db20g0ssxckeg" path="res://Scenes/Door_Object.tscn" id="6_hegnr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1hymn"]
 texture = ExtResource("3_yi0xa")
@@ -155,18 +155,19 @@ scale = Vector2(1.03125, 1.03571)
 texture = ExtResource("6_1rop5")
 
 [node name="door_1" parent="Objects/Doors" instance=ExtResource("6_hegnr")]
-position = Vector2(239, 170)
-
-[node name="door_2" parent="Objects/Doors" instance=ExtResource("6_hegnr")]
-position = Vector2(239, 491)
+position = Vector2(240, 171)
 
 [node name="UpperForDoor2" type="Sprite2D" parent="Objects/Doors"]
 light_mask = 7
 visibility_layer = 7
 z_index = 1
-position = Vector2(480, 548)
+position = Vector2(480, 547)
 scale = Vector2(1.03125, 1.03571)
 texture = ExtResource("6_1rop5")
+
+[node name="door_2" parent="Objects/Doors" instance=ExtResource("6_hegnr")]
+position = Vector2(232, 485)
+scale = Vector2(1.03125, 1.03571)
 
 [node name="Shops" type="Node2D" parent="Objects"]
 

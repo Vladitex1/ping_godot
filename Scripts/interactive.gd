@@ -2,7 +2,7 @@ extends Sprite2D
 
 @onready var loading_animation = $"../Waiting_Animation"
 
-func _process(delta):
+func _process(_delta):
 	
 	
 	if global.get_tougle(3) == true and global.get_tougle(2) != true:

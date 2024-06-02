@@ -23,7 +23,7 @@ func animation(animation_bool):
 	else:
 		door_animation.play("door_close")
 		
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_released("press_key_event_on") and door_ready == true:
 		global.set_tougle(2,true)
 		if door_tougle == false:
@@ -36,9 +36,11 @@ func _process(delta):
 			animation(door_tougle)
 			door_tougle = false
 		
+		
 		door_ready = false
 		global.set_tougle(2,false)
-			
+		global.set_tougle(3,false)
+		
 		door_colision.set_deferred("disabled",door_tougle)	
 			
 			

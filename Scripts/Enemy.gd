@@ -14,7 +14,6 @@ enum {
 var state = PATROL
 var player = null
 var player_chase = false
-var speed = 0
 
 func _on_detection_body_entered(body:CharacterBody2D):
 	if str(body.name) == "Player":
@@ -46,6 +45,8 @@ func _ready():
 
 func _physics_process(delta):
 	
+	var speed: int
+	
 	match state:
 		PATROL:
 			speed = 50
@@ -76,8 +77,8 @@ func move(target, delta, speed):
 	
 	
 func attack():
-	var enemy_pos = enemy_animation.get_global_position()
-	var player_pos = global.get_player_pos()
+	#var enemy_pos = enemy_animation.get_global_position()
+	#var player_pos = global.get_player_pos()
 	if attack_timer.is_stopped() == true:
 		attack_timer.start(2)
 		print("время")
@@ -86,6 +87,7 @@ func attack():
 		global.set_tougle(4,false)
 	
 	
+@warning_ignore("shadowed_variable_base_class")
 func animation(velocity,steering):
 	if velocity.x>=steering.x:
 		enemy_animation.play("walk_right")

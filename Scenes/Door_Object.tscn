@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://qwoq8hai53h2"]
+[gd_scene load_steps=21 format=3 uid="uid://db20g0ssxckeg"]
 
 [ext_resource type="Script" path="res://Scripts/door_script.gd" id="3_ec11f"]
 [ext_resource type="Texture2D" uid="uid://dvmacp1f51ida" path="res://assets/Tilemap/doortilemap.png" id="4_j0txy"]
@@ -133,7 +133,6 @@ radius = 46.0
 position = Vector2(-508, -436)
 collision_layer = 8
 collision_mask = 8
-script = ExtResource("3_ec11f")
 
 [node name="Textures" type="Node2D" parent="Door"]
 

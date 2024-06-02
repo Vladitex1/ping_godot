@@ -7,6 +7,7 @@ func _pressed():
 	special.hide()
 	main_menu.hide()
 	settings_menu.show()
+
 	
 	
 	#global.del_scene("stop_screen")

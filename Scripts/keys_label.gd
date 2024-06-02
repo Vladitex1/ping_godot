@@ -2,5 +2,5 @@ extends Label
 
 var keys_num = 100
 
-func _process(delta):
+func _process(_delta):
 	text = str(keys_num)

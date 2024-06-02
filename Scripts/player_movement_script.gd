@@ -43,7 +43,7 @@ func update_player_position():
 #func _on_hands_body_exited(body):
 	#pass # Replace with function body.
 	
-func _process(delta):
+func _process(_delta):
 	get_input()
 	move_and_slide()
 	animation()

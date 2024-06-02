@@ -1,5 +1,7 @@
 extends PanelContainer
 
+class_name inventory
+
 var open = true
 
 @onready var show_animation = $inventory_pos_animation
@@ -12,7 +14,10 @@ func inventory_tougle():
 		open = true
 		show_animation.play_backwards("inventory_show_animation")	
 
-func _process(delta):
+
+	
+
+func _process(_delta):
 	if Input.is_action_just_released("special_tab"):
 		inventory_tougle()
 
