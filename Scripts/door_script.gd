@@ -7,32 +7,34 @@ var door_ready = false
 
 func _on_body_entered(body:CharacterBody2D):
 	if str(body.name) == "Player":
-		print("вход в территорию двери")
+		print("вход в территорию двери - door_script")
 		global.set_tougle(3,true)
 		door_ready = true
 
 func _on_body_exited(body:CharacterBody2D):
 	if str(body.name) == "Player":
-		print("выход из территории двери")
+		print("выход из территории двери - door_script")
 		door_ready = false
 		global.set_tougle(3,false)
 		
 func animation(animation_bool):
 	if !animation_bool:
 		door_animation.play("door_open")
+
 	else:
 		door_animation.play("door_close")
+
 		
 func _process(_delta):
 	if Input.is_action_just_released("press_key_event_on") and door_ready == true:
 		global.set_tougle(2,true)
 		if door_tougle == false:
-			print("Дверь открыта")
+			print("Дверь открыта - door_script")
 			animation(door_tougle)
 			door_tougle = true
 			await get_tree().create_timer(1).timeout
 		else:
-			print("Дверь закрыта")
+			print("Дверь закрыта - door_script")
 			animation(door_tougle)
 			door_tougle = false
 		

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://db20g0ssxckeg"]
+[gd_scene load_steps=24 format=3 uid="uid://db20g0ssxckeg"]
 
 [ext_resource type="Script" path="res://Scripts/door_script.gd" id="3_ec11f"]
 [ext_resource type="Texture2D" uid="uid://dvmacp1f51ida" path="res://assets/Tilemap/doortilemap.png" id="4_j0txy"]
@@ -127,6 +127,16 @@ size = Vector2(56, 93)
 [sub_resource type="CircleShape2D" id="CircleShape2D_axr4c"]
 radius = 46.0
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_w633k"]
+cull_mode = 1
+polygon = PackedVector2Array(61.6, 114.1, 61.6, 49.7, 21, 49.7, 21, 114.1)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_abypc"]
+polygon = PackedVector2Array(21, 107.1, 61.6, 107.1, 61.6, 114.1, 21, 114.1)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bk2a6"]
+polygon = PackedVector2Array(21.7, 49.7, 21.7, 56, 61.6, 56, 61.6, 49.7)
+
 [node name="Node2D" type="Node2D"]
 
 [node name="Door" type="Area2D" parent="."]
@@ -157,6 +167,26 @@ script = ExtResource("3_ec11f")
 [node name="enter_door_cycle_colision" type="CollisionShape2D" parent="Door/door_real_colision_area/Area2D"]
 position = Vector2(84, -6)
 shape = SubResource("CircleShape2D_axr4c")
+
+[node name="light_mask_close" type="LightOccluder2D" parent="Door"]
+position = Vector2(690, 424)
+scale = Vector2(1.42857, 1.42857)
+occluder = SubResource("OccluderPolygon2D_w633k")
+occluder_light_mask = 2
+
+[node name="light_mask_open_1" type="LightOccluder2D" parent="Door"]
+visible = false
+position = Vector2(690, 424)
+scale = Vector2(1.42857, 1.42857)
+occluder = SubResource("OccluderPolygon2D_abypc")
+occluder_light_mask = 2
+
+[node name="light_mask_open_2" type="LightOccluder2D" parent="Door"]
+visible = false
+position = Vector2(690, 424)
+scale = Vector2(1.42857, 1.42857)
+occluder = SubResource("OccluderPolygon2D_bk2a6")
+occluder_light_mask = 2
 
 [connection signal="body_entered" from="Door/door_real_colision_area/Area2D" to="Door/door_real_colision_area/Area2D" method="_on_body_entered"]
 [connection signal="body_exited" from="Door/door_real_colision_area/Area2D" to="Door/door_real_colision_area/Area2D" method="_on_body_exited"]

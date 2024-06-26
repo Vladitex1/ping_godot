@@ -19,13 +19,13 @@ func _on_detection_body_entered(body:CharacterBody2D):
 	if str(body.name) == "Player":
 		player = body
 		state = CHASE
-		print("Enter_enemy_col")
+		print("Enter_enemy_col - Enemy")
 
 func _on_detection_body_exited(body:CharacterBody2D):
 	if str(body.name) == "Player":
 		player = null
 		state = PATROL
-		print("Exit_enemy_col")
+		print("Exit_enemy_col - Enemy")
 
 func _on_close_detection_body_entered(body:CharacterBody2D):
 	if str(body.name) == "Player":
@@ -51,12 +51,12 @@ func _physics_process(delta):
 		PATROL:
 			speed = 50
 			move(get_circle_position(random_num), delta, speed)
-			#print("Enemy state: Patrol")
+			#print("Enemy state: Patrol - Enemy")
 			patrol_vector_timer()
 		CHASE:
 			speed = 150
 			move(global.get_player_pos(), delta, speed)
-			#print("Enemy state: CHASE")
+			#print("Enemy state: CHASE - Enemy")
 			#Slash ANIM
 		ATTACK:
 			
@@ -81,7 +81,7 @@ func attack():
 	#var player_pos = global.get_player_pos()
 	if attack_timer.is_stopped() == true:
 		attack_timer.start(2)
-		print("время")
+		print("время - Enemy")
 		global.set_tougle(4,true)
 	else:
 		global.set_tougle(4,false)
@@ -112,10 +112,10 @@ func get_circle_position(random):
 	
 func patrol_vector_timer():
 	if state == PATROL:
-		#print(str(round(attack_timer.time_left)))
+		#print(str(round(attack_timer.time_left))+" - Enemy")
 		if attack_timer.is_stopped() == true:
 			attack_timer.start(2)
-			print("время")
+			print("время - Enemy")
 			get_random_num()
 	else:
 		return 0

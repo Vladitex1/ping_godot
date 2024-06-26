@@ -1,9 +1,14 @@
-res://Scenes
+res://Scenes/objects
+res://Scripts/level
 res://Scripts/stop_screen
+res://Scenes
+res://Thems
+res://Scripts/inventory_scripts
+res://assets/Tilemap
+res://assets/special
+res://
 res://Scripts/debug
 res://Scripts
-res://assets/Tilemap
-res://
 G:/godot/ping/Scripts
 res://assets/interface
 res://img

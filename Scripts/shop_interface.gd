@@ -1,12 +1,10 @@
 extends Area2D
 
 var shop_ready = false
-
 func shop_enter():
 	global.del_scene("hud")
 	global.add_scene("shop")
 	global.del_scene("inventory")
-	print("магаз вкл")
 	
 func shop_exit():
 	global.del_scene("shop")
@@ -15,13 +13,13 @@ func shop_exit():
 
 func _on_body_entered(body:CharacterBody2D):
 	if str(body.name) == "Player":
-		print("вход в территорию магазина")
+		print("вход в территорию магазина - shop_interface")
 		global.set_tougle(3,true)
 		shop_ready = true
 
 
 func _on_body_exited(body:CharacterBody2D):
-	print("выход из территории магазина")
+	print("выход из территории магазина - shop_interface")
 	if str(body.name) == "Player":
 		global.set_tougle(3,false)
 		shop_exit()

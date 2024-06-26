@@ -1,0 +1,242 @@
+[gd_scene load_steps=9 format=3 uid="uid://jt7xwcv3m7ec"]
+
+[ext_resource type="Texture2D" uid="uid://bebfv6ulkwc7" path="res://assets/interface/inventory_large.png" id="1_nbj8i"]
+[ext_resource type="Script" path="res://Scripts/inventory_script.gd" id="2_bi0ni"]
+[ext_resource type="Texture2D" uid="uid://b11v8amdb3t7r" path="res://assets/interface/slot_large.png" id="2_pi8ks"]
+[ext_resource type="Script" path="res://Scripts/inventory_scripts/Slot.gd" id="4_0n5ao"]
+[ext_resource type="PackedScene" uid="uid://d1yw1d4ua6778" path="res://Scenes/item.tscn" id="4_v2hlw"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j4a32"]
+texture = ExtResource("2_pi8ks")
+
+[sub_resource type="Animation" id="Animation_tuau0"]
+resource_name = "inventory_show_animation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Control:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1204, 1077), Vector2(1204, 590), Vector2(1204, 610)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5uifj"]
+_data = {
+"inventory_show_animation": SubResource("Animation_tuau0")
+}
+
+[node name="inventory" type="Control"]
+top_level = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1204.0
+offset_top = 1077.0
+offset_right = 1204.0
+offset_bottom = 1077.0
+scale = Vector2(2, 2)
+script = ExtResource("2_bi0ni")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_right = 1000.0
+offset_bottom = 1000.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_nbj8i")
+metadata/_edit_use_anchors_ = true
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 23.0
+offset_right = 361.0
+offset_bottom = 355.0
+scale = Vector2(0.6, 0.6)
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
+columns = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="Slot1" type="Panel" parent="CanvasLayer/Control/GridContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_j4a32")
+script = ExtResource("4_0n5ao")
+
+[node name="Item" parent="CanvasLayer/Control/GridContainer/Slot1" instance=ExtResource("4_v2hlw")]
+
+[node name="Slot2" type="Panel" parent="CanvasLayer/Control/GridContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_j4a32")
+script = ExtResource("4_0n5ao")
+
+[node name="Item" parent="CanvasLayer/Control/GridContainer/Slot2" instance=ExtResource("4_v2hlw")]
+
+[node name="Slot3" type="Panel" parent="CanvasLayer/Control/GridContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_j4a32")
+script = ExtResource("4_0n5ao")
+
+[node name="Item" parent="CanvasLayer/Control/GridContainer/Slot3" instance=ExtResource("4_v2hlw")]
+
+[node name="Slot4" type="Panel" parent="CanvasLayer/Control/GridContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_j4a32")
+script = ExtResource("4_0n5ao")
+
+[node name="Item" parent="CanvasLayer/Control/GridContainer/Slot4" instance=ExtResource("4_v2hlw")]
+
+[node name="Slot5" type="Panel" parent="CanvasLayer/Control/GridContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_j4a32")
+script = ExtResource("4_0n5ao")
+
+[node name="Item" parent="CanvasLayer/Control/GridContainer/Slot5" instance=ExtResource("4_v2hlw")]
+
+[node name="Slot6" type="Panel" parent="CanvasLayer/Control/GridContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_j4a32")
+script = ExtResource("4_0n5ao")
+
+[node name="Item" parent="CanvasLayer/Control/GridContainer/Slot6" instance=ExtResource("4_v2hlw")]
+
+[node name="Slot7" type="Panel" parent="CanvasLayer/Control/GridContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_j4a32")
+script = ExtResource("4_0n5ao")
+
+[node name="Item" parent="CanvasLayer/Control/GridContainer/Slot7" instance=ExtResource("4_v2hlw")]
+
+[node name="Slot8" type="Panel" parent="CanvasLayer/Control/GridContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_j4a32")
+script = ExtResource("4_0n5ao")
+
+[node name="Item" parent="CanvasLayer/Control/GridContainer/Slot8" instance=ExtResource("4_v2hlw")]
+
+[node name="Slot9" type="Panel" parent="CanvasLayer/Control/GridContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_j4a32")
+script = ExtResource("4_0n5ao")
+
+[node name="Item" parent="CanvasLayer/Control/GridContainer/Slot9" instance=ExtResource("4_v2hlw")]
+
+[node name="Slot10" type="Panel" parent="CanvasLayer/Control/GridContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_j4a32")
+script = ExtResource("4_0n5ao")
+
+[node name="Item" parent="CanvasLayer/Control/GridContainer/Slot10" instance=ExtResource("4_v2hlw")]
+
+[node name="Slot11" type="Panel" parent="CanvasLayer/Control/GridContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_j4a32")
+script = ExtResource("4_0n5ao")
+
+[node name="Item" parent="CanvasLayer/Control/GridContainer/Slot11" instance=ExtResource("4_v2hlw")]
+
+[node name="Slot12" type="Panel" parent="CanvasLayer/Control/GridContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_j4a32")
+script = ExtResource("4_0n5ao")
+
+[node name="Item" parent="CanvasLayer/Control/GridContainer/Slot12" instance=ExtResource("4_v2hlw")]
+
+[node name="Slot13" type="Panel" parent="CanvasLayer/Control/GridContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_j4a32")
+script = ExtResource("4_0n5ao")
+
+[node name="Item" parent="CanvasLayer/Control/GridContainer/Slot13" instance=ExtResource("4_v2hlw")]
+
+[node name="Slot14" type="Panel" parent="CanvasLayer/Control/GridContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_j4a32")
+script = ExtResource("4_0n5ao")
+
+[node name="Item" parent="CanvasLayer/Control/GridContainer/Slot14" instance=ExtResource("4_v2hlw")]
+
+[node name="Slot15" type="Panel" parent="CanvasLayer/Control/GridContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_j4a32")
+script = ExtResource("4_0n5ao")
+
+[node name="Item" parent="CanvasLayer/Control/GridContainer/Slot15" instance=ExtResource("4_v2hlw")]
+
+[node name="Slot16" type="Panel" parent="CanvasLayer/Control/GridContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_j4a32")
+script = ExtResource("4_0n5ao")
+
+[node name="Item" parent="CanvasLayer/Control/GridContainer/Slot16" instance=ExtResource("4_v2hlw")]
+
+[node name="inventory_pos_animation" type="AnimationPlayer" parent="CanvasLayer/Control"]
+root_node = NodePath("../../..")
+libraries = {
+"": SubResource("AnimationLibrary_5uifj")
+}

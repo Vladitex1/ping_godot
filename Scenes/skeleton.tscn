@@ -361,10 +361,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lexjj"]
-size = Vector2(33.185, 52.0485)
+size = Vector2(26.239, 45.1895)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qv8di"]
-radius = 40.0257
+radius = 48.5716
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_chf64"]
 radius = 115.278
@@ -388,7 +388,7 @@ sprite_frames = SubResource("SpriteFrames_6qr1t")
 animation = &"skeleton_idle_down"
 
 [node name="PingColision" type="CollisionShape2D" parent="Enemy"]
-position = Vector2(282.857, 170)
+position = Vector2(282.857, 172.143)
 scale = Vector2(0.98, 0.98)
 shape = SubResource("RectangleShape2D_lexjj")
 

@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1yw1d4ua6778"]
+
+[ext_resource type="Script" path="res://Scripts/inventory_scripts/Item.gd" id="1_q7tme"]
+[ext_resource type="Texture2D" uid="uid://dk5o0y2783gkw" path="res://assets/interface/slot_select.png" id="2_mkpdi"]
+
+[node name="Item" type="Node2D"]
+script = ExtResource("1_q7tme")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = 11.0
+offset_right = 60.0
+offset_bottom = 61.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("2_mkpdi")

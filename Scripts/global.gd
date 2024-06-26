@@ -10,6 +10,8 @@ var shop_tougle = false
 var action_tougle = false
 var loading_tougle = false
 var heat_tougle = false
+var drag_tougle = false
+var brightness = 1
 static var ret: bool = false
 var door_list = {}
 var player_position: Vector2
@@ -17,6 +19,7 @@ var player_position: Vector2
 var camera_position: Vector2
 var camera_zoom: Vector2
 
+var dragging = false
 
 func change_scene(name):
 	get_tree().change_scene_to_file("res://Scenes/"+name+".tscn")
@@ -31,8 +34,7 @@ func add_scene(name):
 			get_tree().root.add_child(scene3)
 		"stop_screen":
 			get_tree().root.add_child(scene4)
-		"debug":
-			get_tree().root.add_child(scene5)
+			
 func del_scene(name):
 	match name:
 		"shop":
@@ -60,6 +62,8 @@ func set_tougle(num,status):
 			action_tougle = status
 		4:
 			heat_tougle = status
+		5: 
+			drag_tougle = status
 			
 func get_tougle(num):
 	match num:
@@ -71,13 +75,15 @@ func get_tougle(num):
 			ret = action_tougle
 		4: 
 			ret = heat_tougle
+		5:
+			ret = drag_tougle
 	return ret
 
 func hud_load():
 	#return 0
 	global.add_scene("hud")
-	global.add_scene("inventory")
-	#global.add_scene("debug")
+	#global.add_scene("inventory")
+	
 
 func set_player_pos(vector):
 	player_position = vector
@@ -95,8 +101,5 @@ func get_camera_position(num):
 		2:
 			return camera_zoom
 	
-#func set_camera_zoom_plus():
-
-#func set_camera_zoom_minus():
 	
 	

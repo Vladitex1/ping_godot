@@ -23,13 +23,13 @@ func _on_detection_body_entered(body:CharacterBody2D):
 	if str(body.name) == "Player":
 		player = body
 		state = CHASE
-		print("Enter_enemy_col")
+		print("Enter_enemy_col - skeleton_script")
 
 func _on_detection_body_exited(body:CharacterBody2D):
 	if str(body.name) == "Player":
 		player = null
 		state = PATROL
-		print("Exit_enemy_col")
+		print("Exit_enemy_col - skeleton_script")
 
 func _on_close_detection_body_entered(body:CharacterBody2D):
 	if str(body.name) == "Player":
@@ -62,18 +62,19 @@ func _physics_process(delta):
 		PATROL:
 			speed = 50
 			move(get_circle_position(random_num), delta, speed)
-			#print("Enemy state: Patrol")
+			#print("Enemy state: Patrol - skeleton_script")
 			patrol_vector_timer()
 		CHASE:
 			speed = 150
 			move(global.get_player_pos(), delta, speed)
-			#print("Enemy state: CHASE")
+			#print("Enemy state: CHASE - skeleton_script")
 			#Slash ANIM
 		ATTACK:
 			#global.set_tougle(4,true)
-			print("атака")
+			print("атака - skeleton_script")
 			speed = -1
 			move(global.get_player_pos(), delta, speed)
+			global.set_tougle(4,true)
 			attack()
 			animation(null_vector,null_vector,"idle")
 			#enemy_animation.stop()
@@ -81,7 +82,6 @@ func _physics_process(delta):
 			move(damage(),delta,speed)
 		#DEATH:
 		IDLE:
-			
 			animation(null_vector,null_vector,"idle")
 
 func damage():
@@ -110,13 +110,14 @@ func move(target, delta, speed):
 	animation(velocity,steering,"walk")
 	move_and_slide()
 	
-	
+
 func attack():
+	var attack_speed: int = 1
 	var enemy_pos = enemy_animation.get_global_position()
 	var player_pos = global.get_player_pos()
 	if attack_timer.is_stopped() == true:
-		attack_timer.start(2)
-		print("время")
+		attack_timer.start(attack_speed)
+		print("время - skeleton_script")
 		global.set_tougle(4,true)
 	else:
 		global.set_tougle(4,false)
@@ -200,10 +201,10 @@ func get_circle_position(random):
 	
 func patrol_vector_timer():
 	if state == PATROL:
-		#print(str(round(attack_timer.time_left)))
+		
 		if attack_timer.is_stopped() == true:
 			attack_timer.start(5)
-			print("время")
+			print("время - skeleton_script")
 			get_random_num()
 	else:
 		return 0

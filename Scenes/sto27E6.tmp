@@ -1,0 +1,119 @@
+[gd_scene load_steps=10 format=3 uid="uid://bkr7jbi6doumd"]
+
+[ext_resource type="Texture2D" uid="uid://ca7jy3ditwpb0" path="res://img/bgimg.jpg" id="1_ftatt"]
+[ext_resource type="Script" path="res://Scripts/stop_screen/stop_screen.gd" id="1_s6u6m"]
+[ext_resource type="FontFile" uid="uid://8atws0pc47sn" path="res://fonts/Font1.ttf" id="2_uje5x"]
+[ext_resource type="Texture2D" uid="uid://v1aa4m8uhjnd" path="res://assets/interface/ingamemenu.png" id="3_p1mqc"]
+[ext_resource type="Script" path="res://Scripts/stop_screen/Button_Continue.gd" id="4_fef2k"]
+[ext_resource type="Script" path="res://Scripts/stop_screen/Button_Settings.gd" id="5_yqwtj"]
+[ext_resource type="Script" path="res://Scripts/stop_screen/Button_Exit.gd" id="6_j6xtf"]
+[ext_resource type="Script" path="res://Scripts/stop_screen/Button_Back.gd" id="7_lng4x"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eeiyg"]
+texture = ExtResource("3_p1mqc")
+
+[node name="Control" type="Control"]
+process_mode = 2
+light_mask = 512
+visibility_layer = 512
+z_index = 10
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s6u6m")
+
+[node name="Bgimg" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(1348.5, 730.5)
+scale = Vector2(1.40156, 1.34722)
+texture = ExtResource("1_ftatt")
+
+[node name="Main_stop_screen" type="PanelContainer" parent="."]
+light_mask = 512
+visibility_layer = 512
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -191.0
+offset_top = -159.0
+offset_right = 191.0
+offset_bottom = 149.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_eeiyg")
+
+[node name="special" type="Control" parent="Main_stop_screen"]
+layout_mode = 2
+
+[node name="Pause_Label" type="Label" parent="Main_stop_screen/special"]
+z_index = 1
+layout_mode = 2
+offset_left = 131.0
+offset_top = 34.0
+offset_right = 251.0
+offset_bottom = 77.0
+grow_horizontal = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("2_uje5x")
+theme_override_font_sizes/font_size = 26
+text = "pause"
+
+[node name="main_menu" type="GridContainer" parent="Main_stop_screen"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Button_Continue" type="Button" parent="Main_stop_screen/main_menu"]
+layout_mode = 2
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("2_uje5x")
+button_mask = 7
+text = "continue"
+script = ExtResource("4_fef2k")
+
+[node name="Button_Settings" type="Button" parent="Main_stop_screen/main_menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_uje5x")
+button_mask = 7
+text = "settings
+"
+script = ExtResource("5_yqwtj")
+
+[node name="Button_Exit" type="Button" parent="Main_stop_screen/main_menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_uje5x")
+button_mask = 7
+text = "exit
+"
+script = ExtResource("6_j6xtf")
+
+[node name="settings_menu" type="GridContainer" parent="Main_stop_screen"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="Main_stop_screen/settings_menu"]
+layout_mode = 2
+
+[node name="Settings_Label" type="Label" parent="Main_stop_screen/settings_menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_uje5x")
+text = "settings"
+
+[node name="Label2" type="Label" parent="Main_stop_screen/settings_menu"]
+layout_mode = 2
+
+[node name="Button_Back" type="Button" parent="Main_stop_screen/settings_menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_uje5x")
+button_mask = 7
+text = "back"
+script = ExtResource("7_lng4x")

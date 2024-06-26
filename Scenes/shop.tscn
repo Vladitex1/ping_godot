@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://6xnon7mt5nee"]
+[gd_scene load_steps=9 format=3 uid="uid://6xnon7mt5nee"]
 
 [ext_resource type="Texture2D" uid="uid://bc35ryqt34r6x" path="res://assets/interface/shop1.png" id="1_y0bcl"]
 [ext_resource type="Texture2D" uid="uid://k5742llj4gq2" path="res://assets/interface/ping_icon_1024x1024.png" id="2_kimur"]
@@ -8,8 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://c8e60181qtnia" path="res://assets/interface/exitshopbutton.png" id="5_ke4qd"]
 [ext_resource type="Theme" uid="uid://7xlrsebp7r3g" path="res://font_gray_theme.tres" id="6_xbq1c"]
 [ext_resource type="FontFile" uid="uid://8atws0pc47sn" path="res://fonts/Font1.ttf" id="7_u30p0"]
-[ext_resource type="Texture2D" uid="uid://bebfv6ulkwc7" path="res://assets/interface/inventory_large.png" id="10_tsnn7"]
-[ext_resource type="Script" path="res://Scripts/shop_inventory_script.gd" id="11_ji5sh"]
 
 [node name="Shop" type="Control"]
 layout_mode = 3
@@ -57,13 +55,13 @@ keep_pressed_outside = true
 
 [node name="Button" type="Button" parent="shop_plate/buttons"]
 clip_children = 2
-anchors_preset = -1
-anchor_right = 0.1
-anchor_bottom = 0.1
-offset_left = 840.0
-offset_top = 250.0
-offset_right = 782.0
-offset_bottom = 273.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 841.0
+offset_top = 251.0
+offset_right = -951.0
+offset_bottom = -701.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.4, 0.4)
@@ -128,16 +126,3 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("7_u30p0")
 theme_override_font_sizes/font_size = 35
 text = "SHOP"
-
-[node name="inventory_plate" type="CanvasLayer" parent="."]
-
-[node name="TextureRect" type="TextureRect" parent="inventory_plate"]
-light_mask = 0
-visibility_layer = 512
-offset_left = 1052.0
-offset_top = 219.0
-offset_right = 2052.0
-offset_bottom = 1219.0
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("10_tsnn7")
-script = ExtResource("11_ji5sh")
