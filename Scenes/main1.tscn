@@ -168,7 +168,7 @@ visibility_layer = 16
 position = Vector2(42, 95)
 
 [node name="Skeleton" parent="Creatures" instance=ExtResource("5_nrxgp")]
-position = Vector2(605, 47)
+position = Vector2(4, 512)
 
 [node name="Objects" type="Node2D" parent="."]
 
@@ -208,7 +208,7 @@ position = Vector2(-32, 3)
 [node name="Lights" type="Node2D" parent="Objects"]
 
 [node name="lamp" parent="Objects/Lights" instance=ExtResource("10_fjc6p")]
-position = Vector2(281, 116)
+position = Vector2(279, 220)
 
 [node name="lamp2" parent="Objects/Lights" instance=ExtResource("10_fjc6p")]
-position = Vector2(283, 213)
+position = Vector2(278, 89)

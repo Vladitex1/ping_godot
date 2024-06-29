@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://b0gciphfcfsq0"
+path="res://.godot/imported/inventory_large.aseprite-6af6f2c51c141d88c8e7f695fbe2db57.res"
+
+[deps]
+
+source_file="res://assets/interface/inventory_large.aseprite"
+dest_files=["res://.godot/imported/inventory_large.aseprite-6af6f2c51c141d88c8e7f695fbe2db57.res"]
+
+[params]
+

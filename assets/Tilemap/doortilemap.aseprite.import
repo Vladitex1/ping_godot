@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://c0hssxu54c11o"
+path="res://.godot/imported/doortilemap.aseprite-28c5fe927698b691090b09b7e7be3226.res"
+
+[deps]
+
+source_file="res://assets/Tilemap/doortilemap.aseprite"
+dest_files=["res://.godot/imported/doortilemap.aseprite-28c5fe927698b691090b09b7e7be3226.res"]
+
+[params]
+

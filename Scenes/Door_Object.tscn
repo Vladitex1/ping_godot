@@ -169,24 +169,26 @@ position = Vector2(84, -6)
 shape = SubResource("CircleShape2D_axr4c")
 
 [node name="light_mask_close" type="LightOccluder2D" parent="Door"]
+light_mask = 2
+visibility_layer = 2
 position = Vector2(690, 424)
 scale = Vector2(1.42857, 1.42857)
 occluder = SubResource("OccluderPolygon2D_w633k")
-occluder_light_mask = 2
+occluder_light_mask = 1048575
 
 [node name="light_mask_open_1" type="LightOccluder2D" parent="Door"]
 visible = false
 position = Vector2(690, 424)
 scale = Vector2(1.42857, 1.42857)
 occluder = SubResource("OccluderPolygon2D_abypc")
-occluder_light_mask = 2
+occluder_light_mask = 1048575
 
 [node name="light_mask_open_2" type="LightOccluder2D" parent="Door"]
 visible = false
 position = Vector2(690, 424)
 scale = Vector2(1.42857, 1.42857)
 occluder = SubResource("OccluderPolygon2D_bk2a6")
-occluder_light_mask = 2
+occluder_light_mask = 1048575
 
 [connection signal="body_entered" from="Door/door_real_colision_area/Area2D" to="Door/door_real_colision_area/Area2D" method="_on_body_entered"]
 [connection signal="body_exited" from="Door/door_real_colision_area/Area2D" to="Door/door_real_colision_area/Area2D" method="_on_body_exited"]

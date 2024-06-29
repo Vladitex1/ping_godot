@@ -393,7 +393,9 @@ scale = Vector2(0.98, 0.98)
 shape = SubResource("RectangleShape2D_lexjj")
 
 [node name="AttackTimer" type="Timer" parent="Enemy"]
-wait_time = 2.0
+one_shot = true
+
+[node name="CooldownTimer" type="Timer" parent="Enemy"]
 one_shot = true
 
 [node name="close_detection" type="Area2D" parent="Enemy"]

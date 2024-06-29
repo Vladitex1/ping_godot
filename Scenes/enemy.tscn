@@ -279,7 +279,6 @@ scale = Vector2(0.686001, 0.686001)
 shape = SubResource("RectangleShape2D_rsbu1")
 
 [node name="AttackTimer" type="Timer" parent="Enemy"]
-wait_time = 2.0
 one_shot = true
 
 [node name="detection" type="Area2D" parent="Enemy"]

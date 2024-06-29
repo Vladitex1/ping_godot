@@ -1,8 +1,9 @@
 extends CharacterBody2D
 
 @onready var attack_timer = $AttackTimer
+@onready var cooldown_timer = $CooldownTimer
 @onready var enemy_animation = $AnimatedSprite2D
-
+var attack_time = 1
 var random_num
 var speed
 enum {
@@ -13,7 +14,7 @@ enum {
 	DEATH,
 	IDLE,
 	}
-
+var timer = false
 var state = IDLE
 var player = null
 var last_movement = 2
@@ -66,15 +67,17 @@ func _physics_process(delta):
 			patrol_vector_timer()
 		CHASE:
 			speed = 150
+			attack_timer.stop()
+			global.set_tougle(4,false)
 			move(global.get_player_pos(), delta, speed)
 			#print("Enemy state: CHASE - skeleton_script")
 			#Slash ANIM
 		ATTACK:
-			#global.set_tougle(4,true)
+			
 			print("атака - skeleton_script")
-			speed = -1
+			speed = -0.1
 			move(global.get_player_pos(), delta, speed)
-			global.set_tougle(4,true)
+
 			attack()
 			animation(null_vector,null_vector,"idle")
 			#enemy_animation.stop()
@@ -112,15 +115,23 @@ func move(target, delta, speed):
 	
 
 func attack():
-	var attack_speed: int = 1
-	var enemy_pos = enemy_animation.get_global_position()
-	var player_pos = global.get_player_pos()
-	if attack_timer.is_stopped() == true:
-		attack_timer.start(attack_speed)
-		print("время - skeleton_script")
-		global.set_tougle(4,true)
-	else:
+	var attack_speed: float = 0.5
+	var cooldown_speed: float = 1
+	global.set_tougle(4,true)
+	if attack_timer.is_stopped() == true: ##запуск куладуна
+		cooldown_timer.start(cooldown_speed)
+		global.PlayerIndicators("HP", -5, "set")
+	if cooldown_timer.is_stopped() == true:
 		global.set_tougle(4,false)
+		
+	if cooldown_timer.is_stopped() == false: ##перезапуск таймера атаки
+		attack_timer.start(attack_speed)
+		
+
+		
+		
+	#print("attack_timer = "+str(attack_timer.get_time_left()))
+	#print("cooldown_timer = "+str(cooldown_timer.get_time_left()))
 	
 	
 func animation(velocity,steering,condition):

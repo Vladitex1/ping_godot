@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dmha2u8dlg5o1"]
+[gd_scene load_steps=14 format=3 uid="uid://dmha2u8dlg5o1"]
 
 [ext_resource type="Texture2D" uid="uid://k5742llj4gq2" path="res://assets/interface/ping_icon_1024x1024.png" id="1_21nmr"]
 [ext_resource type="FontFile" uid="uid://8atws0pc47sn" path="res://fonts/Font1.ttf" id="3_h8id7"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://ckakw481uj45i" path="res://assets/interface/health.png" id="5_2ykob"]
 [ext_resource type="Texture2D" uid="uid://cx2ip8bilhrg5" path="res://assets/interface/hud_base_large.png" id="5_5t2uc"]
 [ext_resource type="Texture2D" uid="uid://pl513b6xupyn" path="res://assets/interface/hb1.png" id="6_f1kwn"]
+[ext_resource type="Script" path="res://Scripts/hud/health_bar.gd" id="6_u7gfo"]
 [ext_resource type="Texture2D" uid="uid://cpqe4l277k3fg" path="res://assets/interface/Key1.png" id="7_2srnd"]
 [ext_resource type="Texture2D" uid="uid://bv6wmrh28yfy8" path="res://assets/interface/coin.png" id="8_e6d1a"]
 [ext_resource type="Script" path="res://Scripts/health_label.gd" id="9_napmk"]
@@ -74,6 +75,7 @@ rounded = true
 texture_over = ExtResource("6_f1kwn")
 texture_progress = ExtResource("5_2ykob")
 texture_progress_offset = Vector2(24, 11)
+script = ExtResource("6_u7gfo")
 
 [node name="plate_status_texture" type="TextureRect" parent="plate"]
 offset_left = 48.0

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://b5ju70golwko1"
+path="res://.godot/imported/playbutton1.aseprite-d656476afd8bcd61937301cd4033b390.res"
+
+[deps]
+
+source_file="res://assets/interface/playbutton1.aseprite"
+dest_files=["res://.godot/imported/playbutton1.aseprite-d656476afd8bcd61937301cd4033b390.res"]
+
+[params]
+

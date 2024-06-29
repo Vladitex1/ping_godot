@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dull728jmgn3c"
+path="res://.godot/imported/Skeleton.aseprite-636aabd480fa9adb4d2ca89d3ea300bb.res"
+
+[deps]
+
+source_file="res://assets/Tilemap/Skeleton.aseprite"
+dest_files=["res://.godot/imported/Skeleton.aseprite-636aabd480fa9adb4d2ca89d3ea300bb.res"]
+
+[params]
+

@@ -6,20 +6,35 @@ static var scene3 = preload("res://Scenes/inventory.tscn").instantiate()
 static var scene4 = preload("res://Scenes/stop_screen.tscn").instantiate()
 static var scene5 = preload("res://Scenes/debug.tscn").instantiate()
 
-var shop_tougle = false
-var action_tougle = false
-var loading_tougle = false
-var heat_tougle = false
-var drag_tougle = false
-var brightness = 1
+static var shop_tougle:bool = false
+static var action_tougle:bool = false
+static var loading_tougle:bool = false
+static var heat_tougle:bool = false
+static var drag_tougle:bool = false
+static var brightness = 1
 static var ret: bool = false
+
+var PlayerHP: int = 100
+static var PlayerKeys: int = 0
+static var PlayerCoins: int = 5
+
 var door_list = {}
-var player_position: Vector2
+static var player_position: Vector2
+static var camera_position: Vector2
+static var camera_zoom: Vector2
 
-var camera_position: Vector2
-var camera_zoom: Vector2
+static var dragging:bool = false
 
-var dragging = false
+static var itemlist = {
+	"null": [0, load("res://assets/special/none.png")],
+	"blocked": [0, load("res://assets/interface/slot_block.png")],
+	"key": [2, load("res://assets/interface/Key1.png")],
+	"coin": [2, load("res://assets/interface/coin.png")],
+	"example_1": [5, load("res://assets/interface/continuebutton2.png")],
+	"example_2": [10, load("res://assets/interface/interactive.png")]}
+
+
+
 
 func change_scene(name):
 	get_tree().change_scene_to_file("res://Scenes/"+name+".tscn")
@@ -50,8 +65,6 @@ func del_scene(name):
 			scene4.queue_free()
 			scene4 = load("res://Scenes/"+name+".tscn").instantiate()
 			
-			
-
 func set_tougle(num,status):
 	match num:
 		1:
@@ -82,7 +95,7 @@ func get_tougle(num):
 func hud_load():
 	#return 0
 	global.add_scene("hud")
-	#global.add_scene("inventory")
+	global.add_scene("inventory")
 	
 
 func set_player_pos(vector):
@@ -102,4 +115,26 @@ func get_camera_position(num):
 			return camera_zoom
 	
 	
+func PlayerIndicators(name, delta, GSet):
+	match GSet:
+		"set":
+			match name:
+				"HP":
+					PlayerHP = PlayerHP + delta
+					print("Player Health: "+ str(PlayerHP) + " uuDelta " + str(delta) + " - global")
+				"Coins":
+					PlayerCoins = PlayerCoins + delta
+					print("Player Coins: "+ str(PlayerCoins) + " Delta " + str(delta) + " - global")
+				"Keys":
+					PlayerKeys = PlayerKeys + delta
+					print("Player Keys: "+ str(PlayerKeys) + " Delta " + str(delta) + " - global")
+		"get":
+			match name:
+				"HP":
+					return PlayerHP
+				"Coins":
+					return PlayerCoins
+				"Keys":
+					return PlayerKeys
+
 	

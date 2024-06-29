@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bs0immmfw1wc"
+path="res://.godot/imported/pingsprite_walk_down_test.aseprite-7d9f8b9341cd536cd6b7ed692acc0271.res"
+
+[deps]
+
+source_file="res://assets/Tilemap/pingsprite_walk_down_test.aseprite"
+dest_files=["res://.godot/imported/pingsprite_walk_down_test.aseprite-7d9f8b9341cd536cd6b7ed692acc0271.res"]
+
+[params]
+

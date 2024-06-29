@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cvfa7trqcospl"
+path="res://.godot/imported/hud_1900x1000.aseprite-d7bfc26a88e18219a5d8214062c1c7bd.res"
+
+[deps]
+
+source_file="res://assets/interface/hud_1900x1000.aseprite"
+dest_files=["res://.godot/imported/hud_1900x1000.aseprite-d7bfc26a88e18219a5d8214062c1c7bd.res"]
+
+[params]
+

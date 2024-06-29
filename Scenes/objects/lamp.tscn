@@ -17,13 +17,13 @@ texture = ExtResource("1_1dt8p")
 position = Vector2(0.999998, -9)
 scale = Vector2(2.28125, 2.1875)
 color = Color(0.980149, 0.847807, 0.653115, 1)
-energy = 2.11
+energy = 2.0
 range_item_cull_mask = 7
 shadow_enabled = true
 shadow_filter = 1
 shadow_item_cull_mask = 7
 texture = ExtResource("2_d03s5")
-texture_scale = 0.38
+texture_scale = 0.3
 height = 3.0
 
 [node name="door_real_colision_area" type="StaticBody2D" parent="LampTest"]

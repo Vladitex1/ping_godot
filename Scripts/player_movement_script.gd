@@ -26,15 +26,15 @@ func state_switcher():
 func get_input():
 	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	
-	#if Input.is_action_just_released("debug1"):
-		#global.add_scene("inventory")
-	
 	if Input.is_action_pressed("move_shift"):
 		sprint	= temp_sprit
 	else:
 		sprint = 0
-		
 	velocity = input_dir * (speed + sprint)
+	
+	if Input.is_action_just_released("debug1"):
+		global.PlayerIndicators("Keys", 1, "set")	
+		print(global.PlayerIndicators("Keys", 0, "get"))
 	
 	if Input.is_action_just_released("special_back"):
 		global.add_scene("stop_screen")

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dwasgo6wsxgh"
+path="res://.godot/imported/ping_icon_1024x1024.aseprite-82864f8bd2ae6b708e6fba7dfa6bf4c1.res"
+
+[deps]
+
+source_file="res://assets/interface/ping_icon_1024x1024.aseprite"
+dest_files=["res://.godot/imported/ping_icon_1024x1024.aseprite-82864f8bd2ae6b708e6fba7dfa6bf4c1.res"]
+
+[params]
+

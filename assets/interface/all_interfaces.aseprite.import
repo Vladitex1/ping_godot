@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://c03k4vhvalj3f"
+path="res://.godot/imported/all_interfaces.aseprite-efd80e83626f2fef9b4c29abd89556b2.res"
+
+[deps]
+
+source_file="res://assets/interface/all_interfaces.aseprite"
+dest_files=["res://.godot/imported/all_interfaces.aseprite-efd80e83626f2fef9b4c29abd89556b2.res"]
+
+[params]
+
