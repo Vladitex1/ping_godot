@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://6xnon7mt5nee"]
+[gd_scene load_steps=59 format=3 uid="uid://6xnon7mt5nee"]
 
 [ext_resource type="Script" path="res://Scripts/shop/shop_brain.gd" id="1_6uox3"]
 [ext_resource type="Texture2D" uid="uid://bc35ryqt34r6x" path="res://assets/interface/shop1.png" id="1_y0bcl"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bjh66o0mr2my2" path="res://assets/Tilemap/intresting_item_spritesheet.png" id="9_gt45h"]
 [ext_resource type="Texture2D" uid="uid://cok61u06k8a5v" path="res://assets/interface/plusbutton_large.png" id="9_x3u8a"]
 [ext_resource type="Texture2D" uid="uid://b1xy4fyqngraq" path="res://assets/interface/Key1_shop_large.png" id="10_v1nu2"]
+[ext_resource type="PackedScene" uid="uid://d1yw1d4ua6778" path="res://Scenes/item.tscn" id="11_gbygv"]
 [ext_resource type="Texture2D" uid="uid://cv45h4cbwi43d" path="res://assets/interface/minusbutton_large.png" id="11_h1lch"]
 [ext_resource type="Script" path="res://Scripts/keys_label.gd" id="14_gv3fm"]
 [ext_resource type="Script" path="res://Scripts/coins_label.gd" id="15_c4a8w"]
@@ -456,6 +457,9 @@ offset_top = 5.0
 offset_right = 104.0
 offset_bottom = 105.0
 
+[node name="Item" parent="shop_plate/items/GridContainer/Slot1/Button" instance=ExtResource("11_gbygv")]
+position = Vector2(13, 6.66667)
+
 [node name="Slot2" type="Panel" parent="shop_plate/items/GridContainer"]
 custom_minimum_size = Vector2(110, 110)
 layout_mode = 2
@@ -469,6 +473,9 @@ offset_left = 2.0
 offset_top = 5.0
 offset_right = 104.0
 offset_bottom = 105.0
+
+[node name="Item" parent="shop_plate/items/GridContainer/Slot2/Button" instance=ExtResource("11_gbygv")]
+position = Vector2(13, 6.66667)
 
 [node name="Slot3" type="Panel" parent="shop_plate/items/GridContainer"]
 custom_minimum_size = Vector2(110, 110)
@@ -484,6 +491,9 @@ offset_top = 5.0
 offset_right = 104.0
 offset_bottom = 105.0
 
+[node name="Item" parent="shop_plate/items/GridContainer/Slot3/Button" instance=ExtResource("11_gbygv")]
+position = Vector2(13, 6.66667)
+
 [node name="Slot4" type="Panel" parent="shop_plate/items/GridContainer"]
 custom_minimum_size = Vector2(110, 110)
 layout_mode = 2
@@ -497,6 +507,9 @@ offset_left = 2.0
 offset_top = 5.0
 offset_right = 104.0
 offset_bottom = 105.0
+
+[node name="Item" parent="shop_plate/items/GridContainer/Slot4/Button" instance=ExtResource("11_gbygv")]
+position = Vector2(13, 6.66667)
 
 [node name="Slot5" type="Panel" parent="shop_plate/items/GridContainer"]
 custom_minimum_size = Vector2(110, 110)
@@ -512,6 +525,9 @@ offset_top = 5.0
 offset_right = 104.0
 offset_bottom = 105.0
 
+[node name="Item" parent="shop_plate/items/GridContainer/Slot5/Button" instance=ExtResource("11_gbygv")]
+position = Vector2(13, 6.66667)
+
 [node name="Slot6" type="Panel" parent="shop_plate/items/GridContainer"]
 custom_minimum_size = Vector2(110, 110)
 layout_mode = 2
@@ -525,6 +541,9 @@ offset_left = 2.0
 offset_top = 5.0
 offset_right = 104.0
 offset_bottom = 105.0
+
+[node name="Item" parent="shop_plate/items/GridContainer/Slot6/Button" instance=ExtResource("11_gbygv")]
+position = Vector2(13, 6.66667)
 
 [node name="Slot7" type="Panel" parent="shop_plate/items/GridContainer"]
 custom_minimum_size = Vector2(110, 110)
@@ -540,6 +559,9 @@ offset_top = 5.0
 offset_right = 104.0
 offset_bottom = 105.0
 
+[node name="Item" parent="shop_plate/items/GridContainer/Slot7/Button" instance=ExtResource("11_gbygv")]
+position = Vector2(13, 6.66667)
+
 [node name="Slot8" type="Panel" parent="shop_plate/items/GridContainer"]
 custom_minimum_size = Vector2(110, 110)
 layout_mode = 2
@@ -554,7 +576,11 @@ offset_top = 5.0
 offset_right = 104.0
 offset_bottom = 105.0
 
+[node name="Item" parent="shop_plate/items/GridContainer/Slot8/Button" instance=ExtResource("11_gbygv")]
+position = Vector2(13, 6.66667)
+
 [node name="Key1" type="Sprite2D" parent="shop_plate/items"]
+visible = false
 position = Vector2(632, 359)
 scale = Vector2(0.11, 0.11)
 texture = ExtResource("10_v1nu2")

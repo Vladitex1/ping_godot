@@ -16,10 +16,14 @@ func _process(delta):
 func _ready():
 	countstr = str(count)
 	$shop_plate/buttons/minus_button.connect("button_up",minus_button)
-	$shop_plate/buttons/buy_button.connect("button_down",buy_button)
+	$shop_plate/buttons/buy_button.connect("button_up",buy_button)
 	$shop_plate/buttons/plus_button.connect("button_up",plus_button)
-	$shop_plate/buttons/sell_button.connect("button_down",sell_button)
-	$shop_plate/buttons/exit_button.connect("button_down",exit_button)
+	$shop_plate/buttons/sell_button.connect("button_up",sell_button)
+	$shop_plate/buttons/exit_button.connect("button_up",exit_button)
+	
+	
+	##shop inventory
+	
 	
 func minus_button():
 	

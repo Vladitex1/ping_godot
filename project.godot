@@ -18,6 +18,7 @@ config/icon="res://assets/interface/pingicon.png"
 [autoload]
 
 global="*res://Scripts/global.gd"
+itemlist="*res://Scripts/ItemList_script.gd"
 
 [display]
 

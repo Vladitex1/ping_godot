@@ -13,18 +13,19 @@ func get_slot_info():
 
 func slot(num):
 	match num:
-		0: ###Blocked_slot
-			$TextureRect.texture = global.itemlist["blocked"][1]
+		-1: ###Blocked_slot
+			$TextureRect.texture = itemlist.itemlist["blocked"][1]
 		1:
-			$TextureRect.texture = global.itemlist["null"][1]
+			$TextureRect.texture = itemlist.itemlist["null"][1]
 		2:
-			$TextureRect.texture = global.itemlist["example_1"][1]
+			$TextureRect.texture = itemlist.itemlist["example_1"][1]
 		3:
-			$TextureRect.texture = global.itemlist["example_2"][1]
+			$TextureRect.texture = itemlist.itemlist["example_2"][1]
 		4:
-			$TextureRect.texture = global.itemlist["coin"][1]
+			$TextureRect.texture = itemlist.itemlist["coin"][1]
 		_:
 			pass
+			
 	CurrentID = num
 
 ##передает значение куда положить
@@ -66,4 +67,5 @@ func _on_slot_mouse_control_mouse_entered(): ##работает если нав�
 			slotnum = 15
 		"Item16":
 			slotnum = 16
+			
 	$"../../../..".selected_slot_end = slotnum

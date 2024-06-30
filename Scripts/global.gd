@@ -25,16 +25,6 @@ static var camera_zoom: Vector2
 
 static var dragging:bool = false
 
-static var itemlist = {
-	"null": [0, load("res://assets/special/none.png")],
-	"blocked": [0, load("res://assets/interface/slot_block.png")],
-	"key": [2, load("res://assets/interface/Key1.png")],
-	"coin": [2, load("res://assets/interface/coin.png")],
-	"example_1": [5, load("res://assets/interface/continuebutton2.png")],
-	"example_2": [10, load("res://assets/interface/interactive.png")]}
-
-
-
 
 func change_scene(name):
 	get_tree().change_scene_to_file("res://Scenes/"+name+".tscn")

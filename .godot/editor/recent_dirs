@@ -1,7 +1,8 @@
+res://Scripts
+/Users/vladitex1/Documents/GitHub/ping_godot/Scripts
+res://Scenes
 res://Scripts/shop
 res://Scripts/inventory_scripts
-res://Scenes
-G:/godot/ping/Scripts/inventory_scripts
 res://assets/Tilemap
 res://assets/interface
 res://Scripts/hud
@@ -12,7 +13,4 @@ res://Thems
 res://assets/special
 res://
 res://Scripts/debug
-res://Scripts
-G:/godot/ping/Scripts
 res://img
-G:/godot/ping
