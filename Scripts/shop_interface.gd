@@ -11,14 +11,14 @@ func shop_exit():
 	global.hud_load()
 	
 
-func _on_body_entered(body:CharacterBody2D):
+func _on_body_entered(body):
 	if str(body.name) == "Player":
 		print("вход в территорию магазина - shop_interface")
 		global.set_tougle(3,true)
 		shop_ready = true
 
 
-func _on_body_exited(body:CharacterBody2D):
+func _on_body_exited(body):
 	print("выход из территории магазина - shop_interface")
 	if str(body.name) == "Player":
 		global.set_tougle(3,false)

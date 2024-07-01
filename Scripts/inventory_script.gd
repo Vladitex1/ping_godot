@@ -9,9 +9,13 @@ var selected_slot_start: int = -1
 var selected_slot_id_start: int = -1
 var selected_slot_end: int = -1
 var selected_slot_id_end: int = -1
-var mousetougle: bool = false
+var mousetougle: bool = true
+var button_num: int
 func _ready():
 	print("inventory_started - inventory_script")
+	inventory_info_storage(1)
+	
+	
 	$GridContainer/Slot1/Button.connect("button_down",slot1)
 	$GridContainer/Slot2/Button.connect("button_down",slot2)
 	$GridContainer/Slot3/Button.connect("button_down",slot3)
@@ -29,7 +33,6 @@ func _ready():
 	$GridContainer/Slot15/Button.connect("button_down",slot15)
 	$GridContainer/Slot16/Button.connect("button_down",slot16)
 
-
 func inventory_tougle():
 	if open:
 		open = false
@@ -43,62 +46,70 @@ func _process(_delta):
 		inventory_tougle()
 		print("inventory work - inventory_script")
 	if Input.is_action_just_released("debug1"):
-		random_items_in_slots()	
-	#debug()
+		inventory_info_storage(3)
+#reset_variable()
+#mousetougle = true
+#debug()
+	
 
 
 func debug():
 	print("Start: Слот №" +str(selected_slot_start) +" предмет № " +str(selected_slot_id_start))
 	print("End: Слот № "+str(selected_slot_end) +" предмет № " +str(selected_slot_id_end))
-	print("Рука: Слот № "+str(selected_slot_end)+" предмет № " +str(selected_slot_id_start))
+	#print("Рука: Слот № "+str(selected_slot_end)+" предмет № " +str(selected_slot_id_start))
+	print("mousetougle = " + str(mousetougle))
 	print("________________________________________________________________________")
-func mouse_tougle():
-	if mousetougle == false and open == false:
-		mousetougle = true
-		$mouse_equip_item.visible = true
-	elif mousetougle == true and open == false:
-		if selected_slot_start != selected_slot_end and selected_slot_id_start != selected_slot_id_end:
-			slot(selected_slot_start,selected_slot_id_end)
-			slot(selected_slot_end,selected_slot_id_start)
-		if selected_slot_id_start == selected_slot_id_end:
-			pass
+
+		#if open == false and selected_slot_start != selected_slot_end and selected_slot_id_start != selected_slot_id_end:
 			
+func mouse_touge():
+	if mousetougle == true:
+		#$mouse_equip_item.visible = true
 		mousetougle = false
-		$mouse_equip_item.visible = false
-	
-func _input(event):
-	if event is InputEventMouseButton:
-		mouse_tougle()
+	else:
+		#$mouse_equip_item.visible = false
+		mousetougle = true
+		#if selected_slot_start != selected_slot_end and selected_slot_id_start != selected_slot_id_end:
+			#slot(selected_slot_start,selected_slot_id_end)
+			#slot(selected_slot_end,selected_slot_id_start)
+		#reset_variable()
 
-	if event is InputEventMouseMotion:
-		
-		#print("Предмет = "+str(selected_slot_id_end)+ " слот = "+ str(selected_slot_end))
-		
-		$mouse_equip_item.global_position = event.position	
+func reset_variable():
+	selected_slot_id_start = 0
+	selected_slot_start = 0
+	selected_slot_id_end = 0
+	selected_slot_end = 0
+	mousetougle = true
+
+##################SAVE####################
+#selected_slot_id_start = 0
+#selected_slot_start = 0
+#selected_slot_id_end = 0
+#selected_slot_end = 0
+
+#slot(selected_slot_start,selected_slot_id_end)
+#slot(selected_slot_end,selected_slot_id_start)
+
 ################################################
+func _input(event):
+	if event is InputEventMouseMotion:
+		$mouse_equip_item.global_position = event.position	
+###################Содержимое инвентаря###################
 
-
-###############################################
-
-
-
-
-
-
-## рандомное заполнениеsd
+func inventory_info_storage(num1):
+	var slotnumber = 1
+	while slotnumber <= 16:
+		slot(slotnumber,itemlist.inventory_storage[num1][slotnumber-1])
+		slotnumber = slotnumber + 1
+		
+## рандомное заполнение
 func random_items_in_slots():
 	var slotnumber = 0
 	while slotnumber != 16:
 		slotnumber = slotnumber + 1
 		slot(slotnumber,randi_range(0,4))
-	
 
-
-
-
-
-
-##Редактирование слота
+###################Редактирование слота###################
 func slot(slotnum,num):
 	match slotnum:
 		1:
@@ -135,85 +146,100 @@ func slot(slotnum,num):
 			$GridContainer/Slot16/Button/Item16.slot(num)
 
 ##фидбек кнопки - Возвращает что за предмет в слоте ID
+
+
+func pickup(path,slotNum):
+	if mousetougle == true: ##запоминается айди в руку
+		mouse_touge()
+		$mouse_equip_item.visible = true
+		selected_slot_id_start = path.get_slot_info()
+		if selected_slot_id_start == -1:
+			reset_variable()
+			$mouse_equip_item.texture = itemlist.itemlist[0][1]
+		if selected_slot_id_start == 0:
+			$mouse_equip_item.texture = itemlist.itemlist[0][1]
+			reset_variable()
+		else:
+			$mouse_equip_item.texture = itemlist.itemlist[selected_slot_id_start][1]
+			selected_slot_start = slotNum
+			slot(selected_slot_start,0)
+	elif mousetougle == false:
+		mouse_touge()
+		selected_slot_end = slotNum
+		selected_slot_id_end = path.get_slot_info()
+		if selected_slot_id_end == 0:
+			slot(selected_slot_end,selected_slot_id_start)
+		if selected_slot_id_end == -1:
+			slot(selected_slot_start,selected_slot_id_start)
+			reset_variable()
+		else:
+			slot(selected_slot_end,selected_slot_id_start)
+			slot(selected_slot_start,selected_slot_id_end)
+		$mouse_equip_item.visible = false
+		reset_variable()
+
 func slot1():
-	var slotid = $GridContainer/Slot1/Button/Item1.get_slot_info()
-	selected_slot_id_start = slotid
-	selected_slot_start = 1
-	#print("слот 1 - " + str(slotid))
+	var slotNum = 1
+	var path = $GridContainer/Slot1/Button/Item1
+	pickup(path,slotNum)
 func slot2():
-	var slotid = $GridContainer/Slot2/Button/Item2.get_slot_info()
-	selected_slot_id_start = slotid
-	selected_slot_start = 2
-	#print("слот 2 - " + str(slotid))
+	var slotNum = 2
+	var path = $GridContainer/Slot2/Button/Item2
+	pickup(path,slotNum)
 func slot3():
-	var slotid = $GridContainer/Slot3/Button/Item3.get_slot_info()
-	selected_slot_id_start = slotid
-	selected_slot_start = 3
-	#print("слот 3 - " + str(slotid))
+	var slotNum = 3
+	var path = $GridContainer/Slot3/Button/Item3
+	pickup(path,slotNum)
 func slot4():
-	var slotid = $GridContainer/Slot4/Button/Item4.get_slot_info()
-	selected_slot_id_start = slotid
-	selected_slot_start = 4
-	#print("слот 4 - " + str(slotid))
+	var slotNum = 4
+	var path = $GridContainer/Slot4/Button/Item4
+	pickup(path,slotNum)
 func slot5():
-	var slotid = $GridContainer/Slot5/Button/Item5.get_slot_info()
-	selected_slot_id_start = slotid
-	selected_slot_start = 5
-	#print("слот 5 - " + str(slotid))
+	var slotNum = 5
+	var path = $GridContainer/Slot5/Button/Item5
+	pickup(path,slotNum)
 func slot6():
-	var slotid = $GridContainer/Slot6/Button/Item6.get_slot_info()
-	selected_slot_id_start = slotid
-	selected_slot_start = 6
-	#print("слот 6 - " + str(slotid))
+	var slotNum = 6
+	var path = $GridContainer/Slot6/Button/Item6
+	pickup(path,slotNum)
 func slot7():
-	var slotid = $GridContainer/Slot7/Button/Item7.get_slot_info()
-	selected_slot_id_start = slotid
-	selected_slot_start = 7
-	#print("слот 7 - " + str(slotid))
+	var slotNum = 7
+	var path = $GridContainer/Slot7/Button/Item7
+	pickup(path,slotNum)
 func slot8():
-	var slotid = $GridContainer/Slot8/Button/Item8.get_slot_info()
-	selected_slot_id_start = slotid
-	selected_slot_start = 8
-	#print("слот 8 - " + str(slotid))
+	var slotNum = 8
+	var path = $GridContainer/Slot8/Button/Item8
+	pickup(path,slotNum)
 func slot9():
-	var slotid = $GridContainer/Slot9/Button/Item9.get_slot_info()
-	selected_slot_id_start = slotid
-	selected_slot_start = 9
-	#print("слот 9 - " + str(slotid))
+	var slotNum = 9
+	var path = $GridContainer/Slot9/Button/Item9
+	pickup(path,slotNum)
 func slot10():
-	var slotid = $GridContainer/Slot10/Button/Item10.get_slot_info()
-	selected_slot_id_start = slotid
-	selected_slot_start = 10
-	#print("слот 10 - " + str(slotid))
+	var slotNum = 10
+	var path = $GridContainer/Slot10/Button/Item10
+	pickup(path,slotNum)
 func slot11():
-	var slotid = $GridContainer/Slot11/Button/Item11.get_slot_info()
-	selected_slot_id_start = slotid
-	
-	selected_slot_start = 11
-	#print("слот 11 - " + str(slotid))
+	var slotNum = 11
+	var path = $GridContainer/Slot11/Button/Item11
+	pickup(path,slotNum)
 func slot12():
-	var slotid = $GridContainer/Slot12/Button/Item12.get_slot_info()
-	selected_slot_id_start = slotid
-	selected_slot_start = 12
-	#print("слот 12 - " + str(slotid))
+	var slotNum = 12
+	var path = $GridContainer/Slot12/Button/Item12
+	pickup(path,slotNum)
 func slot13():
-	var slotid = $GridContainer/Slot13/Button/Item13.get_slot_info()
-	selected_slot_id_start= slotid
-	selected_slot_start = 13
-	#print("слот 13 - " + str(slotid))
+	var slotNum = 13
+	var path = $GridContainer/Slot13/Button/Item13
+	pickup(path,slotNum)
 func slot14():
-	var slotid = $GridContainer/Slot14/Button/Item14.get_slot_info()
-	selected_slot_id_start = slotid
-	selected_slot_start = 14
-	#print("слот 14 - " + str(slotid))
+	var slotNum = 14
+	var path = $GridContainer/Slot14/Button/Item14
+	pickup(path,slotNum)
 func slot15():
-	var slotid = $GridContainer/Slot15/Button/Item15.get_slot_info()
-	selected_slot_id_start = slotid
-	selected_slot_start = 15
-	#print("слот 15 - " + str(slotid))
+	var slotNum = 15
+	var path = $GridContainer/Slot15/Button/Item15
+	pickup(path,slotNum)
 func slot16():
-	var slotid = $GridContainer/Slot16/Button/Item16.get_slot_info()
-	selected_slot_id_start = slotid
-	selected_slot_start = 16
-	#print("слот 16 - " + str(slotid))	
+	var slotNum = 16
+	var path = $GridContainer/Slot16/Button/Item16
+	pickup(path,slotNum)
 

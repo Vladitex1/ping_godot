@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/FPS.gd" id="2_rarrq"]
 [ext_resource type="Texture2D" uid="uid://drjcqu76ga1a2" path="res://assets/Tilemap/Tilemap1.png" id="3_yi0xa"]
 [ext_resource type="PackedScene" uid="uid://codphaex78n4y" path="res://Scenes/Player.tscn" id="4_77xg7"]
-[ext_resource type="PackedScene" uid="uid://bc63lj3rqdmyq" path="res://Scenes/Shop_object.tscn" id="5_ktltc"]
+[ext_resource type="PackedScene" uid="uid://bmblodu0v3xso" path="res://Scenes/Shop_object.tscn" id="5_ktltc"]
 [ext_resource type="PackedScene" uid="uid://ddu8mykivdltg" path="res://Scenes/skeleton.tscn" id="5_nrxgp"]
 [ext_resource type="Texture2D" uid="uid://c56bavk2ib8of" path="res://assets/LVL/upper_for_door.png" id="6_1rop5"]
 [ext_resource type="PackedScene" uid="uid://db20g0ssxckeg" path="res://Scenes/Door_Object.tscn" id="6_hegnr"]
@@ -168,7 +168,8 @@ visibility_layer = 16
 position = Vector2(42, 95)
 
 [node name="Skeleton" parent="Creatures" instance=ExtResource("5_nrxgp")]
-position = Vector2(4, 512)
+visible = false
+position = Vector2(396, 81)
 
 [node name="Objects" type="Node2D" parent="."]
 

@@ -39,6 +39,5 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("2_mkpdi")
-metadata/_edit_use_anchors_ = true
 
 [connection signal="mouse_entered" from="slot_mouse_control" to="." method="_on_slot_mouse_control_mouse_entered"]

@@ -6,8 +6,13 @@ res://Scripts/movement.gd
 res://Scripts/player_movement_script.gd
 res://Scripts/skeleton_script.gd
 res://Scenes/shop.tscn
-res://Scripts/global.gd
-res://Scripts/shop/shop_brain.gd
 res://Scenes/inventory.tscn
-res://Scripts/inventory_scripts/Item.gd
-res://ItemList_script.gd
+res://Scenes/stop_screen.tscn
+res://Scenes/Door_Object.tscn
+res://Scenes/skeleton.tscn
+res://Scenes/Shop_object.tscn
+res://Scenes/item.tscn
+res://Scenes/shop/shop_item.tscn
+res://Scripts/shop/shop_brain.gd
+res://Scripts/global.gd
+res://Scenes/Player.tscn

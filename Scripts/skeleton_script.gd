@@ -20,31 +20,31 @@ var player = null
 var last_movement = 2
 static var null_vector = Vector2(0,0)
 
-func _on_detection_body_entered(body:CharacterBody2D):
+func _on_detection_body_entered(body):
 	if str(body.name) == "Player":
 		player = body
 		state = CHASE
 		print("Enter_enemy_col - skeleton_script")
 
-func _on_detection_body_exited(body:CharacterBody2D):
+func _on_detection_body_exited(body):
 	if str(body.name) == "Player":
 		player = null
 		state = PATROL
 		print("Exit_enemy_col - skeleton_script")
 
-func _on_close_detection_body_entered(body:CharacterBody2D):
+func _on_close_detection_body_entered(body):
 	if str(body.name) == "Player":
 		state = ATTACK
 		
-func _on_close_detection_body_exited(body:CharacterBody2D):
+func _on_close_detection_body_exited(body):
 	if str(body.name) == "Player":
 		state = CHASE
 		
-func _on_far_detection_body_entered(body:CharacterBody2D):
+func _on_far_detection_body_entered(body):
 	if str(body.name) == "Player":
 		state = PATROL
 		
-func _on_far_detection_body_exited(body:CharacterBody2D):
+func _on_far_detection_body_exited(body):
 	if str(body.name) == "Player":
 		state = IDLE
 

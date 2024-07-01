@@ -2,35 +2,18 @@ extends Node2D
 
 var CurrentID: int = -1
 
-static var blocked_texture = preload("res://assets/interface/slot_block.png")
-static var interactive_texture = preload("res://assets/interface/interactive.png")
-static var coin_texture = preload("res://assets/interface/coin.png")
-static var continuebutton2_texture = preload("res://assets/interface/continuebutton2.png")
-static var none_texture = preload("res://assets/special/none.png")
-
 func get_slot_info():
 	return CurrentID
 
 func slot(num):
-	match num:
-		-1: ###Blocked_slot
-			$TextureRect.texture = itemlist.itemlist["blocked"][1]
-		1:
-			$TextureRect.texture = itemlist.itemlist["null"][1]
-		2:
-			$TextureRect.texture = itemlist.itemlist["example_1"][1]
-		3:
-			$TextureRect.texture = itemlist.itemlist["example_2"][1]
-		4:
-			$TextureRect.texture = itemlist.itemlist["coin"][1]
-		_:
-			pass
-			
+	var Texture1
+	$TextureRect.texture = itemlist.itemlist[num][1]
 	CurrentID = num
+
 
 ##передает значение куда положить
 func _on_slot_mouse_control_mouse_entered(): ##работает если наведено
-	$"../../../..".selected_slot_id_end = CurrentID #возвращает значения задания предмет откуда взяли
+	#$"../../../..".selected_slot_id_end = CurrentID #возвращает значения задания предмет откуда взяли
 	var slotnum: int
 	#print(self.name)
 	#print(self.clip_children)
@@ -68,4 +51,4 @@ func _on_slot_mouse_control_mouse_entered(): ##работает если нав�
 		"Item16":
 			slotnum = 16
 			
-	$"../../../..".selected_slot_end = slotnum
+	#$"../../../..".selected_slot_end = slotnum

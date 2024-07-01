@@ -11,11 +11,11 @@ static var action_tougle:bool = false
 static var loading_tougle:bool = false
 static var heat_tougle:bool = false
 static var drag_tougle:bool = false
-static var brightness = 1
+static var brightness:float = 1
 static var ret: bool = false
 
 var PlayerHP: int = 100
-static var PlayerKeys: int = 0
+static var PlayerKeys: int = 1
 static var PlayerCoins: int = 5
 
 var door_list = {}

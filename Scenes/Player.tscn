@@ -1,15 +1,36 @@
-[gd_scene load_steps=61 format=3 uid="uid://codphaex78n4y"]
+[gd_scene load_steps=67 format=3 uid="uid://codphaex78n4y"]
 
 [ext_resource type="Script" path="res://Scripts/player_movement_script.gd" id="1_wmd5f"]
 [ext_resource type="Texture2D" uid="uid://b6wioesllg003" path="res://assets/Tilemap/pingtilemap.png" id="2_6qxna"]
 [ext_resource type="Texture2D" uid="uid://hsw0y25ixquf" path="res://assets/interface/interactive.png" id="3_luyv8"]
 [ext_resource type="Texture2D" uid="uid://oagg074dneb7" path="res://assets/Tilemap/loading_tileset_small.png" id="3_rleen"]
+[ext_resource type="Texture2D" uid="uid://bjdaeq1ahu2cn" path="res://assets/Ping/attack-Sheet.png" id="3_x4udo"]
 [ext_resource type="Script" path="res://Scripts/interactive.gd" id="4_am4if"]
 [ext_resource type="Script" path="res://Scripts/Camera.gd" id="5_uowqo"]
 [ext_resource type="Script" path="res://Scripts/heat_script.gd" id="6_dddyl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dnwmu"]
 size = Vector2(33.185, 44.9747)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_35sgd"]
+atlas = ExtResource("3_x4udo")
+region = Rect2(0, 0, 53, 54)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_odsou"]
+atlas = ExtResource("3_x4udo")
+region = Rect2(53, 0, 53, 54)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yghe2"]
+atlas = ExtResource("3_x4udo")
+region = Rect2(106, 0, 53, 54)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4hvhe"]
+atlas = ExtResource("3_x4udo")
+region = Rect2(159, 0, 53, 54)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g7qkj"]
+atlas = ExtResource("3_x4udo")
+region = Rect2(212, 0, 53, 54)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jtwjn"]
 atlas = ExtResource("2_6qxna")
@@ -173,6 +194,26 @@ region = Rect2(182, 111, 26, 37)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_v3xup"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_35sgd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_odsou")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yghe2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4hvhe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g7qkj")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 12.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jtwjn")
@@ -422,7 +463,7 @@ z_index = 2
 position = Vector2(282.485, 171.114)
 scale = Vector2(1.4, 1.41203)
 sprite_frames = SubResource("SpriteFrames_v3xup")
-animation = &"walk_right"
+animation = &"attack"
 
 [node name="Waiting_Animation" type="AnimatedSprite2D" parent="Player"]
 visible = false

@@ -1,5 +1,4 @@
 extends Area2D
-@onready var door_timer =  $"../../Textures/Door_Timer"
 @onready var door_animation = $"../../Textures/door_open_animation"
 @onready var door_colision = $"../door_real_colision"
 @onready var door_mask_close = $"../../light_mask_close"
@@ -9,13 +8,13 @@ extends Area2D
 var door_tougle = false
 var door_ready = false
 
-func _on_body_entered(body:CharacterBody2D):
+func _on_body_entered(body):
 	if str(body.name) == "Player":
 		print("вход в территорию двери - door_script")
 		global.set_tougle(3,true)
 		door_ready = true
 
-func _on_body_exited(body:CharacterBody2D):
+func _on_body_exited(body):
 	if str(body.name) == "Player":
 		print("выход из территории двери - door_script")
 		door_ready = false
