@@ -1,0 +1,14 @@
+xxxxxxxxxxxxxxxxxxxxxxxxxxИДЕИxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxxxГОТОВОxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxxxxВПРОЦЕССЕxxxxxxxxxxxxxxxxxxxxxxxxxx
+сделать шкалу стамины (маны) для ударов.
+Когда шкала пустая, удары слабые/нельзя ударить
+
+сделать шкалу брони.
+
+Предметы - бафы
+При использовании предмета + урон + броня + стамина
+
+реализовать взаимодействие с предметами в инвентаре
+
+соединить инвентарь и магазин лутом
