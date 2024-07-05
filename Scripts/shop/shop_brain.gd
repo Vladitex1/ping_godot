@@ -3,7 +3,8 @@ extends Control
 @onready var cost_lable = $shop_plate/text/cost
 @onready var name_lable = $shop_plate/text/name
 @onready var count_lable = $shop_plate/text/count
-
+@onready var keys_lable = $shop_plate/text/keys
+@onready var coins_lable = $shop_plate/text/coins
 var standart_label = ["name","count","cost"]
 
 var num123 = -1
@@ -21,6 +22,7 @@ var selected_item_ID: int = -2
 	
 func _ready():	
 	countstr = str(count)
+	global.attack_block = true
 	$shop_plate/buttons/minus_button.connect("button_up",minus_button)
 	$shop_plate/buttons/buy_button.connect("button_up",buy_button)
 	$shop_plate/buttons/plus_button.connect("button_up",plus_button)
@@ -41,6 +43,9 @@ func _ready():
 	##shop inventory
 
 func _process(delta):
+	coins_lable.text = str(global.PlayerIndicators("COINS", 0, "GET"))
+	keys_lable.text = str(global.PlayerIndicators("KEYS", 0, "GET"))
+	
 	if selected_item_ID == -2 or selected_item_ID == -1:
 		cost_lable.text = standart_label[2]
 		name_lable.text = standart_label[0]
@@ -59,6 +64,13 @@ func _process(delta):
 			shop_info_storage(num123)
 		else:
 			shop_info_storage(num123)
+	elif Input.is_action_just_pressed("special_back"):
+		print("shop_exit - shop_brain")
+		global.del_scene("shop")
+		#global.del_scene("inventory")
+		global.hud_load()
+		global.set_tougle(3,true)
+		global.attack_block = false
 
 
 ###################Содержимое магазина###################
@@ -96,6 +108,7 @@ func exit_button():
 	#global.del_scene("inventory")
 	global.hud_load()
 	global.set_tougle(3,true)
+	global.attack_block = false
 
 ################## Задать содержимое слота
 

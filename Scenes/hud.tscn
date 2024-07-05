@@ -1,18 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://dmha2u8dlg5o1"]
+[gd_scene load_steps=12 format=3 uid="uid://dmha2u8dlg5o1"]
 
 [ext_resource type="Texture2D" uid="uid://k5742llj4gq2" path="res://assets/interface/ping_icon_1024x1024.png" id="1_21nmr"]
+[ext_resource type="Script" path="res://Scripts/hud/hud_brain.gd" id="1_sjm8r"]
 [ext_resource type="FontFile" uid="uid://8atws0pc47sn" path="res://fonts/Font1.ttf" id="3_h8id7"]
 [ext_resource type="Texture2D" uid="uid://ddb813dlvbuyj" path="res://assets/interface/hud_status_large.png" id="4_7qmn3"]
-[ext_resource type="Script" path="res://Scripts/FPS.gd" id="4_cs6lk"]
 [ext_resource type="Texture2D" uid="uid://ckakw481uj45i" path="res://assets/interface/health.png" id="5_2ykob"]
 [ext_resource type="Texture2D" uid="uid://cx2ip8bilhrg5" path="res://assets/interface/hud_base_large.png" id="5_5t2uc"]
+[ext_resource type="Texture2D" uid="uid://23wurqxer0sb" path="res://assets/interface/stamina.png" id="5_6ne8s"]
 [ext_resource type="Texture2D" uid="uid://pl513b6xupyn" path="res://assets/interface/hb1.png" id="6_f1kwn"]
-[ext_resource type="Script" path="res://Scripts/hud/health_bar.gd" id="6_u7gfo"]
 [ext_resource type="Texture2D" uid="uid://cpqe4l277k3fg" path="res://assets/interface/Key1.png" id="7_2srnd"]
 [ext_resource type="Texture2D" uid="uid://bv6wmrh28yfy8" path="res://assets/interface/coin.png" id="8_e6d1a"]
-[ext_resource type="Script" path="res://Scripts/health_label.gd" id="9_napmk"]
-[ext_resource type="Script" path="res://Scripts/coins_label.gd" id="10_jnfc6"]
-[ext_resource type="Script" path="res://Scripts/keys_label.gd" id="11_v22gr"]
+[ext_resource type="Texture2D" uid="uid://v8cpya8qx1si" path="res://assets/interface/stamina_back.png" id="8_vvm8o"]
 
 [node name="hud" type="Control"]
 layout_mode = 3
@@ -25,10 +23,30 @@ offset_right = 1.0
 offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_sjm8r")
 
-[node name="icon" type="CanvasLayer" parent="."]
+[node name="plate" type="CanvasLayer" parent="."]
 
-[node name="icon_texture" type="TextureRect" parent="icon"]
+[node name="other" type="CanvasLayer" parent="plate"]
+
+[node name="FPS" type="Label" parent="plate/other"]
+anchors_preset = -1
+anchor_left = 0.011
+anchor_top = 0.015
+anchor_right = 0.032
+anchor_bottom = 0.045
+offset_left = 7.88
+offset_top = 33.8001
+offset_right = 7.56
+offset_bottom = 34.4001
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_h8id7")
+theme_override_font_sizes/font_size = 20
+metadata/_edit_use_anchors_ = true
+
+[node name="icon" type="CanvasLayer" parent="plate"]
+
+[node name="icon_texture" type="TextureRect" parent="plate/icon"]
 clip_contents = true
 anchors_preset = -1
 anchor_left = 0.0421875
@@ -44,25 +62,48 @@ texture = ExtResource("1_21nmr")
 stretch_mode = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="FPS" type="Label" parent="icon"]
-anchors_preset = -1
-anchor_left = 0.011
-anchor_top = 0.015
-anchor_right = 0.032
-anchor_bottom = 0.045
-offset_left = 7.88
-offset_top = 33.8001
-offset_right = 7.56
-offset_bottom = 34.4001
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_h8id7")
-theme_override_font_sizes/font_size = 20
-script = ExtResource("4_cs6lk")
-metadata/_edit_use_anchors_ = true
+[node name="stamina_bar" type="CanvasLayer" parent="plate"]
 
-[node name="plate" type="CanvasLayer" parent="."]
+[node name="stamina_bar_back" type="TextureRect" parent="plate/stamina_bar"]
+offset_left = 249.0
+offset_top = 950.0
+offset_right = 1094.0
+offset_bottom = 1049.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("8_vvm8o")
 
-[node name="health_bar" type="TextureProgressBar" parent="plate"]
+[node name="stamina_bar" type="TextureProgressBar" parent="plate/stamina_bar"]
+custom_minimum_size = Vector2(70, 16)
+offset_left = 260.0
+offset_top = 949.0
+offset_right = 810.0
+offset_bottom = 1013.0
+scale = Vector2(0.5, 0.789)
+value = 100.0
+rounded = true
+texture_progress = ExtResource("5_6ne8s")
+
+[node name="plates" type="CanvasLayer" parent="plate"]
+
+[node name="plate_status_texture" type="TextureRect" parent="plate/plates"]
+offset_left = 48.0
+offset_top = 695.0
+offset_right = 1004.0
+offset_bottom = 1051.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("4_7qmn3")
+
+[node name="plate_texture" type="TextureRect" parent="plate/plates"]
+offset_left = 55.0
+offset_top = 813.0
+offset_right = 1536.0
+offset_bottom = 1349.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("5_5t2uc")
+
+[node name="health_bar" type="CanvasLayer" parent="plate"]
+
+[node name="health_bar" type="TextureProgressBar" parent="plate/health_bar"]
 z_index = 1
 custom_minimum_size = Vector2(80, 16)
 offset_left = 266.0
@@ -75,52 +116,16 @@ rounded = true
 texture_over = ExtResource("6_f1kwn")
 texture_progress = ExtResource("5_2ykob")
 texture_progress_offset = Vector2(24, 11)
-script = ExtResource("6_u7gfo")
 
-[node name="plate_status_texture" type="TextureRect" parent="plate"]
-offset_left = 48.0
-offset_top = 695.0
-offset_right = 1004.0
-offset_bottom = 1051.0
-scale = Vector2(0.35, 0.35)
-texture = ExtResource("4_7qmn3")
-
-[node name="plate_texture" type="TextureRect" parent="plate"]
-offset_left = 55.0
-offset_top = 813.0
-offset_right = 1536.0
-offset_bottom = 1349.0
-scale = Vector2(0.35, 0.35)
-texture = ExtResource("5_5t2uc")
-
-[node name="key_texture" type="TextureRect" parent="plate"]
-visibility_layer = 4
-offset_left = 294.0
-offset_top = 908.0
-offset_right = 334.0
-offset_bottom = 948.0
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("7_2srnd")
-
-[node name="coin_texture" type="TextureRect" parent="plate"]
-offset_left = 405.0
-offset_top = 908.0
-offset_right = 445.0
-offset_bottom = 948.0
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("8_e6d1a")
-
-[node name="labels" type="CanvasLayer" parent="plate"]
-
-[node name="healh_count_label" type="Label" parent="plate/labels"]
+[node name="healh_count_label" type="Label" parent="plate/health_bar"]
 light_mask = 16
 visibility_layer = 16
 z_index = 2
 anchors_preset = -1
-anchor_left = 0.00100001
-anchor_top = 0.00199998
-anchor_right = 0.0965209
-anchor_bottom = 0.044963
+anchor_left = -0.0276458
+anchor_top = -0.00262965
+anchor_right = 0.131417
+anchor_bottom = 0.0375556
 offset_left = 333.08
 offset_top = 856.84
 offset_right = 435.68
@@ -130,15 +135,18 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_h8id7")
 theme_override_font_sizes/font_size = 26
 text = "health - 120"
-script = ExtResource("9_napmk")
+horizontal_alignment = 1
+vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="coins_count_label" type="Label" parent="plate/labels"]
+[node name="items" type="CanvasLayer" parent="plate"]
+
+[node name="coins_count_label" type="Label" parent="plate/items"]
 light_mask = 4
 anchors_preset = -1
-anchor_left = 0.00100001
+anchor_left = -0.00160416
 anchor_top = 0.00199998
-anchor_right = 0.0532917
+anchor_right = 0.0824583
 anchor_bottom = 0.032
 offset_left = 443.08
 offset_top = 907.84
@@ -149,15 +157,16 @@ theme_override_colors/font_color = Color(0.0962047, 0.0962048, 0.0962047, 1)
 theme_override_fonts/font = ExtResource("3_h8id7")
 theme_override_font_sizes/font_size = 20
 text = "8"
-script = ExtResource("10_jnfc6")
+horizontal_alignment = 1
+vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="keys_count_label" type="Label" parent="plate/labels"]
+[node name="keys_count_label" type="Label" parent="plate/items"]
 light_mask = 4
 anchors_preset = -1
-anchor_left = 0.00100001
+anchor_left = -0.00160416
 anchor_top = 0.00199998
-anchor_right = 0.0532917
+anchor_right = 0.0824583
 anchor_bottom = 0.032
 offset_left = 331.08
 offset_top = 907.84
@@ -168,5 +177,23 @@ theme_override_colors/font_color = Color(0.0962047, 0.0962048, 0.0962047, 1)
 theme_override_fonts/font = ExtResource("3_h8id7")
 theme_override_font_sizes/font_size = 20
 text = "9"
-script = ExtResource("11_v22gr")
+horizontal_alignment = 1
+vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="key_texture" type="TextureRect" parent="plate/items"]
+visibility_layer = 4
+offset_left = 294.0
+offset_top = 908.0
+offset_right = 334.0
+offset_bottom = 948.0
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("7_2srnd")
+
+[node name="coin_texture" type="TextureRect" parent="plate/items"]
+offset_left = 405.0
+offset_top = 908.0
+offset_right = 445.0
+offset_bottom = 948.0
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("8_e6d1a")

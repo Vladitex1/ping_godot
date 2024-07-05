@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://db20g0ssxckeg"]
+[gd_scene load_steps=24 format=3 uid="uid://d24pfamfbnp8n"]
 
 [ext_resource type="Script" path="res://Scripts/door_script.gd" id="3_ec11f"]
 [ext_resource type="Texture2D" uid="uid://dvmacp1f51ida" path="res://assets/Tilemap/doortilemap.png" id="4_j0txy"]

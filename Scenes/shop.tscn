@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://b4pcmlps8caph"]
+[gd_scene load_steps=56 format=3 uid="uid://b4pcmlps8caph"]
 
 [ext_resource type="Script" path="res://Scripts/shop/shop_brain.gd" id="1_6uox3"]
 [ext_resource type="Texture2D" uid="uid://bc35ryqt34r6x" path="res://assets/interface/shop1.png" id="1_y0bcl"]
@@ -13,8 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://cok61u06k8a5v" path="res://assets/interface/plusbutton_large.png" id="9_x3u8a"]
 [ext_resource type="PackedScene" uid="uid://bdgtifol1pjro" path="res://Scenes/shop/shop_item.tscn" id="11_g3vq1"]
 [ext_resource type="Texture2D" uid="uid://cv45h4cbwi43d" path="res://assets/interface/minusbutton_large.png" id="11_h1lch"]
-[ext_resource type="Script" path="res://Scripts/keys_label.gd" id="14_gv3fm"]
-[ext_resource type="Script" path="res://Scripts/coins_label.gd" id="15_c4a8w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ptomw"]
 atlas = ExtResource("9_gt45h")
@@ -633,7 +631,6 @@ theme_override_colors/font_color = Color(0.329158, 0.329158, 0.329158, 1)
 theme_override_fonts/font = ExtResource("7_u30p0")
 theme_override_font_sizes/font_size = 20
 text = "0"
-script = ExtResource("14_gv3fm")
 
 [node name="coins" type="Label" parent="shop_plate/text"]
 offset_left = 637.0
@@ -645,4 +642,3 @@ theme_override_colors/font_color = Color(0.329158, 0.329158, 0.329158, 1)
 theme_override_fonts/font = ExtResource("7_u30p0")
 theme_override_font_sizes/font_size = 20
 text = "0"
-script = ExtResource("15_c4a8w")

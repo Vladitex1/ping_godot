@@ -1,7 +1,11 @@
-[gd_scene load_steps=50 format=3 uid="uid://ddu8mykivdltg"]
+[gd_scene load_steps=54 format=3 uid="uid://ddu8mykivdltg"]
 
 [ext_resource type="Script" path="res://Scripts/skeleton_script.gd" id="1_512xd"]
+[ext_resource type="Script" path="res://Scripts/skeleton_global_script.gd" id="1_ynw80"]
+[ext_resource type="Texture2D" uid="uid://pl513b6xupyn" path="res://assets/interface/hb1.png" id="2_xvan6"]
 [ext_resource type="Texture2D" uid="uid://5hbacs6p7kj0" path="res://assets/Tilemap/Skeleton.png" id="3_iciww"]
+[ext_resource type="Texture2D" uid="uid://ckakw481uj45i" path="res://assets/interface/health.png" id="3_qytg2"]
+[ext_resource type="FontFile" uid="uid://8atws0pc47sn" path="res://fonts/Font1.ttf" id="5_cudtf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_joesn"]
 atlas = ExtResource("3_iciww")
@@ -361,10 +365,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lexjj"]
-size = Vector2(26.239, 45.1895)
+size = Vector2(11.6618, 15.5491)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_qv8di"]
-radius = 48.5716
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0qy4p"]
+size = Vector2(54.2858, 58.5715)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_chf64"]
 radius = 115.278
@@ -372,25 +376,76 @@ radius = 115.278
 [sub_resource type="CircleShape2D" id="CircleShape2D_008hr"]
 radius = 324.006
 
-[node name="Node2D" type="Node2D"]
+[node name="Skeleton" type="Node2D"]
+script = ExtResource("1_ynw80")
 
 [node name="Enemy" type="CharacterBody2D" parent="."]
-position = Vector2(3.8147e-06, -2.00001)
+position = Vector2(9.09495e-13, -2.38419e-07)
 scale = Vector2(0.7, 0.7)
 collision_layer = 11
 collision_mask = 11
+motion_mode = 1
+wall_min_slide_angle = 0.872665
+floor_stop_on_slope = false
+floor_block_on_wall = false
+platform_floor_layers = 4294901771
+platform_wall_layers = 11
+safe_margin = 1.0
 script = ExtResource("1_512xd")
 
+[node name="health_bar" type="TextureProgressBar" parent="Enemy"]
+visible = false
+z_index = 1
+custom_minimum_size = Vector2(80, 16)
+offset_left = -34.2857
+offset_top = -44.2857
+offset_right = 465.714
+offset_bottom = 19.7143
+scale = Vector2(0.14, 0.25)
+value = 100.0
+rounded = true
+texture_over = ExtResource("2_xvan6")
+texture_progress = ExtResource("3_qytg2")
+texture_progress_offset = Vector2(24, 11)
+
+[node name="healh_count_label" type="Label" parent="Enemy"]
+visible = false
+light_mask = 16
+visibility_layer = 16
+z_index = 2
+anchors_preset = -1
+anchor_left = -0.0276458
+anchor_top = -0.00262965
+anchor_right = 0.131417
+anchor_bottom = 0.0375556
+offset_left = -15.7147
+offset_top = -39.9997
+offset_right = 224.285
+offset_bottom = 3.00029
+scale = Vector2(0.14, 0.197)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_cudtf")
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy"]
-position = Vector2(282.857, 171.429)
+position = Vector2(0, -1.14441e-05)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_6qr1t")
-animation = &"skeleton_idle_down"
+animation = &"skeleton_idle_up"
 
-[node name="PingColision" type="CollisionShape2D" parent="Enemy"]
-position = Vector2(282.857, 172.143)
-scale = Vector2(0.98, 0.98)
+[node name="Skeleton" type="CollisionShape2D" parent="Enemy"]
+position = Vector2(8.51482e-08, 1.52588e-05)
+scale = Vector2(2.94, 2.94)
 shape = SubResource("RectangleShape2D_lexjj")
+
+[node name="enemy_damage_area" type="Area2D" parent="Enemy"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy/enemy_damage_area"]
+position = Vector2(6.81195e-07, 0.714286)
+scale = Vector2(0.999999, 0.999999)
+shape = SubResource("RectangleShape2D_0qy4p")
 
 [node name="AttackTimer" type="Timer" parent="Enemy"]
 one_shot = true
@@ -398,16 +453,8 @@ one_shot = true
 [node name="CooldownTimer" type="Timer" parent="Enemy"]
 one_shot = true
 
-[node name="close_detection" type="Area2D" parent="Enemy"]
-collision_layer = 7
-collision_mask = 7
-
-[node name="enemy_close_colision" type="CollisionShape2D" parent="Enemy/close_detection"]
-position = Vector2(282.857, 170)
-shape = SubResource("CircleShape2D_qv8di")
-
 [node name="detection" type="Area2D" parent="Enemy"]
-position = Vector2(-5.44957e-06, 2.85716)
+position = Vector2(-9.09495e-13, 7.15256e-07)
 scale = Vector2(1.42857, 1.42857)
 collision_layer = 7
 collision_mask = 7
@@ -416,22 +463,15 @@ collision_mask = 7
 light_mask = 2
 visibility_layer = 2
 z_as_relative = false
-position = Vector2(198, 115)
+position = Vector2(3.8147e-06, 0)
 shape = SubResource("CircleShape2D_chf64")
 
 [node name="far_detection" type="Area2D" parent="Enemy"]
-position = Vector2(-5.44957e-06, 2.85716)
+position = Vector2(-9.09495e-13, 7.15256e-07)
 scale = Vector2(1.42857, 1.42857)
 collision_layer = 7
 collision_mask = 7
 
 [node name="enemy_far_colision" type="CollisionShape2D" parent="Enemy/far_detection"]
-position = Vector2(198, 115)
+position = Vector2(7.62939e-06, 0)
 shape = SubResource("CircleShape2D_008hr")
-
-[connection signal="body_entered" from="Enemy/close_detection" to="Enemy" method="_on_close_detection_body_entered"]
-[connection signal="body_exited" from="Enemy/close_detection" to="Enemy" method="_on_close_detection_body_exited"]
-[connection signal="body_entered" from="Enemy/detection" to="Enemy" method="_on_detection_body_entered"]
-[connection signal="body_exited" from="Enemy/detection" to="Enemy" method="_on_detection_body_exited"]
-[connection signal="body_entered" from="Enemy/far_detection" to="Enemy" method="_on_far_detection_body_entered"]
-[connection signal="body_exited" from="Enemy/far_detection" to="Enemy" method="_on_far_detection_body_exited"]

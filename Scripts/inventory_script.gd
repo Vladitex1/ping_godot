@@ -2,7 +2,7 @@ extends Control
 
 class_name inventory
 
-var open = true
+var open = false
 @onready var show_animation = $inventory_pos_animation
 
 var selected_slot_start: int = -1
@@ -34,11 +34,13 @@ func _ready():
 	$GridContainer/Slot16/Button.connect("button_down",slot16)
 
 func inventory_tougle():
-	if open:
-		open = false
+	if !open:
+		open = true
+		global.attack_block = true
 		show_animation.play("inventory_show_animation")
 	else:
-		open = true
+		open = false
+		global.attack_block = false
 		show_animation.play_backwards("inventory_show_animation")	
 
 func _process(_delta):
@@ -169,7 +171,10 @@ func pickup(path,slotNum):
 		selected_slot_id_end = path.get_slot_info()
 		if selected_slot_id_end == 0:
 			slot(selected_slot_end,selected_slot_id_start)
-		if selected_slot_id_end == -1:
+		elif selected_slot_id_end == -1:
+			slot(selected_slot_start,selected_slot_id_start)
+			reset_variable()
+		elif selected_slot_start == selected_slot_end:
 			slot(selected_slot_start,selected_slot_id_start)
 			reset_variable()
 		else:

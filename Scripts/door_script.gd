@@ -44,13 +44,13 @@ func _process(_delta):
 				animation(door_tougle)
 				door_tougle = false ##открытие/закрытие двери переключатель
 			false:
-				if global.PlayerIndicators("Keys", 0, "get") >= 1:
+				if global.PlayerIndicators("KEYS", 0, "GET") >= 1:
 					global.set_tougle(2,true)
-					global.PlayerIndicators("Keys", -1, "set")
+					global.PlayerIndicators("KEYS", -1, "GET")
 					print("Дверь открыта - door_script")
 					animation(door_tougle)
 					door_tougle = true ##открытие/закрытие двери переключатель
-				if global.PlayerIndicators("Keys", 0, "get") <= 0:
+				if global.PlayerIndicators("KEYS", 0, "GET") <= 0:
 					pass
 					#print("нехватает ключей - door_script")
 			

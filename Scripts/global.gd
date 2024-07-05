@@ -10,15 +10,26 @@ static var shop_tougle:bool = false
 static var action_tougle:bool = false
 static var loading_tougle:bool = false
 static var heat_tougle:bool = false
+static var attack_tougle:bool = false
 static var drag_tougle:bool = false
 static var brightness:float = 1
 static var ret: bool = false
-
-var PlayerHP: int = 100
+static var attack_block:bool = false
+static var PlayerHP: int = 100
 static var PlayerKeys: int = 1
 static var PlayerCoins: int = 5
+static var Damage: int = 0
+static var Damage_Throw: int = 0
+static var current_enemy_attack_id: int
 
-var door_list = {}
+
+
+var ememy_id_list = {}
+var enemy_id_global
+
+
+var player_damage
+
 static var player_position: Vector2
 static var camera_position: Vector2
 static var camera_zoom: Vector2
@@ -55,7 +66,7 @@ func del_scene(name):
 			scene4.queue_free()
 			scene4 = load("res://Scenes/"+name+".tscn").instantiate()
 			
-func set_tougle(num,status):
+func set_tougle(num:int,status:bool):
 	match num:
 		1:
 			shop_tougle = status
@@ -67,8 +78,10 @@ func set_tougle(num,status):
 			heat_tougle = status
 		5: 
 			drag_tougle = status
+		6: 
+			attack_tougle = status
 			
-func get_tougle(num):
+func get_tougle(num:int):
 	match num:
 		1:
 			ret = shop_tougle
@@ -80,16 +93,17 @@ func get_tougle(num):
 			ret = heat_tougle
 		5:
 			ret = drag_tougle
+		6: 
+			ret = attack_tougle
 	return ret
 
 func hud_load():
-	#return 0
 	global.add_scene("hud")
 	global.add_scene("inventory")
-	
 
 func set_player_pos(vector):
 	player_position = vector
+
 func get_player_pos():
 	return player_position
 
@@ -104,27 +118,70 @@ func get_camera_position(num):
 		2:
 			return camera_zoom
 	
-	
+func incomingPlayerDamage(name, delta, GSET, ID):
+	#ememy_id_list[ID]
+	match GSET:
+		"SET":
+			match name:
+				"DAMAGE":
+					Damage = delta
+				"DAMAGE_THROW":
+					Damage_Throw = delta
+		"GET":
+			match name:
+				"DAMAGE":
+					return Damage
+				"DAMAGE_THROW":
+					return Damage_Throw
+
+func player_attack(name, delta, GSET, enemy_id):
+	if enemy_id != 0:
+		enemy_id_global = enemy_id
+
+	match GSET:
+		"SET":
+			match name:
+				"DAMAGE":
+					Damage = delta
+				"DAMAGE_THROW":
+					Damage_Throw = delta
+		"GET":
+			match name:
+				"DAMAGE":
+					return Damage
+				"DAMAGE_THROW":
+					return Damage_Throw
+
+var temphp:int = PlayerHP
+var tempCoins:int = PlayerCoins
+var tempKeys:int = PlayerKeys
 func PlayerIndicators(name, delta, GSet):
+	temphp = PlayerHP
+	tempCoins = PlayerCoins
+	tempKeys = PlayerKeys
+	
 	match GSet:
-		"set":
+		"SET":
 			match name:
 				"HP":
 					PlayerHP = PlayerHP + delta
-					print("Player Health: "+ str(PlayerHP) + " uuDelta " + str(delta) + " - global")
-				"Coins":
+				"COINS":
 					PlayerCoins = PlayerCoins + delta
-					print("Player Coins: "+ str(PlayerCoins) + " Delta " + str(delta) + " - global")
-				"Keys":
+				"KEYS":
 					PlayerKeys = PlayerKeys + delta
-					print("Player Keys: "+ str(PlayerKeys) + " Delta " + str(delta) + " - global")
-		"get":
+		"GET":
 			match name:
 				"HP":
 					return PlayerHP
-				"Coins":
+				"COINS":
 					return PlayerCoins
-				"Keys":
+				"KEYS":
 					return PlayerKeys
 
-	
+	if temphp != PlayerHP: 
+		pass
+		#print("Player Health: "+ str(PlayerHP) + " Delta " + str(delta) + " - global")
+	if tempCoins != PlayerCoins: 
+		print("Player Coins: "+ str(PlayerCoins) + " Delta " + str(delta) + " - global")
+	if tempKeys != PlayerKeys:
+		print("Player Keys: "+ str(PlayerKeys) + " Delta " + str(delta) + " - global")
