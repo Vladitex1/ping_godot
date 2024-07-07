@@ -1,8 +1,8 @@
 xxxxxxxxxxxxxxxxxxxxxxxxxxИДЕИxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 xxxxxxxxxxxxxxxxxxxxxxxxxГОТОВОxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-xxxxxxxxxxxxxxxxxxxxxxxxxxВПРОЦЕССЕxxxxxxxxxxxxxxxxxxxxxxxxxx
-сделать шкалу стамины (маны) для ударов.
 Когда шкала пустая, удары слабые/нельзя ударить
+сделать шкалу стамины (маны) для ударов.
+xxxxxxxxxxxxxxxxxxxxxxxxxxВПРОЦЕССЕxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 сделать шкалу брони.
 

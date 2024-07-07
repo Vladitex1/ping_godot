@@ -7,14 +7,14 @@ extends Control
 @onready var keys_count_lable = $plate/items/keys_count_label
 @onready var FPS_lable = $plate/other/FPS
 
-var value: int
+var value: int  = 0
 func _ready():
-	value = 0
-
+	stamina_bar.max_value = global.MaxStamina
+	health_bar.max_value = global.MaxHealth
 func _process(delta):
 	var fps = Engine.get_frames_per_second()
 	FPS_lable.text = "fps: "+str(fps)
-	stamina_bar.value = global.PlayerIndicators("HP", 0, "GET")
+	stamina_bar.value = global.PlayerIndicators("STAMINA", 0, "GET")
 	health_bar.value = global.PlayerIndicators("HP", 0, "GET")
 	healh_count_lable.text = "health - "+str(global.PlayerIndicators("HP", 0, "GET"))
 	coins_count_lable.text = str(global.PlayerIndicators("COINS", 0, "GET"))

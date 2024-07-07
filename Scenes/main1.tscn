@@ -122,7 +122,6 @@ sources/0 = SubResource("TileSetAtlasSource_1hymn")
 [node name="Lights" type="Node2D" parent="Level"]
 
 [node name="darkness" type="CanvasModulate" parent="Level/Lights"]
-visible = false
 color = Color(0.377919, 0.377919, 0.377919, 1)
 script = ExtResource("1_wkv1h")
 

@@ -37,6 +37,20 @@ metadata/_edit_use_anchors_ = true
 scale = Vector2(2, 2)
 transform = Transform2D(2, 0, 0, 2, 0, 0)
 
+[node name="console" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/console"]
+layout_mode = 0
+offset_right = 961.0
+offset_bottom = 38.0
+placeholder_text = "console"
+alignment = 2
+
 [node name="DelayTimer" type="Timer" parent="CanvasLayer"]
 one_shot = true
 

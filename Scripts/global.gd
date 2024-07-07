@@ -15,14 +15,22 @@ static var drag_tougle:bool = false
 static var brightness:float = 1
 static var ret: bool = false
 static var attack_block:bool = false
-static var PlayerHP: int = 100
-static var PlayerKeys: int = 1
-static var PlayerCoins: int = 5
-static var Damage: int = 0
-static var Damage_Throw: int = 0
+
+static var PlayerHealth: float
+static var MaxHealth: float
+static var PlayerStamina: float
+static var MaxStamina: float
+
+static var PlayerKeys: int
+static var PlayerCoins: int
+
+static var Damage: int
+static var Damage_Throw: int
 static var current_enemy_attack_id: int
-
-
+var temphp:int = PlayerHealth
+var tempCoins:int = PlayerCoins
+var tempKeys:int = PlayerKeys
+var tempStamina:int = PlayerStamina
 
 var ememy_id_list = {}
 var enemy_id_global
@@ -101,7 +109,7 @@ func hud_load():
 	global.add_scene("hud")
 	global.add_scene("inventory")
 
-func set_player_pos(vector):
+func set_player_pos(vector: Vector2):
 	player_position = vector
 
 func get_player_pos():
@@ -152,11 +160,9 @@ func player_attack(name, delta, GSET, enemy_id):
 				"DAMAGE_THROW":
 					return Damage_Throw
 
-var temphp:int = PlayerHP
-var tempCoins:int = PlayerCoins
-var tempKeys:int = PlayerKeys
+
 func PlayerIndicators(name, delta, GSet):
-	temphp = PlayerHP
+	temphp = PlayerHealth
 	tempCoins = PlayerCoins
 	tempKeys = PlayerKeys
 	
@@ -164,24 +170,30 @@ func PlayerIndicators(name, delta, GSet):
 		"SET":
 			match name:
 				"HP":
-					PlayerHP = PlayerHP + delta
+					PlayerHealth = PlayerHealth + delta
 				"COINS":
 					PlayerCoins = PlayerCoins + delta
 				"KEYS":
 					PlayerKeys = PlayerKeys + delta
+				"STAMINA":
+					PlayerStamina = PlayerStamina + delta
 		"GET":
 			match name:
 				"HP":
-					return PlayerHP
+					return PlayerHealth
 				"COINS":
 					return PlayerCoins
 				"KEYS":
 					return PlayerKeys
+				"STAMINA":
+					return PlayerStamina
 
-	if temphp != PlayerHP: 
+	if temphp != PlayerHealth: 
 		pass
-		#print("Player Health: "+ str(PlayerHP) + " Delta " + str(delta) + " - global")
+		#print("Player Health: "+ str(PlayerHealth) + " Delta " + str(delta) + " - global")
 	if tempCoins != PlayerCoins: 
 		print("Player Coins: "+ str(PlayerCoins) + " Delta " + str(delta) + " - global")
 	if tempKeys != PlayerKeys:
 		print("Player Keys: "+ str(PlayerKeys) + " Delta " + str(delta) + " - global")
+
+

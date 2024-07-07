@@ -490,18 +490,20 @@ scale = Vector2(1.42857, 1.42857)
 texture = ExtResource("3_luyv8")
 
 [node name="Hands" type="Area2D" parent="Player"]
+z_index = 1
 position = Vector2(2.72478e-06, 7.08318e-07)
 scale = Vector2(0.114282, 0.11428)
 
 [node name="WeaponIcon" type="Sprite2D" parent="Player/Hands"]
+z_index = 1
 position = Vector2(425.014, -6.19809e-06)
 rotation = 1.5708
 scale = Vector2(6.055, 6.055)
 texture = ExtResource("6_ck2w6")
 
 [node name="HandsColision" type="CollisionShape2D" parent="Player/Hands"]
+z_index = 1
 position = Vector2(343.761, -6.25032)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_mfvtw")
 
 [node name="damage_zone_detection" type="Area2D" parent="Player"]

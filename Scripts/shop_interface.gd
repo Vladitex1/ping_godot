@@ -19,8 +19,8 @@ func _on_body_entered(body):
 
 
 func _on_body_exited(body):
-	print("выход из территории магазина - shop_interface")
 	if str(body.name) == "Player":
+		print("выход из территории магазина - shop_interface")
 		global.set_tougle(3,false)
 		shop_exit()
 		shop_ready = false

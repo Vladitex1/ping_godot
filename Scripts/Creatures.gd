@@ -9,7 +9,7 @@ var spawn: bool = false
 
 func _process(delta):
 	var max_creatures = $".".get_child_count()
-	if Input.is_action_just_released("debug1"):# and Input.is_action_just_pressed("attack"):
+	if Input.is_action_just_released("debug2"):# and Input.is_action_just_pressed("attack"):
 		var Spawn = load("res://Scenes/skeleton.tscn").instantiate()
 		var mouse_pos = get_local_mouse_position()
 		var nodepath = $"."
@@ -25,7 +25,7 @@ func _process(delta):
 		var my_object = $".".get_node_or_null(creature_name)
 		var new_item = [creature_id, path, creature_name]
 		dict[len(dict)] = new_item
-		global.ememy_id_list[len(global.ememy_id_list)] = new_item				
+		global.ememy_id_list[len(global.ememy_id_list)] = new_item
 		if max_creatures>max:
 			max = max_creatures
 			if spawn:

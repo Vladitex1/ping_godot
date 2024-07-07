@@ -374,7 +374,7 @@ size = Vector2(54.2858, 58.5715)
 radius = 115.278
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_008hr"]
-radius = 324.006
+radius = 602.014
 
 [node name="Skeleton" type="Node2D"]
 script = ExtResource("1_ynw80")
@@ -430,6 +430,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy"]
+z_index = 1
 position = Vector2(0, -1.14441e-05)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_6qr1t")

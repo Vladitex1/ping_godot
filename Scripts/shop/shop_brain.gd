@@ -1,32 +1,39 @@
 extends Control
 
 @onready var cost_lable = $shop_plate/text/cost
+@onready var sell_cost_lable = $shop_plate/text/sell_cost
 @onready var name_lable = $shop_plate/text/name
 @onready var count_lable = $shop_plate/text/count
 @onready var keys_lable = $shop_plate/text/keys
 @onready var coins_lable = $shop_plate/text/coins
-var standart_label = ["name","count","cost"]
+@onready var buy_button = $shop_plate/buttons/buy_button
+@onready var sell_button = $shop_plate/buttons/sell_button
+@onready var eye_right = $shop_plate/eyes/eye_right
+@onready var eye_left = $shop_plate/eyes/eye_left
+
+var standart_label = ["name","count","cost","sell"]
 
 var num123 = -1
 
 var count:int = 1
 var countstr:String
 
-var cost:int = 0
+var cost:int
+var sell_cost:int
 var coststr:String
 var name1: String
 
 var selected_item: int = 0
-var selected_item_ID: int = -2
+var selected_item_ID: int = -1
 
 	
 func _ready():	
 	countstr = str(count)
 	global.attack_block = true
 	$shop_plate/buttons/minus_button.connect("button_up",minus_button)
-	$shop_plate/buttons/buy_button.connect("button_up",buy_button)
+	$shop_plate/buttons/buy_button.connect("button_up",buy_button_func)
 	$shop_plate/buttons/plus_button.connect("button_up",plus_button)
-	$shop_plate/buttons/sell_button.connect("button_up",sell_button)
+	$shop_plate/buttons/sell_button.connect("button_up",sell_button_func)
 	$shop_plate/buttons/exit_button.connect("button_up",exit_button)
 
 	##buttons
@@ -41,19 +48,34 @@ func _ready():
 
 	shop_info_storage(randi_range(0,3))
 	##shop inventory
-
+func eyes():
+	var mouse_pos = get_local_mouse_position().angle()
+	var mouse_pos2 = get_local_mouse_position()
+	eye_left.rotation = mouse_pos
+	eye_right.rotation = mouse_pos
+	print("левое: ",eye_left.get_screen_position())
+	print("правое: ",eye_right.get_screen_position())
+	print("мышь: ",mouse_pos2)
 func _process(delta):
+	
+	eyes()
+	
+	
+	
+	print(selected_item_ID)
 	coins_lable.text = str(global.PlayerIndicators("COINS", 0, "GET"))
 	keys_lable.text = str(global.PlayerIndicators("KEYS", 0, "GET"))
 	
 	if selected_item_ID == -2 or selected_item_ID == -1:
-		cost_lable.text = standart_label[2]
 		name_lable.text = standart_label[0]
 		count_lable.text = standart_label[1]
+		cost_lable.text = standart_label[2]
+		sell_cost_lable.text = standart_label[3]
 	else:
 		cost = itemlist.itemlist[selected_item_ID][0] * count
+		sell_cost = itemlist.itemlist[selected_item_ID][3] * count
 		cost_lable.text = str(cost)
-		
+		sell_cost_lable.text = str(sell_cost)
 		name_lable.text = itemlist.itemlist[selected_item_ID][2]
 		count_lable.text = str(count)
 	
@@ -64,6 +86,7 @@ func _process(delta):
 			shop_info_storage(num123)
 		else:
 			shop_info_storage(num123)
+			
 	elif Input.is_action_just_pressed("special_back"):
 		print("shop_exit - shop_brain")
 		global.del_scene("shop")
@@ -71,7 +94,6 @@ func _process(delta):
 		global.hud_load()
 		global.set_tougle(3,true)
 		global.attack_block = false
-
 
 ###################Содержимое магазина###################
 	
@@ -98,10 +120,35 @@ func plus_button():
 	count = count + 1
 	countstr = str(count)
 	
-func buy_button():
-	pass
-func sell_button():
-	pass
+func buy_button_func():
+	if global.PlayerIndicators("COINS",0,"GET") < itemlist.itemlist[selected_item_ID][0] or global.PlayerIndicators("COINS",0,"GET") <= 0:
+		buy_button.disabled = true
+	elif global.PlayerIndicators("COINS",0,"GET") > 0:
+		buy_button.disabled = false
+		match selected_item_ID:
+			1:
+				global.PlayerIndicators("KEYS",count,"SET")
+				global.PlayerIndicators("COINS",itemlist.itemlist[selected_item_ID][0]*-1,"SET")
+			2:
+				pass
+			_:
+				global.PlayerIndicators("COINS",itemlist.itemlist[selected_item_ID][0]*-1,"SET")
+
+	
+func sell_button_func():###################дописать
+	if global.PlayerIndicators("KEYS",0,"GET") < count:
+		buy_button.disabled = true
+	else:
+		buy_button.disabled = false
+		match selected_item_ID:
+			1:
+				global.PlayerIndicators("KEYS",count*-1,"SET")
+				global.PlayerIndicators("COINS",itemlist.itemlist[selected_item_ID][3],"SET") 
+			2:
+				pass
+			_:
+				global.PlayerIndicators("COINS",itemlist.itemlist[selected_item_ID][3],"SET")
+			
 func exit_button():
 	print("shop_exit - shop_brain")
 	global.del_scene("shop")

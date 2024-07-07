@@ -32,11 +32,11 @@ var max_health = 150
 var temp_state
 var damaged = true
 var enemy_id: int = -1
-
+var patrol_timer = false
+var new_vector: Vector2
 
 
 func _ready():
-	
 	health_bar.max_value = max_health
 	$enemy_damage_area.connect("body_entered",AttackArea_enter)
 	$detection.connect("body_entered",ChaseArea_enter)
@@ -47,8 +47,6 @@ func _ready():
 	$far_detection.connect("body_exited",PatrolArea_exit)
 	
 func _physics_process(delta):
-	#print(enemy_id)
-	#print(global.enemy_id_global)
 	health_bar_conrol(SET)
 	GSet_health(0,GET)
 	
@@ -58,13 +56,35 @@ func _physics_process(delta):
 			state = DAMAGE
 		false:
 			pass
-			#state = temp_state
 	match state:
 		PATROL:
+			
 			speed = 50
-			move(get_circle_position(random_num), delta, speed)
+			if attack_timer.is_stopped() == true:
+				new_vector = get_circle_position(get_random_num())
+				attack_timer.start(5)
+			#print(attack_timer.time_left)
+			#print("__________________________________________")
+			#print(patrol_timer)
+			#print("new_vector = "+str(new_vector))
+			#print("enemy_position = "+str(enemy.get_global_position()))
+			var delta_x = enemy.get_global_position().x-new_vector.x
+			var delta_y = enemy.get_global_position().y-new_vector.y
+			
+
+			if delta_x<=0:
+				delta_x *= -1
+			if delta_y<=0:
+				delta_y *= -1
+			#print("delta_x = "+str(delta_x))
+			#print("delta_y = "+str(delta_y))
+			var delta_num = 2
+			if delta_x < delta_num and delta_y < delta_num:
+				animation(null_vector,null_vector,"idle")  
+			else:
+				move(new_vector, delta, speed)
 			#print("Enemy state: Patrol - skeleton_script")
-			patrol_vector_timer()
+			
 			temp_state = PATROL
 		CHASE:
 			speed = 150
@@ -88,7 +108,7 @@ func _physics_process(delta):
 				var incoming_damage = global.player_attack("DAMAGE", 0, "GET",0)
 				var incoming_damage_throw = global.player_attack("DAMAGE_THROW", 0, "GET",0)
 				GSet_health(GSet_health(0,GET) - incoming_damage,SET)
-				print(" Damage: "+str(incoming_damage)+" Damage_Throw: "+str(incoming_damage_throw) + " - skeleton_script")
+				#print(" Damage: "+str(incoming_damage)+" Damage_Throw: "+str(incoming_damage_throw) + " - skeleton_script: id = " + str(enemy_id))
 				move(damage_vector(),1,10)
 			state = temp_state
 		DEATH:
@@ -102,9 +122,8 @@ func _physics_process(delta):
 
 ###############special######################
 func get_random_num():
-	var random_number_generator = RandomNumberGenerator.new()
-	random_number_generator.randomize()
-	random_num = random_number_generator.randf()
+	random_num = randi_range(0,180)
+	#print(random_num)
 	return random_num
 
 func move(target, delta, speed):
@@ -115,7 +134,6 @@ func move(target, delta, speed):
 	animation(velocity,steering,"walk")
 	move_and_slide()
 	
-
 func GSet_health(Count:int,GS):
 	if health_value <= 0:
 		state = DEATH
@@ -125,7 +143,6 @@ func GSet_health(Count:int,GS):
 			return health_value
 		SET:
 			health_value = Count
-
 
 func animation(velocity,steering,condition):
 	var walk = 0
@@ -234,8 +251,6 @@ func health_bar_conrol(GS):
 				health_bar_lable.visible = false
 				health_bar.visible = false
 
-
-
 ###############atack######################
 
 func attack():
@@ -251,9 +266,7 @@ func attack():
 	if cooldown_timer.is_stopped() == false: ##перезапуск таймера атаки
 		attack_timer.start(attack_speed)
 		
-
 ###############damage######################
-
 
 func damage_vector():
 	if global.enemy_id_global == enemy_id:
@@ -271,23 +284,19 @@ func damage_vector():
 ###############chase######################
 ###############patrol######################
 func get_circle_position(random):
-	var kill_circle_centre = enemy.get_global_position()
 	var radius = 200
 	 #Distance from center to circumference of circle
-	var angle = random * PI * 2;
-	var x = kill_circle_centre.x + cos(angle) * radius;
-	var y = kill_circle_centre.y + sin(angle) * radius;
+	var angle = random# * PI * 2;
+	var vector_from_angle = Vector2(cos(angle), sin(angle))
+	var vector = Vector2(radius,radius) * vector_from_angle
+	var vector123 = enemy.get_global_position()-vector
 
-	return Vector2(x, y)
+	return vector123
 	
-func patrol_vector_timer():
-	if state == PATROL:
-		if attack_timer.is_stopped() == true:
-			attack_timer.start(5)
-			print("время - skeleton_script")
-			get_random_num()
-	else:
-		return 0
+func patrol_vector_timer(): ##перезапуск таймера
+	print("время - skeleton_script: id = " + str(enemy_id))
+	get_random_num()
+	
 ###############connections######################		
 
 

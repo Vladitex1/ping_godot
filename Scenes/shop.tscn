@@ -311,10 +311,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -272.0
-offset_top = 91.0
-offset_right = -272.0
-offset_bottom = 91.0
+offset_top = 126.0
+offset_bottom = 126.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6uox3")
@@ -570,9 +568,9 @@ offset_bottom = 98.0
 [node name="text" type="CanvasLayer" parent="shop_plate"]
 
 [node name="name" type="Label" parent="shop_plate/text"]
-offset_left = 479.0
+offset_left = 474.0
 offset_top = 584.0
-offset_right = 555.0
+offset_right = 620.0
 offset_bottom = 621.0
 theme = ExtResource("6_xbq1c")
 theme_override_colors/font_color = Color(0.329158, 0.329158, 0.329158, 1)
@@ -583,15 +581,28 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="cost" type="Label" parent="shop_plate/text"]
-offset_left = 773.0
-offset_top = 646.0
-offset_right = 879.0
-offset_bottom = 683.0
+offset_left = 641.0
+offset_top = 585.0
+offset_right = 747.0
+offset_bottom = 622.0
 theme = ExtResource("6_xbq1c")
 theme_override_colors/font_color = Color(0.329412, 0.329412, 0.329412, 1)
 theme_override_fonts/font = ExtResource("7_u30p0")
 theme_override_font_sizes/font_size = 20
 text = "cost"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="sell_cost" type="Label" parent="shop_plate/text"]
+offset_left = 773.0
+offset_top = 585.0
+offset_right = 879.0
+offset_bottom = 622.0
+theme = ExtResource("6_xbq1c")
+theme_override_colors/font_color = Color(0.329412, 0.329412, 0.329412, 1)
+theme_override_fonts/font = ExtResource("7_u30p0")
+theme_override_font_sizes/font_size = 20
+text = "sell"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -609,10 +620,10 @@ theme_override_font_sizes/font_size = 35
 text = "SHOP"
 
 [node name="count" type="Label" parent="shop_plate/text"]
-offset_left = 773.0
-offset_top = 585.0
-offset_right = 880.0
-offset_bottom = 620.0
+offset_left = 774.0
+offset_top = 647.0
+offset_right = 881.0
+offset_bottom = 682.0
 theme = ExtResource("6_xbq1c")
 theme_override_colors/font_color = Color(0.329412, 0.329412, 0.329412, 1)
 theme_override_fonts/font = ExtResource("7_u30p0")
@@ -642,3 +653,45 @@ theme_override_colors/font_color = Color(0.329158, 0.329158, 0.329158, 1)
 theme_override_fonts/font = ExtResource("7_u30p0")
 theme_override_font_sizes/font_size = 20
 text = "0"
+
+[node name="eyes" type="CanvasLayer" parent="."]
+
+[node name="eye_left" type="Control" parent="eyes"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 548.0
+offset_top = 377.0
+offset_right = 552.0
+offset_bottom = 381.0
+
+[node name="ColorRect" type="ColorRect" parent="eyes/eye_left"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 1
+offset_left = -1.0
+offset_top = -4.0
+offset_right = 7.0
+offset_bottom = 4.0
+color = Color(0, 0, 0, 1)
+
+[node name="eye_right" type="Control" parent="eyes"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 495.0
+offset_top = 377.0
+offset_right = 499.0
+offset_bottom = 381.0
+
+[node name="ColorRect" type="ColorRect" parent="eyes/eye_right"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -3.0
+offset_top = -6.0
+offset_right = 5.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
