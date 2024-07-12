@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dmha2u8dlg5o1"]
+[gd_scene load_steps=13 format=3 uid="uid://dmha2u8dlg5o1"]
 
 [ext_resource type="Texture2D" uid="uid://k5742llj4gq2" path="res://assets/interface/ping_icon_1024x1024.png" id="1_21nmr"]
 [ext_resource type="Script" path="res://Scripts/hud/hud_brain.gd" id="1_sjm8r"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://23wurqxer0sb" path="res://assets/interface/stamina.png" id="5_6ne8s"]
 [ext_resource type="Texture2D" uid="uid://pl513b6xupyn" path="res://assets/interface/hb1.png" id="6_f1kwn"]
 [ext_resource type="Texture2D" uid="uid://cpqe4l277k3fg" path="res://assets/interface/Key1.png" id="7_2srnd"]
+[ext_resource type="Texture2D" uid="uid://cjoia4dnia1yc" path="res://assets/items/weapons/sword.png" id="7_ayjy7"]
 [ext_resource type="Texture2D" uid="uid://bv6wmrh28yfy8" path="res://assets/interface/coin.png" id="8_e6d1a"]
 [ext_resource type="Texture2D" uid="uid://v8cpya8qx1si" path="res://assets/interface/stamina_back.png" id="8_vvm8o"]
 
@@ -35,13 +36,14 @@ anchor_left = 0.011
 anchor_top = 0.015
 anchor_right = 0.032
 anchor_bottom = 0.045
-offset_left = 7.88
-offset_top = 33.8001
-offset_right = 7.56
-offset_bottom = 34.4001
+offset_left = -2.12
+offset_top = 80.8
+offset_right = 60.56
+offset_bottom = 82.4
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_h8id7")
 theme_override_font_sizes/font_size = 20
+text = "fps: 60"
 metadata/_edit_use_anchors_ = true
 
 [node name="icon" type="CanvasLayer" parent="plate"]
@@ -92,6 +94,26 @@ offset_right = 1004.0
 offset_bottom = 1051.0
 scale = Vector2(0.35, 0.35)
 texture = ExtResource("4_7qmn3")
+
+[node name="weapon_texture" type="TextureRect" parent="plate/plates"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -564.0
+offset_top = 159.0
+offset_right = -524.0
+offset_bottom = 259.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.57079
+scale = Vector2(3, 3)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("7_ayjy7")
+stretch_mode = 1
 
 [node name="plate_texture" type="TextureRect" parent="plate/plates"]
 offset_left = 55.0

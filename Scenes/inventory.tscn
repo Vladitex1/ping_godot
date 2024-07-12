@@ -62,7 +62,7 @@ offset_left = 248.5
 offset_top = -45.0
 offset_right = 288.5
 offset_bottom = -5.0
-scale = Vector2(0.6, 0.6)
+scale = Vector2(0.07, 0.07)
 texture = ExtResource("5_146gb")
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]

@@ -1,4 +1,5 @@
 extends Area2D
+
 @onready var door_animation = $"../../Textures/door_open_animation"
 @onready var door_colision = $"../door_real_colision"
 @onready var door_mask_close = $"../../light_mask_close"
@@ -9,16 +10,16 @@ var door_tougle = false
 var door_ready = false
 
 func _on_body_entered(body):
-	if str(body.name) == "Player":
+	if str(body.name) == "player":
 		print("вход в территорию двери - door_script")
-		global.set_tougle(3,true)
+		global.action_tougle = true
 		door_ready = true
 
 func _on_body_exited(body):
-	if str(body.name) == "Player":
+	if str(body.name) == "player":
 		print("выход из территории двери - door_script")
 		door_ready = false
-		global.set_tougle(3,false)
+		global.action_tougle = false
 		
 func animation(animation_bool):
 	if !animation_bool:
@@ -35,35 +36,29 @@ func animation(animation_bool):
 
 		
 func _process(_delta):
-	if Input.is_action_just_released("press_key_event_on") and door_ready == true:
+	if Input.is_action_just_released("special_use") and door_ready == true:
 		
 		match door_tougle:
 			true:
-				global.set_tougle(2,true)
+				global.loading_tougle = true
 				print("Дверь закрыта - door_script")
 				animation(door_tougle)
 				door_tougle = false ##открытие/закрытие двери переключатель
 			false:
-				if global.PlayerIndicators("KEYS", 0, "GET") >= 1:
-					global.set_tougle(2,true)
-					global.PlayerIndicators("KEYS", -1, "GET")
+				if global.PlayerIndicators("key", 0, "get") >= 1:
+					global.loading_tougle = true
+					global.PlayerIndicators("key", -1, "set")
 					print("Дверь открыта - door_script")
 					animation(door_tougle)
 					door_tougle = true ##открытие/закрытие двери переключатель
-				if global.PlayerIndicators("KEYS", 0, "GET") <= 0:
+				if global.PlayerIndicators("key", 0, "get") <= 0:
 					pass
-					#print("нехватает ключей - door_script")
-			
-			
-		await get_tree().create_timer(1).timeout 
-			
 
-		
-		
+
+		await get_tree().create_timer(1).timeout 
 		door_ready = false
-		global.set_tougle(2,false)
-		global.set_tougle(3,false)
-		
+		global.loading_tougle = false
+		global.action_tougle = false
 		door_colision.set_deferred("disabled",door_tougle)	
 			
 			

@@ -1,19 +1,21 @@
-[gd_scene load_steps=9 format=3 uid="uid://bkr7jbi6doumd"]
+[gd_scene load_steps=11 format=3 uid="uid://bkr7jbi6doumd"]
 
 [ext_resource type="Texture2D" uid="uid://ca7jy3ditwpb0" path="res://img/bgimg.jpg" id="1_ftatt"]
 [ext_resource type="Script" path="res://Scripts/stop_screen/stop_screen.gd" id="1_s6u6m"]
+[ext_resource type="StyleBox" uid="uid://b1j6fi831qnyn" path="res://Thems/console_stylebox_0.tres" id="2_j2qry"]
 [ext_resource type="FontFile" uid="uid://8atws0pc47sn" path="res://fonts/Font1.ttf" id="2_uje5x"]
 [ext_resource type="Texture2D" uid="uid://v1aa4m8uhjnd" path="res://assets/interface/ingamemenu.png" id="3_p1mqc"]
-[ext_resource type="StyleBox" uid="uid://dsiifa1jr66sg" path="res://button_fixed_pressed.tres" id="5_fe4ip"]
-[ext_resource type="StyleBox" uid="uid://bmuedaydehnq7" path="res://button_fixed_unpress.tres" id="6_47wxi"]
-[ext_resource type="Script" path="res://Scripts/stop_screen/SliderForce.gd" id="6_tq4c2"]
+[ext_resource type="Texture2D" uid="uid://cgxj5mj8ejqc8" path="res://assets/interface/menu/settings_menu_large.png" id="7_38uj6"]
+[ext_resource type="StyleBox" uid="uid://bmuedaydehnq7" path="res://Thems/button_fixed_unpress.tres" id="8_s0dyy"]
+[ext_resource type="StyleBox" uid="uid://dsiifa1jr66sg" path="res://Thems/button_fixed_pressed.tres" id="9_s1xqu"]
+[ext_resource type="Script" path="res://Scripts/stop_screen/keybinds_script.gd" id="10_ywde3"]
 
 [sub_resource type="Theme" id="Theme_x2boa"]
 default_base_scale = 1.0
 default_font = ExtResource("2_uje5x")
 default_font_size = 12
 
-[node name="Control" type="Control"]
+[node name="stop_screen" type="Control"]
 process_mode = 3
 process_physics_priority = 2
 z_index = 10
@@ -34,8 +36,9 @@ script = ExtResource("1_s6u6m")
 metadata/_edit_use_anchors_ = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-scale = Vector2(2, 2)
-transform = Transform2D(2, 0, 0, 2, 0, 0)
+
+[node name="DelayTimer" type="Timer" parent="CanvasLayer"]
+one_shot = true
 
 [node name="console" type="Control" parent="CanvasLayer"]
 visible = false
@@ -46,28 +49,36 @@ offset_bottom = 40.0
 
 [node name="LineEdit" type="LineEdit" parent="CanvasLayer/console"]
 layout_mode = 0
-offset_right = 961.0
-offset_bottom = 38.0
+offset_left = -1.0
+offset_top = 13.0
+offset_right = 1919.0
+offset_bottom = 37.0
+theme_override_styles/normal = ExtResource("2_j2qry")
+theme_override_styles/focus = ExtResource("2_j2qry")
 placeholder_text = "console"
 alignment = 2
 
-[node name="DelayTimer" type="Timer" parent="CanvasLayer"]
-one_shot = true
-
-[node name="Ingamemenu" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(474.875, 291.5)
-scale = Vector2(0.534211, 0.564103)
-texture = ExtResource("3_p1mqc")
-
 [node name="main_menu" type="Control" parent="CanvasLayer"]
 layout_mode = 3
-anchors_preset = 0
-offset_left = 364.875
-offset_top = 227.5
-offset_right = 775.875
-offset_bottom = 260.5
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -231.0
+offset_top = -119.0
+offset_right = -231.0
+offset_bottom = -119.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="Ingamemenu" type="Sprite2D" parent="CanvasLayer/main_menu"]
+position = Vector2(110, 64)
+scale = Vector2(0.534211, 0.564103)
+texture = ExtResource("3_p1mqc")
 
 [node name="Pause_Label" type="Label" parent="CanvasLayer/main_menu"]
 layout_mode = 2
@@ -96,30 +107,30 @@ layout_mode = 2
 theme_override_constants/h_separation = 0
 theme_override_fonts/font = ExtResource("2_uje5x")
 theme_override_font_sizes/font_size = 12
-theme_override_styles/normal = ExtResource("6_47wxi")
-theme_override_styles/hover = ExtResource("5_fe4ip")
-theme_override_styles/pressed = ExtResource("5_fe4ip")
-theme_override_styles/focus = ExtResource("5_fe4ip")
+theme_override_styles/normal = ExtResource("8_s0dyy")
+theme_override_styles/hover = ExtResource("9_s1xqu")
+theme_override_styles/pressed = ExtResource("9_s1xqu")
+theme_override_styles/focus = ExtResource("9_s1xqu")
 text = "continue"
 
 [node name="Button_Settings" type="Button" parent="CanvasLayer/main_menu/first_line_stop_menu/main"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_uje5x")
 theme_override_font_sizes/font_size = 12
-theme_override_styles/normal = ExtResource("6_47wxi")
-theme_override_styles/hover = ExtResource("5_fe4ip")
-theme_override_styles/pressed = ExtResource("5_fe4ip")
-theme_override_styles/focus = ExtResource("5_fe4ip")
+theme_override_styles/normal = ExtResource("8_s0dyy")
+theme_override_styles/hover = ExtResource("9_s1xqu")
+theme_override_styles/pressed = ExtResource("9_s1xqu")
+theme_override_styles/focus = ExtResource("9_s1xqu")
 text = "settings"
 
 [node name="Button_Quit" type="Button" parent="CanvasLayer/main_menu/first_line_stop_menu/main"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_uje5x")
 theme_override_font_sizes/font_size = 12
-theme_override_styles/normal = ExtResource("6_47wxi")
-theme_override_styles/hover = ExtResource("5_fe4ip")
-theme_override_styles/pressed = ExtResource("5_fe4ip")
-theme_override_styles/focus = ExtResource("5_fe4ip")
+theme_override_styles/normal = ExtResource("8_s0dyy")
+theme_override_styles/hover = ExtResource("9_s1xqu")
+theme_override_styles/pressed = ExtResource("9_s1xqu")
+theme_override_styles/focus = ExtResource("9_s1xqu")
 text = "quit"
 
 [node name="second_line_stop_menu" type="MarginContainer" parent="CanvasLayer/main_menu"]
@@ -136,10 +147,10 @@ layout_mode = 2
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_uje5x")
 theme_override_font_sizes/font_size = 12
-theme_override_styles/normal = ExtResource("6_47wxi")
-theme_override_styles/hover = ExtResource("5_fe4ip")
-theme_override_styles/pressed = ExtResource("5_fe4ip")
-theme_override_styles/focus = ExtResource("5_fe4ip")
+theme_override_styles/normal = ExtResource("8_s0dyy")
+theme_override_styles/hover = ExtResource("9_s1xqu")
+theme_override_styles/pressed = ExtResource("9_s1xqu")
+theme_override_styles/focus = ExtResource("9_s1xqu")
 text = "save
 "
 
@@ -147,40 +158,74 @@ text = "save
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_uje5x")
 theme_override_font_sizes/font_size = 12
-theme_override_styles/normal = ExtResource("6_47wxi")
-theme_override_styles/hover = ExtResource("5_fe4ip")
-theme_override_styles/pressed = ExtResource("5_fe4ip")
-theme_override_styles/focus = ExtResource("5_fe4ip")
+theme_override_styles/normal = ExtResource("8_s0dyy")
+theme_override_styles/hover = ExtResource("9_s1xqu")
+theme_override_styles/pressed = ExtResource("9_s1xqu")
+theme_override_styles/focus = ExtResource("9_s1xqu")
 text = "load"
 
 [node name="settings_menu" type="Control" parent="CanvasLayer"]
 visible = false
 layout_mode = 3
-anchors_preset = 0
-offset_left = 440.5
-offset_top = 260.0
-offset_right = 480.5
-offset_bottom = 300.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -51.0
+offset_top = 156.0
+offset_right = -51.0
+offset_bottom = 156.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
+[node name="SettingsMenuLarge" type="Sprite2D" parent="CanvasLayer/settings_menu"]
+position = Vector2(35, -51)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_38uj6")
+
 [node name="Settings_Label" type="Label" parent="CanvasLayer/settings_menu"]
 layout_mode = 2
-offset_left = -23.5
-offset_top = 55.5
-offset_right = 95.5
-offset_bottom = 84.5
+offset_left = -25.5
+offset_top = 57.0
+offset_right = 93.5
+offset_bottom = 86.0
 theme_override_fonts/font = ExtResource("2_uje5x")
 theme_override_font_sizes/font_size = 17
 text = "settings"
 horizontal_alignment = 1
 
+[node name="in_settings_buttons" type="MarginContainer" parent="CanvasLayer/settings_menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -74.0
+offset_top = -181.0
+offset_right = 24.0
+offset_bottom = -148.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="settings" type="HBoxContainer" parent="CanvasLayer/settings_menu/in_settings_buttons"]
+layout_mode = 2
+
+[node name="Button_KeyMap" type="Button" parent="CanvasLayer/settings_menu/in_settings_buttons/settings"]
+layout_mode = 2
+theme = SubResource("Theme_x2boa")
+text = "keymaps"
+
 [node name="settings_menu" type="MarginContainer" parent="CanvasLayer/settings_menu"]
 layout_mode = 0
-offset_left = 83.0
-offset_top = -35.0
-offset_right = 148.0
-offset_bottom = -2.0
+offset_left = 81.5
+offset_top = 7.0
+offset_right = 146.5
+offset_bottom = 40.0
 
 [node name="settings" type="HBoxContainer" parent="CanvasLayer/settings_menu/settings_menu"]
 layout_mode = 2
@@ -188,42 +233,110 @@ layout_mode = 2
 [node name="Button_Back" type="Button" parent="CanvasLayer/settings_menu/settings_menu/settings"]
 layout_mode = 2
 theme = SubResource("Theme_x2boa")
-theme_override_styles/normal = ExtResource("6_47wxi")
-theme_override_styles/hover = ExtResource("5_fe4ip")
-theme_override_styles/pressed = ExtResource("5_fe4ip")
-theme_override_styles/focus = ExtResource("5_fe4ip")
+theme_override_styles/normal = ExtResource("8_s0dyy")
+theme_override_styles/hover = ExtResource("9_s1xqu")
+theme_override_styles/pressed = ExtResource("9_s1xqu")
+theme_override_styles/focus = ExtResource("9_s1xqu")
 text = "back"
 
-[node name="HSlider" type="HSlider" parent="CanvasLayer/settings_menu"]
+[node name="brightness" type="Control" parent="CanvasLayer/settings_menu"]
+anchors_preset = 0
+offset_left = -69.5
+offset_top = -223.0
+offset_right = -29.5
+offset_bottom = -183.0
+
+[node name="slider" type="HSlider" parent="CanvasLayer/settings_menu/brightness"]
 layout_mode = 0
-offset_left = -77.0
-offset_top = -5.0
-offset_right = 45.0
-offset_bottom = 11.0
+offset_left = -3.5
+offset_top = 14.0
+offset_right = 118.5
+offset_bottom = 30.0
 max_value = 1.5
 step = 0.1
 
-[node name="SliderForce" type="Label" parent="CanvasLayer/settings_menu"]
+[node name="slider_lable" type="Label" parent="CanvasLayer/settings_menu/brightness"]
 layout_mode = 0
-offset_left = -78.5
-offset_top = -25.5
-offset_right = 40.5
-offset_bottom = 3.5
+offset_left = -5.0
+offset_top = -6.5
+offset_right = 114.0
+offset_bottom = 22.5
 theme_override_fonts/font = ExtResource("2_uje5x")
 theme_override_font_sizes/font_size = 10
 text = "brightness 0"
 horizontal_alignment = 1
-script = ExtResource("6_tq4c2")
+
+[node name="settings_keybinds" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -51.0
+offset_top = 156.0
+offset_right = -51.0
+offset_bottom = 156.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="SettingsMenuLarge" type="Sprite2D" parent="CanvasLayer/settings_keybinds"]
+position = Vector2(35, -51)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_38uj6")
+
+[node name="Settings_Label" type="Label" parent="CanvasLayer/settings_keybinds"]
+layout_mode = 2
+offset_left = -25.5
+offset_top = 57.0
+offset_right = 93.5
+offset_bottom = 86.0
+theme_override_fonts/font = ExtResource("2_uje5x")
+theme_override_font_sizes/font_size = 17
+text = "settings"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/settings_keybinds"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -232.0
+offset_right = 151.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("10_ywde3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/settings_keybinds/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 38
+
+[node name="settings_menu" type="MarginContainer" parent="CanvasLayer/settings_keybinds"]
+layout_mode = 0
+offset_left = 81.5
+offset_top = 7.0
+offset_right = 146.5
+offset_bottom = 40.0
+
+[node name="settings" type="HBoxContainer" parent="CanvasLayer/settings_keybinds/settings_menu"]
+layout_mode = 2
+
+[node name="Button_Back" type="Button" parent="CanvasLayer/settings_keybinds/settings_menu/settings"]
+layout_mode = 2
+theme = SubResource("Theme_x2boa")
+text = "back"
 
 [node name="Bgimg" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(1348.5, 730.5)
 scale = Vector2(1.40156, 1.34722)
 texture = ExtResource("1_ftatt")
-
-[connection signal="button_up" from="CanvasLayer/main_menu/first_line_stop_menu/main/Button_Continue" to="." method="_on_continue_button_up"]
-[connection signal="button_up" from="CanvasLayer/main_menu/first_line_stop_menu/main/Button_Settings" to="." method="_on_settings_button_up"]
-[connection signal="button_up" from="CanvasLayer/main_menu/first_line_stop_menu/main/Button_Quit" to="." method="_on_quit_button_up"]
-[connection signal="button_up" from="CanvasLayer/main_menu/second_line_stop_menu/main/Button_Save-" to="." method="_on_settings_button_up"]
-[connection signal="button_up" from="CanvasLayer/main_menu/second_line_stop_menu/main/Button_Load" to="." method="_on_settings_button_up"]
-[connection signal="button_up" from="CanvasLayer/settings_menu/settings_menu/settings/Button_Back" to="." method="_on_back_button_up"]

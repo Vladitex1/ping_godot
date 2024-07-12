@@ -3,7 +3,7 @@ extends Node2D
 var CurrentID: int = -1
 
 
-func _process(delta):
+func _process(_delta):
 	slot(CurrentID)
 	
 func get_slot_info():

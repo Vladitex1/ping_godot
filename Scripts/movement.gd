@@ -34,7 +34,7 @@ func animation():
 func actions():
 	if action_tougle == true:
 		_interactive.show()
-		if Input.is_action_just_released("press_key_event_on"):
+		if Input.is_action_just_released("special_use"):
 			print("тык")
 	else:
 		_interactive.hide()

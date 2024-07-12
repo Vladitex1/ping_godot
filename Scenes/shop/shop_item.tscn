@@ -4,6 +4,8 @@
 [ext_resource type="Script" path="res://Scripts/shop/shop_item.gd" id="1_n6sg7"]
 
 [node name="shop_item" type="Node2D"]
+position = Vector2(44, 45)
+scale = Vector2(0.19, 0.19)
 script = ExtResource("1_n6sg7")
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -16,11 +18,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 18.0
-offset_top = 17.0
-offset_right = 66.0
-offset_bottom = 65.0
+offset_left = 21.0527
+offset_top = 26.3158
+offset_right = 41.0527
+offset_bottom = 47.3158
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.2, 1.2)
+scale = Vector2(0.9, 0.9)
 texture = ExtResource("1_gsevc")

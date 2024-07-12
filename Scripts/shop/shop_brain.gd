@@ -8,15 +8,13 @@ extends Control
 @onready var coins_lable = $shop_plate/text/coins
 @onready var buy_button = $shop_plate/buttons/buy_button
 @onready var sell_button = $shop_plate/buttons/sell_button
-@onready var eye_right = $shop_plate/eyes/eye_right
-@onready var eye_left = $shop_plate/eyes/eye_left
+@onready var eye_right = $eyes/eye_right
+@onready var eye_left = $eyes/eye_left
+@onready var intresting_slot = $shop_plate/IntrestingSlot
+static var standart_label = ["name","count","cost","sell"]
 
-var standart_label = ["name","count","cost","sell"]
-
-var num123 = -1
-
+var num123 = -1 ##debug
 var count:int = 1
-var countstr:String
 
 var cost:int
 var sell_cost:int
@@ -28,8 +26,8 @@ var selected_item_ID: int = -1
 
 	
 func _ready():	
-	countstr = str(count)
 	global.attack_block = true
+	intresting_slot.play("intresting_item_play")
 	$shop_plate/buttons/minus_button.connect("button_up",minus_button)
 	$shop_plate/buttons/buy_button.connect("button_up",buy_button_func)
 	$shop_plate/buttons/plus_button.connect("button_up",plus_button)
@@ -46,32 +44,32 @@ func _ready():
 	$shop_plate/items/GridContainer/Slot7/Button.connect("button_down",slot7)
 	$shop_plate/items/GridContainer/Slot8/Button.connect("button_down",slot8)
 
-	shop_info_storage(randi_range(0,3))
+	shop_info_storage(0)#randi_range(0,3))
 	##shop inventory
+	
 func eyes():
 	var mouse_pos = get_local_mouse_position().angle()
-	var mouse_pos2 = get_local_mouse_position()
 	eye_left.rotation = mouse_pos
 	eye_right.rotation = mouse_pos
-	print("левое: ",eye_left.get_screen_position())
-	print("правое: ",eye_right.get_screen_position())
-	print("мышь: ",mouse_pos2)
-func _process(delta):
 	
+	
+func _process(_delta):
 	eyes()
-	
-	
-	
-	print(selected_item_ID)
-	coins_lable.text = str(global.PlayerIndicators("COINS", 0, "GET"))
-	keys_lable.text = str(global.PlayerIndicators("KEYS", 0, "GET"))
+	buttons_control()
+	coins_lable.text = str(global.PlayerIndicators("coin", 0, "get"))
+	keys_lable.text = str(global.PlayerIndicators("key", 0, "get"))
 	
 	if selected_item_ID == -2 or selected_item_ID == -1:
-		name_lable.text = standart_label[0]
-		count_lable.text = standart_label[1]
-		cost_lable.text = standart_label[2]
-		sell_cost_lable.text = standart_label[3]
+		name_lable.visible = false
+		count_lable.visible = false
+		cost_lable.visible = false
+		sell_cost_lable.visible = false
 	else:
+		name_lable.visible = true
+		count_lable.visible = true
+		cost_lable.visible = true
+		sell_cost_lable.visible = true
+		
 		cost = itemlist.itemlist[selected_item_ID][0] * count
 		sell_cost = itemlist.itemlist[selected_item_ID][3] * count
 		cost_lable.text = str(cost)
@@ -90,9 +88,8 @@ func _process(delta):
 	elif Input.is_action_just_pressed("special_back"):
 		print("shop_exit - shop_brain")
 		global.del_scene("shop")
-		#global.del_scene("inventory")
 		global.hud_load()
-		global.set_tougle(3,true)
+		global.action_tougle = true
 		global.attack_block = false
 
 ###################Содержимое магазина###################
@@ -111,54 +108,66 @@ func random_items_in_slots():
 		
 #########################Кнопки##########################
 func minus_button():
-	countstr = str(count)
-	if count <= 0:
-		count = 0
+	if count <= 1:
+		count = 1
 	else:
 		count = count - 1	
+
 func plus_button():
 	count = count + 1
-	countstr = str(count)
 	
-func buy_button_func():
-	if global.PlayerIndicators("COINS",0,"GET") < itemlist.itemlist[selected_item_ID][0] or global.PlayerIndicators("COINS",0,"GET") <= 0:
+func buttons_control():
+	####sell
+	if global.PlayerIndicators("key",0,"get") < count and selected_item_ID == 1:
+		sell_button.disabled = true
+	elif global.PlayerIndicators("hp",0,"get") < count*30 and selected_item_ID == 3:
+		sell_button.disabled = true
+	else:
+		sell_button.disabled = false
+	###buy
+	if global.PlayerIndicators("coin",0,"get") < itemlist.itemlist[selected_item_ID][0]*count or global.PlayerIndicators("coin",0,"get") <= 0:
 		buy_button.disabled = true
-	elif global.PlayerIndicators("COINS",0,"GET") > 0:
+	elif global.PlayerIndicators("coin",0,"get") < itemlist.itemlist[selected_item_ID][0]*count and selected_item_ID == 3:
+		buy_button.disabled = true
+	elif global.PlayerIndicators("coin",0,"get") > 0:
 		buy_button.disabled = false
-		match selected_item_ID:
-			1:
-				global.PlayerIndicators("KEYS",count,"SET")
-				global.PlayerIndicators("COINS",itemlist.itemlist[selected_item_ID][0]*-1,"SET")
-			2:
-				pass
-			_:
-				global.PlayerIndicators("COINS",itemlist.itemlist[selected_item_ID][0]*-1,"SET")
-
+		
+func buy_button_func():###################дописать
+	match selected_item_ID:
+		1:
+			global.PlayerIndicators("key",count,"set")
+			global.PlayerIndicators("coin",itemlist.itemlist[selected_item_ID][0]*-1,"set")
+		2:
+			pass
+		3:
+			global.PlayerIndicators("hp",count*25,"set")
+			global.PlayerIndicators("coin",itemlist.itemlist[selected_item_ID][0]*-1,"set")
+		_:
+			global.PlayerIndicators("coin",itemlist.itemlist[selected_item_ID][0]*-1,"set")
 	
 func sell_button_func():###################дописать
-	if global.PlayerIndicators("KEYS",0,"GET") < count:
-		buy_button.disabled = true
-	else:
-		buy_button.disabled = false
-		match selected_item_ID:
-			1:
-				global.PlayerIndicators("KEYS",count*-1,"SET")
-				global.PlayerIndicators("COINS",itemlist.itemlist[selected_item_ID][3],"SET") 
-			2:
-				pass
-			_:
-				global.PlayerIndicators("COINS",itemlist.itemlist[selected_item_ID][3],"SET")
+	match selected_item_ID:
+		1:
+			global.PlayerIndicators("key",count*-1,"set")
+			global.PlayerIndicators("coin",itemlist.itemlist[selected_item_ID][3]*count,"set") 
+		2:
+			pass
+		3:
+			global.PlayerIndicators("hp",count*-30,"set")
+			global.PlayerIndicators("coin",itemlist.itemlist[selected_item_ID][3]*count,"set")
+			
+		_:
+			global.PlayerIndicators("coin",itemlist.itemlist[selected_item_ID][3]*count,"set")
 			
 func exit_button():
 	print("shop_exit - shop_brain")
 	global.del_scene("shop")
 	#global.del_scene("inventory")
 	global.hud_load()
-	global.set_tougle(3,true)
+	global.action_tougle = true
 	global.attack_block = false
 
 ################## Задать содержимое слота
-
 
 func slot(slotnum,num):
 	match slotnum:
@@ -180,7 +189,6 @@ func slot(slotnum,num):
 			$shop_plate/items/GridContainer/Slot8/Button/shop_item_8.slot(num)
 		_:
 			pass
-	
 	
 func slot1():
 	selected_item_ID = $shop_plate/items/GridContainer/Slot1/Button/shop_item_1.get_slot_info()

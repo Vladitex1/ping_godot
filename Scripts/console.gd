@@ -1,13 +1,5 @@
 extends Node
 
-enum {
-	GET,
-	SET,
-	KEYS,
-	COINS,
-	HP,
-}
-
 var teleport_tougle: bool = false
 
 func teleport(x,y):
@@ -20,14 +12,14 @@ func item(value,delta):
 	value = str(value)
 	print(delta)
 	match value:
-		"KEYS":
-			global.PlayerIndicators("KEYS",delta,"SET")
-		"COINS":
-			global.PlayerIndicators("COINS",delta,"SET")
-		"HP":
-			global.PlayerIndicators("HP",delta,"SET")
-		"STAMINA":
-			global.PlayerIndicators("STAMINA",delta,"SET")
+		"key":
+			global.PlayerIndicators("key",delta,"set")
+		"coin":
+			global.PlayerIndicators("coin",delta,"set")
+		"hp":
+			global.PlayerIndicators("hp",delta,"set")
+		"stamina":
+			global.PlayerIndicators("stamina",delta,"set")
 	#print('|',value,'|',delta,'|',pminus,'|')
 
 func input(command,value1,value2):

@@ -1,25 +1,22 @@
 extends Node
 
-static var scene1 = preload("res://Scenes/shop.tscn").instantiate()
-static var scene2 = preload("res://Scenes/hud.tscn").instantiate()
-static var scene3 = preload("res://Scenes/inventory.tscn").instantiate()
-static var scene4 = preload("res://Scenes/stop_screen.tscn").instantiate()
-static var scene5 = preload("res://Scenes/debug.tscn").instantiate()
 
-static var shop_tougle:bool = false
-static var action_tougle:bool = false
-static var loading_tougle:bool = false
-static var heat_tougle:bool = false
-static var attack_tougle:bool = false
+var shop_tougle:bool = false
+var action_tougle:bool = false
+var loading_tougle:bool = false
+var heat_tougle:bool = false
+var attack_tougle:bool = false
+var buttons_lock: bool = false
+
 static var drag_tougle:bool = false
 static var brightness:float = 1
 static var ret: bool = false
 static var attack_block:bool = false
 
-static var PlayerHealth: float
-static var MaxHealth: float
-static var PlayerStamina: float
-static var MaxStamina: float
+static var PlayerHealth: int
+static var MaxHealth: int
+static var PlayerStamina: int
+static var MaxStamina: int
 
 static var PlayerKeys: int
 static var PlayerCoins: int
@@ -27,6 +24,7 @@ static var PlayerCoins: int
 static var Damage: int
 static var Damage_Throw: int
 static var current_enemy_attack_id: int
+
 var temphp:int = PlayerHealth
 var tempCoins:int = PlayerCoins
 var tempKeys:int = PlayerKeys
@@ -35,7 +33,6 @@ var tempStamina:int = PlayerStamina
 var ememy_id_list = {}
 var enemy_id_global
 
-
 var player_damage
 
 static var player_position: Vector2
@@ -43,68 +40,23 @@ static var camera_position: Vector2
 static var camera_zoom: Vector2
 
 static var dragging:bool = false
-
-
-func change_scene(name):
-	get_tree().change_scene_to_file("res://Scenes/"+name+".tscn")
 	
-func add_scene(name):
-	match name:
-		"shop":
-			get_tree().root.add_child(scene1)
-		"hud":
-			get_tree().root.add_child(scene2)
-		"inventory":
-			get_tree().root.add_child(scene3)
-		"stop_screen":
-			get_tree().root.add_child(scene4)
-			
-func del_scene(name):
-	match name:
-		"shop":
-			scene1.queue_free()
-			scene1 = load("res://Scenes/"+name+".tscn").instantiate()
-		"hud":
-			scene2.queue_free()
-			scene2 = load("res://Scenes/"+name+".tscn").instantiate()
-		"inventory":
-			scene3.queue_free()
-			scene3 = load("res://Scenes/"+name+".tscn").instantiate()
-		"stop_screen":
-			scene4.queue_free()
-			scene4 = load("res://Scenes/"+name+".tscn").instantiate()
-			
-func set_tougle(num:int,status:bool):
-	match num:
-		1:
-			shop_tougle = status
-		2:
-			loading_tougle = status
-		3:
-			action_tougle = status
-		4:
-			heat_tougle = status
-		5: 
-			drag_tougle = status
-		6: 
-			attack_tougle = status
-			
-func get_tougle(num:int):
-	match num:
-		1:
-			ret = shop_tougle
-		2:
-			ret = loading_tougle
-		3:
-			ret = action_tougle
-		4: 
-			ret = heat_tougle
-		5:
-			ret = drag_tougle
-		6: 
-			ret = attack_tougle
-	return ret
-
+func change_scene(namestr):
+	get_tree().change_scene_to_file("res://Scenes/"+namestr+".tscn")
+	
+func add_scene(namestr):
+	get_tree().root.add_child(load("res://Scenes/"+namestr+".tscn").instantiate())
+		
+func del_scene(namestr):
+	var scene = "res://Scenes/"+namestr+".tscn"
+	for i in get_tree().root.get_child_count():
+		if get_tree().root.get_child(i).name == namestr:
+			print(get_tree().root.get_child(i).name)
+			scene = get_tree().root.get_child(i)
+			scene.queue_free()
+	#print(get_tree().root.get_child_count())
+	
+	
 func hud_load():
 	global.add_scene("hud")
 	global.add_scene("inventory")
@@ -126,66 +78,65 @@ func get_camera_position(num):
 		2:
 			return camera_zoom
 	
-func incomingPlayerDamage(name, delta, GSET, ID):
-	#ememy_id_list[ID]
+func incomingPlayerDamage(namestr, delta, GSET):
 	match GSET:
-		"SET":
-			match name:
-				"DAMAGE":
+		"set":
+			match namestr:
+				"damage":
 					Damage = delta
-				"DAMAGE_THROW":
+				"damage_throw":
 					Damage_Throw = delta
-		"GET":
-			match name:
-				"DAMAGE":
+		"get":
+			match namestr:
+				"damage":
 					return Damage
-				"DAMAGE_THROW":
+				"damage_throw":
 					return Damage_Throw
 
-func player_attack(name, delta, GSET, enemy_id):
-	if enemy_id != 0:
-		enemy_id_global = enemy_id
+func player_attack(namestr, delta, GSET):
 
 	match GSET:
-		"SET":
-			match name:
-				"DAMAGE":
+		"set":
+			match namestr:
+				"damage":
 					Damage = delta
-				"DAMAGE_THROW":
+				"damage_throw":
 					Damage_Throw = delta
-		"GET":
-			match name:
-				"DAMAGE":
+		"get":
+			match namestr:
+				"damage":
 					return Damage
-				"DAMAGE_THROW":
+				"damage_throw":
 					return Damage_Throw
 
 
-func PlayerIndicators(name, delta, GSet):
+func PlayerIndicators(namestr, delta, GSet):
 	temphp = PlayerHealth
 	tempCoins = PlayerCoins
 	tempKeys = PlayerKeys
 	
 	match GSet:
-		"SET":
-			match name:
-				"HP":
+		"set":
+			match namestr:
+				"hp":
 					PlayerHealth = PlayerHealth + delta
-				"COINS":
+					if PlayerHealth > MaxHealth:
+						PlayerHealth = MaxHealth
+				"coin":
 					PlayerCoins = PlayerCoins + delta
-				"KEYS":
+				"key":
 					PlayerKeys = PlayerKeys + delta
-				"STAMINA":
+				"stamina":
 					PlayerStamina = PlayerStamina + delta
-		"GET":
-			match name:
-				"HP":
+		"get":
+			match namestr:
+				"hp":
 					return PlayerHealth
-				"COINS":
+				"coin":
 					return PlayerCoins
-				"KEYS":
+				"key":
 					return PlayerKeys
-				"STAMINA":
+				"stamina":
 					return PlayerStamina
 
 	if temphp != PlayerHealth: 

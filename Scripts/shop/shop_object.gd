@@ -1,0 +1,35 @@
+extends Area2D
+
+var shop_ready = false
+func shop_enter():
+	global.del_scene("hud")
+	global.add_scene("shop")
+	global.del_scene("inventory")
+	
+func shop_exit():
+	global.del_scene("shop")
+	global.hud_load()
+	
+
+func _on_body_entered(body):
+	if str(body.name) == "player":
+		print("вход в территорию магазина - shop_interface")
+		global.action_tougle = true
+		shop_ready = true
+
+
+func _on_body_exited(body):
+	if str(body.name) == "player":
+		print("выход из территории магазина - shop_interface")
+		global.action_tougle = false
+		shop_exit()
+		shop_ready = false
+		
+func _physics_process(_delta):
+	if Input.is_action_just_released("special_use") and shop_ready:
+		shop_enter()
+		global.action_tougle = false
+
+
+
+

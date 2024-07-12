@@ -51,16 +51,11 @@ func _physics_process(delta):
 		PATROL:
 			speed = 50
 			move(get_circle_position(random_num), delta, speed)
-			#print("Enemy state: Patrol - Enemy")
 			patrol_vector_timer()
 		CHASE:
 			speed = 150
 			move(global.get_player_pos(), delta, speed)
-			#print("Enemy state: CHASE - Enemy")
-			#Slash ANIM
 		ATTACK:
-			
-			#global.set_tougle(4,true)
 			speed = -5
 			move(global.get_player_pos(), delta, speed)
 			attack()
@@ -82,20 +77,18 @@ func attack():
 	if attack_timer.is_stopped() == true:
 		attack_timer.start(2)
 		print("время - Enemy")
-		global.set_tougle(4,true)
+		global.heat_tougle = true
 	else:
-		global.set_tougle(4,false)
-	
-	
-@warning_ignore("shadowed_variable_base_class")
-func animation(velocity,steering):
-	if velocity.x>=steering.x:
+		global.heat_tougle = false
+
+func animation(vc,steering):
+	if vc.x>=steering.x:
 		enemy_animation.play("walk_right")
-	elif velocity.x<=steering.x:
+	elif vc.x<=steering.x:
 		enemy_animation.play("walk_left")
-	elif velocity.y<=steering.y:
+	elif vc.y<=steering.y:
 		enemy_animation.play("walk_up")
-	elif velocity.y>=steering.y:
+	elif vc.y>=steering.y:
 		enemy_animation.play("walk_down")
 	else:
 		enemy_animation.stop()

@@ -34,31 +34,32 @@ var damaged = true
 var enemy_id: int = -1
 var patrol_timer = false
 var new_vector: Vector2
-
-
+#damage_zone_detection
 func _ready():
 	health_bar.max_value = max_health
 	$enemy_damage_area.connect("body_entered",AttackArea_enter)
-	$detection.connect("body_entered",ChaseArea_enter)
-	$far_detection.connect("body_entered",PatrolArea_enter)
-
 	$enemy_damage_area.connect("body_exited",AttackArea_exit)
+	
+	$detection.connect("body_entered",ChaseArea_enter)
 	$detection.connect("body_exited",ChaseArea_exit)
+	
+	$get_damage_area.connect("area_entered",DamageArea_enter)
+	#$get_damage_area.connect("area_exited",DamageArea_exit)
+	
+	$far_detection.connect("body_entered",PatrolArea_enter)
 	$far_detection.connect("body_exited",PatrolArea_exit)
 	
 func _physics_process(delta):
 	health_bar_conrol(SET)
 	GSet_health(0,GET)
 	
-	match global.attack_tougle:
-		true:
-			temp_state = state
-			state = DAMAGE
-		false:
-			pass
+	if global.attack_tougle:
+		temp_state = state
+		state = DAMAGE
+
+			
 	match state:
 		PATROL:
-			
 			speed = 50
 			if attack_timer.is_stopped() == true:
 				new_vector = get_circle_position(get_random_num())
@@ -89,10 +90,8 @@ func _physics_process(delta):
 		CHASE:
 			speed = 150
 			attack_timer.stop()
-			global.set_tougle(4,false)
+			global.action_tougle = false
 			move(global.get_player_pos(), delta, speed)
-			#print("Enemy state: CHASE - skeleton_script")
-			#Slash ANIM
 			temp_state = CHASE
 		ATTACK:
 			speed = 10
@@ -100,22 +99,17 @@ func _physics_process(delta):
 			attack()
 			animation(null_vector,null_vector,"idle")
 			temp_state = ATTACK
-			#print("ATTACK - skeleton_script")
-			#enemy_animation.stop()
 		DAMAGE:
 			animation(null_vector,null_vector,"damage")
-			if global.enemy_id_global == enemy_id:
-				var incoming_damage = global.player_attack("DAMAGE", 0, "GET",0)
-				var incoming_damage_throw = global.player_attack("DAMAGE_THROW", 0, "GET",0)
-				GSet_health(GSet_health(0,GET) - incoming_damage,SET)
-				#print(" Damage: "+str(incoming_damage)+" Damage_Throw: "+str(incoming_damage_throw) + " - skeleton_script: id = " + str(enemy_id))
-				move(damage_vector(),1,10)
+			var incoming_damage = global.player_attack("damage", 0, "get")
+			GSet_health(GSet_health(0,GET) - incoming_damage,SET)
+			move(damage_vector(),1,10)
 			state = temp_state
 		DEATH:
 			animation(null_vector,null_vector,"death")
 			if enemy_animation.get_frame() == 3:
-				global.PlayerIndicators("COINS", 1, "SET")	
-				$"..".queue_free()
+				global.PlayerIndicators("coin", 1, "set")	
+				$".".queue_free()
 		IDLE:
 			animation(null_vector,null_vector,"idle")
 			state = IDLE
@@ -123,12 +117,11 @@ func _physics_process(delta):
 ###############special######################
 func get_random_num():
 	random_num = randi_range(0,180)
-	#print(random_num)
 	return random_num
 
-func move(target, delta, speed):
+func move(target, delta, spd):
 	var direction = (target - enemy_animation.get_global_position()).normalized() 
-	var desired_velocity =  direction * speed
+	var desired_velocity =  direction * spd
 	var steering = (desired_velocity - velocity) * delta * 2.5
 	velocity += steering
 	animation(velocity,steering,"walk")
@@ -139,26 +132,22 @@ func GSet_health(Count:int,GS):
 		state = DEATH
 	match GS:
 		GET:
-			#print("health = "+str(health_value) + " Creation = "+str(enemy_id))
 			return health_value
 		SET:
 			health_value = Count
 
-func animation(velocity,steering,condition):
+func animation(vc,steering,condition):
 	var walk = 0
 	var more_than = 4
 	
-	##############################################################################не работает
-	
-	if velocity.x>steering.x and velocity.x-steering.x>more_than: #right
+	if vc.x>steering.x and vc.x-steering.x>more_than: #right
 		walk = 1
-	elif velocity.x<steering.x and velocity.x-steering.x<more_than: #left
+	elif vc.x<steering.x and vc.x-steering.x<more_than: #left
 		walk = 2
-	elif velocity.y>steering.y and velocity.y-steering.y>more_than: #up
+	elif vc.y>steering.y and vc.y-steering.y>more_than: #up
 		walk = 4
-	elif velocity.y<steering.y and velocity.y-steering.y<more_than: #down
+	elif vc.y<steering.y and vc.y-steering.y<more_than: #down
 		walk = 3
-	
 		
 	match condition:
 		"walk":
@@ -256,30 +245,25 @@ func health_bar_conrol(GS):
 func attack():
 	var attack_speed: float = 0.5
 	var cooldown_speed: float = 1
-	global.set_tougle(4,true)
+	global.heat_tougle = true
 	if attack_timer.is_stopped() == true: ##запуск куладуна
-		global.PlayerIndicators("HP",attack_strange,"SET")
+		global.PlayerIndicators("hp",attack_strange,"set")
 		cooldown_timer.start(cooldown_speed)
 	if cooldown_timer.is_stopped() == true:
-		global.set_tougle(4,false)
-		global.PlayerIndicators("HP",0,"SET")
+		global.heat_tougle = false
+		global.PlayerIndicators("hp",0,"set")
 	if cooldown_timer.is_stopped() == false: ##перезапуск таймера атаки
 		attack_timer.start(attack_speed)
 		
 ###############damage######################
 
 func damage_vector():
-	if global.enemy_id_global == enemy_id:
-		var num = global.player_attack("DAMAGE_THROW", 0, "GET",0)
-		var enemy_angle = (global.get_player_pos() - enemy.get_global_position()).angle()	
-		var vector_from_angle = Vector2(cos(enemy_angle), sin(enemy_angle))
-		var vector = Vector2(num,num) * vector_from_angle
-		var vector123 = enemy.get_global_position()-vector
-	#return vector123
-	
-	#var vector123 = Vector2(global.get_player_pos()[0]*-1 + num,global.get_player_pos()[0]*-1 + num)
-		#var vector123 = enemy.get_global_position()-vector
-		return vector123
+	var num = global.player_attack("damage_throw", 0, "get")
+	var enemy_angle = (global.get_player_pos() - enemy.get_global_position()).angle()	
+	var vector_from_angle = Vector2(cos(enemy_angle), sin(enemy_angle))
+	var vector = Vector2(num,num) * vector_from_angle
+	var final_vector = enemy.get_global_position()+(vector*-1)
+	return final_vector
 	
 ###############chase######################
 ###############patrol######################
@@ -289,9 +273,8 @@ func get_circle_position(random):
 	var angle = random# * PI * 2;
 	var vector_from_angle = Vector2(cos(angle), sin(angle))
 	var vector = Vector2(radius,radius) * vector_from_angle
-	var vector123 = enemy.get_global_position()-vector
-
-	return vector123
+	var final_vector = enemy.get_global_position()-vector
+	return final_vector
 	
 func patrol_vector_timer(): ##перезапуск таймера
 	print("время - skeleton_script: id = " + str(enemy_id))
@@ -299,34 +282,43 @@ func patrol_vector_timer(): ##перезапуск таймера
 	
 ###############connections######################		
 
-
 func ChaseArea_enter(body):
-	if str(body.name) == "Player":
+	if str(body.name) == "player":
 		player = body
 		state = CHASE
 		print("Enter_enemy_col - skeleton_script")
 
 func ChaseArea_exit(body):
-	if str(body.name) == "Player":
+	if str(body.name) == "player":
 		player = null
 		state = PATROL
 		print("Exit_enemy_col - skeleton_script")
 
 func AttackArea_enter(body):
 	global.current_enemy_attack_id = enemy_id
-	if str(body.name) == "Player":
+	if str(body.name) == "player":
 		state = ATTACK
 		#IDLE#
+
 func AttackArea_exit(body):
-	if str(body.name) == "Player":
+	if str(body.name) == "player":
 		state = CHASE
 		
 func PatrolArea_enter(body):
-	if str(body.name) == "Player":
+	if str(body.name) == "player":
 		state = PATROL
 		
 func PatrolArea_exit(body):
-	if str(body.name) == "Player":
+	if str(body.name) == "player":
 		state = IDLE
-
+		
+func DamageArea_enter(area):
+	print(area.name)
+	if str(area.name) == "Hands":
+		state = DAMAGE
+		
+func DamageArea_exit(area):
+	if str(area.name) == "Hands":
+		state = temp_state
+	
 

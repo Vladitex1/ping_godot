@@ -1,0 +1,194 @@
+[gd_scene load_steps=24 format=3 uid="uid://chsnegkawbbdb"]
+
+[ext_resource type="Script" path="res://Scripts/door_script.gd" id="3_ec11f"]
+[ext_resource type="Texture2D" uid="uid://dvmacp1f51ida" path="res://assets/Tilemap/doortilemap.png" id="4_j0txy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_76kp2"]
+atlas = ExtResource("4_j0txy")
+region = Rect2(0, 92, 64, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uutt5"]
+atlas = ExtResource("4_j0txy")
+region = Rect2(384, 0, 64, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ocao8"]
+atlas = ExtResource("4_j0txy")
+region = Rect2(320, 0, 64, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_paxon"]
+atlas = ExtResource("4_j0txy")
+region = Rect2(256, 0, 64, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rp5s0"]
+atlas = ExtResource("4_j0txy")
+region = Rect2(192, 0, 64, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m2q1g"]
+atlas = ExtResource("4_j0txy")
+region = Rect2(64, 0, 64, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bq2og"]
+atlas = ExtResource("4_j0txy")
+region = Rect2(0, 0, 64, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ss0np"]
+atlas = ExtResource("4_j0txy")
+region = Rect2(0, 0, 64, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8h4g"]
+atlas = ExtResource("4_j0txy")
+region = Rect2(64, 0, 64, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mmrqg"]
+atlas = ExtResource("4_j0txy")
+region = Rect2(128, 0, 64, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8h6ku"]
+atlas = ExtResource("4_j0txy")
+region = Rect2(192, 0, 64, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wmscx"]
+atlas = ExtResource("4_j0txy")
+region = Rect2(256, 0, 64, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_de3lt"]
+atlas = ExtResource("4_j0txy")
+region = Rect2(320, 0, 64, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kseu0"]
+atlas = ExtResource("4_j0txy")
+region = Rect2(384, 0, 64, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lr0v2"]
+atlas = ExtResource("4_j0txy")
+region = Rect2(0, 92, 64, 92)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cuqtx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_76kp2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uutt5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ocao8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_paxon")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rp5s0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m2q1g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bq2og")
+}],
+"loop": false,
+"name": &"door_close",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ss0np")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l8h4g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mmrqg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8h6ku")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wmscx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_de3lt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kseu0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lr0v2")
+}],
+"loop": false,
+"name": &"door_open",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k63gp"]
+size = Vector2(56, 93)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_axr4c"]
+radius = 46.0
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_w633k"]
+cull_mode = 1
+polygon = PackedVector2Array(20.3, 33.6, 20.3, -30.8, -20.3001, -30.8, -20.3001, 33.6)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_abypc"]
+polygon = PackedVector2Array(-20.3, -4.2, 20.3, -4.2, 20.3, 5.60001, -20.3, 5.60001)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bk2a6"]
+polygon = PackedVector2Array(-19.6, -4.90001, -19.6, 4.9, 21, 4.9, 21, -4.90001)
+
+[node name="door" type="Node2D"]
+
+[node name="Door" type="Area2D" parent="."]
+position = Vector2(-749, -539)
+collision_layer = 8
+collision_mask = 8
+
+[node name="Textures" type="Node2D" parent="Door"]
+
+[node name="door_open_animation" type="AnimatedSprite2D" parent="Door/Textures"]
+position = Vector2(749, 541)
+sprite_frames = SubResource("SpriteFrames_cuqtx")
+animation = &"door_open"
+
+[node name="door_real_colision_area" type="StaticBody2D" parent="Door"]
+visible = false
+position = Vector2(276, 329)
+
+[node name="door_real_colision" type="CollisionShape2D" parent="Door/door_real_colision_area"]
+position = Vector2(473, 210.5)
+shape = SubResource("RectangleShape2D_k63gp")
+
+[node name="Area2D" type="Area2D" parent="Door/door_real_colision_area"]
+light_mask = 32
+position = Vector2(388, 217)
+script = ExtResource("3_ec11f")
+
+[node name="enter_door_cycle_colision" type="CollisionShape2D" parent="Door/door_real_colision_area/Area2D"]
+position = Vector2(84, -6)
+shape = SubResource("CircleShape2D_axr4c")
+
+[node name="light_mask_close" type="LightOccluder2D" parent="Door"]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(749, 539)
+scale = Vector2(1.42857, 1.42857)
+occluder = SubResource("OccluderPolygon2D_w633k")
+occluder_light_mask = 1048575
+
+[node name="light_mask_open_1" type="LightOccluder2D" parent="Door"]
+visible = false
+position = Vector2(749, 501)
+scale = Vector2(1.42857, 1.42857)
+occluder = SubResource("OccluderPolygon2D_abypc")
+occluder_light_mask = 1048575
+
+[node name="light_mask_open_2" type="LightOccluder2D" parent="Door"]
+visible = false
+position = Vector2(748, 580)
+scale = Vector2(1.42857, 1.42857)
+occluder = SubResource("OccluderPolygon2D_bk2a6")
+occluder_light_mask = 1048575
+
+[connection signal="body_entered" from="Door/door_real_colision_area/Area2D" to="Door/door_real_colision_area/Area2D" method="_on_body_entered"]
+[connection signal="body_exited" from="Door/door_real_colision_area/Area2D" to="Door/door_real_colision_area/Area2D" method="_on_body_exited"]
