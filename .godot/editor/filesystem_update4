@@ -6,6 +6,8 @@ res://Scripts/movement.gd
 res://Scripts/player_movement_script.gd
 res://Scripts/skeleton_script.gd
 res://Thems/console_stylebox_0.tres
+res://Scripts/Creatures.gd
+res://Scripts/global.gd
 res://Scenes/mobs/player_mob.tscn
 res://Scenes/objects/lamp_object.tscn
 res://Scenes/mobs/skeleton_mob.tscn
@@ -14,9 +16,10 @@ res://Scenes/item.tscn
 res://Scenes/shop/shop_item.tscn
 res://Scenes/stop_screen/keybind_slot.tscn
 res://Scenes/stop_screen.tscn
-res://Scripts/hud/hud_brain.gd
-res://Scripts/stop_screen/keybinds_script.gd
+res://Scripts/console.gd
 res://Scripts/stop_screen/stop_screen.gd
-res://Scripts/global.gd
-res://Scripts/ItemList_script.gd
-res://Scripts/Creatures.gd
+res://Scripts/shop/shop_brain.gd
+res://Scripts/loading_script.gd
+res://Scripts/Enemy.gd
+res://Scripts/stop_screen/keybinds_script.gd
+res://Scripts/inventory_script.gd

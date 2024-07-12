@@ -56,26 +56,26 @@ func eyes():
 func _process(_delta):
 	eyes()
 	buttons_control()
+
+	var state: bool
+	if selected_item_ID == -2 or selected_item_ID == -1:
+		state = false
+	else:
+		state = true
+		
+	name_lable.visible = state
+	count_lable.visible = state
+	cost_lable.visible = state
+	sell_cost_lable.visible = state
+	
 	coins_lable.text = str(global.PlayerIndicators("coin", 0, "get"))
 	keys_lable.text = str(global.PlayerIndicators("key", 0, "get"))
-	
-	if selected_item_ID == -2 or selected_item_ID == -1:
-		name_lable.visible = false
-		count_lable.visible = false
-		cost_lable.visible = false
-		sell_cost_lable.visible = false
-	else:
-		name_lable.visible = true
-		count_lable.visible = true
-		cost_lable.visible = true
-		sell_cost_lable.visible = true
-		
-		cost = itemlist.itemlist[selected_item_ID][0] * count
-		sell_cost = itemlist.itemlist[selected_item_ID][3] * count
-		cost_lable.text = str(cost)
-		sell_cost_lable.text = str(sell_cost)
-		name_lable.text = itemlist.itemlist[selected_item_ID][2]
-		count_lable.text = str(count)
+	cost = itemlist.itemlist[selected_item_ID][0] * count
+	sell_cost = itemlist.itemlist[selected_item_ID][3] * count
+	cost_lable.text = str(cost)
+	sell_cost_lable.text = str(sell_cost)
+	name_lable.text = itemlist.itemlist[selected_item_ID][2]
+	count_lable.text = str(count)
 	
 	if Input.is_action_just_released("debug1"):
 		num123 = num123 + 1

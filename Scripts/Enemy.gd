@@ -19,13 +19,13 @@ func _on_detection_body_entered(body:CharacterBody2D):
 	if str(body.name) == "Player":
 		player = body
 		state = CHASE
-		print("Enter_enemy_col - Enemy")
+		#print("Enter_enemy_col - Enemy")
 
 func _on_detection_body_exited(body:CharacterBody2D):
 	if str(body.name) == "Player":
 		player = null
 		state = PATROL
-		print("Exit_enemy_col - Enemy")
+		#print("Exit_enemy_col - Enemy")
 
 func _on_close_detection_body_entered(body:CharacterBody2D):
 	if str(body.name) == "Player":

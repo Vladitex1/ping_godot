@@ -16,10 +16,10 @@ var Attack_Value: int = 25
 var Attack_Throw: int = 20
 
 static var temp_sprit = sprint
-var delta = 1
-var is_first_try = true
+
 var player_align: String
 var attack_state: bool = false
+var lastanim: String
 @onready var player_animation = $Ping_Aimation
 @onready var player = $"."
 @onready var damage_texture = $Damage
@@ -27,16 +27,12 @@ var attack_state: bool = false
 @onready var Interactive = $Interactive
 @onready var attack_timer = $AttackTimer
 @onready var cooldown_timer = $CooldownTimer
-var attack_zone_ready: bool = false
+
 @onready var hands = $Hands
 @onready var weapon = $Weapon
 @onready var camera2 = $Camera2D
-var attack_cooldown = true
 var temp_state
-var enemy_id
-var enemy_max: int
 
-var enemy_list = {}
 enum {
 	IDLE,
 	WALK,
@@ -49,7 +45,7 @@ enum {
 var state = IDLE
 
 func _ready():
-	
+	global.hud_load()
 	global.PlayerStamina = StarterStamina
 	global.MaxStamina = MaxStamina
 	global.MaxHealth = MaxHealth
@@ -62,13 +58,12 @@ func _ready():
 	
 		
 func _physics_process(_delta):
-	if console.teleport_tougle == true:
-		console.teleport_tougle = false
-		player.set_global_position(global.get_player_pos())
-	
 	get_input()
-	state_switcher()
+	debug_buttons()
+	
+	
 	update_player_position()
+	state_switcher()
 	match state:
 		WALK:
 			move_and_slide()
@@ -83,10 +78,6 @@ func _physics_process(_delta):
 	interactive()
 	damage_texture_func()
 	
-	
-
-
-
 
 func interactive():
 	if global.action_tougle and !global.loading_tougle:
@@ -115,35 +106,24 @@ func state_switcher():
 		#state = DEATH
 			
 func get_input():
-	
-	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if Input.is_action_pressed("special_shift"):
 		if global.PlayerIndicators("stamina",0,"get") >= 100:
 			global.PlayerIndicators("stamina",StaminaSpeed*-1,"get")
 			sprint	= temp_sprit
 		else:
 			sprint = 0
-	else:
+	elif !Input.is_action_pressed("special_shift"):
 		sprint = 0
 		if global.PlayerIndicators("stamina",0,"get") < 0:
 			global.PlayerStamina = 0
 		elif global.PlayerIndicators("stamina",0,"get") < MaxStamina:
 			global.PlayerIndicators("stamina",StaminaSpeed,"set")
-	velocity = input_dir * (speed + sprint)
-
-	if Input.is_action_just_pressed("debug1"):
-		
-		global.PlayerIndicators("key", 1, "set")	
 	
-	elif Input.is_action_just_released("special_back"):
+	if Input.is_action_just_released("special_back"):
 		global.add_scene("stop_screen")
-	
 	else:
 		state = temp_state
-		
-		
-var animnum = 0
-var lastanim
+	velocity = Input.get_vector("move_left", "move_right", "move_up", "move_down") * (speed + sprint)
 func animation(is_pressing: bool):
 	if is_pressing:
 		if Input.is_action_pressed("move_right"):
@@ -160,26 +140,27 @@ func animation(is_pressing: bool):
 		elif Input.is_action_pressed("move_down"):
 			player_animation.play("walk_down")
 
-		elif Input.is_action_just_pressed("attack") and global.attack_block == false and cooldown_timer.is_stopped() :
-			#velocity = Vector2(0,0)
+		elif Input.is_action_just_pressed("attack") and global.attack_block == false and cooldown_timer.is_stopped():
 			if global.PlayerIndicators("stamina",0,"get") >= 200:
-				hands.get_child(0).disabled = false
-				global.PlayerIndicators("stamina",AttackStaminaSpeed*-1,"set")
-				if global.attack_block == false and attack_zone_ready == true: #Атака игроком другого существа
-					cooldown_timer.start(0.7)
+				
+				if global.attack_block == false: #Атака игроком другого существа
+					match player_align:
+						"right":
+							player_animation.flip_h = false 
+						"left":
+							player_animation.flip_h = true
+					player_animation.play("attack")
 					
-					global.attack_tougle = true
-			
-				if player_align == "right":
-					player_animation.flip_h = false 
-				elif player_align == "left":
-					player_animation.flip_h = true
-				player_animation.play("attack")
+					cooldown_timer.start(0.8)
+					hands.get_child(0).disabled = false ##непосредственно атака
+					global.PlayerIndicators("stamina",AttackStaminaSpeed*-1,"set")
+				
 				lastanim = "attack"
 			
 			
 			
 		elif Input.is_anything_pressed() == false:
+			player_animation.flip_h = false
 			hands.get_child(0).disabled = true
 			if lastanim == "attack":
 				player_animation.play("attack")
@@ -187,7 +168,7 @@ func animation(is_pressing: bool):
 					lastanim = "idle"
 			else:
 				player_animation.play("idle")
-				player_animation.flip_h = false
+				
 			
 
 func hands_control():
@@ -197,14 +178,22 @@ func hands_control():
 func update_player_position():
 	global.set_player_pos(player.get_global_position())
 	var align = player.get_global_position()-get_global_mouse_position()
-	
 	if align[0] >= 0:
 		player_align = "left"
 	else:
 		player_align = "right"
 		
 
+func debug_buttons():
+	if Input.is_action_just_pressed("debug1"):
+		global.PlayerIndicators("key", 1, "set")
 
 
+		
+	if Input.is_action_just_released("debug2"):
+		var node = $"/root/main".get_child(1)
+		var Spawn = load("res://Scenes/mobs/skeleton_mob.tscn").instantiate()
+		Spawn.position = get_global_mouse_position()
+		node.add_child(Spawn)
 
 

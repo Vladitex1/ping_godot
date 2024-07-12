@@ -5,7 +5,6 @@ var shop_tougle:bool = false
 var action_tougle:bool = false
 var loading_tougle:bool = false
 var heat_tougle:bool = false
-var attack_tougle:bool = false
 var buttons_lock: bool = false
 
 static var drag_tougle:bool = false
@@ -30,11 +29,6 @@ var tempCoins:int = PlayerCoins
 var tempKeys:int = PlayerKeys
 var tempStamina:int = PlayerStamina
 
-var ememy_id_list = {}
-var enemy_id_global
-
-var player_damage
-
 static var player_position: Vector2
 static var camera_position: Vector2
 static var camera_zoom: Vector2
@@ -46,7 +40,7 @@ func change_scene(namestr):
 	
 func add_scene(namestr):
 	get_tree().root.add_child(load("res://Scenes/"+namestr+".tscn").instantiate())
-		
+	
 func del_scene(namestr):
 	var scene = "res://Scenes/"+namestr+".tscn"
 	for i in get_tree().root.get_child_count():

@@ -94,8 +94,7 @@ func reset_variable():
 
 ################################################
 func _input(event):
-	if event is InputEventMouseMotion:
-		$mouse_equip_item.global_position = event.position	
+	$mouse_equip_item.global_position = get_global_mouse_position()-Vector2(40,40)
 ###################Содержимое инвентаря###################
 
 func inventory_info_storage(num1):

@@ -1,10 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://do42rlis6it6d"]
+[gd_scene load_steps=13 format=3 uid="uid://do42rlis6it6d"]
 
 [ext_resource type="Script" path="res://Scripts/level/darkness.gd" id="1_wkv1h"]
 [ext_resource type="Texture2D" uid="uid://drjcqu76ga1a2" path="res://assets/Tilemap/Tilemap1.png" id="3_yi0xa"]
 [ext_resource type="PackedScene" uid="uid://3nh6n7vhnc8h" path="res://Scenes/mobs/player_mob.tscn" id="4_r16yv"]
 [ext_resource type="PackedScene" uid="uid://ch2tgjjy03a8s" path="res://Scenes/mobs/skeleton_mob.tscn" id="5_f8kjb"]
-[ext_resource type="Script" path="res://Scripts/Creatures.gd" id="5_fpjgi"]
 [ext_resource type="Texture2D" uid="uid://c56bavk2ib8of" path="res://assets/LVL/upper_for_door.png" id="6_1rop5"]
 [ext_resource type="PackedScene" uid="uid://chsnegkawbbdb" path="res://Scenes/objects/door_object.tscn" id="7_s40s2"]
 [ext_resource type="PackedScene" uid="uid://dq6ushunyiy23" path="res://Scenes/objects/shop_object.tscn" id="9_bb57y"]
@@ -145,7 +144,6 @@ layer_2/tile_data = PackedInt32Array(65537, 0, 3, 65538, 0, 3, 65539, 0, 3, 6554
 [node name="Creatures" type="Node2D" parent="."]
 light_mask = 16
 visibility_layer = 16
-script = ExtResource("5_fpjgi")
 
 [node name="player" parent="Creatures" instance=ExtResource("4_r16yv")]
 position = Vector2(194, 259)

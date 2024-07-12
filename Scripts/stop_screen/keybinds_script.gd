@@ -109,7 +109,7 @@ func refresh(): ##выводит содержимое переопределяя
 ##input - имя объекта пример - "special_use"
 ##new_key - кнопка - пример - KEY_UP
 func remap_key(input,new_key):
-	print("input: ",input," new_key: ",new_key)
+	#print("input: ",input," new_key: ",new_key)
 	InputMap.erase_action(str(input))
 	InputMap.add_action(str(input))
 	var key_event = InputEventKey.new()
@@ -119,9 +119,9 @@ func remap_key(input,new_key):
 	##назначение в таблицу
 	for i in len(keybinds):
 		if keybinds[i][2] == str(input): #нахождение в таблице какой раздел клавиши
-			print("До изменений:",keybinds[i][1], "|", key_value[i][1])
+			#print("До изменений:",keybinds[i][1], "|", key_value[i][1])
 			keybinds[i][1] = new_key #присвоение в таблицу значения 
-			print("После изменений:",keybinds[i][1], "|", key_value[i][1])
+			#print("После изменений:",keybinds[i][1], "|", key_value[i][1])
 			#print(keybinds[i][1])
 
 
