@@ -381,6 +381,7 @@ text = "settings"
 horizontal_alignment = 1
 
 [node name="button_list" type="MarginContainer" parent="CanvasLayer/settings_window"]
+layout_mode = 0
 offset_left = -71.5
 offset_top = -225.5
 offset_right = 29.5
