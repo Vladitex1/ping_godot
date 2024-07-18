@@ -1,3 +1,10 @@
+NavigationRegion2D
+NavigationAgent2D
+NavigationLink2D
+CPUParticles2D
+Timer
+CollisionShape2D
+Area2D
 HSlider
 Label
 Panel
@@ -5,11 +12,3 @@ VBoxContainer
 Button
 CanvasLayer
 Node2D
-CollisionShape2D
-Area2D
-HSeparator
-VSeparator
-HBoxContainer
-ScrollContainer
-HFlowContainer
-MarginContainer

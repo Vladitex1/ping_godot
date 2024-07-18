@@ -1,10 +1,11 @@
-[gd_scene load_steps=54 format=3 uid="uid://ch2tgjjy03a8s"]
+[gd_scene load_steps=56 format=3 uid="uid://ch2tgjjy03a8s"]
 
 [ext_resource type="Script" path="res://Scripts/skeleton_script.gd" id="1_uml16"]
 [ext_resource type="Texture2D" uid="uid://pl513b6xupyn" path="res://assets/interface/hb1.png" id="2_dgof6"]
 [ext_resource type="Texture2D" uid="uid://ckakw481uj45i" path="res://assets/interface/health.png" id="3_s44k5"]
 [ext_resource type="FontFile" uid="uid://8atws0pc47sn" path="res://fonts/Font1.ttf" id="4_gsiy2"]
 [ext_resource type="Texture2D" uid="uid://5hbacs6p7kj0" path="res://assets/Tilemap/Skeleton.png" id="5_3k3yb"]
+[ext_resource type="Script" path="res://Scripts/Camera.gd" id="6_uj3cm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_joesn"]
 atlas = ExtResource("5_3k3yb")
@@ -367,19 +368,29 @@ animations = [{
 size = Vector2(8.21185, 10.4956)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_us40i"]
-size = Vector2(34.1429, 42.2858)
+size = Vector2(50.0001, 53.0001)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bt8vo"]
+radius = 20.025
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dnpgc"]
 size = Vector2(34, 42)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_06mtc"]
-radius = 95.9001
+radius = 136.529
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6pg5k"]
-radius = 602.014
+radius = 891.114
 
 [node name="skeleton" type="CharacterBody2D"]
+collision_layer = 15
+collision_mask = 15
+motion_mode = 1
+platform_floor_layers = 4294967291
 script = ExtResource("1_uml16")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
 
 [node name="health_bar" type="TextureProgressBar" parent="."]
 visible = false
@@ -429,16 +440,22 @@ position = Vector2(-4.76837e-07, 4.76837e-07)
 scale = Vector2(2.94, 2.94)
 shape = SubResource("RectangleShape2D_40nvm")
 
-[node name="enemy_damage_area" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_damage_area"]
-position = Vector2(-9.53674e-07, 9.53674e-07)
+[node name="attack_area" type="Area2D" parent="."]
+position = Vector2(1.90735e-06, -9.53674e-07)
 scale = Vector2(0.999999, 0.999999)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_area"]
+position = Vector2(-2.62261e-06, 0.500002)
 shape = SubResource("RectangleShape2D_us40i")
 
-[node name="get_damage_area" type="Area2D" parent="."]
+[node name="enemy_hands" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="get_damage_area"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_hands"]
+shape = SubResource("CircleShape2D_bt8vo")
+
+[node name="damage_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="damage_area"]
 shape = SubResource("RectangleShape2D_dnpgc")
 
 [node name="AttackTimer" type="Timer" parent="."]
@@ -459,6 +476,13 @@ visibility_layer = 2
 z_as_relative = false
 position = Vector2(3.8147e-06, 0)
 shape = SubResource("CircleShape2D_06mtc")
+
+[node name="Camera2D" type="Camera2D" parent="detection/enemy_detection_colision"]
+position = Vector2(-1.19209e-07, 1.19209e-07)
+scale = Vector2(0.999999, 0.999999)
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+script = ExtResource("6_uj3cm")
 
 [node name="far_detection" type="Area2D" parent="."]
 position = Vector2(-9.09495e-13, 7.15256e-07)

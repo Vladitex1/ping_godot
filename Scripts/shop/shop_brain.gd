@@ -35,14 +35,13 @@ func _ready():
 	$shop_plate/buttons/exit_button.connect("button_up",exit_button)
 
 	##buttons
-	$shop_plate/items/GridContainer/Slot1/Button.connect("button_down",slot1)
-	$shop_plate/items/GridContainer/Slot2/Button.connect("button_down",slot2)
-	$shop_plate/items/GridContainer/Slot3/Button.connect("button_down",slot3)
-	$shop_plate/items/GridContainer/Slot4/Button.connect("button_down",slot4)
-	$shop_plate/items/GridContainer/Slot5/Button.connect("button_down",slot5)
-	$shop_plate/items/GridContainer/Slot6/Button.connect("button_down",slot6)
-	$shop_plate/items/GridContainer/Slot7/Button.connect("button_down",slot7)
-	$shop_plate/items/GridContainer/Slot8/Button.connect("button_down",slot8)
+	
+	for slotnum in get_node("shop_plate/items/GridContainer").get_child_count():
+		#print(slotnum+1)
+		slotnum = slotnum + 1
+		var node_path: String = "shop_plate/items/GridContainer/Slot"+str(slotnum)+"/Button"
+		var button = get_node(node_path)
+		button.connect("button_down",Callable(self, "slotnum").bind(slotnum))
 
 	shop_info_storage(0)#randi_range(0,3))
 	##shop inventory
@@ -170,47 +169,12 @@ func exit_button():
 ################## Задать содержимое слота
 
 func slot(slotnum,num):
-	match slotnum:
-		1:
-			$shop_plate/items/GridContainer/Slot1/Button/shop_item_1.slot(num)
-		2:
-			$shop_plate/items/GridContainer/Slot2/Button/shop_item_2.slot(num)
-		3:
-			$shop_plate/items/GridContainer/Slot3/Button/shop_item_3.slot(num)
-		4:
-			$shop_plate/items/GridContainer/Slot4/Button/shop_item_4.slot(num)
-		5:
-			$shop_plate/items/GridContainer/Slot5/Button/shop_item_5.slot(num)
-		6:
-			$shop_plate/items/GridContainer/Slot6/Button/shop_item_6.slot(num)
-		7:
-			$shop_plate/items/GridContainer/Slot7/Button/shop_item_7.slot(num)
-		8:
-			$shop_plate/items/GridContainer/Slot8/Button/shop_item_8.slot(num)
-		_:
-			pass
+	var slotnum2 = str(slotnum)
+	var node_path = "shop_plate/items/GridContainer/Slot" + slotnum2 + "/Button/shop_item_" + slotnum2
+	get_node(node_path).slot(num)
 	
-func slot1():
-	selected_item_ID = $shop_plate/items/GridContainer/Slot1/Button/shop_item_1.get_slot_info()
-	count = 1
-func slot2():
-	selected_item_ID = $shop_plate/items/GridContainer/Slot2/Button/shop_item_2.get_slot_info()
-	count = 1
-func slot3():
-	selected_item_ID = $shop_plate/items/GridContainer/Slot3/Button/shop_item_3.get_slot_info()
-	count = 1
-func slot4():
-	selected_item_ID = $shop_plate/items/GridContainer/Slot4/Button/shop_item_4.get_slot_info()
-	count = 1
-func slot5():
-	selected_item_ID = $shop_plate/items/GridContainer/Slot5/Button/shop_item_5.get_slot_info()
-	count = 1
-func slot6():
-	selected_item_ID = $shop_plate/items/GridContainer/Slot6/Button/shop_item_6.get_slot_info()
-	count = 1
-func slot7():
-	selected_item_ID = $shop_plate/items/GridContainer/Slot7/Button/shop_item_7.get_slot_info()
-	count = 1
-func slot8():
-	selected_item_ID = $shop_plate/items/GridContainer/Slot8/Button/shop_item_8.get_slot_info()
+func slotnum(slotnum):
+	var slotnum2 = str(slotnum)
+	var node_path = "shop_plate/items/GridContainer/Slot" + slotnum2 + "/Button/shop_item_" + slotnum2
+	selected_item_ID = get_node(node_path).get_slot_info()
 	count = 1

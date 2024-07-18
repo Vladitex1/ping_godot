@@ -10,9 +10,11 @@ extends Control
 
 var value: int  = 0
 func _ready():
+	
 	stamina_bar.max_value = global.MaxStamina
 	health_bar.max_value = global.MaxHealth
 func _process(_delta):
+	
 	var fps = Engine.get_frames_per_second()
 	FPS_lable.text = "fps: "+str(fps)
 	stamina_bar.value = global.PlayerIndicators("stamina", 0, "get")

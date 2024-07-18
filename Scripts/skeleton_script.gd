@@ -6,7 +6,8 @@ extends CharacterBody2D
 @onready var health_bar = $health_bar
 @onready var health_bar_lable = $healh_count_label
 @onready var enemy = $"."
-
+@onready var hands = $enemy_hands
+@onready var nav: NavigationAgent2D = $NavigationAgent2D
 enum {
 	PATROL, #0
 	CHASE, #1
@@ -18,8 +19,16 @@ enum {
 	SET, #0
 	}
 
-var attack_strange: int = -5
-var attack_time: float = 1
+const standart_speed: float = 100
+
+const max_health: int = 150
+const attack_strange: int = -5
+const attack_throw: int = -1000
+const attack_speed: float = 0.5
+const cooldown_speed: float = 1
+const acceleration = 5
+
+var health_value: int
 var random_num: int
 var speed: float
 var timer:bool = false
@@ -27,91 +36,88 @@ var state = IDLE
 var player = null
 var last_movement = 2
 var null_vector = Vector2(0,0)
-var health_value = 150
-var max_health = 150
+var direction = Vector3()
 var temp_state
 var damaged = true
 var patrol_timer = false
 var new_vector: Vector2
+var IFT = null
 #damage_zone_detection
 func _ready():
+	hands.get_child(0).disabled = true
+	health_value = max_health
 	health_bar.max_value = max_health
-	$enemy_damage_area.connect("body_entered",AttackArea_enter)
-	$enemy_damage_area.connect("body_exited",AttackArea_exit)
+	$attack_area.connect("body_entered",AttackArea_enter)
+	$attack_area.connect("body_exited",AttackArea_exit)
 	
 	$detection.connect("body_entered",ChaseArea_enter)
 	$detection.connect("body_exited",ChaseArea_exit)
 	
-	$get_damage_area.connect("area_entered",DamageArea_enter)
-	#$get_damage_area.connect("area_exited",DamageArea_exit)
+	$damage_area.connect("area_entered",DamageArea_enter)
+	#$damage_area.connect("area_exited",DamageArea_exit)
 	
 	$far_detection.connect("body_entered",PatrolArea_enter)
 	$far_detection.connect("body_exited",PatrolArea_exit)
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	health_bar_conrol(SET)
 	GSet_health(0,GET)
-
+	#print(global.player_attack("damage", 0, "get"))
 			
 	match state:
 		PATROL:
-			speed = 50
+			speed = standart_speed
 			if attack_timer.is_stopped() == true:
-				new_vector = get_circle_position(get_random_num())
-				attack_timer.start(5)
-			var delta_x = enemy.get_global_position().x-new_vector.x
-			var delta_y = enemy.get_global_position().y-new_vector.y
-			
-
-			if delta_x<=0:
-				delta_x *= -1
-			if delta_y<=0:
-				delta_y *= -1
-			var delta_num = 2
-			if delta_x < delta_num and delta_y < delta_num:
-				animation(null_vector,null_vector,"idle")  
-			else:
-				move(new_vector, delta, speed)
+				attack_timer.start(3)
+				new_vector = get_circle_position()
+								
+			move(new_vector, _delta, speed)
 			
 			temp_state = PATROL
 		CHASE:
-			speed = 150
-			attack_timer.stop()
+			speed = standart_speed
 			global.action_tougle = false
-			move(global.get_player_pos(), delta, speed)
+			nav.target_position = global.get_player_pos()
+			direction = nav.target_position - global_position
+			velocity = velocity.lerp(direction.normalized() * speed, acceleration * _delta) 
+			
+			nav.get_next_path_position()
+			
+			animation("walk")
+			move_and_slide()
+			
+			
 			temp_state = CHASE
 		ATTACK:
-			speed = 10
-			move(global.get_player_pos(), delta, speed)
+			speed = 0
+			move(global.get_player_pos(), _delta, speed)
 			attack()
-			animation(null_vector,null_vector,"idle")
+			animation("idle")
 			temp_state = ATTACK
 		DAMAGE:
-			animation(null_vector,null_vector,"damage")
+			speed = 0
 			var incoming_damage = global.player_attack("damage", 0, "get")
+			var incoming_damage_throw = global.player_attack("damage_throw", 0, "get")
 			GSet_health(GSet_health(0,GET) - incoming_damage,SET)
-			move(damage_vector(),1,10)
+			#print(damage_vector(_delta))
+			move(damage_vector(), 0.6, speed)
+			animation("damage")
 			state = temp_state
 		DEATH:
-			animation(null_vector,null_vector,"death")
+			animation("death")
 			if enemy_animation.get_frame() == 3:
 				global.PlayerIndicators("coin", 1, "set")	
 				$".".queue_free()
 		IDLE:
-			animation(null_vector,null_vector,"idle")
-			state = IDLE
+			animation("idle")
+			temp_state = IDLE
 
 ###############special######################
-func get_random_num():
-	random_num = randi_range(0,180)
-	return random_num
 
-func move(target, delta, spd):
-	var direction = (target - enemy_animation.get_global_position()).normalized() 
-	var desired_velocity =  direction * spd
-	var steering = (desired_velocity - velocity) * delta * 2.5
-	velocity += steering
-	animation(velocity,steering,"walk")
+func move(target, _delta, spd):
+	var direction = velocity + target
+	velocity = velocity.lerp(direction.normalized() * speed, acceleration * _delta) 
+	animation("walk")
 	move_and_slide()
 	
 func GSet_health(Count:int,GS):
@@ -123,19 +129,29 @@ func GSet_health(Count:int,GS):
 		SET:
 			health_value = Count
 
-func animation(vc,steering,condition):
+func animation(condition):
 	var walk = 0
-	var more_than = 4
-	
-	if vc.x>steering.x and vc.x-steering.x>more_than: #right
-		walk = 1
-	elif vc.x<steering.x and vc.x-steering.x<more_than: #left
+	var dir
+	if state == PATROL:
+		dir = rad_to_deg(new_vector.angle())
+	else:
+		dir = rad_to_deg((global.get_player_pos() - enemy.get_global_position()).angle())
+		#print(round(dir))
+	var direction = round(dir)
+	#print(direction)
+
+	#print(state)
+	#print(direction)
+	if direction <= -135 or direction >= 135: #left
 		walk = 2
-	elif vc.y>steering.y and vc.y-steering.y>more_than: #up
-		walk = 4
-	elif vc.y<steering.y and vc.y-steering.y<more_than: #down
+	#elif direction <= 45: #right 
+	if direction >= -135 and direction <= -45: #up
 		walk = 3
-		
+	if direction <= 135 and direction >= 45: #down
+		walk = 4
+	if direction <= 45 and direction >= -45: #right
+		walk = 1
+
 	match condition:
 		"walk":
 			match walk:
@@ -230,41 +246,46 @@ func health_bar_conrol(GS):
 ###############atack######################
 
 func attack():
-	var attack_speed: float = 0.5
-	var cooldown_speed: float = 1
-	global.heat_tougle = true
-	if attack_timer.is_stopped() == true: ##запуск куладуна
-		global.PlayerIndicators("hp",attack_strange,"set")
+	
+	#print(attack_timer.time_left)
+	#print(cooldown_timer.time_left)
+	if attack_timer.time_left != 0:
+		hands.get_child(0).disabled = true
+	if attack_timer.time_left > 0.1:
 		cooldown_timer.start(cooldown_speed)
-	if cooldown_timer.is_stopped() == true:
-		global.heat_tougle = false
-		global.PlayerIndicators("hp",0,"set")
-	if cooldown_timer.is_stopped() == false: ##перезапуск таймера атаки
+		hands.get_child(0).disabled = false
+	if cooldown_timer.time_left == 0:
 		attack_timer.start(attack_speed)
+		
+
 		
 ###############damage######################
 
-func damage_vector():
-	var num = global.player_attack("damage_throw", 0, "get")
-	var enemy_angle = (global.get_player_pos() - enemy.get_global_position()).angle()	
-	var vector_from_angle = Vector2(cos(enemy_angle), sin(enemy_angle))
-	var vector = Vector2(num,num) * vector_from_angle
-	var final_vector = enemy.get_global_position()+(vector*-1)
-	return final_vector
 	
-###############chase######################
+func damage_vector() -> Vector2:
+	var player_position = global.get_player_pos()
+	var enemy_position = enemy.global_position
+	var knockback_distance = 20  # Установите нужное значение расстояния
+	var direction: Vector2 = (enemy_position - player_position).normalized()
+	var knockback_vector: Vector2 = enemy_position + direction * knockback_distance#s * knockback_force
+	return knockback_vector
+
+	
+	
+###############chase######################o
 ###############patrol######################
-func get_circle_position(random):
-	var radius = 200
-	 #Distance from center to circumference of circle
-	var angle = random# * PI * 2;
-	var vector_from_angle = Vector2(cos(angle), sin(angle))
-	var vector = Vector2(radius,radius) * vector_from_angle
-	var final_vector = enemy.get_global_position()-vector
-	return final_vector
+func get_circle_position():
+	var min = -180
+	var max = 180
+	var randnum1 = randi_range(min,max)
+	#var randnum2 = randi_range(min,max)
+	#print("randnum1:",randnum1," randnum2",randnum2)
+	var vector_from_angle = Vector2(cos(randnum1), sin(randnum1)) * 100
+	#var radius = 10Vector2(radius,radius) * 
+	#print(vector_from_angle)
+	var vector = vector_from_angle
+	return vector
 	
-func patrol_vector_timer(): ##перезапуск таймера
-	get_random_num()
 	
 ###############connections######################		
 
@@ -282,8 +303,8 @@ func ChaseArea_exit(body):
 
 func AttackArea_enter(body):
 	if str(body.name) == "player":
+		IFT = true
 		state = ATTACK
-		#IDLE#
 
 func AttackArea_exit(body):
 	if str(body.name) == "player":
@@ -296,11 +317,12 @@ func PatrolArea_enter(body):
 func PatrolArea_exit(body):
 	if str(body.name) == "player":
 		state = IDLE
+
 		
 func DamageArea_enter(area):
 	if str(area.name) == "Hands":
 		state = DAMAGE
-		
+
 func DamageArea_exit(area):
 	if str(area.name) == "Hands":
 		state = temp_state

@@ -59,7 +59,6 @@ placeholder_text = "console"
 alignment = 2
 
 [node name="main_menu" type="Control" parent="CanvasLayer"]
-visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -279,6 +278,7 @@ text = "brightness 0"
 horizontal_alignment = 1
 
 [node name="settings_keybinds" type="Control" parent="CanvasLayer"]
+visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
