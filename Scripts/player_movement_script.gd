@@ -16,7 +16,7 @@ static var StaterCoins:int = 0
 static var StaminaSpeed: int = 5
 static var AttackStaminaSpeed: int = 100
 var Attack_Value: int = 25
-var Attack_Throw: int = 100
+var Attack_Throw: int = 1.1
 
 var enemy_attack_strange = 0
 var enemy_attack_throw = 0
@@ -29,7 +29,6 @@ var attack_state: bool = false
 var lastanim: String
 @onready var player_animation = $Ping_Aimation
 @onready var player = $"."
-@onready var damage_texture = $Damage
 @onready var loading_animation = $"Waiting_Animation"
 @onready var Interactive = $Interactive
 @onready var attack_timer = $AttackTimer
@@ -93,11 +92,11 @@ func _physics_process(_delta):
 			move(incoming_damage_vector,_delta,200)#0.6
 			player_animation.play("damage")
 			await get_tree().create_timer(0.3).timeout
-			print("получение урона - player_movement_script")
 			if damage_ready == true:
+				print("получение урона - player_movement_script")
 				damage_ready = false
 				global.PlayerIndicators("hp",enemy_attack_strange,"set")
-			state = temp_state
+				state = temp_state
 		DEATH:
 			pass
 	
@@ -248,5 +247,5 @@ func damage_area_enter(area):
 		
 func damage_area_exit(area):
 	if str(area.name) == "enemy_hands":
-		state = temp_state
+		state = WALK
 

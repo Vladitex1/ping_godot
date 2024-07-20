@@ -1,66 +1,55 @@
-extends Area2D
+extends Node2D
 
-@onready var door_animation = $"../../Textures/door_open_animation"
-@onready var door_colision = $"../door_real_colision"
-@onready var door_mask_close = $"../../light_mask_close"
-@onready var door_mask_open1 = $"../../light_mask_open_1"
-@onready var door_mask_open2 = $"../../light_mask_open_2"
+@onready var door_mask = $door_colisions/door_mask
 
 var door_tougle = false
 var door_ready = false
 
-func _on_body_entered(body):
-	if str(body.name) == "player":
-		#print("вход в территорию двери - door_script")
-		global.action_tougle = true
-		door_ready = true
-
-func _on_body_exited(body):
-	if str(body.name) == "player":
-		#print("выход из территории двери - door_script")
-		door_ready = false
-		global.action_tougle = false
-		
+func _ready():
+	$opener_area.connect("body_entered",body_entered)
+	$opener_area.connect("body_exited",body_exited)
+	
 func animation(animation_bool):
-	if !animation_bool:
-		door_animation.play("door_open")
-		door_mask_close.hide()
-		door_mask_open1.show()
-		door_mask_open2.show()
+	if animation_bool:
+		door_mask.play("door_mask_open")
 	else:
-		door_animation.play("door_close")
-		door_mask_open1.hide()
-		door_mask_open2.hide()
-		door_mask_close.show()
+		door_mask.play_backwards("door_mask_open")	
 
-
+func tougle():
+	if door_tougle == true:
+		door_tougle = false
+	else:
+		door_tougle = true
+		
+	match door_tougle:
+		true:##открытие/закрытие двери переключатель
+			global.loading_tougle = true
+			animation(door_tougle)
+		false:
+			if global.PlayerIndicators("key", 0, "get") >= 1:
+				global.loading_tougle = true
+				global.PlayerIndicators("key", -1, "set")
+				animation(door_tougle)
+			elif global.PlayerIndicators("key", 0, "get") <= 0:
+				pass
+					
+	await get_tree().create_timer(1).timeout 
+	door_ready = false
+	global.loading_tougle = false
+	global.action_tougle = false
 		
 func _process(_delta):
 	if Input.is_action_just_released("special_use") and door_ready == true:
+		tougle()
+			
+func body_entered(body):
+	if str(body.name) == "player":
+		door_ready = true
+		global.action_tougle = true
 		
-		match door_tougle:
-			true:
-				global.loading_tougle = true
-				#print("Дверь закрыта - door_script")
-				animation(door_tougle)
-				door_tougle = false ##открытие/закрытие двери переключатель
-			false:
-				if global.PlayerIndicators("key", 0, "get") >= 1:
-					global.loading_tougle = true
-					global.PlayerIndicators("key", -1, "set")
-					#print("Дверь открыта - door_script")
-					animation(door_tougle)
-					door_tougle = true ##открытие/закрытие двери переключатель
-				elif global.PlayerIndicators("key", 0, "get") <= 0:
-					pass
-
-
-		await get_tree().create_timer(1).timeout 
+func body_exited(body):
+	if str(body.name) == "player":
 		door_ready = false
-		global.loading_tougle = door_ready
-		global.action_tougle = door_ready
-		door_colision.set_deferred("disabled",door_tougle)	
-			
-			
+		global.action_tougle = false
 		
 

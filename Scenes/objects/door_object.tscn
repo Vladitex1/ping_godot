@@ -1,35 +1,7 @@
-[gd_scene load_steps=24 format=3 uid="uid://chsnegkawbbdb"]
+[gd_scene load_steps=20 format=3 uid="uid://chsnegkawbbdb"]
 
 [ext_resource type="Script" path="res://Scripts/door_script.gd" id="3_ec11f"]
 [ext_resource type="Texture2D" uid="uid://dvmacp1f51ida" path="res://assets/Tilemap/doortilemap.png" id="4_j0txy"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_76kp2"]
-atlas = ExtResource("4_j0txy")
-region = Rect2(0, 92, 64, 92)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uutt5"]
-atlas = ExtResource("4_j0txy")
-region = Rect2(384, 0, 64, 92)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ocao8"]
-atlas = ExtResource("4_j0txy")
-region = Rect2(320, 0, 64, 92)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_paxon"]
-atlas = ExtResource("4_j0txy")
-region = Rect2(256, 0, 64, 92)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rp5s0"]
-atlas = ExtResource("4_j0txy")
-region = Rect2(192, 0, 64, 92)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_m2q1g"]
-atlas = ExtResource("4_j0txy")
-region = Rect2(64, 0, 64, 92)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bq2og"]
-atlas = ExtResource("4_j0txy")
-region = Rect2(0, 0, 64, 92)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ss0np"]
 atlas = ExtResource("4_j0txy")
@@ -67,32 +39,6 @@ region = Rect2(0, 92, 64, 92)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_76kp2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uutt5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ocao8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_paxon")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rp5s0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_m2q1g")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bq2og")
-}],
-"loop": false,
-"name": &"door_close",
-"speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_ss0np")
 }, {
 "duration": 1.0,
@@ -121,74 +67,205 @@ animations = [{
 "speed": 8.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_k63gp"]
-size = Vector2(56, 93)
+[sub_resource type="Animation" id="Animation_mqy62"]
+length = 0.001
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_axr4c"]
-radius = 46.0
+[sub_resource type="Animation" id="Animation_1uks1"]
+resource_name = "door_mask_open"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("door_colisions/light_mask_up:occluder:polygon")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(-20.3, -4.2, 20.3, -4.2, 20.3, 27.5, -20.3, 27.5), PackedVector2Array(-20.3, -4.2, 20.3, -4.2, 20.3, 24.5, -20.3, 24.5), PackedVector2Array(-20.3, -4.2, 20.3, -4.2, 20.3, 21.7, -20.3, 21.7), PackedVector2Array(-20.3, -4.2, 20.3, -4.2, 20.3, 19.6, -20.3, 19.6), PackedVector2Array(-20.3, -4.2, 20.3, -4.2, 20.3, 15.4, -20.3, 15.4), PackedVector2Array(-20.3, -4.2, 20.3, -4.2, 20.3, 8.40001, -20.3, 8.40001), PackedVector2Array(-20.3, -4.2, 20.3, -4.2, 20.3, 5.60001, -20.3, 5.60001), PackedVector2Array(-20.3, -4.2, 20.3, -4.2, 20.3, -0.700001, -20.3, -0.700001)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("door_colisions/light_mask_down:occluder:polygon")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(-19.6, -28.7, -19.6, 4.9, 21, 4.9, 21, -28.7), PackedVector2Array(-19.6, -27.3, -19.6, 4.9, 21, 4.9, 21, -27.3), PackedVector2Array(-19.6, -23.8, -19.6, 4.9, 21, 4.9, 21, -23.8), PackedVector2Array(-19.6, -20.3, -19.6, 4.9, 21, 4.9, 21, -20.3), PackedVector2Array(-19.6, -13.3, -19.6, 4.9, 21, 4.9, 21, -13.3), PackedVector2Array(-19.6, -11.2, -19.6, 4.9, 21, 4.9, 21, -11.2), PackedVector2Array(-19.6, -4.90001, -19.6, 4.9, 21, 4.9, 21, -4.90001), PackedVector2Array(-19.6, -0.700001, -19.6, 4.9, 21, 4.9, 21, -0.700001)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("animation:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("door_colisions/colision_down:polygon")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(27, -47, 27, 1, -31, 1, -31, -47), PackedVector2Array(27, -45, 27, 1, -31, 1, -31, -45), PackedVector2Array(27, -40, 27, 1, -31, 1, -31, -40), PackedVector2Array(27, -35, 27, 1, -31, 1, -31, -35), PackedVector2Array(27, -25, 27, 1, -31, 1, -31, -25), PackedVector2Array(27, -22, 27, 1, -31, 1, -31, -22), PackedVector2Array(27, -13, 27, 1, -31, 1, -31, -13), PackedVector2Array(27, -7, 27, 1, -31, 1, -31, -7)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("door_colisions/colision_up:polygon")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(-29, -2.5, 29, -2.5, 29, 41.5, -29, 41.5), PackedVector2Array(-29, -2.5, 29, -2.5, 29, 38.5, -29, 38.5), PackedVector2Array(-29, -2.5, 29, -2.5, 29, 34.5, -29, 34.5), PackedVector2Array(-29, -2.5, 29, -2.5, 29, 31.5, -29, 31.5), PackedVector2Array(-29, -2.5, 29, -2.5, 29, 25.5, -29, 25.5), PackedVector2Array(-29, -2.5, 29, -2.5, 29, 15.5, -29, 15.5), PackedVector2Array(-29, -2.5, 29, -2.5, 29, 11.5, -29, 11.5), PackedVector2Array(-29, -2.5, 29, -2.5, 29, 2.5, -29, 2.5)]
+}
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_w633k"]
-cull_mode = 1
-polygon = PackedVector2Array(20.3, 33.6, 20.3, -30.8, -20.3001, -30.8, -20.3001, 33.6)
+[sub_resource type="Animation" id="Animation_8s1qs"]
+resource_name = "door_mask_open_2"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("door_colisions/light_mask_up:occluder:polygon")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(-20.3, -4.2, 20.3, -4.2, 20.3, 27.5, -20.3, 27.5), PackedVector2Array(-20.3, -4.2, 20.3, -4.2, 20.3, 24.5, -20.3, 24.5), PackedVector2Array(-20.3, -4.2, 20.3, -4.2, 20.3, 21.7, -20.3, 21.7), PackedVector2Array(-20.3, -4.2, 20.3, -4.2, 20.3, 19.6, -20.3, 19.6), PackedVector2Array(-20.3, -4.2, 20.3, -4.2, 20.3, 15.4, -20.3, 15.4), PackedVector2Array(-20.3, -4.2, 20.3, -4.2, 20.3, 8.40001, -20.3, 8.40001), PackedVector2Array(-20.3, -4.2, 20.3, -4.2, 20.3, 5.60001, -20.3, 5.60001), PackedVector2Array(-20.3, -4.2, 20.3, -4.2, 20.3, -0.700001, -20.3, -0.700001)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("door_colisions/light_mask_down:occluder:polygon")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(-19.6, -28.7, -19.6, 4.9, 21, 4.9, 21, -28.7), PackedVector2Array(-19.6, -27.3, -19.6, 4.9, 21, 4.9, 21, -27.3), PackedVector2Array(-19.6, -23.8, -19.6, 4.9, 21, 4.9, 21, -23.8), PackedVector2Array(-19.6, -20.3, -19.6, 4.9, 21, 4.9, 21, -20.3), PackedVector2Array(-19.6, -13.3, -19.6, 4.9, 21, 4.9, 21, -13.3), PackedVector2Array(-19.6, -11.2, -19.6, 4.9, 21, 4.9, 21, -11.2), PackedVector2Array(-19.6, -4.90001, -19.6, 4.9, 21, 4.9, 21, -4.90001), PackedVector2Array(-19.6, -0.700001, -19.6, 4.9, 21, 4.9, 21, -0.700001)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("animation:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("door_colisions/colision_down:polygon")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(27, -47, 27, 1, -31, 1, -31, -47), PackedVector2Array(27, -45, 27, 1, -31, 1, -31, -45), PackedVector2Array(27, -40, 27, 1, -31, 1, -31, -40), PackedVector2Array(27, -35, 27, 1, -31, 1, -31, -35), PackedVector2Array(27, -25, 27, 1, -31, 1, -31, -25), PackedVector2Array(27, -22, 27, 1, -31, 1, -31, -22), PackedVector2Array(27, -13, 27, 1, -31, 1, -31, -13), PackedVector2Array(27, -7, 27, 1, -31, 1, -31, -7)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("door_colisions/colision_up:polygon")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [PackedVector2Array(-29, -2.5, 29, -2.5, 29, 41.5, -29, 41.5), PackedVector2Array(-29, -2.5, 29, -2.5, 29, 38.5, -29, 38.5), PackedVector2Array(-29, -2.5, 29, -2.5, 29, 34.5, -29, 34.5), PackedVector2Array(-29, -2.5, 29, -2.5, 29, 31.5, -29, 31.5), PackedVector2Array(-29, -2.5, 29, -2.5, 29, 25.5, -29, 25.5), PackedVector2Array(-29, -2.5, 29, -2.5, 29, 15.5, -29, 15.5), PackedVector2Array(-29, -2.5, 29, -2.5, 29, 11.5, -29, 11.5), PackedVector2Array(-29, -2.5, 29, -2.5, 29, 2.5, -29, 2.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x8fw5"]
+_data = {
+"RESET": SubResource("Animation_mqy62"),
+"door_mask_open": SubResource("Animation_1uks1"),
+"door_mask_open_2": SubResource("Animation_8s1qs")
+}
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_abypc"]
-polygon = PackedVector2Array(-20.3, -4.2, 20.3, -4.2, 20.3, 5.60001, -20.3, 5.60001)
+resource_local_to_scene = true
+polygon = PackedVector2Array(-20.3, -4.2, 20.3, -4.2, 20.3, 27.5, -20.3, 27.5)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bk2a6"]
-polygon = PackedVector2Array(-19.6, -4.90001, -19.6, 4.9, 21, 4.9, 21, -4.90001)
+resource_local_to_scene = true
+polygon = PackedVector2Array(-19.6, -28.7, -19.6, 4.9, 21, 4.9, 21, -28.7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qopee"]
+size = Vector2(21, 61)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o7eau"]
+size = Vector2(22, 60)
 
 [node name="door" type="Node2D"]
+script = ExtResource("3_ec11f")
 
-[node name="Door" type="Area2D" parent="."]
-position = Vector2(-749, -539)
-collision_layer = 8
-collision_mask = 8
-
-[node name="Textures" type="Node2D" parent="Door"]
-
-[node name="door_open_animation" type="AnimatedSprite2D" parent="Door/Textures"]
-position = Vector2(749, 541)
+[node name="animation" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 2)
 sprite_frames = SubResource("SpriteFrames_cuqtx")
 animation = &"door_open"
 
-[node name="door_real_colision_area" type="StaticBody2D" parent="Door"]
-visible = false
-position = Vector2(276, 329)
+[node name="door_colisions" type="StaticBody2D" parent="."]
+position = Vector2(-473, -210)
 
-[node name="door_real_colision" type="CollisionShape2D" parent="Door/door_real_colision_area"]
-position = Vector2(473, 210.5)
-shape = SubResource("RectangleShape2D_k63gp")
+[node name="door_mask" type="AnimationPlayer" parent="door_colisions"]
+reset_on_save = false
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_x8fw5")
+}
+speed_scale = 0.9
 
-[node name="Area2D" type="Area2D" parent="Door/door_real_colision_area"]
-light_mask = 32
-position = Vector2(388, 217)
-script = ExtResource("3_ec11f")
+[node name="colision_up" type="CollisionPolygon2D" parent="door_colisions"]
+position = Vector2(473, 168.5)
+polygon = PackedVector2Array(-29, -2.5, 29, -2.5, 29, 41.5, -29, 41.5)
 
-[node name="enter_door_cycle_colision" type="CollisionShape2D" parent="Door/door_real_colision_area/Area2D"]
-position = Vector2(84, -6)
-shape = SubResource("CircleShape2D_axr4c")
+[node name="colision_down" type="CollisionPolygon2D" parent="door_colisions"]
+position = Vector2(475, 257)
+polygon = PackedVector2Array(27, -47, 27, 1, -31, 1, -31, -47)
 
-[node name="light_mask_close" type="LightOccluder2D" parent="Door"]
-light_mask = 2
-visibility_layer = 2
-position = Vector2(749, 539)
-scale = Vector2(1.42857, 1.42857)
-occluder = SubResource("OccluderPolygon2D_w633k")
-occluder_light_mask = 1048575
-
-[node name="light_mask_open_1" type="LightOccluder2D" parent="Door"]
-visible = false
-position = Vector2(749, 501)
+[node name="light_mask_up" type="LightOccluder2D" parent="door_colisions"]
+position = Vector2(473, 172)
 scale = Vector2(1.42857, 1.42857)
 occluder = SubResource("OccluderPolygon2D_abypc")
 occluder_light_mask = 1048575
 
-[node name="light_mask_open_2" type="LightOccluder2D" parent="Door"]
-visible = false
-position = Vector2(748, 580)
+[node name="light_mask_down" type="LightOccluder2D" parent="door_colisions"]
+position = Vector2(472, 251)
 scale = Vector2(1.42857, 1.42857)
 occluder = SubResource("OccluderPolygon2D_bk2a6")
 occluder_light_mask = 1048575
 
-[connection signal="body_entered" from="Door/door_real_colision_area/Area2D" to="Door/door_real_colision_area/Area2D" method="_on_body_entered"]
-[connection signal="body_exited" from="Door/door_real_colision_area/Area2D" to="Door/door_real_colision_area/Area2D" method="_on_body_exited"]
+[node name="opener_area" type="Area2D" parent="."]
+light_mask = 32
+position = Vector2(-85, 7)
+
+[node name="colision_1" type="CollisionShape2D" parent="opener_area"]
+position = Vector2(45, 8.5)
+shape = SubResource("RectangleShape2D_qopee")
+
+[node name="colision_2" type="CollisionShape2D" parent="opener_area"]
+position = Vector2(125, 9)
+shape = SubResource("RectangleShape2D_o7eau")

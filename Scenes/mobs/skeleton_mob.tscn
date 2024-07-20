@@ -379,8 +379,8 @@ size = Vector2(34, 42)
 [sub_resource type="CircleShape2D" id="CircleShape2D_06mtc"]
 radius = 136.529
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_6pg5k"]
-radius = 891.114
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_vt04j"]
+polygon = PackedVector2Array(-11, -26, -7, -20, -7, -16, -12, -14, -11, -8, -32, -8, -30, -14, -35, -15, -35, -20, -31, -26, -32, -31, -32, -36, -28, -40, -15, -40, -11, -36, -10, -31)
 
 [node name="skeleton" type="CharacterBody2D"]
 collision_layer = 15
@@ -484,12 +484,7 @@ zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 script = ExtResource("6_uj3cm")
 
-[node name="far_detection" type="Area2D" parent="."]
-position = Vector2(-9.09495e-13, 7.15256e-07)
-scale = Vector2(1.42857, 1.42857)
-collision_layer = 7
-collision_mask = 7
-
-[node name="enemy_far_colision" type="CollisionShape2D" parent="far_detection"]
-position = Vector2(7.62939e-06, 0)
-shape = SubResource("CircleShape2D_6pg5k")
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2(21, 25)
+occluder = SubResource("OccluderPolygon2D_vt04j")
+occluder_light_mask = 1023

@@ -32,7 +32,7 @@ var health_value: int
 var random_num: int
 var speed: float
 var timer:bool = false
-var state = IDLE
+var state = PATROL
 var player = null
 var last_movement = 2
 var null_vector = Vector2(0,0)
@@ -56,8 +56,6 @@ func _ready():
 	$damage_area.connect("area_entered",DamageArea_enter)
 	#$damage_area.connect("area_exited",DamageArea_exit)
 	
-	$far_detection.connect("body_entered",PatrolArea_enter)
-	$far_detection.connect("body_exited",PatrolArea_exit)
 	
 func _physics_process(_delta):
 	health_bar_conrol(SET)
@@ -77,20 +75,19 @@ func _physics_process(_delta):
 		CHASE:
 			speed = standart_speed
 			global.action_tougle = false
-			nav.target_position = global.get_player_pos()
+			nav.target_position = player.global_position
 			direction = nav.target_position - global_position
 			velocity = velocity.lerp(direction.normalized() * speed, acceleration * _delta) 
 			
-			nav.get_next_path_position()
+			#nav.get_next_path_position()
 			
 			animation("walk")
 			move_and_slide()
-			
-			
+		
 			temp_state = CHASE
 		ATTACK:
 			speed = 0
-			move(global.get_player_pos(), _delta, speed)
+			move(player.global_position, _delta, speed)
 			attack()
 			animation("idle")
 			temp_state = ATTACK
@@ -100,8 +97,9 @@ func _physics_process(_delta):
 			var incoming_damage_throw = global.player_attack("damage_throw", 0, "get")
 			GSet_health(GSet_health(0,GET) - incoming_damage,SET)
 			#print(damage_vector(_delta))
-			move(damage_vector(), 0.6, speed)
+			move(damage_vector(), 0.6 * incoming_damage_throw, speed)
 			animation("damage")
+			
 			state = temp_state
 		DEATH:
 			animation("death")
@@ -135,7 +133,7 @@ func animation(condition):
 	if state == PATROL:
 		dir = rad_to_deg(new_vector.angle())
 	else:
-		dir = rad_to_deg((global.get_player_pos() - enemy.get_global_position()).angle())
+		dir = rad_to_deg((player.global_position - enemy.get_global_position()).angle())
 		#print(round(dir))
 	var direction = round(dir)
 	#print(direction)
@@ -190,17 +188,17 @@ func animation(condition):
 				1:
 					enemy_animation.flip_h = false
 					enemy_animation.play("skeleton_damage_side")
-					await get_tree().create_timer(1).timeout 
+					await get_tree().create_timer(2).timeout 
 				2:
 					enemy_animation.flip_h = true
 					enemy_animation.play("skeleton_damage_side")
-					await get_tree().create_timer(1).timeout 
+					await get_tree().create_timer(2).timeout 
 				3:
 					enemy_animation.play("skeleton_damage_up")
-					await get_tree().create_timer(1).timeout 
+					await get_tree().create_timer(2).timeout 
 				4:
 					enemy_animation.play("skeleton_damage_down")
-					await get_tree().create_timer(1).timeout 
+					await get_tree().create_timer(2).timeout 
 				_:
 					enemy_animation.stop()
 		"death":
@@ -263,7 +261,7 @@ func attack():
 
 	
 func damage_vector() -> Vector2:
-	var player_position = global.get_player_pos()
+	var player_position = player.global_position
 	var enemy_position = enemy.global_position
 	var knockback_distance = 20  # Установите нужное значение расстояния
 	var direction: Vector2 = (enemy_position - player_position).normalized()
@@ -310,14 +308,6 @@ func AttackArea_exit(body):
 	if str(body.name) == "player":
 		state = CHASE
 		
-func PatrolArea_enter(body):
-	if str(body.name) == "player":
-		state = PATROL
-		
-func PatrolArea_exit(body):
-	if str(body.name) == "player":
-		state = IDLE
-
 		
 func DamageArea_enter(area):
 	if str(area.name) == "Hands":

@@ -8,7 +8,7 @@ var heat_tougle:bool = false
 var buttons_lock: bool = false
 
 static var drag_tougle:bool = false
-static var brightness:float = 1
+static var brightness:float = 0.4
 static var ret: bool = false
 static var attack_block:bool = false
 

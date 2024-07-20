@@ -14,6 +14,7 @@ config/name="Ping"
 run/main_scene="res://Scenes/main1.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://assets/interface/pingicon.png"
+config/windows_native_icon="res://pingicon.ico"
 
 [autoload]
 
@@ -131,6 +132,9 @@ enter={
 
 [layer_names]
 
+2d_render/layer_1="player"
+2d_render/layer_2="objects"
+2d_render/layer_3="creatures"
 2d_physics/layer_1="ground"
 2d_physics/layer_2="walls"
 2d_physics/layer_3="creatures"
@@ -140,6 +144,8 @@ enter={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/lossless_compression/force_png=true
+textures/webp_compression/lossless_compression_factor=100.0
 shader_compiler/shader_cache/compress=false
 anti_aliasing/screen_space_roughness_limiter/enabled=false
 lightmapping/primitive_meshes/texel_size=0.999

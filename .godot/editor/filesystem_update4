@@ -1,4 +1,3 @@
-res://Scenes/mobs/player_mob.tscn
 res://Scenes/main1.tscn
 res://Scripts/inventory_scripts/Slot.gd
 res://Scripts/CollisionShape2D.gd
@@ -7,10 +6,12 @@ res://Scripts/player_movement_script.gd
 res://Scripts/skeleton_script.gd
 res://Thems/console_stylebox_0.tres
 res://Scenes/objects/lamp_object.tscn
+res://Scenes/mobs/player_mob.tscn
 res://Scenes/mobs/skeleton_mob.tscn
 res://Scenes/shop.tscn
 res://Scenes/item.tscn
-res://Scenes/shop/shop_item.tscn
-res://Scenes/stop_screen/keybind_slot.tscn
-res://Scenes/stop_screen.tscn
 res://debug_scenes/battle_debug_scene.tscn
+res://Scenes/objects/door_object.tscn
+res://Scenes/hud.tscn
+res://Scenes/stop_screen.tscn
+res://Scenes/shop/shop_item.tscn
