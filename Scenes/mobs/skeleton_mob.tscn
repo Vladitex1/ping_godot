@@ -1,11 +1,10 @@
-[gd_scene load_steps=56 format=3 uid="uid://ch2tgjjy03a8s"]
+[gd_scene load_steps=54 format=3 uid="uid://ch2tgjjy03a8s"]
 
 [ext_resource type="Script" path="res://Scripts/skeleton_script.gd" id="1_uml16"]
 [ext_resource type="Texture2D" uid="uid://pl513b6xupyn" path="res://assets/interface/hb1.png" id="2_dgof6"]
 [ext_resource type="Texture2D" uid="uid://ckakw481uj45i" path="res://assets/interface/health.png" id="3_s44k5"]
 [ext_resource type="FontFile" uid="uid://8atws0pc47sn" path="res://fonts/Font1.ttf" id="4_gsiy2"]
 [ext_resource type="Texture2D" uid="uid://5hbacs6p7kj0" path="res://assets/Tilemap/Skeleton.png" id="5_3k3yb"]
-[ext_resource type="Script" path="res://Scripts/Camera.gd" id="6_uj3cm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_joesn"]
 atlas = ExtResource("5_3k3yb")
@@ -367,20 +366,17 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_40nvm"]
 size = Vector2(8.21185, 10.4956)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_us40i"]
-size = Vector2(50.0001, 53.0001)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_bt8vo"]
-radius = 20.025
+radius = 21.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dnpgc"]
-size = Vector2(34, 42)
+size = Vector2(24, 30)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_06mtc"]
 radius = 136.529
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_vt04j"]
-polygon = PackedVector2Array(-11, -26, -7, -20, -7, -16, -12, -14, -11, -8, -32, -8, -30, -14, -35, -15, -35, -20, -31, -26, -32, -31, -32, -36, -28, -40, -15, -40, -11, -36, -10, -31)
+polygon = PackedVector2Array(12, 15, -12, 15, -12, -15, 12, -15)
 
 [node name="skeleton" type="CharacterBody2D"]
 collision_layer = 15
@@ -394,7 +390,7 @@ debug_enabled = true
 
 [node name="health_bar" type="TextureProgressBar" parent="."]
 visible = false
-z_index = 1
+z_index = 3
 custom_minimum_size = Vector2(80, 16)
 offset_left = -34.2857
 offset_top = -44.2857
@@ -411,7 +407,7 @@ texture_progress_offset = Vector2(24, 11)
 visible = false
 light_mask = 16
 visibility_layer = 16
-z_index = 2
+z_index = 3
 anchors_preset = -1
 anchor_left = -0.0276458
 anchor_top = -0.00262965
@@ -434,19 +430,12 @@ position = Vector2(0, 9.53674e-07)
 scale = Vector2(2.0625, 2.0625)
 sprite_frames = SubResource("SpriteFrames_tswkv")
 animation = &"skeleton_idle_down"
+frame_progress = 0.0804547
 
 [node name="Skeleton" type="CollisionShape2D" parent="."]
 position = Vector2(-4.76837e-07, 4.76837e-07)
 scale = Vector2(2.94, 2.94)
 shape = SubResource("RectangleShape2D_40nvm")
-
-[node name="attack_area" type="Area2D" parent="."]
-position = Vector2(1.90735e-06, -9.53674e-07)
-scale = Vector2(0.999999, 0.999999)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_area"]
-position = Vector2(-2.62261e-06, 0.500002)
-shape = SubResource("RectangleShape2D_us40i")
 
 [node name="enemy_hands" type="Area2D" parent="."]
 
@@ -477,14 +466,6 @@ z_as_relative = false
 position = Vector2(3.8147e-06, 0)
 shape = SubResource("CircleShape2D_06mtc")
 
-[node name="Camera2D" type="Camera2D" parent="detection/enemy_detection_colision"]
-position = Vector2(-1.19209e-07, 1.19209e-07)
-scale = Vector2(0.999999, 0.999999)
-zoom = Vector2(2, 2)
-position_smoothing_enabled = true
-script = ExtResource("6_uj3cm")
-
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-position = Vector2(21, 25)
 occluder = SubResource("OccluderPolygon2D_vt04j")
-occluder_light_mask = 1023
+occluder_light_mask = 8

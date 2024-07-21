@@ -17,9 +17,9 @@ func _process(_delta):
 	
 	var fps = Engine.get_frames_per_second()
 	FPS_lable.text = "fps: "+str(fps)
-	stamina_bar.value = global.PlayerIndicators("stamina", 0, "get")
-	health_bar.value = global.PlayerIndicators("hp", 0, "get")
-	healh_count_lable.text = "health - "+str(global.PlayerIndicators("hp", 0, "get"))
-	coins_count_lable.text = str(global.PlayerIndicators("coin", 0, "get"))
-	keys_count_lable.text = str(global.PlayerIndicators("key", 0, "get"))
+	stamina_bar.value = global.player_indicators("stamina", 0, "get")
+	health_bar.value = global.player_indicators("hp", 0, "get")
+	healh_count_lable.text = "health - "+str(global.player_indicators("hp", 0, "get"))
+	coins_count_lable.text = str(global.player_indicators("coin", 0, "get"))
+	keys_count_lable.text = str(global.player_indicators("key", 0, "get"))
 	#weapon_texture.texture =

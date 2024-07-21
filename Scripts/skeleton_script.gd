@@ -10,7 +10,7 @@ extends CharacterBody2D
 @onready var nav: NavigationAgent2D = $NavigationAgent2D
 enum {
 	PATROL, #0
-	CHASE, #1
+	PURSUIT, #1
 	ATTACK, #2
 	DAMAGE, #3
 	DEATH, #4
@@ -22,110 +22,100 @@ enum {
 const standart_speed: float = 100
 
 const max_health: int = 150
-const attack_strange: int = -5
-const attack_throw: int = -1000
-const attack_speed: float = 0.5
-const cooldown_speed: float = 1
+const attack_strange: int = 5
+const attack_throw: int = 30
+const attack_speed: float = 1
+const cooldown_time: float = 1
 const acceleration = 5
 
+const debug_freeze = true
+
+var damage_final_vector: Vector2
 var health_value: int
 var random_num: int
 var speed: float
 var timer:bool = false
-var state = PATROL
+var state = IDLE
 var player = null
 var last_movement = 2
 var null_vector = Vector2(0,0)
 var direction = Vector3()
 var temp_state
-var damaged = true
+var damage_area = false
+var attack_area = false
 var patrol_timer = false
 var new_vector: Vector2
 var IFT = null
 #damage_zone_detection
 func _ready():
-	hands.get_child(0).disabled = true
 	health_value = max_health
 	health_bar.max_value = max_health
-	$attack_area.connect("body_entered",AttackArea_enter)
-	$attack_area.connect("body_exited",AttackArea_exit)
-	
-	$detection.connect("body_entered",ChaseArea_enter)
-	$detection.connect("body_exited",ChaseArea_exit)
+	$enemy_hands.connect("body_entered",AttackArea_enter)
+	$enemy_hands.connect("body_exited",AttackArea_exit)
+
+	$detection.connect("body_entered",PursuitArea_enter)
+	$detection.connect("body_exited",PursuitArea_exit)
 	
 	$damage_area.connect("area_entered",DamageArea_enter)
-	#$damage_area.connect("area_exited",DamageArea_exit)
+	$damage_area.connect("area_exited",DamageArea_exit)
 	
 	
 func _physics_process(_delta):
 	health_bar_conrol(SET)
-	GSet_health(0,GET)
+	
 	#print(global.player_attack("damage", 0, "get"))
-			
-	match state:
-		PATROL:
-			speed = standart_speed
-			if attack_timer.is_stopped() == true:
-				attack_timer.start(3)
-				new_vector = get_circle_position()
-								
-			move(new_vector, _delta, speed)
-			
-			temp_state = PATROL
-		CHASE:
-			speed = standart_speed
-			global.action_tougle = false
-			nav.target_position = player.global_position
-			direction = nav.target_position - global_position
-			velocity = velocity.lerp(direction.normalized() * speed, acceleration * _delta) 
-			
-			#nav.get_next_path_position()
-			
-			animation("walk")
-			move_and_slide()
-		
-			temp_state = CHASE
-		ATTACK:
-			speed = 0
-			move(player.global_position, _delta, speed)
-			attack()
-			animation("idle")
-			temp_state = ATTACK
-		DAMAGE:
-			speed = 0
-			var incoming_damage = global.player_attack("damage", 0, "get")
-			var incoming_damage_throw = global.player_attack("damage_throw", 0, "get")
-			GSet_health(GSet_health(0,GET) - incoming_damage,SET)
-			#print(damage_vector(_delta))
-			move(damage_vector(), 0.6 * incoming_damage_throw, speed)
-			animation("damage")
-			
-			state = temp_state
-		DEATH:
-			animation("death")
-			if enemy_animation.get_frame() == 3:
-				global.PlayerIndicators("coin", 1, "set")	
-				$".".queue_free()
-		IDLE:
-			animation("idle")
-			temp_state = IDLE
+	#print(state)
+	
+	if GSet_health(0,GET) <= 0:
+		death()
+	elif global.player_attack("damage", 0, "get") > 0 and damage_area:
+		damage()
+		state = DAMAGE
+	elif attack_area and cooldown_timer.time_left < 0.1:
+		attack()
+	else:
+		global.player_damage("damage",0,"set")
+		global.player_damage("damage_throw",0,"set")
+		match state:
+			PATROL:
+				speed = standart_speed
+				if attack_timer.time_left < 0.1:
+					attack_timer.start(1)
+					new_vector = get_circle_position()			
+				move(new_vector, _delta, speed)
+
+			PURSUIT:
+				speed = standart_speed
+				global.action_tougle = false
+				nav.target_position = player.global_position
+				direction = nav.target_position - global_position
+				velocity = velocity.lerp(direction.normalized() * speed, acceleration * _delta) 
+				nav.get_next_path_position()
+				animation("walk")
+				move_and_slide()
+			DAMAGE:
+				
+				if !move(damage_final_vector,_delta,speed):
+					pass
+				else:	
+					state = PURSUIT
+							
+			IDLE:
+				animation("idle")
 
 ###############special######################
 
 func move(target, _delta, spd):
-	var direction = velocity + target
-	velocity = velocity.lerp(direction.normalized() * speed, acceleration * _delta) 
-	animation("walk")
-	move_and_slide()
+	#print(target)
+	nav.target_position = target
+	nav.get_next_path_position()
+	velocity = position.direction_to(target) * spd
+	if position.distance_to(target) > 10:
+		move_and_slide()
+		return false
+	return true
 	
-func GSet_health(Count:int,GS):
-	if health_value <= 0:
-		state = DEATH
-	match GS:
-		GET:
-			return health_value
-		SET:
-			health_value = Count
+	
 
 func animation(condition):
 	var walk = 0
@@ -133,32 +123,28 @@ func animation(condition):
 	if state == PATROL:
 		dir = rad_to_deg(new_vector.angle())
 	else:
-		dir = rad_to_deg((player.global_position - enemy.get_global_position()).angle())
-		#print(round(dir))
+		dir = rad_to_deg((global.get_player_pos() - enemy.get_global_position()).angle())
 	var direction = round(dir)
-	#print(direction)
 
-	#print(state)
-	#print(direction)
+	if direction <= 45 and direction >= -45: #right
+		walk = 1
+		enemy_animation.flip_h = false
 	if direction <= -135 or direction >= 135: #left
 		walk = 2
-	#elif direction <= 45: #right 
+		enemy_animation.flip_h = true
 	if direction >= -135 and direction <= -45: #up
 		walk = 3
 	if direction <= 135 and direction >= 45: #down
 		walk = 4
-	if direction <= 45 and direction >= -45: #right
-		walk = 1
+
 
 	match condition:
 		"walk":
 			match walk:
 				1:
-					enemy_animation.flip_h = false
 					enemy_animation.play("skeleton_walk_side")
 					last_movement = 1
 				2:
-					enemy_animation.flip_h = true
 					enemy_animation.play("skeleton_walk_side")
 					last_movement = 2
 				3:
@@ -167,61 +153,45 @@ func animation(condition):
 				4:
 					enemy_animation.play("skeleton_walk_down")
 					last_movement = 4
-				_:
-					enemy_animation.stop()
 		"idle":
 			match last_movement:
 				1:
-					enemy_animation.flip_h = false
 					enemy_animation.play("skeleton_idle_side")
 				2:
-					enemy_animation.flip_h = true
 					enemy_animation.play("skeleton_idle_side")
 				3:
 					enemy_animation.play("skeleton_idle_up")
 				4:
 					enemy_animation.play("skeleton_idle_down")
-				_:
-					enemy_animation.stop()
 		"damage":
 			match last_movement:
 				1:
-					enemy_animation.flip_h = false
 					enemy_animation.play("skeleton_damage_side")
-					await get_tree().create_timer(2).timeout 
 				2:
-					enemy_animation.flip_h = true
 					enemy_animation.play("skeleton_damage_side")
-					await get_tree().create_timer(2).timeout 
 				3:
 					enemy_animation.play("skeleton_damage_up")
-					await get_tree().create_timer(2).timeout 
 				4:
 					enemy_animation.play("skeleton_damage_down")
-					await get_tree().create_timer(2).timeout 
-				_:
-					enemy_animation.stop()
+			await get_tree().create_timer(2).timeout 
 		"death":
 			match last_movement:
 				1:
 					enemy_animation.flip_h = false
 					enemy_animation.play("skeleton_death_side")
-					await get_tree().create_timer(1).timeout 
+					await get_tree().create_timer(2).timeout
 				2:
 					enemy_animation.flip_h = true
 					enemy_animation.play("skeleton_death_side")
-					await get_tree().create_timer(1).timeout 
+					await get_tree().create_timer(2).timeout
 				3:
 					enemy_animation.play("skeleton_death_up")
-					await get_tree().create_timer(1).timeout 
+					await get_tree().create_timer(2).timeout
 				4:
 					enemy_animation.play("skeleton_death_down")
-					await get_tree().create_timer(1).timeout 
-				_:
-					enemy_animation.stop()
+					await get_tree().create_timer(2).timeout
+			 
 
-func out_state_conrol(setter):
-	state = setter
 ###############health_bar_conrol######################
 
 func health_bar_conrol(GS):
@@ -241,36 +211,94 @@ func health_bar_conrol(GS):
 				health_bar_lable.visible = false
 				health_bar.visible = false
 
-###############atack######################
+func GSet_health(Count:int,GS):
+	match GS:
+		GET:
+			return health_value
+		SET:
+			health_value = Count
 
-func attack():
-	
-	#print(attack_timer.time_left)
-	#print(cooldown_timer.time_left)
-	if attack_timer.time_left != 0:
-		hands.get_child(0).disabled = true
-	if attack_timer.time_left > 0.1:
-		cooldown_timer.start(cooldown_speed)
-		hands.get_child(0).disabled = false
-	if cooldown_timer.time_left == 0:
-		attack_timer.start(attack_speed)
-		
 
-		
+
 ###############damage######################
 
-	
 func damage_vector() -> Vector2:
-	var player_position = player.global_position
+	var str: String
+	var player_position = global.get_player_pos()
 	var enemy_position = enemy.global_position
-	var knockback_distance = 20  # Установите нужное значение расстояния
-	var direction: Vector2 = (enemy_position - player_position).normalized()
-	var knockback_vector: Vector2 = enemy_position + direction * knockback_distance#s * knockback_force
+	var dist = global.player_attack("damage_throw",0,"get")
+	var throw: Vector2 = Vector2(dist,dist)
+	var dir: Vector2 = (player_position - enemy_position).normalized()
+	var vector_from = Vector2(snapped(dir[0],1),snapped(dir[1],1))
+	
+	var num1 = vector_from[0] * throw[0]
+	var num2 = vector_from[1] * throw[0]
+	
+	var delta = Vector2(num1,num2) * -1
+	var knockback_vector: Vector2 = enemy_position + delta
+	
+	'match vector_from:
+		Vector2(0,-1): ##Вверх
+			str = "Вверх"
+		Vector2(1,-1): #Право-Вверх
+			str = "Право-Вверх"
+		Vector2(-1,-1): #Лево-Вверх
+			str = "Лево-Вверх"
+		Vector2(1,0): ##Право
+			str = "право"
+		Vector2(-1,0): ##Лево
+			str = "лево"
+		Vector2(0,1): ##Низ
+			str = "снизу"
+		Vector2(1,1): #Право-Низ
+			str = "право-низ"
+		Vector2(-1,1): #Лево-Низ
+			str = "лево-низ"
+			
+	print("____________________________")
+	print("Удар пришелся:   ",str)
+	debprint("player_pos    ",player_position)
+	debprint("enemy_position",enemy_position)
+	debprint("новый вектор  ",knockback_vector)
+	debprint("delta         ",delta)
+	debprint("vector        ", Vector2(snapped(dir[0],1),snapped(dir[1],1)))
+	print("____________________________")'
+	
 	return knockback_vector
+	
+	
+	
+func debprint(first,second):
+	print(first,": ",second)
+	#debprint("",)
+	
+###############states######################
 
-	
-	
-###############chase######################o
+func state_switcher(object: String,in_or_out: String):
+
+	match in_or_out:
+		"in":
+			match object:
+				"player":
+					attack_area = true
+				"hands":
+					damage_area = true
+				"pursuit":
+					state = PURSUIT
+				_:
+					pass
+		"out":
+			match object:
+				"player":
+					attack_area = false
+				"hands":
+					damage_area = false
+				"pursuit":
+					state = PATROL
+				_:
+					pass
+	#print(state)
+
 ###############patrol######################
 func get_circle_position():
 	var min = -180
@@ -284,37 +312,67 @@ func get_circle_position():
 	var vector = vector_from_angle
 	return vector
 	
+
+#################states########################
+func death():
+	animation("death")
+	if enemy_animation.get_frame() == 3:
+		global.player_indicators("coin", 1, "set")	
+		$".".queue_free()
+
+
+func attack():
+	#print("атака")
+	cooldown_timer.start(cooldown_time)
+	global.player_damage("damage",attack_strange,"set")
+	global.player_damage("damage_throw",attack_throw,"set")
+
 	
+func damage():
+	var incoming_damage = global.player_attack("damage", 0, "get")
+	var incoming_damage_throw = global.player_attack("damage_throw", 0, "get")
+	GSet_health(GSet_health(0,GET) - incoming_damage,SET)
+	damage_final_vector = damage_vector()
+	animation("damage")
+	if debug_freeze == true:
+		state = IDLE
+	else:
+		state = PURSUIT
+
+
 ###############connections######################		
 
-func ChaseArea_enter(body):
-	if str(body.name) == "player":
-		player = body
-		state = CHASE
-		print("Enter_enemy_col - skeleton_script")
 
-func ChaseArea_exit(body):
+
+func PursuitArea_enter(body):
 	if str(body.name) == "player":
+		state_switcher("pursuit","in")
+		player = body
+		print(body.name + " enter_enemy_col - skeleton_script")
+
+func PursuitArea_exit(body):
+	if str(body.name) == "player":
+		state_switcher("pursuit","out")
 		player = null
-		state = PATROL
-		print("Exit_enemy_col - skeleton_script")
+		print(body.name + " exit_enemy_col - skeleton_script")
 
 func AttackArea_enter(body):
 	if str(body.name) == "player":
-		IFT = true
-		state = ATTACK
+		state_switcher(body.name,"in")
+		print(body.name + " attack_area_in - skeleton_script")
 
 func AttackArea_exit(body):
 	if str(body.name) == "player":
-		state = CHASE
-		
+		state_switcher(body.name,"out")
+		print(body.name + " attack_area_out - skeleton_script")
 		
 func DamageArea_enter(area):
-	if str(area.name) == "Hands":
-		state = DAMAGE
+	if str(area.name) == "hands":
+		state_switcher("hands","in")
+		print(area.name + " damage_area_in - skeleton_script")
 
 func DamageArea_exit(area):
-	if str(area.name) == "Hands":
-		state = temp_state
-	
+	if str(area.name) == "hands":
+		state_switcher("hands","out")
+		print(area.name + " damage_area_out - skeleton_script")
 

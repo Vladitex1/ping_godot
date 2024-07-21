@@ -1,3 +1,4 @@
+NavigationAgent2D
 WorldEnvironment
 Window
 AcceptDialog
@@ -12,4 +13,3 @@ CollisionPolygon2D
 LightOccluder2D
 AnimationPlayer
 NavigationRegion2D
-NavigationAgent2D

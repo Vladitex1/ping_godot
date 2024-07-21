@@ -26,11 +26,11 @@ func tougle():
 			global.loading_tougle = true
 			animation(door_tougle)
 		false:
-			if global.PlayerIndicators("key", 0, "get") >= 1:
+			if global.player_indicators("key", 0, "get") >= 1:
 				global.loading_tougle = true
-				global.PlayerIndicators("key", -1, "set")
+				global.player_indicators("key", -1, "set")
 				animation(door_tougle)
-			elif global.PlayerIndicators("key", 0, "get") <= 0:
+			elif global.player_indicators("key", 0, "get") <= 0:
 				pass
 					
 	await get_tree().create_timer(1).timeout 

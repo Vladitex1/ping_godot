@@ -67,8 +67,8 @@ func _process(_delta):
 	cost_lable.visible = state
 	sell_cost_lable.visible = state
 	
-	coins_lable.text = str(global.PlayerIndicators("coin", 0, "get"))
-	keys_lable.text = str(global.PlayerIndicators("key", 0, "get"))
+	coins_lable.text = str(global.player_indicators("coin", 0, "get"))
+	keys_lable.text = str(global.player_indicators("key", 0, "get"))
 	cost = itemlist.itemlist[selected_item_ID][0] * count
 	sell_cost = itemlist.itemlist[selected_item_ID][3] * count
 	cost_lable.text = str(cost)
@@ -117,46 +117,46 @@ func plus_button():
 	
 func buttons_control():
 	####sell
-	if global.PlayerIndicators("key",0,"get") < count and selected_item_ID == 1:
+	if global.player_indicators("key",0,"get") < count and selected_item_ID == 1:
 		sell_button.disabled = true
-	elif global.PlayerIndicators("hp",0,"get") < count*30 and selected_item_ID == 3:
+	elif global.player_indicators("hp",0,"get") < count*30 and selected_item_ID == 3:
 		sell_button.disabled = true
 	else:
 		sell_button.disabled = false
 	###buy
-	if global.PlayerIndicators("coin",0,"get") < itemlist.itemlist[selected_item_ID][0]*count or global.PlayerIndicators("coin",0,"get") <= 0:
+	if global.player_indicators("coin",0,"get") < itemlist.itemlist[selected_item_ID][0]*count or global.player_indicators("coin",0,"get") <= 0:
 		buy_button.disabled = true
-	elif global.PlayerIndicators("coin",0,"get") < itemlist.itemlist[selected_item_ID][0]*count and selected_item_ID == 3:
+	elif global.player_indicators("coin",0,"get") < itemlist.itemlist[selected_item_ID][0]*count and selected_item_ID == 3:
 		buy_button.disabled = true
-	elif global.PlayerIndicators("coin",0,"get") > 0:
+	elif global.player_indicators("coin",0,"get") > 0:
 		buy_button.disabled = false
 		
 func buy_button_func():###################дописать
 	match selected_item_ID:
 		1:
-			global.PlayerIndicators("key",count,"set")
-			global.PlayerIndicators("coin",itemlist.itemlist[selected_item_ID][0]*-1,"set")
+			global.player_indicators("key",count,"set")
+			global.player_indicators("coin",itemlist.itemlist[selected_item_ID][0]*-1,"set")
 		2:
 			pass
 		3:
-			global.PlayerIndicators("hp",count*25,"set")
-			global.PlayerIndicators("coin",itemlist.itemlist[selected_item_ID][0]*-1,"set")
+			global.player_indicators("hp",count*25,"set")
+			global.player_indicators("coin",itemlist.itemlist[selected_item_ID][0]*-1,"set")
 		_:
-			global.PlayerIndicators("coin",itemlist.itemlist[selected_item_ID][0]*-1,"set")
+			global.player_indicators("coin",itemlist.itemlist[selected_item_ID][0]*-1,"set")
 	
 func sell_button_func():###################дописать
 	match selected_item_ID:
 		1:
-			global.PlayerIndicators("key",count*-1,"set")
-			global.PlayerIndicators("coin",itemlist.itemlist[selected_item_ID][3]*count,"set") 
+			global.player_indicators("key",count*-1,"set")
+			global.player_indicators("coin",itemlist.itemlist[selected_item_ID][3]*count,"set") 
 		2:
 			pass
 		3:
-			global.PlayerIndicators("hp",count*-30,"set")
-			global.PlayerIndicators("coin",itemlist.itemlist[selected_item_ID][3]*count,"set")
+			global.player_indicators("hp",count*-30,"set")
+			global.player_indicators("coin",itemlist.itemlist[selected_item_ID][3]*count,"set")
 			
 		_:
-			global.PlayerIndicators("coin",itemlist.itemlist[selected_item_ID][3]*count,"set")
+			global.player_indicators("coin",itemlist.itemlist[selected_item_ID][3]*count,"set")
 			
 func exit_button():
 	print("shop_exit - shop_brain")

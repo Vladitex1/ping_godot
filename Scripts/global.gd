@@ -20,6 +20,8 @@ static var MaxStamina: int
 static var PlayerKeys: int
 static var PlayerCoins: int
 
+static var Attack_Strange: int
+static var Attack_Throw: int
 static var Damage: int
 static var Damage_Throw: int
 static var current_enemy_attack_id: int
@@ -93,6 +95,22 @@ func player_attack(namestr, delta, GSET):
 		"set":
 			match namestr:
 				"damage":
+					Attack_Strange = delta
+				"damage_throw":
+					Attack_Throw = delta
+		"get":
+			match namestr:
+				"damage":
+					return Attack_Strange
+				"damage_throw":
+					return Attack_Throw
+
+func player_damage(namestr, delta, GSET):
+
+	match GSET:
+		"set":
+			match namestr:
+				"damage":
 					Damage = delta
 				"damage_throw":
 					Damage_Throw = delta
@@ -103,8 +121,7 @@ func player_attack(namestr, delta, GSET):
 				"damage_throw":
 					return Damage_Throw
 
-
-func PlayerIndicators(namestr, delta, GSet):
+func player_indicators(namestr, delta, GSet):
 	temphp = PlayerHealth
 	tempCoins = PlayerCoins
 	tempKeys = PlayerKeys

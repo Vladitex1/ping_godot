@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://do42rlis6it6d"]
+[gd_scene load_steps=11 format=3 uid="uid://do42rlis6it6d"]
 
 [ext_resource type="Script" path="res://Scripts/level/darkness.gd" id="1_wkv1h"]
 [ext_resource type="Texture2D" uid="uid://drjcqu76ga1a2" path="res://assets/Tilemap/Tilemap1.png" id="3_yi0xa"]
 [ext_resource type="PackedScene" uid="uid://3nh6n7vhnc8h" path="res://Scenes/mobs/player_mob.tscn" id="4_r16yv"]
-[ext_resource type="PackedScene" uid="uid://ch2tgjjy03a8s" path="res://Scenes/mobs/skeleton_mob.tscn" id="5_f8kjb"]
 [ext_resource type="Texture2D" uid="uid://c56bavk2ib8of" path="res://assets/LVL/upper_for_door.png" id="6_1rop5"]
 [ext_resource type="PackedScene" uid="uid://chsnegkawbbdb" path="res://Scenes/objects/door_object.tscn" id="7_s40s2"]
 [ext_resource type="PackedScene" uid="uid://dq6ushunyiy23" path="res://Scenes/objects/shop_object.tscn" id="9_bb57y"]
@@ -126,22 +125,12 @@ layer_2/name = "ground"
 layer_2/z_index = -1
 layer_2/tile_data = PackedInt32Array(65537, 1, 3, 65538, 1, 3, 65539, 1, 3, 65540, 1, 3, 65541, 1, 3, 65542, 1, 3, 65543, 1, 3, 65544, 1, 3, 131080, 1, 3, 196616, 1, 3, 196615, 1, 3, 131079, 1, 3, 131078, 1, 3, 131077, 1, 3, 131076, 1, 3, 131075, 1, 3, 131074, 1, 3, 131073, 1, 3, 262145, 1, 3, 262146, 1, 3, 196610, 1, 3, 196611, 1, 3, 196612, 1, 3, 196613, 1, 3, 196614, 1, 3, 262147, 1, 3, 262148, 1, 3, 262149, 1, 3, 262150, 1, 3, 262151, 1, 3, 262152, 1, 3, 196609, 1, 3, 327681, 1, 3, 327682, 1, 3, 327683, 1, 3, 327684, 1, 3, 327685, 1, 3, 327686, 1, 3, 327687, 1, 3, 327688, 1, 3, 327689, 1, 3, 393225, 1, 3, 393224, 1, 3, 393223, 1, 3, 393222, 1, 3, 393221, 1, 3, 393220, 1, 3, 393219, 1, 3, 393218, 1, 3, 393217, 1, 3, 458753, 1, 3, 458754, 1, 3, 458755, 1, 3, 458756, 1, 3, 458757, 1, 3, 458758, 1, 3, 458759, 1, 3, 458760, 1, 3, 458761, 1, 3, 458762, 1, 3, 262153, 1, 3, 196617, 1, 3, 131081, 1, 3, 131082, 1, 3, 196618, 1, 3, 262154, 1, 3, 327690, 1, 3, 393226, 1, 3, 65545, 1, 3, 65546, 1, 3, 524298, 1, 3, 524297, 1, 3, 524296, 1, 3, 524295, 1, 3, 524294, 1, 3, 524293, 1, 3, 524292, 1, 3, 524291, 1, 3, 524290, 1, 3, 524289, 1, 3, 589825, 1, 3, 589826, 1, 3, 589827, 1, 3, 589828, 1, 3, 589829, 1, 3, 589830, 1, 3, 589831, 1, 3, 589832, 1, 3, 589833, 1, 3, 589834, 1, 3, 655361, 1, 3, 720897, 1, 3, 720898, 1, 3, 655362, 1, 3, 655363, 1, 3, 720899, 1, 3, 720900, 1, 3, 720901, 1, 3, 720902, 1, 3, 720903, 1, 3, 720904, 1, 3, 720905, 1, 3, 720906, 1, 3, 720907, 1, 3, 720908, 1, 3, 720909, 1, 3, 655373, 1, 3, 589837, 1, 3, 524301, 1, 3, 458765, 1, 3, 458764, 1, 3, 458763, 1, 3, 524299, 1, 3, 524300, 1, 3, 589836, 1, 3, 655372, 1, 3, 655371, 1, 3, 655370, 1, 3, 589835, 1, 3, 655369, 1, 3, 655368, 1, 3, 655367, 1, 3, 655366, 1, 3, 655365, 1, 3, 655364, 1, 3, 65547, 1, 3, 65548, 1, 3, 65549, 1, 3, 131085, 1, 3, 196621, 1, 3, 262157, 1, 3, 327693, 1, 3, 393229, 1, 3, 393228, 1, 3, 393227, 1, 3, 327691, 1, 3, 327692, 1, 3, 262156, 1, 3, 196620, 1, 3, 131083, 1, 3, 196619, 1, 3, 262155, 1, 3, 131084, 1, 3)
 
-[node name="Creatures" type="Node2D" parent="."]
-light_mask = 16
-visibility_layer = 16
-
-[node name="player" parent="Creatures" instance=ExtResource("4_r16yv")]
-position = Vector2(217, 247)
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Creatures"]
+[node name="Creatures" type="NavigationRegion2D" parent="."]
 position = Vector2(4, -4)
 navigation_polygon = SubResource("NavigationPolygon_cihwb")
 
-[node name="skeleton" parent="Creatures/NavigationRegion2D" instance=ExtResource("5_f8kjb")]
-position = Vector2(707, 288)
-
-[node name="skeleton2" parent="Creatures/NavigationRegion2D" instance=ExtResource("5_f8kjb")]
-position = Vector2(255, 587)
+[node name="player" parent="Creatures" instance=ExtResource("4_r16yv")]
+position = Vector2(213, 251)
 
 [node name="Objects" type="Node2D" parent="."]
 

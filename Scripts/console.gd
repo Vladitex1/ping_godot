@@ -10,7 +10,7 @@ func teleport(x,y):
 func item(value,delta):
 	delta = int(delta)
 	value = str(value)
-	global.PlayerIndicators(value,delta,"set")
+	global.player_indicators(value,delta,"set")
 
 func input(command,value1,value2):
 	var text 
