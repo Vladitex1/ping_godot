@@ -364,10 +364,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_40nvm"]
-size = Vector2(8.21185, 10.4956)
+size = Vector2(8.21185, 10.3498)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_bt8vo"]
-radius = 21.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_om0on"]
+size = Vector2(28, 34)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dnpgc"]
 size = Vector2(24, 30)
@@ -433,14 +433,14 @@ animation = &"skeleton_idle_down"
 frame_progress = 0.0804547
 
 [node name="Skeleton" type="CollisionShape2D" parent="."]
-position = Vector2(-4.76837e-07, 4.76837e-07)
+position = Vector2(-4.76837e-07, 0.214267)
 scale = Vector2(2.94, 2.94)
 shape = SubResource("RectangleShape2D_40nvm")
 
 [node name="enemy_hands" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_hands"]
-shape = SubResource("CircleShape2D_bt8vo")
+shape = SubResource("RectangleShape2D_om0on")
 
 [node name="damage_area" type="Area2D" parent="."]
 

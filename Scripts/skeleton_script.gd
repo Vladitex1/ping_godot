@@ -23,12 +23,12 @@ const standart_speed: float = 100
 
 const max_health: int = 150
 const attack_strange: int = 5
-const attack_throw: int = 30
+const attack_throw: int = 15
 const attack_speed: float = 1
 const cooldown_time: float = 1
 const acceleration = 5
 
-const debug_freeze = true
+const debug_freeze = false
 
 var damage_final_vector: Vector2
 var health_value: int
@@ -46,7 +46,7 @@ var attack_area = false
 var patrol_timer = false
 var new_vector: Vector2
 var IFT = null
-#damage_zone_detection
+
 func _ready():
 	health_value = max_health
 	health_bar.max_value = max_health
@@ -59,20 +59,18 @@ func _ready():
 	$damage_area.connect("area_entered",DamageArea_enter)
 	$damage_area.connect("area_exited",DamageArea_exit)
 	
-	
+var temp_pos: Vector2
 func _physics_process(_delta):
-	health_bar_conrol(SET)
-	
-	#print(global.player_attack("damage", 0, "get"))
-	#print(state)
+	health_bar_conrol()
 	
 	if GSet_health(0,GET) <= 0:
 		death()
+	elif attack_area and cooldown_timer.time_left < 0.1 and state != DAMAGE:
+		attack()	
 	elif global.player_attack("damage", 0, "get") > 0 and damage_area:
 		damage()
 		state = DAMAGE
-	elif attack_area and cooldown_timer.time_left < 0.1:
-		attack()
+
 	else:
 		global.player_damage("damage",0,"set")
 		global.player_damage("damage_throw",0,"set")
@@ -83,22 +81,29 @@ func _physics_process(_delta):
 					attack_timer.start(1)
 					new_vector = get_circle_position()			
 				move(new_vector, _delta, speed)
-
 			PURSUIT:
-				speed = standart_speed
+				if global_position.distance_to(global.get_player_pos()) < 20:
+					speed = 0
+					animation("idle")
+				else:
+					speed = standart_speed
+					animation("walk")
 				global.action_tougle = false
 				nav.target_position = player.global_position
 				direction = nav.target_position - global_position
 				velocity = velocity.lerp(direction.normalized() * speed, acceleration * _delta) 
-				nav.get_next_path_position()
-				animation("walk")
-				move_and_slide()
-			DAMAGE:
+				#nav.get_next_path_position()
 				
-				if !move(damage_final_vector,_delta,speed):
-					pass
+				move_and_slide()
+				
+			DAMAGE:
+				if !move(damage_final_vector,0.7,standart_speed):
+					if temp_pos == round(global_position):
+						state = PURSUIT
+					temp_pos = round(global_position)
 				else:	
 					state = PURSUIT
+
 							
 			IDLE:
 				animation("idle")
@@ -108,16 +113,17 @@ func _physics_process(_delta):
 func move(target, _delta, spd):
 	#print(target)
 	nav.target_position = target
-	nav.get_next_path_position()
+	#nav.get_next_path_position()
 	velocity = position.direction_to(target) * spd
 	if position.distance_to(target) > 10:
 		move_and_slide()
 		return false
-	return true
+	else:
+		return true
 	
 	
 
-func animation(condition):
+func animation(condition) -> void:
 	var walk = 0
 	var dir
 	if state == PATROL:
@@ -194,22 +200,18 @@ func animation(condition):
 
 ###############health_bar_conrol######################
 
-func health_bar_conrol(GS):
-	match GS:
-		GET:
-			pass
-		SET:
-			if health_value >= max_health:
-				health_bar_lable.visible = false
-				health_bar.visible = false
-			elif health_value <= max_health:
-				health_bar_lable.visible = true
-				health_bar.visible = true
-				health_bar.value = health_value
-				health_bar_lable.text = str(health_value)
-			elif health_value <= 0:
-				health_bar_lable.visible = false
-				health_bar.visible = false
+func health_bar_conrol() -> void:
+	if health_value >= max_health:
+		health_bar_lable.visible = false
+		health_bar.visible = false
+	elif health_value <= max_health:
+		health_bar_lable.visible = true
+		health_bar.visible = true
+		health_bar.value = health_value
+		health_bar_lable.text = str(health_value)
+	elif health_value <= 0:
+		health_bar_lable.visible = false
+		health_bar.visible = false
 
 func GSet_health(Count:int,GS):
 	match GS:
@@ -226,17 +228,17 @@ func damage_vector() -> Vector2:
 	var str: String
 	var player_position = global.get_player_pos()
 	var enemy_position = enemy.global_position
-	var dist = global.player_attack("damage_throw",0,"get")
-	var throw: Vector2 = Vector2(dist,dist)
+	var throw = global.player_attack("damage_throw",0,"get")
+	var throw_vector: Vector2 = Vector2(throw,throw)
 	var dir: Vector2 = (player_position - enemy_position).normalized()
-	var vector_from = Vector2(snapped(dir[0],1),snapped(dir[1],1))
+	var direction_vector = Vector2(snapped(dir[0],1),snapped(dir[1],1))
 	
-	var num1 = vector_from[0] * throw[0]
-	var num2 = vector_from[1] * throw[0]
+	var num1 = direction_vector[0] * throw_vector[0]
+	var num2 = direction_vector[1] * throw_vector[0]
 	
-	var delta = Vector2(num1,num2) * -1
-	var knockback_vector: Vector2 = enemy_position + delta
-	
+	var new_vector = Vector2(num1,num2) * -1
+	var knockback_vector: Vector2 = enemy_position + new_vector
+
 	'match vector_from:
 		Vector2(0,-1): ##Вверх
 			str = "Вверх"
@@ -267,11 +269,6 @@ func damage_vector() -> Vector2:
 	return knockback_vector
 	
 	
-	
-func debprint(first,second):
-	print(first,": ",second)
-	#debprint("",)
-	
 ###############states######################
 
 func state_switcher(object: String,in_or_out: String):
@@ -297,7 +294,6 @@ func state_switcher(object: String,in_or_out: String):
 					state = PATROL
 				_:
 					pass
-	#print(state)
 
 ###############patrol######################
 func get_circle_position():

@@ -15,12 +15,12 @@ func _ready():
 	print("inventory_started - inventory_script")
 	inventory_info_storage(1)
 	
-	for slotnum in get_node("GridContainer").get_child_count():
+	for num in get_node("GridContainer").get_child_count():
 		#print(slotnum+1)
-		slotnum = slotnum + 1
-		var node_path: String = "GridContainer/Slot"+str(slotnum)+"/Button"
+		num = num + 1
+		var node_path: String = "GridContainer/Slot"+str(num)+"/Button"
 		var button = get_node(node_path)
-		button.connect("button_down",Callable(self, "slotnum").bind(slotnum))
+		button.connect("button_down",Callable(self, "slotnum").bind(num))
 
 func inventory_tougle():
 	if !open:
@@ -82,7 +82,7 @@ func reset_variable():
 #slot(selected_slot_end,selected_slot_id_start)
 
 ################################################
-func _input(event):
+func _input(_event):
 	$mouse_equip_item.global_position = get_global_mouse_position()-Vector2(40,40)
 ###################Содержимое инвентаря###################
 
@@ -100,8 +100,8 @@ func random_items_in_slots():
 		slot(slotnumber,randi_range(0,4))
 
 ###################Редактирование слота###################
-func slot(slotnum,num):
-	var slotnum2 = str(slotnum)
+func slot(slot_number,num):
+	var slotnum2 = str(slot_number)
 	var node_path = "GridContainer/Slot" + slotnum2 + "/Button/Item" + slotnum2
 	get_node(node_path).slot(num)
 
@@ -142,6 +142,6 @@ func pickup(path,slotNum):
 		reset_variable()
 
 
-func slotnum(slotnum):
-	var node_path = "GridContainer/Slot" + str(slotnum) + "/Button/Item" + str(slotnum)
-	pickup(get_node(node_path),slotnum)
+func slotnum(slot_number):
+	var node_path = "GridContainer/Slot" + str(slot_number) + "/Button/Item" + str(slot_number)
+	pickup(get_node(node_path),slot_number)

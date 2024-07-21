@@ -15,8 +15,8 @@ static var StaterCoins:int = 0
 
 static var StaminaSpeed: int = 5
 static var AttackStaminaSpeed: int = 100
-var Attack_Value: int = 25
-var Attack_Throw: int = 30#1.1
+const Attack_Value: int = 25
+const Attack_Throw: int = 10#1.1
 static var cooldown_attack: float = 0.8
 var enemy_attack_strange = 0
 var enemy_attack_throw = 0
@@ -40,7 +40,7 @@ var damage_active: bool
 @onready var camera2 = $Camera2D
 @onready var nav: NavigationAgent2D = $NavigationAgent2D
 var damage_ready
-
+var temp_pos: Vector2
 enum {
 	IDLE,
 	WALK,
@@ -67,6 +67,7 @@ func hud_load():
 	if hoodload == true:
 		hoodload = false
 		global.hud_load()	
+		
 
 func _physics_process(_delta):
 	hud_load()
@@ -74,24 +75,39 @@ func _physics_process(_delta):
 	debug_buttons()
 	update_player_position()
 	state_switcher()
-	#if global.player_damage("damage",0,"get") > 0:
-		#print(damage_active)	
-		#print(global.player_damage("damage",0,"get"))
-	print(state)
+
 	match state:
+
+		IDLE: #0
+			animation("0")
 		WALK: #1
 			animation("0")
 			move_and_slide()
-		IDLE: #0
-			animation("0")
 		DAMAGE:
-			if !move(incoming_damage_vector,_delta,650):
-				pass
+			if !move(incoming_damage_vector,0.7,200):
+				if temp_pos == round(global_position):
+					state = WALK
+				temp_pos = round(global_position)
 			else:	
 				state = WALK
-	
+
+
+			#
 	hands_control()
 	interactive()
+
+func move(target, _delta, spd):
+	#print(target)
+	nav.target_position = target
+	nav.get_next_path_position()
+	velocity = position.direction_to(target) * spd
+	if position.distance_to(target) > 10:
+		move_and_slide()
+		return false
+	else:
+		return true
+
+
 
 func interactive(): ##Иконка взаимодействия
 	if global.action_tougle and !global.loading_tougle:
@@ -107,10 +123,11 @@ func interactive(): ##Иконка взаимодействия
 		
 #################states#########################
 	
-func damage(damage:int):	
+func damage(dmg:int):	
 	animation("damage")
 	cooldown_damage_timer.start(0.25)
-	global.player_indicators("hp",damage * -1,"set")
+	global.player_indicators("hp",dmg * -1,"set")
+	state = DAMAGE
 	
 func attack():
 	animation("attack")
@@ -126,25 +143,20 @@ func death():
 #############################################################################################		
 		
 func state_switcher():
+	var dmg:int = global.player_damage("damage", 0, "get")
+	if dmg > 0 and damage_area:
+		if current_area != null:
+			incoming_damage_vector = damage_vector(current_area.global_position)
+			damage(dmg)
+			state = DAMAGE
+			
 	if global.player_indicators("hp",0,"get") < 0:
 		death()
-	elif global.player_damage("damage",0,"get") > 0 and damage_active:
-		#print(global.player_damage("damage",0,"get"))
-		incoming_damage_vector = damage_vector(current_area)
-		damage(global.player_damage("damage",0,"get"))
-		state = DAMAGE
-	elif Input.is_action_pressed("attack") and global.attack_block == false and cooldown_timer.is_stopped() and global.player_indicators("stamina",0,"get") >= 200:
+	if Input.is_action_pressed("attack") and global.attack_block == false and cooldown_timer.time_left < 0.1 and global.player_indicators("stamina",0,"get") >= 200:
 		attack()
-	elif state != DAMAGE: 
-		global.player_attack("damage",0,"set")
-		global.player_attack("damage_throw",0,"set")
 	else:
-		state = WALK
-		
-	if !Input.is_anything_pressed():
-		state = IDLE
-
-
+		global.player_attack("damage", 0, "set")
+		global.player_attack("damage_throw", 0, "set")
 			
 func get_input():
 	if Input.is_action_pressed("special_shift"):
@@ -165,8 +177,8 @@ func get_input():
 		global.add_scene("stop_screen")
 	velocity = Input.get_vector("move_left", "move_right", "move_up", "move_down") * (speed + sprint)
 	
-func animation(animation: String) -> void:
-	match animation:
+func animation(anim: String) -> void:
+	match anim:
 		"attack":
 			match player_align:
 				"left":
@@ -234,36 +246,27 @@ func debug_buttons():
 
 ##########DAMAGE###################
 
-func damage_vector(area) -> Vector2:
+func damage_vector(pos: Vector2) -> Vector2:
 	var player_position = global_position
-	var enemy_position = area.global_position
-	var dist = global.player_damage("damage_throw",0,"get")
-	var throw: Vector2 = Vector2(dist,dist)
+	var enemy_position = pos
+	var throw = global.player_damage("damage_throw",0,"get")
+	var throw_vector: Vector2 = Vector2(throw,throw)
 	var dir: Vector2 = (enemy_position - player_position).normalized()
-	var vector_from = Vector2(snapped(dir[0],1),snapped(dir[1],1))
+	var direction_vector = Vector2(snapped(dir[0],1),snapped(dir[1],1))
 	
-	var num1 = vector_from[0] * throw[0]
-	var num2 = vector_from[1] * throw[0]
+	var num1 = direction_vector[0] * throw_vector[0]
+	var num2 = direction_vector[1] * throw_vector[0]
 	
-	var delta = Vector2(num1,num2) * -1
-	var knockback_vector: Vector2 = player_position + delta
-	
+	var new_vector = Vector2(num1,num2) * -1
+	var knockback_vector: Vector2 = player_position + new_vector
+			
 	return knockback_vector	
 	
-	
+func debprint(first,second):
+	print(first,": ",second)	
 
-func move(target, _delta, spd): ################################################
-	#print(target)
-	#print(global_position)
-	nav.target_position = target
-	nav.get_next_path_position()
-	velocity = position.direction_to(target) * spd
-	print(position.distance_to(target))
-	if position.distance_to(target) > 10:
-		move_and_slide()
-		return false
-	return true
-	
+
+		
 
 ###########AREAS############
 func damage_area_enter(area):

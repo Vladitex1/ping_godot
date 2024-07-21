@@ -14,7 +14,7 @@
 [ext_resource type="Script" path="res://Scripts/Camera.gd" id="7_tbpjk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ptcxw"]
-size = Vector2(23.4694, 26.5306)
+size = Vector2(22.449, 32.6531)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_35sgd"]
 atlas = ExtResource("2_crj1b")
@@ -401,7 +401,7 @@ animations = [{
 size = Vector2(411.263, 288.764)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qnhbi"]
-size = Vector2(23, 38)
+size = Vector2(22, 38)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xsvsp"]
 cull_mode = 1
@@ -416,7 +416,7 @@ script = ExtResource("1_f2mdd")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="PingColision" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 6)
+position = Vector2(2.21729e-07, 3)
 scale = Vector2(0.98, 0.98)
 shape = SubResource("RectangleShape2D_ptcxw")
 
@@ -464,7 +464,6 @@ disable_mode = 2
 [node name="HandsColision" type="CollisionShape2D" parent="hands"]
 z_index = 1
 position = Vector2(319.385, -4.37524)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_2kyhl")
 
 [node name="damage_zone_detection" type="Area2D" parent="."]
@@ -473,7 +472,7 @@ collision_layer = 7
 collision_mask = 7
 
 [node name="damage_zone_colision" type="CollisionShape2D" parent="damage_zone_detection"]
-position = Vector2(0.5, -7.15256e-07)
+position = Vector2(1.36424e-12, -7.15256e-07)
 shape = SubResource("RectangleShape2D_qnhbi")
 
 [node name="Camera2D" type="Camera2D" parent="."]
