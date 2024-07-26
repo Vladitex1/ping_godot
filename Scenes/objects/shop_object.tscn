@@ -12,9 +12,10 @@ size = Vector2(58, 46)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_w4qjn"]
 cull_mode = 1
-polygon = PackedVector2Array(-29, -40, -29, 65, 29, 65, 29, -40, 26, -44, -25, -44)
+polygon = PackedVector2Array(-29, -40, -29, 45, 29, 45, 29, -40, 26, -44, -25, -44)
 
 [node name="shop_object" type="Node2D"]
+script = ExtResource("3_yg55v")
 
 [node name="Textures" type="Node2D" parent="."]
 position = Vector2(0, 8)
@@ -28,6 +29,8 @@ position = Vector2(0, 25)
 texture = ExtResource("2_2wknm")
 
 [node name="Colision" type="StaticBody2D" parent="."]
+collision_layer = 8
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Colision"]
 z_index = 1
@@ -37,7 +40,8 @@ one_way_collision_margin = 2.3
 
 [node name="Area2D" type="Area2D" parent="Colision"]
 position = Vector2(0, 51)
-script = ExtResource("3_yg55v")
+collision_layer = 4
+collision_mask = 4
 
 [node name="enter_shop_cycle_colision" type="CollisionShape2D" parent="Colision/Area2D"]
 light_mask = 0
@@ -46,6 +50,3 @@ shape = SubResource("RectangleShape2D_l2tgv")
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_w4qjn")
 occluder_light_mask = 2
-
-[connection signal="body_entered" from="Colision/Area2D" to="Colision/Area2D" method="_on_body_entered"]
-[connection signal="body_exited" from="Colision/Area2D" to="Colision/Area2D" method="_on_body_exited"]

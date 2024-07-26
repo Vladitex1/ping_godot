@@ -1,6 +1,5 @@
 extends Control
 
-static var size1: float = 1
 var console_visible = false
 
 @onready var window = $"."
@@ -33,17 +32,7 @@ enum {
 	hp,
 }	
 	
-func set_view_size():
-	match global.get_camera_position(2)[0]:
-		1.5:
-			size1 = 1.34
-		2.0:
-			size1 = 1
-		2.5:
-			size1 = 0.8
-	window.scale = Vector2(size1,size1)
 
-	
 func _process(_delta):
 	brightness_slider()
 	if delay_timer.is_stopped() == true:
@@ -51,7 +40,7 @@ func _process(_delta):
 			get_tree().paused = false
 			global.del_scene("stop_screen")
 		if Input.is_action_just_released("special_console") and !global.buttons_lock:
-			console_tougle()
+			console_toggle()
 		if Input.is_action_just_released("enter") and console_visible and !global.buttons_lock:
 			var command = str(console_line.get_text())
 			var text = console_text_parse(command)
@@ -79,7 +68,7 @@ func console_text_parse(text : String):
 		return text2
 	return console.input(str(command),value1,value2)
 
-func console_tougle():
+func console_toggle():
 	if console_visible:	 
 		console_visible = false
 	else:

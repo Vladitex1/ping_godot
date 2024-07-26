@@ -1,8 +1,9 @@
-[gd_scene load_steps=65 format=3 uid="uid://3nh6n7vhnc8h"]
+[gd_scene load_steps=72 format=3 uid="uid://3nh6n7vhnc8h"]
 
 [ext_resource type="Script" path="res://Scripts/player_movement_script.gd" id="1_f2mdd"]
 [ext_resource type="Texture2D" uid="uid://c64klfpy51u4b" path="res://assets/special/2d_lights_and_shadows_neutral_point_light.webp" id="2_cesop"]
 [ext_resource type="Texture2D" uid="uid://bjdaeq1ahu2cn" path="res://assets/Ping/attack-Sheet.png" id="2_crj1b"]
+[ext_resource type="Texture2D" uid="uid://gm6uvydnxx2t" path="res://assets/Ping/attack_with_weapon-Sheet.png" id="3_5mimd"]
 [ext_resource type="Texture2D" uid="uid://co7fma77gsww3" path="res://assets/Ping/damage.png" id="3_15utc"]
 [ext_resource type="Texture2D" uid="uid://b6wioesllg003" path="res://assets/Tilemap/pingtilemap.png" id="3_belul"]
 [ext_resource type="Texture2D" uid="uid://b1cpxvfd70d41" path="res://assets/Ping/walk_down.png" id="4_6i6fg"]
@@ -35,6 +36,22 @@ region = Rect2(159, 0, 53, 54)
 [sub_resource type="AtlasTexture" id="AtlasTexture_g7qkj"]
 atlas = ExtResource("2_crj1b")
 region = Rect2(212, 0, 53, 54)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_26hq7"]
+atlas = ExtResource("3_5mimd")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eex0o"]
+atlas = ExtResource("3_5mimd")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wafg7"]
+atlas = ExtResource("3_5mimd")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hib8h"]
+atlas = ExtResource("3_5mimd")
+region = Rect2(384, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tuwxg"]
 atlas = ExtResource("3_15utc")
@@ -189,6 +206,23 @@ animations = [{
 "loop": false,
 "name": &"attack",
 "speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_26hq7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eex0o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wafg7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hib8h")
+}],
+"loop": false,
+"name": &"attack_weapon",
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 50.0,
@@ -397,8 +431,199 @@ animations = [{
 "speed": 8.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2kyhl"]
-size = Vector2(411.263, 288.764)
+[sub_resource type="Animation" id="Animation_0ibxx"]
+resource_name = "attack_right"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Weapon:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1e+06, 1e+06, 1e+06, 1e+06, 1e+06),
+"update": 0,
+"values": [-0.487372, 0.499164, 2.07694, 2.67035, -0.487372]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Weapon:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(5, 9), Vector2(5, 9)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Ping_Animation:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1e+06),
+"update": 1,
+"values": [&"attack_weapon", &"idle"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Ping_Animation:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Weapon/WeaponIcon:z_index")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.5),
+"transitions": PackedFloat32Array(23170.5, 1, 1, 23170.5),
+"update": 1,
+"values": [2, 3, 3, 2]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../Ping_Animation:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4, 0.5),
+"transitions": PackedFloat32Array(1e+06, 1e+06, 1e+06, 1e+06),
+"update": 0,
+"values": [Vector2(1, 1.15), Vector2(1.1, 1.265), Vector2(1.1, 1.265), Vector2(1, 1.15)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../Weapon/WeaponIcon:flip_h")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = false
+tracks/7/path = NodePath("../Ping_Animation:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.1, 0.4, 0.5),
+"transitions": PackedFloat32Array(1e+06, 1e+06, 1),
+"update": 0,
+"values": [Vector2(0, 2), Vector2(0, 2), Vector2(0, 2.38419e-07)]
+}
+
+[sub_resource type="Animation" id="Animation_bu6ly"]
+resource_name = "attack_left"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Weapon:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1e+06, 1e+06, 1e+06, 1e+06, 1e+06),
+"update": 0,
+"values": [0.486947, -0.499164, -2.07694, -2.67035, 0.486947]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Weapon:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-5, 9), Vector2(-5, 9)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Ping_Animation:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1e+06),
+"update": 1,
+"values": [&"attack_weapon", &"idle"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Ping_Animation:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Weapon/WeaponIcon:z_index")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.5),
+"transitions": PackedFloat32Array(23170.5, 870550, 1e+06, 23170.5),
+"update": 1,
+"values": [2, 2, 3, 2]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../Weapon/WeaponIcon:flip_h")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../Ping_Animation:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4, 0.5),
+"transitions": PackedFloat32Array(1e+06, 1e+06, 1e+06, 1e+06),
+"update": 0,
+"values": [Vector2(1, 1.15), Vector2(1.1, 1.265), Vector2(1.1, 1.265), Vector2(1, 1.15)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uoo84"]
+_data = {
+"attack_left": SubResource("Animation_bu6ly"),
+"attack_right": SubResource("Animation_0ibxx")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qnhbi"]
 size = Vector2(22, 38)
@@ -408,9 +633,11 @@ cull_mode = 1
 polygon = PackedVector2Array(7.70001, 13.3, 7.70001, 8.40001, 6.30001, 8.40001, 6.30001, -13.3, -5.60001, -13.3, -5.60001, 8.40001, -7.00001, 8.40001, -7.00001, 13.3)
 
 [node name="player" type="CharacterBody2D"]
-collision_layer = 11
-collision_mask = 11
+collision_layer = 14
+collision_mask = 14
 motion_mode = 1
+platform_floor_layers = 1
+platform_wall_layers = 2
 script = ExtResource("1_f2mdd")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
@@ -420,12 +647,11 @@ position = Vector2(2.21729e-07, 3)
 scale = Vector2(0.98, 0.98)
 shape = SubResource("RectangleShape2D_ptcxw")
 
-[node name="Ping_Aimation" type="AnimatedSprite2D" parent="."]
+[node name="Ping_Animation" type="AnimatedSprite2D" parent="."]
 z_index = 2
-position = Vector2(0, 2.38419e-07)
-scale = Vector2(1.06868, 1.14286)
+scale = Vector2(1, 1.15)
 sprite_frames = SubResource("SpriteFrames_cvcsf")
-animation = &"walk_down"
+animation = &"attack_weapon"
 
 [node name="Waiting_Animation" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -445,56 +671,60 @@ scale = Vector2(0.901786, 0.924102)
 texture = ExtResource("5_j5ey8")
 
 [node name="Weapon" type="Node2D" parent="."]
-position = Vector2(2.38419e-07, 0)
+z_index = -1
+position = Vector2(5, 9)
+rotation = -0.487372
 scale = Vector2(0.114282, 0.11428)
+skew = -1.41859e-05
 
 [node name="WeaponIcon" type="Sprite2D" parent="Weapon"]
 z_index = 2
-position = Vector2(393.763, 0)
-rotation = 1.5708
+position = Vector2(-5.32729, -270.221)
 scale = Vector2(6.055, 6.055)
 texture = ExtResource("6_fntwn")
 
+[node name="Attack_Animation" type="AnimationPlayer" parent="Weapon"]
+deterministic = true
+root_node = NodePath("../../hands")
+libraries = {
+"": SubResource("AnimationLibrary_uoo84")
+}
+speed_scale = 2.0
+
 [node name="hands" type="Area2D" parent="."]
-z_index = 3
+light_mask = 4
+visibility_layer = 4
+z_index = -1
 position = Vector2(2.72478e-06, 7.08318e-07)
 scale = Vector2(0.114282, 0.11428)
 disable_mode = 2
+collision_layer = 12
+collision_mask = 12
 
-[node name="HandsColision" type="CollisionShape2D" parent="hands"]
-z_index = 1
-position = Vector2(319.385, -4.37524)
-shape = SubResource("RectangleShape2D_2kyhl")
+[node name="HandsColision" type="CollisionPolygon2D" parent="hands"]
+visible = false
+position = Vector2(17.5005, -52.5026)
+scale = Vector2(1, 1)
+polygon = PackedVector2Array(262.509, -306.265, 323.761, -253.763, 411.263, -148.757, 446.265, 52.5026, 411.263, 227.511, 358.762, 332.517, 210.007, 262.513, 227.507, 192.51, 245.008, 52.5026, 227.507, -87.5044, 183.756, -175.009)
 
-[node name="damage_zone_detection" type="Area2D" parent="."]
+[node name="WeaponIcon" type="Sprite2D" parent="hands"]
+visible = false
+z_index = 2
+position = Vector2(367.512, 8.75043)
+rotation = 1.5655
+scale = Vector2(6.055, 6.055)
+texture = ExtResource("6_fntwn")
+
+[node name="Damage_Zone_Detection" type="Area2D" parent="."]
+visible = false
 position = Vector2(-1.36424e-12, 7.15256e-07)
-collision_layer = 7
-collision_mask = 7
+collision_layer = 12
+collision_mask = 12
 
-[node name="damage_zone_colision" type="CollisionShape2D" parent="damage_zone_detection"]
+[node name="damage_zone_colision" type="CollisionShape2D" parent="Damage_Zone_Detection"]
+visible = false
 position = Vector2(1.36424e-12, -7.15256e-07)
 shape = SubResource("RectangleShape2D_qnhbi")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-1.19209e-07, 1.19209e-07)
-scale = Vector2(0.999999, 0.999999)
-zoom = Vector2(2, 2)
-position_smoothing_enabled = true
-script = ExtResource("7_tbpjk")
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-position = Vector2(5.82077e-11, 1.19209e-07)
-scale = Vector2(1.42857, 1.42857)
-occluder = SubResource("OccluderPolygon2D_xsvsp")
-occluder_light_mask = 0
-
-[node name="cooldown_damage_timer" type="Timer" parent="."]
-one_shot = true
-
-[node name="CooldownTimer" type="Timer" parent="."]
-one_shot = true
-
-[node name="Timer" type="Timer" parent="."]
 
 [node name="light_point" type="PointLight2D" parent="."]
 z_index = 6
@@ -510,3 +740,24 @@ shadow_item_cull_mask = 7
 texture = ExtResource("2_cesop")
 texture_scale = 4.98
 height = 3.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+visible = false
+position = Vector2(-1.19209e-07, 1.19209e-07)
+scale = Vector2(0.999999, 0.999999)
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+script = ExtResource("7_tbpjk")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+visible = false
+position = Vector2(5.82077e-11, 1.19209e-07)
+scale = Vector2(1.42857, 1.42857)
+occluder = SubResource("OccluderPolygon2D_xsvsp")
+occluder_light_mask = 0
+
+[node name="Cooldown_Damage_Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Attack_Timer" type="Timer" parent="."]
+one_shot = true

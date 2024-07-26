@@ -13,7 +13,7 @@ config_version=5
 config/name="Ping"
 run/main_scene="res://Scenes/main1.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
-config/icon="res://assets/interface/pingicon.png"
+config/icon="res://assets/interface/ping_icon_1024x1024.png"
 config/windows_native_icon="res://pingicon.ico"
 
 [autoload]
@@ -136,6 +136,7 @@ enter={
 2d_render/layer_2="objects"
 2d_render/layer_3="creatures"
 2d_physics/layer_1="ground"
+2d_navigation/layer_1="pursuit"
 2d_physics/layer_2="walls"
 2d_physics/layer_3="creatures"
 2d_physics/layer_4="objects"

@@ -77,9 +77,9 @@ func attack():
 	if attack_timer.is_stopped() == true:
 		attack_timer.start(2)
 		print("время - Enemy")
-		global.heat_tougle = true
+		global.heat_toggle = true
 	else:
-		global.heat_tougle = false
+		global.heat_toggle = false
 
 func animation(vc,steering):
 	if vc.x>=steering.x:

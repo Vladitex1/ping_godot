@@ -1,6 +1,6 @@
 extends Node
 
-var teleport_tougle: bool = false
+var teleport_toggle: bool = false
 
 func teleport(x,y):
 	var vector = Vector2(int(x),int(y))

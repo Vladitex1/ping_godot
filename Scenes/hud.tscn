@@ -1,17 +1,83 @@
-[gd_scene load_steps=13 format=3 uid="uid://dmha2u8dlg5o1"]
+[gd_scene load_steps=24 format=3 uid="uid://dmha2u8dlg5o1"]
 
 [ext_resource type="Texture2D" uid="uid://k5742llj4gq2" path="res://assets/interface/ping_icon_1024x1024.png" id="1_21nmr"]
 [ext_resource type="Script" path="res://Scripts/hud/hud_brain.gd" id="1_sjm8r"]
 [ext_resource type="FontFile" uid="uid://8atws0pc47sn" path="res://fonts/Font1.ttf" id="3_h8id7"]
 [ext_resource type="Texture2D" uid="uid://ddb813dlvbuyj" path="res://assets/interface/hud_status_large.png" id="4_7qmn3"]
+[ext_resource type="Texture2D" uid="uid://cvlnep0argmqv" path="res://assets/interface/animation_large.png" id="4_ktygs"]
 [ext_resource type="Texture2D" uid="uid://ckakw481uj45i" path="res://assets/interface/health.png" id="5_2ykob"]
 [ext_resource type="Texture2D" uid="uid://cx2ip8bilhrg5" path="res://assets/interface/hud_base_large.png" id="5_5t2uc"]
 [ext_resource type="Texture2D" uid="uid://23wurqxer0sb" path="res://assets/interface/stamina.png" id="5_6ne8s"]
 [ext_resource type="Texture2D" uid="uid://pl513b6xupyn" path="res://assets/interface/hb1.png" id="6_f1kwn"]
+[ext_resource type="Texture2D" uid="uid://bc6xqtorp87xq" path="res://assets/interface/stamina_limit.png" id="6_guuqj"]
 [ext_resource type="Texture2D" uid="uid://cpqe4l277k3fg" path="res://assets/interface/Key1.png" id="7_2srnd"]
 [ext_resource type="Texture2D" uid="uid://cjoia4dnia1yc" path="res://assets/items/weapons/sword.png" id="7_ayjy7"]
 [ext_resource type="Texture2D" uid="uid://bv6wmrh28yfy8" path="res://assets/interface/coin.png" id="8_e6d1a"]
 [ext_resource type="Texture2D" uid="uid://v8cpya8qx1si" path="res://assets/interface/stamina_back.png" id="8_vvm8o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wpg7s"]
+atlas = ExtResource("4_ktygs")
+region = Rect2(5120, 0, 640, 660)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h3lkk"]
+atlas = ExtResource("4_ktygs")
+region = Rect2(5760, 0, 640, 660)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lg2ph"]
+atlas = ExtResource("4_ktygs")
+region = Rect2(6400, 0, 640, 660)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_asxvi"]
+atlas = ExtResource("4_ktygs")
+region = Rect2(7040, 0, 640, 660)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yxjd2"]
+atlas = ExtResource("4_ktygs")
+region = Rect2(7680, 0, 640, 660)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ljne"]
+atlas = ExtResource("4_ktygs")
+region = Rect2(8320, 0, 640, 660)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k7le3"]
+atlas = ExtResource("4_ktygs")
+region = Rect2(8960, 0, 640, 660)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1xkfr"]
+atlas = ExtResource("4_ktygs")
+region = Rect2(9600, 0, 640, 660)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ur0ea"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wpg7s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h3lkk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lg2ph")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_asxvi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yxjd2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ljne")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k7le3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1xkfr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="hud" type="Control"]
 layout_mode = 3
@@ -55,14 +121,23 @@ anchor_left = 0.0421875
 anchor_top = 0.772222
 anchor_right = 0.124714
 anchor_bottom = 0.924159
-offset_right = 897.886
-offset_bottom = 929.855
+offset_left = 4.0
+offset_top = 8.00024
+offset_right = 901.886
+offset_bottom = 937.855
 grow_vertical = 0
 scale = Vector2(0.15, 0.15)
 size_flags_stretch_ratio = 0.0
 texture = ExtResource("1_21nmr")
 stretch_mode = 2
 metadata/_edit_use_anchors_ = true
+
+[node name="icon_animation" type="AnimatedSprite2D" parent="plate/icon"]
+visible = false
+position = Vector2(162, 918)
+scale = Vector2(0.225, 0.225)
+sprite_frames = SubResource("SpriteFrames_ur0ea")
+frame_progress = 0.594916
 
 [node name="stamina_bar" type="CanvasLayer" parent="plate"]
 
@@ -81,9 +156,22 @@ offset_top = 949.0
 offset_right = 810.0
 offset_bottom = 1013.0
 scale = Vector2(0.5, 0.789)
-value = 100.0
+max_value = 1000.0
+value = 1000.0
 rounded = true
 texture_progress = ExtResource("5_6ne8s")
+
+[node name="stamina_bar_limit" type="TextureProgressBar" parent="plate/stamina_bar"]
+custom_minimum_size = Vector2(70, 16)
+offset_left = 260.0
+offset_top = 949.0
+offset_right = 810.0
+offset_bottom = 1013.0
+scale = Vector2(0.5, 0.789)
+max_value = 1000.0
+value = 100.0
+rounded = true
+texture_progress = ExtResource("6_guuqj")
 
 [node name="plates" type="CanvasLayer" parent="plate"]
 

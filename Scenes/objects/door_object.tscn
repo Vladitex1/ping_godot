@@ -1,7 +1,17 @@
-[gd_scene load_steps=20 format=3 uid="uid://chsnegkawbbdb"]
+[gd_scene load_steps=22 format=3 uid="uid://chsnegkawbbdb"]
 
+[ext_resource type="Texture2D" uid="uid://c56bavk2ib8of" path="res://assets/LVL/upper_for_door.png" id="2_iijqy"]
 [ext_resource type="Script" path="res://Scripts/door_script.gd" id="3_ec11f"]
 [ext_resource type="Texture2D" uid="uid://dvmacp1f51ida" path="res://assets/Tilemap/doortilemap.png" id="4_j0txy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qopee"]
+size = Vector2(21, 61)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o7eau"]
+size = Vector2(22, 60)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_udbu2"]
+polygon = PackedVector2Array(-310.1, -172.9, -263.9, -172.9, -263.9, -156.8, -265.3, -156.8, -265.3, -155.4, -308.7, -155.4, -308.7, -156.8, -310.1, -156.8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ss0np"]
 atlas = ExtResource("4_j0txy")
@@ -213,14 +223,36 @@ polygon = PackedVector2Array(-20.3, -4.2, 20.3, -4.2, 20.3, 27.5, -20.3, 27.5)
 resource_local_to_scene = true
 polygon = PackedVector2Array(-19.6, -28.7, -19.6, 4.9, 21, 4.9, 21, -28.7)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qopee"]
-size = Vector2(21, 61)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_o7eau"]
-size = Vector2(22, 60)
-
 [node name="door" type="Node2D"]
 script = ExtResource("3_ec11f")
+
+[node name="opener_area" type="Area2D" parent="."]
+light_mask = 32
+position = Vector2(-85, 7)
+collision_layer = 8
+collision_mask = 8
+
+[node name="colision_1" type="CollisionShape2D" parent="opener_area"]
+position = Vector2(45, 8.5)
+shape = SubResource("RectangleShape2D_qopee")
+
+[node name="colision_2" type="CollisionShape2D" parent="opener_area"]
+position = Vector2(125, 9)
+shape = SubResource("RectangleShape2D_o7eau")
+
+[node name="upper_light_mask" type="LightOccluder2D" parent="."]
+position = Vector2(410, 179)
+scale = Vector2(1.42857, 1.42857)
+occluder = SubResource("OccluderPolygon2D_udbu2")
+occluder_light_mask = 1048575
+
+[node name="UpperForDoor" type="Sprite2D" parent="."]
+light_mask = 7
+visibility_layer = 7
+z_index = 1
+position = Vector2(-2.98023e-08, -47)
+scale = Vector2(1.01563, 1.03571)
+texture = ExtResource("2_iijqy")
 
 [node name="animation" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 2)
@@ -229,6 +261,8 @@ animation = &"door_open"
 
 [node name="door_colisions" type="StaticBody2D" parent="."]
 position = Vector2(-473, -210)
+collision_layer = 8
+collision_mask = 8
 
 [node name="door_mask" type="AnimationPlayer" parent="door_colisions"]
 reset_on_save = false
@@ -257,15 +291,3 @@ position = Vector2(472, 251)
 scale = Vector2(1.42857, 1.42857)
 occluder = SubResource("OccluderPolygon2D_bk2a6")
 occluder_light_mask = 1048575
-
-[node name="opener_area" type="Area2D" parent="."]
-light_mask = 32
-position = Vector2(-85, 7)
-
-[node name="colision_1" type="CollisionShape2D" parent="opener_area"]
-position = Vector2(45, 8.5)
-shape = SubResource("RectangleShape2D_qopee")
-
-[node name="colision_2" type="CollisionShape2D" parent="opener_area"]
-position = Vector2(125, 9)
-shape = SubResource("RectangleShape2D_o7eau")

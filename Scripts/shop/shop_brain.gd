@@ -26,7 +26,6 @@ var selected_item_ID: int = -1
 
 	
 func _ready():	
-	global.attack_block = true
 	intresting_slot.play("intresting_item_play")
 	$shop_plate/buttons/minus_button.connect("button_up",minus_button)
 	$shop_plate/buttons/buy_button.connect("button_up",buy_button_func)
@@ -84,12 +83,9 @@ func _process(_delta):
 		else:
 			shop_info_storage(num123)
 			
-	elif Input.is_action_just_pressed("special_back"):
+	if Input.is_action_just_pressed("special_back"):
 		print("shop_exit - shop_brain")
-		global.del_scene("shop")
-		global.hud_load()
-		global.action_tougle = true
-		global.attack_block = false
+		exit_button()
 
 ###################Содержимое магазина###################
 	
@@ -161,10 +157,9 @@ func sell_button_func():###################дописать
 func exit_button():
 	print("shop_exit - shop_brain")
 	global.del_scene("shop")
-	#global.del_scene("inventory")
-	global.hud_load()
-	global.action_tougle = true
-	global.attack_block = false
+	global.add_scene("hud")
+	global.add_scene("inventory")
+	
 
 ################## Задать содержимое слота
 

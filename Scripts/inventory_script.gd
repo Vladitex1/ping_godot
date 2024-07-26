@@ -9,20 +9,19 @@ var selected_slot_start: int = -1
 var selected_slot_id_start: int = -1
 var selected_slot_end: int = -1
 var selected_slot_id_end: int = -1
-var mousetougle: bool = true
+var mousetoggle: bool = true
 var button_num: int
 func _ready():
 	print("inventory_started - inventory_script")
 	inventory_info_storage(1)
 	
 	for num in get_node("GridContainer").get_child_count():
-		#print(slotnum+1)
 		num = num + 1
 		var node_path: String = "GridContainer/Slot"+str(num)+"/Button"
 		var button = get_node(node_path)
 		button.connect("button_down",Callable(self, "slotnum").bind(num))
 
-func inventory_tougle():
+func inventory_toggle():
 	if !open:
 		open = true
 		global.attack_block = true
@@ -34,13 +33,10 @@ func inventory_tougle():
 
 func _process(_delta):
 	if Input.is_action_just_released("special_tab"):
-		inventory_tougle()
+		inventory_toggle()
 		print("inventory work - inventory_script")
 	if Input.is_action_just_released("debug1"):
 		inventory_info_storage(3)
-#reset_variable()
-#mousetougle = true
-#debug()
 	
 
 
@@ -48,39 +44,25 @@ func debug():
 	print("Start: Слот №" +str(selected_slot_start) +" предмет № " +str(selected_slot_id_start))
 	print("End: Слот № "+str(selected_slot_end) +" предмет № " +str(selected_slot_id_end))
 	#print("Рука: Слот № "+str(selected_slot_end)+" предмет № " +str(selected_slot_id_start))
-	print("mousetougle = " + str(mousetougle))
+	print("mousetoggle = " + str(mousetoggle))
 	print("________________________________________________________________________")
 
-		#if open == false and selected_slot_start != selected_slot_end and selected_slot_id_start != selected_slot_id_end:
+		
 			
 func mouse_touge():
-	if mousetougle == true:
-		#$mouse_equip_item.visible = true
-		mousetougle = false
+	if mousetoggle == true:
+		mousetoggle = false
 	else:
-		#$mouse_equip_item.visible = false
-		mousetougle = true
-		#if selected_slot_start != selected_slot_end and selected_slot_id_start != selected_slot_id_end:
-			#slot(selected_slot_start,selected_slot_id_end)
-			#slot(selected_slot_end,selected_slot_id_start)
-		#reset_variable()
+		mousetoggle = true
 
 func reset_variable():
 	selected_slot_id_start = 0
 	selected_slot_start = 0
 	selected_slot_id_end = 0
 	selected_slot_end = 0
-	mousetougle = true
+	mousetoggle = true
 
 ##################SAVE####################
-#selected_slot_id_start = 0
-#selected_slot_start = 0
-#selected_slot_id_end = 0
-#selected_slot_end = 0
-
-#slot(selected_slot_start,selected_slot_id_end)
-#slot(selected_slot_end,selected_slot_id_start)
-
 ################################################
 func _input(_event):
 	$mouse_equip_item.global_position = get_global_mouse_position()-Vector2(40,40)
@@ -109,7 +91,7 @@ func slot(slot_number,num):
 
 
 func pickup(path,slotNum):
-	if mousetougle == true: ##запоминается айди в руку
+	if mousetoggle == true: ##запоминается айди в руку
 		mouse_touge()
 		$mouse_equip_item.visible = true
 		selected_slot_id_start = path.get_slot_info()
@@ -123,7 +105,7 @@ func pickup(path,slotNum):
 			$mouse_equip_item.texture = itemlist.itemlist[selected_slot_id_start][1]
 			selected_slot_start = slotNum
 			slot(selected_slot_start,0)
-	elif mousetougle == false:
+	elif mousetoggle == false:
 		mouse_touge()
 		selected_slot_end = slotNum
 		selected_slot_id_end = path.get_slot_info()

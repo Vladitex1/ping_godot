@@ -1,58 +1,58 @@
 extends Node
 
 
-var shop_tougle:bool = false
-var action_tougle:bool = false
-var loading_tougle:bool = false
-var heat_tougle:bool = false
+var shop_toggle:bool = false
+var action_toggle:bool = false
+var loading_toggle:bool = false
+var heat_toggle:bool = false
 var buttons_lock: bool = false
 
-static var drag_tougle:bool = false
+static var drag_toggle:bool = false
 static var brightness:float = 0.4
 static var ret: bool = false
-static var attack_block:bool = false
+var attack_block:bool = false
 
-static var PlayerHealth: int
-static var MaxHealth: int
-static var PlayerStamina: int
-static var MaxStamina: int
+static var player_health: int
+static var max_health: int
+static var player_stamina: int
+static var max_stamina: int
 
-static var PlayerKeys: int
-static var PlayerCoins: int
+static var player_keys: int
+static var player_coins: int
 
-static var Attack_Strange: int
-static var Attack_Throw: int
-static var Damage: int
-static var Damage_Throw: int
-static var current_enemy_attack_id: int
+static var attack_strange: int
+static var attack_throw: int
+static var damage: int
+static var damage_throw: int
 
-var temphp:int = PlayerHealth
-var tempCoins:int = PlayerCoins
-var tempKeys:int = PlayerKeys
-var tempStamina:int = PlayerStamina
+var temp_hp:int = player_health
+var temp_coins:int = player_coins
+var temp_keys:int = player_keys
+var temp_stamina:int = player_stamina
 
 static var player_position: Vector2
 static var camera_position: Vector2
 static var camera_zoom: Vector2
-
+static var stamina_limit: int
 static var dragging:bool = false
 	
 func change_scene(namestr):
 	get_tree().change_scene_to_file("res://Scenes/"+namestr+".tscn")
 	
-func add_scene(namestr):
-	get_tree().root.add_child(load("res://Scenes/"+namestr+".tscn").instantiate())
+func add_scene(namestr):#add_child(
+	var new_scene: Object = load("res://Scenes/"+namestr+".tscn").instantiate()
+	get_tree().root.add_child(new_scene)
+	
+	
 	
 func del_scene(namestr):
-	var scene = "res://Scenes/"+namestr+".tscn"
+	var scene = namestr
 	for i in get_tree().root.get_child_count():
 		if get_tree().root.get_child(i).name == namestr:
 			print(get_tree().root.get_child(i).name)
 			scene = get_tree().root.get_child(i)
 			scene.queue_free()
-	#print(get_tree().root.get_child_count())
-	
-	
+		
 func hud_load():
 	global.add_scene("hud")
 	global.add_scene("inventory")
@@ -63,47 +63,20 @@ func set_player_pos(vector: Vector2):
 func get_player_pos():
 	return player_position
 
-func set_camera_position(num,zoom):
-	camera_position = num
-	camera_zoom = zoom
-
-func get_camera_position(num):
-	match num:
-		1:
-			return camera_position
-		2:
-			return camera_zoom
-	
-func incomingPlayerDamage(namestr, delta, GSET):
-	match GSET:
-		"set":
-			match namestr:
-				"damage":
-					Damage = delta
-				"damage_throw":
-					Damage_Throw = delta
-		"get":
-			match namestr:
-				"damage":
-					return Damage
-				"damage_throw":
-					return Damage_Throw
-
 func player_attack(namestr, delta, GSET):
-
 	match GSET:
 		"set":
 			match namestr:
 				"damage":
-					Attack_Strange = delta
+					attack_strange = delta
 				"damage_throw":
-					Attack_Throw = delta
+					attack_throw = delta
 		"get":
 			match namestr:
 				"damage":
-					return Attack_Strange
+					return attack_strange
 				"damage_throw":
-					return Attack_Throw
+					return attack_throw
 
 func player_damage(namestr, delta, GSET):
 
@@ -111,51 +84,57 @@ func player_damage(namestr, delta, GSET):
 		"set":
 			match namestr:
 				"damage":
-					Damage = delta
+					damage = delta
 				"damage_throw":
-					Damage_Throw = delta
+					damage_throw = delta
 		"get":
 			match namestr:
 				"damage":
-					return Damage
+					return damage
 				"damage_throw":
-					return Damage_Throw
+					return damage_throw
 
 func player_indicators(namestr, delta, GSet):
-	temphp = PlayerHealth
-	tempCoins = PlayerCoins
-	tempKeys = PlayerKeys
+	temp_hp = player_health
+	temp_coins = player_coins
+	temp_keys = player_keys
 	
 	match GSet:
 		"set":
 			match namestr:
 				"hp":
-					PlayerHealth = PlayerHealth + delta
-					if PlayerHealth > MaxHealth:
-						PlayerHealth = MaxHealth
+					player_health = player_health + delta
+					if player_health > max_health:
+						player_health = max_health
+					elif player_health <= 0:
+						player_health = 0
 				"coin":
-					PlayerCoins = PlayerCoins + delta
+					player_coins = player_coins + delta
 				"key":
-					PlayerKeys = PlayerKeys + delta
+					player_keys = player_keys + delta
 				"stamina":
-					PlayerStamina = PlayerStamina + delta
+					player_stamina = player_stamina + delta
+					if player_stamina > max_stamina:
+						player_stamina = max_stamina
+					elif player_stamina <= 0:
+						player_stamina = 0
 		"get":
 			match namestr:
 				"hp":
-					return PlayerHealth
+					return player_health
 				"coin":
-					return PlayerCoins
+					return player_coins
 				"key":
-					return PlayerKeys
+					return player_keys
 				"stamina":
-					return PlayerStamina
+					return player_stamina
 
-	if temphp != PlayerHealth: 
+	if temp_hp != player_health: 
 		pass
-		#print("Player Health: "+ str(PlayerHealth) + " Delta " + str(delta) + " - global")
-	if tempCoins != PlayerCoins: 
-		print("Player Coins: "+ str(PlayerCoins) + " Delta " + str(delta) + " - global")
-	if tempKeys != PlayerKeys:
-		print("Player Keys: "+ str(PlayerKeys) + " Delta " + str(delta) + " - global")
+		#print("Player Health: "+ str(player_health) + " Delta " + str(delta) + " - global")
+	if temp_coins != player_coins: 
+		print("Player Coins: "+ str(player_coins) + " Delta " + str(delta) + " - global")
+	if temp_keys != player_keys:
+		print("Player Keys: "+ str(player_keys) + " Delta " + str(delta) + " - global")
 
 
