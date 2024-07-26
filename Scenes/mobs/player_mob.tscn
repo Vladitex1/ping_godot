@@ -651,7 +651,7 @@ shape = SubResource("RectangleShape2D_ptcxw")
 z_index = 2
 scale = Vector2(1, 1.15)
 sprite_frames = SubResource("SpriteFrames_cvcsf")
-animation = &"attack_weapon"
+animation = &"walk_right"
 
 [node name="Waiting_Animation" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -678,6 +678,7 @@ scale = Vector2(0.114282, 0.11428)
 skew = -1.41859e-05
 
 [node name="WeaponIcon" type="Sprite2D" parent="Weapon"]
+visible = false
 z_index = 2
 position = Vector2(-5.32729, -270.221)
 scale = Vector2(6.055, 6.055)
@@ -704,7 +705,7 @@ collision_mask = 12
 [node name="HandsColision" type="CollisionPolygon2D" parent="hands"]
 visible = false
 position = Vector2(17.5005, -52.5026)
-polygon = PackedVector2Array(262.509, -306.265, 323.761, -253.763, 411.263, -148.757, 446.265, 52.5026, 411.263, 227.511, 358.762, 332.517, 210.007, 262.513, 227.507, 192.51, 245.008, 52.5026, 227.507, -87.5044, 183.756, -175.009)
+polygon = PackedVector2Array(586.269, -90, 586.269, 228, 96.253, 228, 96.253, -90)
 
 [node name="WeaponIcon" type="Sprite2D" parent="hands"]
 visible = false

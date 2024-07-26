@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://ch2tgjjy03a8s"]
+[gd_scene load_steps=53 format=3 uid="uid://ch2tgjjy03a8s"]
 
 [ext_resource type="Script" path="res://Scripts/skeleton_script.gd" id="1_uml16"]
 [ext_resource type="Texture2D" uid="uid://pl513b6xupyn" path="res://assets/interface/hb1.png" id="2_dgof6"]
@@ -372,9 +372,6 @@ size = Vector2(28, 34)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dnpgc"]
 size = Vector2(24, 30)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_06mtc"]
-radius = 136.529
-
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_vt04j"]
 polygon = PackedVector2Array(12, 15, -12, 15, -12, -15, 12, -15)
 
@@ -470,12 +467,10 @@ scale = Vector2(1.42857, 1.42857)
 collision_layer = 4
 collision_mask = 4
 
-[node name="enemy_detection_colision" type="CollisionShape2D" parent="detection"]
-light_mask = 2
-visibility_layer = 2
-z_as_relative = false
-position = Vector2(3.8147e-06, 0)
-shape = SubResource("CircleShape2D_06mtc")
+[node name="enemy_detection_colision" type="CollisionPolygon2D" parent="detection"]
+visible = false
+rotation = -1.5708
+polygon = PackedVector2Array(-9.10001, -5.0068e-07, -49, 93.8, 49.7001, 93.8001, 8.40001, 0)
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_vt04j")

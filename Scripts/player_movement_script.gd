@@ -15,7 +15,7 @@ static var starter_coins: int = 0
 static var temp_attack_strength: int = 0
 static var temp_attack_throw: int = 0
 
-const weapon = 1
+const weapon = 0
 
 var stmn_state = Stamina_State.HOLD
 var atck_state = Attack_State.HOLD
@@ -84,11 +84,9 @@ var temp_state = State.WALK
 
 func _ready():
 	# Инициализация глобальных переменных
-	
-	
-	if weapon == 0:
-		weapon_icon.visible = false
-	
+	if weapon == 1:
+		weapon_icon.visible = true
+		
 	attack_timer.start(0.001)
 	global.stamina_limit = stamina_cooldown_limit
 	global.player_stamina = starter_stamina
@@ -110,8 +108,6 @@ func hud_load():
 		global.hud_load()
 
 func _physics_process(_delta):
-	
-	
 	
 	hud_load()
 	get_input()
@@ -284,12 +280,18 @@ func animation(anim: String) -> void:
 						player_animation.play("walk_down")
 						last_anim = "walk_down"
 					Vector2(0, 0):
-						if last_anim != "attack":
-							attack_animation.stop()
-							player_animation.play("idle")
 						if last_anim == "attack" and weapon == 0:
-							if player_animation.frame == 4:
-								player_animation.play("idle")	
+							match weapon:
+								0:													
+									if player_animation.frame == 4:
+										player_animation.play("idle")
+								_:
+									attack_animation.stop()
+									last_anim = "idle"
+						elif last_anim != "attack":
+							player_animation.play("idle")
+							
+
 
 func hands_control():
 	hands.rotation = get_local_mouse_position().angle()

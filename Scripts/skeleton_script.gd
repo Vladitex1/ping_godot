@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+@export var list_num: int
+
+@onready var detectiron_area = $detection
 @onready var attack_timer = $AttackTimer
 @onready var cooldown_timer = $CooldownTimer
 @onready var enemy_animation = $AnimatedSprite2D
@@ -7,7 +10,7 @@ extends CharacterBody2D
 @onready var health_progress_bar = $health_bar/health_bar
 @onready var health_count_label = $health_bar/healh_count_label
 @onready var nav: NavigationAgent2D = $NavigationAgent2D
-@export var list_num: int
+
 
 enum State {
 	PATROL,
@@ -48,6 +51,8 @@ var animations: Dictionary = {
 		"down": "skeleton_death_down"
 	}
 }
+
+var direction_str: String
 var current_checkpoint = 0
 const STANDARD_SPEED: float = 100
 const MAX_HEALTH: int = 150
@@ -79,20 +84,23 @@ func _ready():
 	$enemy_hands.connect("body_entered", AttackArea_enter)
 	$enemy_hands.connect("body_exited", AttackArea_exit)
 
-	$detection.connect("body_entered", PursuitArea_enter)
-	$detection.connect("body_exited", PursuitArea_exit)
+	detectiron_area.connect("body_entered", PursuitArea_enter)
+	detectiron_area.connect("body_exited", PursuitArea_exit)
 
 	$damage_area.connect("area_entered", DamageArea_enter)
 	$damage_area.connect("area_exited", DamageArea_exit)
 
-func _physics_process(_delta):
+func _physics_process(_delta) -> void:
 	health_bar_control()
-	if attack_area and state != State.DAMAGE:
-		attack()
 	if health_value <= 0:
 		damage_area = false
+		animation(target_position,"death")
+		speed = 1
+		if enemy_animation.get_frame() == 3:
+			death()
+	if attack_area and state != State.DAMAGE:
+		attack()
 	if damage_area and global.player_attack("damage", 0, "get") > 0:
-		
 		if global.player_attack("damage_throw", 0, "get") > 0:
 			cooldown_timer.start(global.player_attack("damage_throw", 0, "get") * 0.01) ##отбрасывание
 			damage(global.player_attack("damage", 0, "get"))
@@ -105,12 +113,14 @@ func _physics_process(_delta):
 					cooldown_timer.start(3)
 					target_position = get_circle_position()
 					state = State.IDLE
-				animation(target_position,"walk")
+				detectiron_area.look_at(nav.get_next_path_position())
+				animation(nav.get_next_path_position(),"walk")
 				move(target_position, speed)
 			State.PURSUIT:
 				nav.target_position = global.get_player_pos()
 				move(nav.get_next_path_position(),speed)
-				if global_position.distance_to(nav.target_position) < 20:
+				detectiron_area.look_at(global.get_player_pos())
+				if position.distance_to(nav.target_position) < 10:
 					speed = 0
 					animation(nav.get_next_path_position(),"idle")
 				else:
@@ -128,11 +138,6 @@ func _physics_process(_delta):
 					if cooldown_timer.time_left < 0.01 and health_value > 0:
 						state = State.PURSUIT
 						is_in_pursuit = true
-					if health_value <= 0:
-						animation(target_position,"death")
-						speed = 1
-						if enemy_animation.get_frame() == 3:
-							death()
 					move(target_position, speed*1.5 * -1)
 			State.IDLE:
 				if cooldown_timer.time_left < 0.01:
@@ -142,7 +147,7 @@ func _physics_process(_delta):
 
 ###############
 
-func move(target_pos, spd):
+func move(target_pos, spd) -> void:
 	nav.target_position = target_pos
 	var direction = to_local(nav.get_next_path_position()).normalized()
 	velocity = direction * spd
@@ -150,25 +155,22 @@ func move(target_pos, spd):
 		move_and_slide()
 		
 func animation(to_position,condition) -> void:
-	var walk = 0
 	var dir = rad_to_deg((to_position - global_position).angle())
-	var direction = round(dir)
-
+	
 	if dir <= 45 and dir >= -45:
-		direction = "right"
+		direction_str = "right"
 		enemy_animation.flip_h = false
 	elif dir <= -135 or dir >= 135:
-		direction = "left"
+		direction_str = "left"
 		enemy_animation.flip_h = true
 	elif dir >= -135 and dir <= -45:
-		direction = "up"
+		direction_str = "up"
 	elif dir <= 135 and dir >= 45:
-		direction = "down"
-
-	if condition in animations and direction in animations[condition]:
-		enemy_animation.play(animations[condition][direction])
-	last_movement = direction
-			 
+		direction_str = "down"
+	if condition in animations and direction_str in animations[condition]:
+		enemy_animation.play(animations[condition][direction_str])
+	last_movement = direction_str
+	 
 ###############health_bar_conrol######################
 
 func health_bar_control() -> void:
@@ -177,10 +179,8 @@ func health_bar_control() -> void:
 	
 	if health_value < 1 or health_value == MAX_HEALTH:
 		health_bar.visible = false
-		print("выкл")
 	else:
 		health_bar.visible = true
-
 
 ###############states######################
 
@@ -230,6 +230,7 @@ func get_circle_position():
 	#var Vector:Vector2 = global_position + num '
 	
 #################states########################
+
 func death():
 	global.player_indicators("coin", 1, "set")	
 	$".".queue_free()
