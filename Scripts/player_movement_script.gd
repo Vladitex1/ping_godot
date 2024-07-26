@@ -47,7 +47,7 @@ var attack_ift: bool = true
 @onready var attack_timer = $Attack_Timer
 @onready var damage_area = $Damage_Zone_Detection
 @onready var hands = $hands
-#@onready var weapon = $hands/WeaponIcon
+@onready var weapon_icon = $Weapon
 @onready var camera2 = $Camera2D
 @onready var nav = $NavigationAgent2D
 @onready var attack_animation = $Weapon/Attack_Animation
@@ -84,6 +84,11 @@ var temp_state = State.WALK
 
 func _ready():
 	# Инициализация глобальных переменных
+	
+	
+	if weapon == 0:
+		weapon_icon.visible = false
+	
 	attack_timer.start(0.001)
 	global.stamina_limit = stamina_cooldown_limit
 	global.player_stamina = starter_stamina
@@ -105,6 +110,9 @@ func hud_load():
 		global.hud_load()
 
 func _physics_process(_delta):
+	
+	
+	
 	hud_load()
 	get_input()
 	debug_buttons()
@@ -163,9 +171,7 @@ func damage(dmg: int):
 
 func attack():
 	
-	
-	
-	
+
 	
 	var input: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	match atck_state:
@@ -178,6 +184,7 @@ func attack():
 			
 				
 		Attack_State.COOLDOWNZERO:
+			attack_timer.start(cooldown_attack)
 			if global.player_indicators("stamina", 0, "get") >= stamina_cooldown_limit:
 				recovery_speed = stamina_recovery_speed
 				atck_state = Attack_State.COOLDOWN
@@ -246,24 +253,16 @@ func animation(anim: String) -> void:
 	
 	match anim:
 		"attack":
-			
-			print("fliph: ",player_animation.flip_h)				
-			print("last_anim: ",last_anim)
-			print("anim_attack_block: ",anim_attack_block)
-			print("time: ",attack_animation.current_animation_position)
-			print("********")
-			
 			match weapon:
 				0:
 					player_animation.play("attack")
-					last_anim = "attack"
-				1:
+				_:
 					match player_align:
 						"left":
 							attack_animation.play("attack_left")
 						"right":
-							attack_animation.play("attack_right")
-					last_anim = "attack"
+							attack_animation.play("attack_right")	
+			last_anim = anim
 		"damage":
 			player_animation.play("damage")
 			last_anim = "damage"
@@ -285,13 +284,12 @@ func animation(anim: String) -> void:
 						player_animation.play("walk_down")
 						last_anim = "walk_down"
 					Vector2(0, 0):
-						if last_anim == "attack":
-							if (player_animation.get_frame() == 4 and weapon == 0) or (player_animation.get_frame() == 3 and weapon != 0):
-								last_anim = "idle"
-						if !anim_attack_block and last_anim != "attack":
+						if last_anim != "attack":
 							attack_animation.stop()
 							player_animation.play("idle")
-							
+						if last_anim == "attack" and weapon == 0:
+							if player_animation.frame == 4:
+								player_animation.play("idle")	
 
 func hands_control():
 	hands.rotation = get_local_mouse_position().angle()

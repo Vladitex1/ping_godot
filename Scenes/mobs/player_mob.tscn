@@ -431,6 +431,94 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="Animation" id="Animation_bu6ly"]
+resource_name = "attack_left"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Weapon:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1e+06, 1e+06, 1e+06, 1e+06, 1e+06),
+"update": 0,
+"values": [0.486947, -0.499164, -2.07694, -2.67035, 0.486947]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Weapon:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-5, 9), Vector2(-5, 9)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Ping_Animation:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1e+06),
+"update": 1,
+"values": [&"attack_weapon", &"idle"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Ping_Animation:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Weapon/WeaponIcon:z_index")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.5),
+"transitions": PackedFloat32Array(23170.5, 870550, 1e+06, 23170.5),
+"update": 1,
+"values": [2, 2, 3, 2]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../Weapon/WeaponIcon:flip_h")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../Ping_Animation:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4, 0.5),
+"transitions": PackedFloat32Array(1e+06, 1e+06, 1e+06, 1e+06),
+"update": 0,
+"values": [Vector2(1, 1.15), Vector2(1.1, 1.265), Vector2(1.1, 1.265), Vector2(1, 1.15)]
+}
+
 [sub_resource type="Animation" id="Animation_0ibxx"]
 resource_name = "attack_right"
 length = 0.5
@@ -531,94 +619,6 @@ tracks/7/keys = {
 "values": [Vector2(0, 2), Vector2(0, 2), Vector2(0, 2.38419e-07)]
 }
 
-[sub_resource type="Animation" id="Animation_bu6ly"]
-resource_name = "attack_left"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Weapon:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1e+06, 1e+06, 1e+06, 1e+06, 1e+06),
-"update": 0,
-"values": [0.486947, -0.499164, -2.07694, -2.67035, 0.486947]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../Weapon:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.1, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-5, 9), Vector2(-5, 9)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../Ping_Animation:animation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.1, 0.5),
-"transitions": PackedFloat32Array(1, 1e+06),
-"update": 1,
-"values": [&"attack_weapon", &"idle"]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../Ping_Animation:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("../Weapon/WeaponIcon:z_index")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.5),
-"transitions": PackedFloat32Array(23170.5, 870550, 1e+06, 23170.5),
-"update": 1,
-"values": [2, 2, 3, 2]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("../Weapon/WeaponIcon:flip_h")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0.1, 0.2, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [false, true, false]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("../Ping_Animation:scale")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.4, 0.5),
-"transitions": PackedFloat32Array(1e+06, 1e+06, 1e+06, 1e+06),
-"update": 0,
-"values": [Vector2(1, 1.15), Vector2(1.1, 1.265), Vector2(1.1, 1.265), Vector2(1, 1.15)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uoo84"]
 _data = {
 "attack_left": SubResource("Animation_bu6ly"),
@@ -672,8 +672,8 @@ texture = ExtResource("5_j5ey8")
 
 [node name="Weapon" type="Node2D" parent="."]
 z_index = -1
-position = Vector2(5, 9)
-rotation = -0.487372
+position = Vector2(-5, 9)
+rotation = 0.486947
 scale = Vector2(0.114282, 0.11428)
 skew = -1.41859e-05
 
@@ -689,7 +689,7 @@ root_node = NodePath("../../hands")
 libraries = {
 "": SubResource("AnimationLibrary_uoo84")
 }
-speed_scale = 2.0
+speed_scale = 1.5
 
 [node name="hands" type="Area2D" parent="."]
 light_mask = 4
@@ -704,7 +704,6 @@ collision_mask = 12
 [node name="HandsColision" type="CollisionPolygon2D" parent="hands"]
 visible = false
 position = Vector2(17.5005, -52.5026)
-scale = Vector2(1, 1)
 polygon = PackedVector2Array(262.509, -306.265, 323.761, -253.763, 411.263, -148.757, 446.265, 52.5026, 411.263, 227.511, 358.762, 332.517, 210.007, 262.513, 227.507, 192.51, 245.008, 52.5026, 227.507, -87.5044, 183.756, -175.009)
 
 [node name="WeaponIcon" type="Sprite2D" parent="hands"]
