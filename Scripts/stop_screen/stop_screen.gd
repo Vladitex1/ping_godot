@@ -8,20 +8,62 @@ var console_visible = false
 @onready var delay_timer = $CanvasLayer/DelayTimer
 @onready var console_node = $CanvasLayer/console
 @onready var console_line = $CanvasLayer/console/LineEdit
-@onready var slider = $CanvasLayer/settings_menu/brightness/slider
-@onready var slider_lable = $CanvasLayer/settings_menu/brightness/slider_lable
+@onready var keybinds_slider = $CanvasLayer/settings_menu/brightness/slider
+@onready var keybinds_slider_lable = $CanvasLayer/settings_menu/brightness/slider_lable
 @onready var keymap_menu = $CanvasLayer/settings_keybinds
+@onready var window_menu = $CanvasLayer/settings_window
+
+
+var active_resolution
+const resolution_list:Dictionary = {
+	1: [1000,700],
+	2: [1200,800],
+	3: [1600,1000],
+	4: [1920,1080],
+	5: [2048,1080],
+	6: [2940, 1912]
+}
+
+###Window_Settings####
+
+@onready var window_res_slider= $CanvasLayer/settings_window/button_list/button_list/in_settings_buttons/resolution/HSlider
+@onready var window_res_label = $CanvasLayer/settings_window/button_list/button_list/in_settings_buttons/resolution/Label
+#@onready var keymap_menu = $CanvasLayer/settings_keybinds
+#@onready var keymap_menu = $CanvasLayer/settings_keybinds
 
 func _ready():
-	$CanvasLayer/main_menu/first_line_stop_menu/main/Button_Continue.connect("button_up",continue_button)
-	$CanvasLayer/main_menu/first_line_stop_menu/main/Button_Settings.connect("button_up",settings_button)
-	$CanvasLayer/main_menu/first_line_stop_menu/main/Button_Quit.connect("button_up",quit_button)
-	$CanvasLayer/settings_menu/settings_menu/settings/Button_Back.connect("button_up",back_button)
-	$CanvasLayer/settings_menu/in_settings_buttons/button_list/keymap/Button_KeyMap.connect("button_down",keymap_button)
-	$CanvasLayer/settings_keybinds/settings_menu/settings/Button_Back.connect("button_down",keymap_back_button)
+	####main_menu####
+	var continue_but = $CanvasLayer/main_menu/first_line_stop_menu/main/Button_Continue
+	continue_but.connect("button_up",continue_button)
+	var settings_but = $CanvasLayer/main_menu/first_line_stop_menu/main/Button_Settings
+	settings_but.connect("button_up",settings_button)
+	var quit_but = $CanvasLayer/main_menu/first_line_stop_menu/main/Button_Quit
+	quit_but.connect("button_up",quit_button)
 	
+	####settings_menu####
+	
+	var back_settings_but = $CanvasLayer/settings_menu/settings_menu/settings/Button_Back
+	back_settings_but.connect("button_up",back_button)
+	
+	var keymap_settings_but = $CanvasLayer/settings_menu/in_settings_buttons/button_list/keymap/Button_KeyMap
+	keymap_settings_but.connect("button_down",keymap_button)
+	
+	var window_settings_but = $CanvasLayer/settings_menu/in_settings_buttons/button_list/window/Button_Window
+	window_settings_but.connect("button_down",window_button)
+	
+	####keymap######
+	var back_keymap_but = $CanvasLayer/settings_keybinds/settings_menu/settings/Button_Back
+	back_keymap_but.connect("button_down",keymap_back_button)
+	
+	###window####
+	
+	var back_window_but = $CanvasLayer/settings_window/settings_menu/settings/Button_Back
+	back_window_but.connect("button_down",window_back_button)
+	
+	var confirm_window_but = $CanvasLayer/settings_window/settings_menu/settings/Button_Confirm
+	confirm_window_but.connect("button_down",window_confirm_button)
 	get_tree().paused = true
-	slider.value = global.brightness
+	keybinds_slider.value = global.brightness
 	delay_timer.start(0.2)
 
 enum {
@@ -34,7 +76,8 @@ enum {
 	
 
 func _process(_delta):
-	brightness_slider()
+	settings_brightness_slider()
+	window_resolution_slider()
 	if delay_timer.is_stopped() == true:
 		if Input.is_action_just_released("special_back") and !global.buttons_lock:
 			get_tree().paused = false
@@ -96,12 +139,46 @@ func keymap_button():
 	global.buttons_lock = true
 	settings_menu.hide()
 	keymap_menu.show()	
+
+func window_button():
+	global.buttons_lock = true
+	settings_menu.hide()
+	window_menu.show()	
+
+	
+func window_back_button():
+	global.buttons_lock = false
+	settings_menu.show()
+	window_menu.hide()		
 	
 func keymap_back_button():
 	global.buttons_lock = false
 	settings_menu.show()
 	keymap_menu.hide()		
+
+
 	
-func brightness_slider():
-	global.brightness = slider.value
-	slider_lable.text = "brightness: "+str(slider.value)
+func settings_brightness_slider():
+	global.brightness = keybinds_slider.value
+	keybinds_slider_lable.text = "brightness: "+str(keybinds_slider.value)
+
+func window_resolution_slider():
+	var num = window_res_slider.value
+	var result = resolution_list[int(num)]
+	var text = str(result[0],"x",result[1])
+	window_res_label.text = text
+	active_resolution = result
+	#global.brightness = window_res_slider.value
+	
+func window_confirm_button():
+	var num1 = active_resolution[0]
+	var num2 = active_resolution[1]
+	#print(DisplayServer.screen_get_size())
+	#get_tree().screen_get_size
+	get_viewport().position = Vector2i(0,0)
+	get_viewport().size = Vector2i(num1,num2)
+	#print(get_viewport().size)
+	#get_tree().viewport.set_size(Vector2i(num1,num2))
+	#ProjectSettings.save()
+
+

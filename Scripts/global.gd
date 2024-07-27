@@ -35,7 +35,9 @@ static var camera_position: Vector2
 static var camera_zoom: Vector2
 static var stamina_limit: int
 static var dragging:bool = false
-	
+
+
+
 func change_scene(namestr):
 	get_tree().change_scene_to_file("res://Scenes/"+namestr+".tscn")
 	

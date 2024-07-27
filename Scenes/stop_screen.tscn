@@ -435,18 +435,24 @@ offset_left = -2.0
 offset_top = 3.5
 offset_right = 122.0
 offset_bottom = 20.5
+min_value = 1.0
 max_value = 6.0
 value = 3.0
 
 [node name="settings_menu" type="MarginContainer" parent="CanvasLayer/settings_window"]
 layout_mode = 0
-offset_left = 81.5
-offset_top = 7.0
-offset_right = 146.5
-offset_bottom = 40.0
+offset_left = -34.0
+offset_top = 8.5
+offset_right = 103.0
+offset_bottom = 41.5
 
 [node name="settings" type="HBoxContainer" parent="CanvasLayer/settings_window/settings_menu"]
 layout_mode = 2
+
+[node name="Button_Confirm" type="Button" parent="CanvasLayer/settings_window/settings_menu/settings"]
+layout_mode = 2
+theme = SubResource("Theme_x2boa")
+text = "confirm"
 
 [node name="Button_Back" type="Button" parent="CanvasLayer/settings_window/settings_menu/settings"]
 layout_mode = 2

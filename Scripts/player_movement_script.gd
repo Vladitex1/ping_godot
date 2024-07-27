@@ -106,6 +106,8 @@ func hud_load():
 	if hud_loaded:
 		hud_loaded = false
 		global.hud_load()
+		get_viewport().position = Vector2i(0,0)
+		get_viewport().size = DisplayServer.screen_get_size()
 
 func _physics_process(_delta):
 	

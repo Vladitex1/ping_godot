@@ -17,4 +17,5 @@ res://Scenes/stop_screen.tscn
 res://Scenes/shop/shop_item.tscn
 res://Scenes/objects/shop_object.tscn
 res://Scenes/objects/navigation_point.tscn
-res://Scripts/skeleton_script.gd
+res://Scripts/stop_screen/stop_screen.gd
+res://Scripts/global.gd
