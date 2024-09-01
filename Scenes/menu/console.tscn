@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://jtlh7kljlt8i"]
+
+[ext_resource type="Script" path="res://Scripts/console.gd" id="1_4flbb"]
+[ext_resource type="StyleBox" uid="uid://b1j6fi831qnyn" path="res://Thems/console_stylebox_0.tres" id="1_bgyjd"]
+
+[node name="console" type="CanvasLayer"]
+process_mode = 2
+script = ExtResource("1_4flbb")
+
+[node name="LineEdit" type="LineEdit" parent="."]
+offset_left = -1.0
+offset_top = 13.0
+offset_right = 1919.0
+offset_bottom = 37.0
+theme_override_styles/normal = ExtResource("1_bgyjd")
+theme_override_styles/focus = ExtResource("1_bgyjd")
+placeholder_text = "console"
+alignment = 2

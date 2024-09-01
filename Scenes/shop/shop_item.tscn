@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bv87kk1yo0gh7" path="res://assets/items/loot/coin_icon_large.png" id="2_yx65g"]
 
 [node name="shop_item" type="Node2D"]
-position = Vector2(44, 45)
+position = Vector2(45, 45)
 scale = Vector2(0.19, 0.19)
 script = ExtResource("1_n6sg7")
 

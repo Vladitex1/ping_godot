@@ -72,6 +72,8 @@ var player: Node2D = null
 var direction = Vector2()
 var target_position: Vector2
 var is_in_pursuit = true
+var distance: int = 20
+var local_target: String
 
 func _ready():
 	cooldown_timer.start(0.001)
@@ -80,7 +82,7 @@ func _ready():
 	health_progress_bar.max_value = MAX_HEALTH
 	health_bar.visible = false
 	target_position = get_circle_position()
-	
+	distance_to_target()
 	$enemy_hands.connect("body_entered", AttackArea_enter)
 	$enemy_hands.connect("body_exited", AttackArea_exit)
 
@@ -89,6 +91,8 @@ func _ready():
 
 	$damage_area.connect("area_entered", DamageArea_enter)
 	$damage_area.connect("area_exited", DamageArea_exit)
+
+
 
 func _physics_process(_delta) -> void:
 	health_bar_control()
@@ -109,10 +113,17 @@ func _physics_process(_delta) -> void:
 		match state:
 			State.PATROL:
 				speed = STANDARD_SPEED/2
-				if global_position.distance_to(target_position) < 20:
-					cooldown_timer.start(3)
+				var target
+				match local_target:
+					"circle": 
+						target = nav.get_next_path_position()
+					_: 
+						target = nav.target_position
+				if position.distance_to(target) < distance or !nav.is_target_reachable():
 					target_position = get_circle_position()
+					cooldown_timer.start(3)
 					state = State.IDLE
+					
 				detectiron_area.look_at(nav.get_next_path_position())
 				animation(nav.get_next_path_position(),"walk")
 				move(target_position, speed)
@@ -124,7 +135,7 @@ func _physics_process(_delta) -> void:
 					speed = 0
 					animation(nav.get_next_path_position(),"idle")
 				else:
-					speed = STANDARD_SPEED
+					speed = STANDARD_SPEED + 20
 					animation(nav.get_next_path_position(),"walk")
 				if DEBUG_FREEZE:
 					state = State.IDLE
@@ -142,7 +153,7 @@ func _physics_process(_delta) -> void:
 			State.IDLE:
 				if cooldown_timer.time_left < 0.01:
 					state = State.PATROL
-				animation(Vector2(0,0),"idle")
+				animation(nav.get_next_path_position(),"idle")
 				
 
 ###############
@@ -167,9 +178,11 @@ func animation(to_position,condition) -> void:
 		direction_str = "up"
 	elif dir <= 135 and dir >= 45:
 		direction_str = "down"
+		
 	if condition in animations and direction_str in animations[condition]:
 		enemy_animation.play(animations[condition][direction_str])
 	last_movement = direction_str
+
 	 
 ###############health_bar_conrol######################
 
@@ -204,30 +217,36 @@ func state_switcher(object: String, in_or_out: String):
 					state = State.PATROL
 
 ###############patrol######################
-
+func distance_to_target():
+	var node = $".".get_parent().get_parent()
+	var node1 = node.get_child(0).get_child(3)
+	if !node1.position_list.has(list_num):
+		local_target = "circle"
+	else:
+		local_target = "position"
+		
 func get_circle_position():
 	var node = $".".get_parent().get_parent()
 	var node1 = node.get_child(0).get_child(3)
 	#print(node1.position_list)
 	if !node1.position_list.has(list_num):
-		list_num = 0
-	if current_checkpoint == len(node1.position_list)-1:
-		current_checkpoint = 0
+		var max = 30
+		var min = -30
+		var randnum1 = randi_range(min, max)
+		var randnum2 = randi_range(min, max)
+		var num = Vector2(cos(randnum1), sin(randnum2)) * 100
+		var Vector:Vector2 = global_position + num
+		return Vector
 	else:
-		current_checkpoint += 1
-	var naem = node1.position_list[list_num][current_checkpoint]
-	var Vector: Vector2 = Vector2(naem[0],naem[1])
-	return Vector
-	
-	
-	
-	'	#print(naem)
-	var max = 30
-	var min = -30
-	var randnum1 = randi_range(min, max)
-	var randnum2 = randi_range(min, max)
-	var num = Vector2(cos(randnum1), sin(randnum2)) * 100
-	#var Vector:Vector2 = global_position + num '
+		if current_checkpoint == len(node1.position_list)-1:
+			current_checkpoint = 0
+		else:
+			current_checkpoint += 1
+			
+		var naem = node1.position_list[list_num][current_checkpoint]
+		var Vector: Vector2 = Vector2(naem[0],naem[1])
+		return Vector
+
 	
 #################states########################
 

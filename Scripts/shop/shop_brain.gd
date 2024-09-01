@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer
 
 @onready var cost_lable = $shop_plate/text/cost
 @onready var sell_cost_lable = $shop_plate/text/sell_cost
@@ -45,14 +45,13 @@ func _ready():
 	shop_info_storage(0)#randi_range(0,3))
 	##shop inventory
 	
-func eyes():
-	var mouse_pos = get_local_mouse_position().angle()
-	eye_left.rotation = mouse_pos
-	eye_right.rotation = mouse_pos
+#func eyes():
+	#var mouse_pos = get_global_mouse_position().angle()
+	#eye_left.rotation = mouse_pos
+	#eye_right.rotation = mouse_pos
 	
 	
 func _process(_delta):
-	eyes()
 	buttons_control()
 
 	var state: bool

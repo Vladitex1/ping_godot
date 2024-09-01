@@ -86,8 +86,7 @@ func _ready():
 	# Инициализация глобальных переменных
 	if weapon == 1:
 		weapon_icon.visible = true
-		
-	attack_timer.start(0.001)
+	#attack_timer.start(0.001)
 	global.stamina_limit = stamina_cooldown_limit
 	global.player_stamina = starter_stamina
 	global.max_stamina = max_stamina
@@ -106,21 +105,45 @@ func hud_load():
 	if hud_loaded:
 		hud_loaded = false
 		global.hud_load()
+<<<<<<< Updated upstream
 		#get_viewport().position = Vector2i(0,0)
 		#get_viewport().size = DisplayServer.screen_get_size()
 
 		
+=======
+		
+
+		
+		
+		
+		#get_viewport().position = Vector2i(0,0)
+		#get_viewport().size = DisplayServer.screen_get_size()
+		###loading_custom_scene###
+		#var new_scene: Object = load("res://Scenes/window.tscn").instantiate()
+		#get_tree().root.add_child(new_scene)
+		
+>>>>>>> Stashed changes
 
 func _physics_process(_delta):
+	
+	
+	for i in get_tree().root.get_child_count():
+		print(get_tree().root.get_child(i).name)
+	
+	print("____")
+	
+	
 	
 	hud_load()
 	get_input()
 	debug_buttons()
-	
 	state_switcher()
 	movement()
 	attack()	
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 	
 	match state:
 		State.IDLE:
@@ -177,7 +200,6 @@ func attack():
 				atck_state = Attack_State.COOLDOWNZERO
 			else:
 				atck_state = Attack_State.COOLDOWN
-			
 				
 		Attack_State.COOLDOWNZERO:
 			attack_timer.start(cooldown_attack)

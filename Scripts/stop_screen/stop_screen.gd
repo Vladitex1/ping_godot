@@ -1,11 +1,10 @@
 extends Control
 
-var console_visible = false
 
 @onready var window = $"."
-@onready var settings_menu = $CanvasLayer/settings_menu
-@onready var main_menu = $CanvasLayer/main_menu
+@onready var main_menu = $CanvasLayer
 @onready var delay_timer = $CanvasLayer/DelayTimer
+<<<<<<< Updated upstream
 @onready var console_node = $CanvasLayer/console
 @onready var console_line = $CanvasLayer/console/LineEdit
 @onready var keybinds_slider = $CanvasLayer/settings_menu/brightness/slider
@@ -31,6 +30,9 @@ const resolution_list:Dictionary = {
 @onready var window_res_label = $CanvasLayer/settings_window/button_list/button_list/in_settings_buttons/resolution/Label
 #@onready var keymap_menu = $CanvasLayer/settings_keybinds
 #@onready var keymap_menu = $CanvasLayer/settings_keybinds
+=======
+var console_visible: bool = true
+>>>>>>> Stashed changes
 
 func _ready():
 	####main_menu####
@@ -44,110 +46,44 @@ func _ready():
 	
 	####settings_menu####
 	
-	var back_settings_but = $CanvasLayer/settings_menu/settings_menu/settings/Button_Back
-	back_settings_but.connect("button_up",back_button)
-	
-	var keymap_settings_but = $CanvasLayer/settings_menu/in_settings_buttons/button_list/keymap/Button_KeyMap
-	keymap_settings_but.connect("button_down",keymap_button)
-	
-	var window_settings_but = $CanvasLayer/settings_menu/in_settings_buttons/button_list/window/Button_Window
-	window_settings_but.connect("button_down",window_button)
-	
-	####keymap######
-	var back_keymap_but = $CanvasLayer/settings_keybinds/settings_menu/settings/Button_Back
-	back_keymap_but.connect("button_down",keymap_back_button)
-	
-	###window####
-	
-	var back_window_but = $CanvasLayer/settings_window/settings_menu/settings/Button_Back
-	back_window_but.connect("button_down",window_back_button)
-	
-	var confirm_window_but = $CanvasLayer/settings_window/settings_menu/settings/Button_Confirm
-	confirm_window_but.connect("button_down",window_confirm_button)
 	get_tree().paused = true
-	keybinds_slider.value = global.brightness
 	delay_timer.start(0.2)
 
-enum {
-	GET,
-	SET,
-	key,
-	coin,
-	hp,
-}	
-	
-
 func _process(_delta):
-	settings_brightness_slider()
-	window_resolution_slider()
-	if delay_timer.is_stopped() == true:
-		if Input.is_action_just_released("special_back") and !global.buttons_lock:
-			get_tree().paused = false
-			global.del_scene("stop_screen")
-		if Input.is_action_just_released("special_console") and !global.buttons_lock:
-			console_toggle()
-		if Input.is_action_just_released("enter") and console_visible and !global.buttons_lock:
-			var command = str(console_line.get_text())
-			var text = console_text_parse(command)
-			console_line.set_text(text)
-			await get_tree().create_timer(2).timeout
-			console_line.set_text("")
-			
-
-func console_text_parse(text : String):
-	text = text.lstrip(" ").rstrip(" ")
-	var firstSpace : int = text.find(" ")
-	var secondSpace : int = text.find(" ",firstSpace+1)
-	var command : String
-	var value1 : String
-	var value2 : String
-	if firstSpace == -1:
-		command = text
+	if global.mm_hide == true:
+		main_menu.hide()
+		global.buttons_lock = true
 	else:
-		command = text.substr(0, firstSpace)
-		value1 = text.substr(firstSpace+1,secondSpace - firstSpace-1)
-		value2 = text.substr(secondSpace+1,len(text))
-	var text2
-	if value1 == null:
-		text2 = "input_error"
-		return text2
-	return console.input(str(command),value1,value2)
-
-func console_toggle():
-	if console_visible:	 
-		console_visible = false
-	else:
-		console_visible = true
-	console_node.visible = console_visible	
+		main_menu.show()
+		global.buttons_lock = false
+		
+	if delay_timer.is_stopped() and Input.is_action_just_released("special_back") and !global.buttons_lock:
+		continue_button()
+	if Input.is_action_just_released("special_console"):
+		console_toggle()
 	
 func continue_button():
+	print("консоль выкл")
+	console_visible = true
+	global.del_scene("console")
+	
 	get_tree().paused = false
 	global.del_scene("stop_screen")
 	
 func settings_button():
+	global.add_scene("settings")
 	main_menu.hide()
-	settings_menu.show()
 
 func quit_button():
 	get_tree().quit()
 
-###settings menu
-
-func back_button():
-	settings_menu.hide()
-	main_menu.show()
+func console_toggle():
+	for i in get_tree().root.get_child_count():
+		print(get_tree().root.get_child(i).name)
 	
-func keymap_button():
-	global.buttons_lock = true
-	settings_menu.hide()
-	keymap_menu.show()	
-
-func window_button():
-	global.buttons_lock = true
-	settings_menu.hide()
-	window_menu.show()	
-
+	print("____")
 	
+<<<<<<< Updated upstream
 func window_back_button():
 	global.buttons_lock = false
 	settings_menu.show()
@@ -205,3 +141,14 @@ func window_confirm_button():
 	#ProjectSettings.save()
 
 
+=======
+	match console_visible:
+		true:
+			print("консоль вкл")
+			console_visible = false
+			global.add_scene("console")
+		false:
+			print("консоль выкл")
+			console_visible = true
+			global.del_scene("console")
+>>>>>>> Stashed changes
