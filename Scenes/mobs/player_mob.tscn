@@ -655,8 +655,6 @@ animation = &"attack"
 
 [node name="Waiting_Animation" type="AnimatedSprite2D" parent="."]
 visible = false
-light_mask = 14
-visibility_layer = 14
 z_index = 2
 position = Vector2(0, -30)
 scale = Vector2(1.10714, 1.10714)
@@ -665,8 +663,8 @@ animation = &"wait_circle"
 
 [node name="Interactive" type="Sprite2D" parent="."]
 visible = false
-light_mask = 14
-visibility_layer = 14
+light_mask = 15
+visibility_layer = 15
 z_index = 2
 position = Vector2(-1.19209e-07, -29.6072)
 scale = Vector2(0.901786, 0.924102)

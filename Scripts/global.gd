@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Node
 
 
 var shop_toggle:bool = false
@@ -36,27 +36,13 @@ static var camera_zoom: Vector2
 static var stamina_limit: int
 static var dragging:bool = false
 
-var mm_hide: bool = false
-
-
-var scenes = {
-	"hud": "res://Scenes/hud.tscn",
-	"shop": "res://Scenes/shop/shop.tscn",
-	"inventory": "res://Scenes/inventory.tscn",
-	"stop_screen": "res://Scenes/stop_screen.tscn",
-	"settings": "res://Scenes/menu/settings.tscn",
-	"console": "res://Scenes/menu/console.tscn",
-	"main1": "res://Scenes/main1.tscn",
-	"main_menu": "res://Scenes/menu/main_menu.tscn",
-}
-
 
 
 func change_scene(namestr):
-	get_tree().change_scene_to_file(scenes[namestr])
+	get_tree().change_scene_to_file("res://Scenes/"+namestr+".tscn")
 	
 func add_scene(namestr):#add_child(
-	var new_scene: Object = load(scenes[namestr]).instantiate()
+	var new_scene: Object = load("res://Scenes/"+namestr+".tscn").instantiate()
 	get_tree().root.add_child(new_scene)
 	
 	
@@ -64,14 +50,14 @@ func add_scene(namestr):#add_child(
 func del_scene(namestr):
 	var scene = namestr
 	for i in get_tree().root.get_child_count():
-		#print(get_tree().root.get_child(i).name)
 		if get_tree().root.get_child(i).name == namestr:
+			print(get_tree().root.get_child(i).name)
 			scene = get_tree().root.get_child(i)
 			scene.queue_free()
 		
 func hud_load():
-	add_scene("hud")
-	add_scene("inventory")
+	global.add_scene("hud")
+	global.add_scene("inventory")
 
 func set_player_pos(vector: Vector2):
 	player_position = vector

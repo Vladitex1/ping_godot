@@ -11,7 +11,7 @@ extends Control
 @onready var icon_animation = $plate/icon/icon_animation
 var value: int  = 0
 func _ready():
-
+	
 	stamina_bar.max_value = global.max_stamina
 	health_bar.max_value = global.max_health
 	stamina_bar_limit.value = global.stamina_limit
