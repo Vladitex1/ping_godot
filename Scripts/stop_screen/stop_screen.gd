@@ -22,7 +22,7 @@ const resolution_list:Dictionary = {
 	3: [1600,1000,0.84,800,575],
 	4: [1920,1080,1,960,540],
 	5: [2048,1080,1,250,825],
-	6: [2940, 1780,1,250,825]
+	6: [2940, 1780,1.53,1475,1100]
 }
 
 ###Window_Settings####
@@ -165,9 +165,10 @@ func window_reset_button2():
 	get_tree().reload_current_scene()
 	
 func window_reset_button():
-	var scaled = 1.04
-	var base_resolution = Vector2(2048,1080)
-	var positioned = Vector2(1000,500)
+	var scaled = 1.53
+	var res = 4
+	var base_resolution = Vector2(resolution_list[res][0],resolution_list[res][1])
+	var positioned = Vector2(1475,1100)
 	global.del_scene("hud")
 	DisplayServer.window_set_size(base_resolution)
 	get_viewport().size = base_resolution
