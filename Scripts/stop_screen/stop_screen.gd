@@ -16,12 +16,13 @@ var console_visible = false
 
 var active_resolution
 const resolution_list:Dictionary = {
-	1: [1000,700],
-	2: [1200,800],
-	3: [1600,1000],
-	4: [1920,1080],
-	5: [2048,1080],
-	6: [2940, 1912]
+	####width,height,interface_scale
+	1: [500,500,0.1],
+	2: [1200,800,0.6],
+	3: [1600,1000,0.6],
+	4: [1920,1080,1],
+	5: [2048,1080,1.4],
+	6: [2940, 1780,1.4]
 }
 
 ###Window_Settings####
@@ -33,6 +34,7 @@ const resolution_list:Dictionary = {
 
 func _ready():
 	####main_menu####
+	print(get_viewport().size)
 	var continue_but = $CanvasLayer/main_menu/first_line_stop_menu/main/Button_Continue
 	continue_but.connect("button_up",continue_button)
 	var settings_but = $CanvasLayer/main_menu/first_line_stop_menu/main/Button_Settings
@@ -171,14 +173,35 @@ func window_resolution_slider():
 	#global.brightness = window_res_slider.value
 	
 func window_confirm_button():
+	##Позиция окна
+	get_viewport().position = Vector2i(0,0)
+	##Разамер окна
 	var num1 = active_resolution[0]
 	var num2 = active_resolution[1]
+	
+	
+	print("a_r0: ",active_resolution[0])
+	print("a_r1: ",active_resolution[1])
+	
+	var Screen_Size = Vector2i(num1,num2)
+	var Scale = Vector2(active_resolution[2],active_resolution[2])
+	var Scaled_Position = Screen_Size/2
 	#print(DisplayServer.screen_get_size())
 	#get_tree().screen_get_size
-	get_viewport().position = Vector2i(0,0)
-	get_viewport().size = Vector2i(num1,num2)
-	#print(get_viewport().size)
-	#get_tree().viewport.set_size(Vector2i(num1,num2))
+	#get_viewport().size = DisplayServer.screen_get_size()
+	#DisplayServer.window_set_size(Vector2i(num1,num2))
+	
+	$".".position = Scaled_Position 
+	$CanvasLayer.scale = Scale
+	
+	DisplayServer.window_set_size(Screen_Size)
+	get_viewport().size = Screen_Size
+	#print("размер экрана: ",)
+	
+	
+	get_tree().reload_current_scene()
+	print("size:1 ",get_viewport().size)
+	print("size:2 ",num1," ",num2)
 	#ProjectSettings.save()
 
 

@@ -106,8 +106,10 @@ func hud_load():
 	if hud_loaded:
 		hud_loaded = false
 		global.hud_load()
-		get_viewport().position = Vector2i(0,0)
-		get_viewport().size = DisplayServer.screen_get_size()
+		#get_viewport().position = Vector2i(0,0)
+		#get_viewport().size = DisplayServer.screen_get_size()
+
+		
 
 func _physics_process(_delta):
 	
@@ -118,9 +120,7 @@ func _physics_process(_delta):
 	state_switcher()
 	movement()
 	attack()	
-	#print(global.player_attack("damage", attack_strength, "get"))
-	#print(attack_timer.time_left)
-	#print("______________")
+
 	
 	match state:
 		State.IDLE:
@@ -168,8 +168,6 @@ func damage(dmg: int):
 	state = State.DAMAGE
 
 func attack():
-	
-
 	
 	var input: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	match atck_state:
@@ -247,13 +245,17 @@ func get_input():
 
 
 func animation(anim: String) -> void:
-	update_player_position()
+	
+	
 	
 	match anim:
 		"attack":
+			update_player_position(player.get_global_position() - get_global_mouse_position())
 			match weapon:
 				0:
+					player_animation.flip_h = true
 					player_animation.play("attack")
+					
 				_:
 					match player_align:
 						"left":
@@ -265,6 +267,7 @@ func animation(anim: String) -> void:
 			player_animation.play("damage")
 			last_anim = "damage"
 		_:
+			update_player_position(velocity)
 			if cooldown_damage_timer.time_left < 0.1:
 				match Input.get_vector("move_left", "move_right", "move_up", "move_down"):
 					Vector2(1, 0):  # Право
@@ -298,15 +301,14 @@ func animation(anim: String) -> void:
 func hands_control():
 	hands.rotation = get_local_mouse_position().angle()
 
-func update_player_position():
+func update_player_position(align):
 	global.set_player_pos(global_position)
-	var align = player.get_global_position() - get_global_mouse_position()
 	if align[0] >= 0:
 		player_align = "left"
-		player_animation.flip_h = true
+		player_animation.flip_h = false
 	else:
 		player_align = "right"
-		player_animation.flip_h = false
+		player_animation.flip_h = true
 
 func debug_buttons():
 	

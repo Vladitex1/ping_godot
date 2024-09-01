@@ -651,7 +651,7 @@ shape = SubResource("RectangleShape2D_ptcxw")
 z_index = 2
 scale = Vector2(1, 1.15)
 sprite_frames = SubResource("SpriteFrames_cvcsf")
-animation = &"walk_right"
+animation = &"attack"
 
 [node name="Waiting_Animation" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -741,12 +741,6 @@ texture = ExtResource("2_cesop")
 texture_scale = 4.98
 height = 3.0
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-1.19209e-07, 1.19209e-07)
-zoom = Vector2(2, 2)
-position_smoothing_enabled = true
-script = ExtResource("7_tbpjk")
-
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 visible = false
 position = Vector2(5.82077e-11, 1.19209e-07)
@@ -759,3 +753,9 @@ one_shot = true
 
 [node name="Attack_Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-1.19209e-07, 1.19209e-07)
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+script = ExtResource("7_tbpjk")
