@@ -1,3 +1,4 @@
+res://Scripts/stop_screen
 res://assets/Ping
 res://assets/interface
 res://Scenes/objects
@@ -10,7 +11,6 @@ res://Scenes
 res://assets/Tilemap
 res://Scenes/mobs
 res://debug_scenes
-res://Scripts/stop_screen
 res://Scenes/stop_screen
 res://Thems
 G:/godot/ping/Scripts

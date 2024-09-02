@@ -5,6 +5,7 @@ res://Scripts/CollisionShape2D.gd
 res://Scripts/door_script.gd
 res://Scripts/player_movement_script.gd
 res://Thems/console_stylebox_0.tres
+res://Scripts/stop_screen/stop_screen.gd
 res://Scenes/objects/lamp_object.tscn
 res://Scenes/objects/door_object.tscn
 res://Scenes/mobs/player_mob.tscn
@@ -17,4 +18,5 @@ res://Scenes/hud.tscn
 res://Scenes/shop/shop_item.tscn
 res://Scenes/objects/shop_object.tscn
 res://Scenes/objects/navigation_point.tscn
-res://Scripts/stop_screen/stop_screen.gd
+res://Scripts/stop_screen/window_settings_script.gd
+res://Scripts/stop_screen/config.gd

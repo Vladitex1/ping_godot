@@ -22,11 +22,15 @@ config/windows_native_icon="res://pingicon.ico"
 global="*res://Scripts/global.gd"
 itemlist="*res://Scripts/ItemList_script.gd"
 console="*res://Scripts/console.gd"
+config="*res://Scripts/stop_screen/config.gd"
 
 [display]
 
 window/size/viewport_width=3000
 window/size/viewport_height=2000
+window/size/mode=3
+window/size/resizable=false
+window/size/borderless=true
 window/stretch/mode="viewport"
 window/stretch/aspect="ignore"
 window/stretch/scale_mode="integer"

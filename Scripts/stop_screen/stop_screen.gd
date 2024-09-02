@@ -69,7 +69,8 @@ func _ready():
 	var reset_window_but = $CanvasLayer/control_module/settings_window/settings_menu/settings/Button_Reset
 	reset_window_but.connect("button_down",window_reset_button)
 	
-	
+	window_res_slider.value = config.BASE_RES_NUM
+	window_reset(config.BASE_RES_NUM)
 	
 	get_tree().paused = true
 	keybinds_slider.value = global.brightness
@@ -93,7 +94,7 @@ func _process(_delta):
 			global.del_scene("stop_screen")
 		if Input.is_action_just_released("special_console") and !global.buttons_lock:
 			console_toggle()
-			window_reset_button()
+			window_reset(config.TEMP_RES)
 		if Input.is_action_just_released("enter") and console_visible and !global.buttons_lock:
 			var command = str(console_line.get_text())
 			var text = console_text_parse(command)
@@ -176,6 +177,15 @@ func window_reset_button():
 	$CanvasLayer/control_module.position = positioned
 	get_tree().reload_current_scene()	
 	
+func window_reset(res):
+	var scaled = config.resolution_list[res][2]
+	var resolution = Vector2(config.resolution_list[res][0],config.resolution_list[res][1])
+	var positioned = Vector2(config.resolution_list[res][3],config.resolution_list[res][4])
+	DisplayServer.window_set_size(resolution)
+	get_viewport().size = resolution
+	$CanvasLayer/control_module.scale = Vector2(scaled,scaled)
+	$CanvasLayer/control_module.position = positioned
+	get_tree().reload_current_scene()	
 	
 func window_back_button():
 	global.buttons_lock = false
@@ -186,8 +196,6 @@ func keymap_back_button():
 	global.buttons_lock = false
 	settings_menu.show()
 	keymap_menu.hide()		
-
-
 	
 func settings_brightness_slider():
 	global.brightness = keybinds_slider.value
@@ -195,36 +203,37 @@ func settings_brightness_slider():
 
 func window_resolution_slider():
 	var num = window_res_slider.value
-	var result = resolution_list[int(num)]
+	var result = config.resolution_list[int(num)]
 	var text = str(result[0],"x",result[1])
 	window_res_label.text = text
 	active_resolution = result
-	#global.brightness = window_res_slider.value
-	
+
 func window_confirm_button():
 	##Размер окна
 	var Screen_Size = Vector2(active_resolution[0], active_resolution[1])
 	var Scale = Vector2(active_resolution[2],active_resolution[2])
 	var Scaled_Position = Screen_Size/2
 	
-	DisplayServer.window_set_size(Screen_Size)
-	get_viewport().size = Screen_Size
-	
-	$CanvasLayer/control_module.position = Vector2(active_resolution[3],active_resolution[4])
-	$CanvasLayer/control_module.scale = Scale
 	
 
 	
-	get_tree().reload_current_scene()
-	
-	
-	##############debug#############
-	print("__________________")
-	print("размер экрана: ",DisplayServer.screen_get_size()) ##Вывод размера экрана
-	print("новое разрешение приложения: ",active_resolution[0],"x",active_resolution[1])
-	print("Scale разрешения: ",active_resolution[2])
+	DisplayServer.window_set_size(Screen_Size)
+	get_viewport().size = Screen_Size
+	$CanvasLayer/control_module.position = Vector2(Scaled_Position[0], Scaled_Position[1] + 200)
+	#$CanvasLayer/control_module.position = Vector2(active_resolution[3],active_resolution[4])
+	$CanvasLayer/control_module.scale = Scale
+
+
+	print("Screen_Size: ",Screen_Size)
+	print("Scale: ",Scale)
 	print("Scaled_Position: ",Scaled_Position)
-	print("real_interface_position: ",$CanvasLayer/control_module.position)
+	print("control_module.position: ",$CanvasLayer/control_module.position)
+
+
+
+	config.BASE_RES_NUM = window_res_slider.value
+	get_tree().reload_current_scene()
+
 	#print("size:2 ",num1," ",num2)
 	#ProjectSettings.save()
 

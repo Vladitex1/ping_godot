@@ -60,10 +60,12 @@ placeholder_text = "console"
 
 [node name="control_module" type="Control" parent="CanvasLayer"]
 layout_mode = 3
+anchor_left = -0.0208333
+anchor_top = -0.037037
 anchor_right = -0.0208333
 anchor_bottom = -0.037037
-offset_left = 1500.0
-offset_top = 1000.0
+offset_left = 1562.5
+offset_top = 1074.07
 offset_right = 1562.5
 offset_bottom = 1074.07
 metadata/_edit_use_anchors_ = true
@@ -476,6 +478,7 @@ theme = SubResource("Theme_x2boa")
 text = "back"
 
 [node name="LineEdit" type="LineEdit" parent="CanvasLayer/control_module"]
+layout_mode = 0
 offset_left = -960.0
 offset_top = -540.0
 offset_right = 960.0
@@ -486,6 +489,7 @@ placeholder_text = "console"
 alignment = 2
 
 [node name="LineEdit" type="LineEdit" parent="CanvasLayer/control_module/LineEdit"]
+layout_mode = 0
 offset_top = 1056.0
 offset_right = 1920.0
 offset_bottom = 1080.0
