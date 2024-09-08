@@ -3,9 +3,12 @@ extends Node
 
 var shop_toggle:bool = false
 var action_toggle:bool = false
+var pickup_toggle: bool = false
 var loading_toggle:bool = false
 var heat_toggle:bool = false
 var buttons_lock: bool = false
+var hold_in_hands: bool = false
+
 
 static var drag_toggle:bool = false
 static var brightness:float = 0.4
@@ -44,8 +47,21 @@ func change_scene(namestr):
 func add_scene(namestr):#add_child(
 	var new_scene: Object = load("res://Scenes/"+namestr+".tscn").instantiate()
 	get_tree().root.add_child(new_scene)
+
+func visible_scene(namestr: String, status: bool):
+	for i in get_tree().root.get_child_count():
+		if get_tree().root.get_child(i).name == namestr:
+			get_tree().root.get_child(i).visible = status
+
+func viev_scene_list():
+	for i in get_tree().root.get_child_count():
+		print(get_tree().root.get_child(i).name)
+		
+	print("~~~~~~~~~~~~~~~~~~~~~~~~~")
 	
-	
+func reload_scene(namestr):	
+	del_scene(namestr)
+	add_scene(namestr)
 	
 func del_scene(namestr):
 	var scene = namestr
@@ -55,9 +71,6 @@ func del_scene(namestr):
 			scene = get_tree().root.get_child(i)
 			scene.queue_free()
 		
-func hud_load():
-	global.add_scene("hud")
-	global.add_scene("inventory")
 
 func set_player_pos(vector: Vector2):
 	player_position = vector

@@ -12,7 +12,6 @@ extends Control
 @onready var eye_left = $eyes/eye_left
 @onready var intresting_slot = $shop_plate/IntrestingSlot
 static var standart_label = ["name","count","cost","sell"]
-
 var num123 = -1 ##debug
 var count:int = 1
 
@@ -44,6 +43,16 @@ func _ready():
 
 	shop_info_storage(0)#randi_range(0,3))
 	##shop inventory
+	node_reset(config.BASE_RES_NUM)
+	
+func node_reset(res):
+	var scaled = config.resolution_list[res][2]
+	var positioned = Vector2(config.resolution_list[res][3],config.resolution_list[res][4])
+	scale = Vector2(scaled,scaled)
+	position = positioned	
+
+	
+	
 	
 func eyes():
 	var mouse_pos = get_local_mouse_position().angle()
@@ -82,10 +91,6 @@ func _process(_delta):
 			shop_info_storage(num123)
 		else:
 			shop_info_storage(num123)
-			
-	if Input.is_action_just_pressed("special_back"):
-		print("shop_exit - shop_brain")
-		exit_button()
 
 ###################Содержимое магазина###################
 	
@@ -155,10 +160,11 @@ func sell_button_func():###################дописать
 			global.player_indicators("coin",itemlist.itemlist[selected_item_ID][3]*count,"set")
 			
 func exit_button():
-	print("shop_exit - shop_brain")
-	global.del_scene("shop")
-	global.add_scene("hud")
-	global.add_scene("inventory")
+	global.visible_scene("hud",true)
+	global.visible_scene("inventory",true)
+	global.visible_scene("shop",false)
+	
+	#global.add_scene("inventory")
 	
 
 ################## Задать содержимое слота

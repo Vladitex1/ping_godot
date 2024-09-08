@@ -1,12 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://bkr7jbi6doumd"]
+[gd_scene load_steps=12 format=3 uid="uid://bkr7jbi6doumd"]
 
-[ext_resource type="Texture2D" uid="uid://ca7jy3ditwpb0" path="res://img/bgimg.jpg" id="1_ftatt"]
 [ext_resource type="Script" path="res://Scripts/stop_screen/stop_screen.gd" id="1_s6u6m"]
 [ext_resource type="StyleBox" uid="uid://b1j6fi831qnyn" path="res://Thems/console_stylebox_0.tres" id="2_j2qry"]
 [ext_resource type="FontFile" uid="uid://8atws0pc47sn" path="res://fonts/Font1.ttf" id="2_uje5x"]
 [ext_resource type="Texture2D" uid="uid://v1aa4m8uhjnd" path="res://assets/interface/ingamemenu.png" id="3_p1mqc"]
 [ext_resource type="Texture2D" uid="uid://cgxj5mj8ejqc8" path="res://assets/interface/menu/settings_menu_large.png" id="7_38uj6"]
+[ext_resource type="Texture2D" uid="uid://nxywjy43sduu" path="res://assets/interface/menu/keymap_icon.png" id="8_5iyqc"]
 [ext_resource type="StyleBox" uid="uid://bmuedaydehnq7" path="res://Thems/button_fixed_unpress.tres" id="8_s0dyy"]
+[ext_resource type="Texture2D" uid="uid://cyp5o7nwo8w32" path="res://assets/interface/menu/window_icon.png" id="9_1ahi7"]
 [ext_resource type="StyleBox" uid="uid://dsiifa1jr66sg" path="res://Thems/button_fixed_pressed.tres" id="9_s1xqu"]
 [ext_resource type="Script" path="res://Scripts/stop_screen/keybinds_script.gd" id="10_ywde3"]
 
@@ -15,40 +16,34 @@ default_base_scale = 1.0
 default_font = ExtResource("2_uje5x")
 default_font_size = 12
 
-[node name="stop_screen" type="Control"]
-process_mode = 3
-process_physics_priority = 2
-z_index = 10
-layout_direction = 1
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -960.0
-offset_top = -540.0
-offset_right = -960.0
-offset_bottom = -540.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-auto_translate = false
-localize_numeral_system = false
+[node name="stop_screen" type="CanvasLayer"]
+process_priority = 1
 script = ExtResource("1_s6u6m")
 metadata/_edit_use_anchors_ = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="control_module" type="Control" parent="."]
+layout_mode = 3
+anchor_left = -0.0208333
+anchor_top = -0.037037
+anchor_right = -0.0208333
+anchor_bottom = -0.037037
+offset_left = 62.4999
+offset_top = 74.074
+offset_right = 62.4999
+offset_bottom = 74.074
+metadata/_edit_use_anchors_ = true
 
-[node name="console" type="Control" parent="CanvasLayer"]
+[node name="console" type="Control" parent="control_module"]
 visible = false
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = -945.0
+offset_top = -602.0
+offset_right = -945.0
+offset_bottom = -602.0
+mouse_filter = 2
 
-[node name="LineEdit" type="LineEdit" parent="CanvasLayer/console"]
+[node name="LineEdit" type="LineEdit" parent="control_module/console"]
 layout_mode = 0
 offset_left = -1.0
 offset_top = 13.0
@@ -58,67 +53,51 @@ theme_override_styles/normal = ExtResource("2_j2qry")
 theme_override_styles/focus = ExtResource("2_j2qry")
 placeholder_text = "console"
 
-[node name="control_module" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchor_left = -0.0208333
-anchor_top = -0.037037
-anchor_right = -0.0208333
-anchor_bottom = -0.037037
-offset_left = 1562.5
-offset_top = 1074.07
-offset_right = 1562.5
-offset_bottom = 1074.07
-metadata/_edit_use_anchors_ = true
-
-[node name="DelayTimer" type="Timer" parent="CanvasLayer/control_module"]
+[node name="DelayTimer" type="Timer" parent="control_module"]
 one_shot = true
 
-[node name="main_menu" type="Control" parent="CanvasLayer/control_module"]
-visible = false
+[node name="main_menu" type="Control" parent="control_module"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = -20.0
-offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Ingamemenu" type="Sprite2D" parent="CanvasLayer/control_module/main_menu"]
-position = Vector2(110, 64)
-scale = Vector2(0.534211, 0.564103)
+[node name="Ingamemenu" type="Sprite2D" parent="control_module/main_menu"]
+scale = Vector2(0.55, 0.55)
 texture = ExtResource("3_p1mqc")
 
-[node name="Pause_Label" type="Label" parent="CanvasLayer/control_module/main_menu"]
+[node name="Pause_Label" type="Label" parent="control_module/main_menu"]
 layout_mode = 2
-offset_left = 71.0
-offset_top = 88.0
-offset_right = 150.0
-offset_bottom = 117.0
+offset_left = -34.5
+offset_top = 22.5
+offset_right = 44.5
+offset_bottom = 51.5
 theme_override_fonts/font = ExtResource("2_uje5x")
 theme_override_font_sizes/font_size = 17
 text = "pause
 "
 horizontal_alignment = 1
 
-[node name="first_line_stop_menu" type="MarginContainer" parent="CanvasLayer/control_module/main_menu"]
+[node name="first_line_stop_menu" type="MarginContainer" parent="control_module/main_menu"]
 layout_direction = 1
 layout_mode = 0
-offset_right = 411.0
-offset_bottom = 33.0
+offset_left = -111.0
+offset_top = -62.0
+offset_right = 300.0
+offset_bottom = -29.0
 scale = Vector2(0.798685, 0.93892)
 
-[node name="main" type="HBoxContainer" parent="CanvasLayer/control_module/main_menu/first_line_stop_menu"]
+[node name="main" type="HBoxContainer" parent="control_module/main_menu/first_line_stop_menu"]
 layout_mode = 2
 
-[node name="Button_Continue" type="Button" parent="CanvasLayer/control_module/main_menu/first_line_stop_menu/main"]
+[node name="Button_Continue" type="Button" parent="control_module/main_menu/first_line_stop_menu/main"]
 layout_mode = 2
 theme_override_constants/h_separation = 0
 theme_override_fonts/font = ExtResource("2_uje5x")
@@ -129,7 +108,7 @@ theme_override_styles/pressed = ExtResource("9_s1xqu")
 theme_override_styles/focus = ExtResource("9_s1xqu")
 text = "continue"
 
-[node name="Button_Settings" type="Button" parent="CanvasLayer/control_module/main_menu/first_line_stop_menu/main"]
+[node name="Button_Settings" type="Button" parent="control_module/main_menu/first_line_stop_menu/main"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_uje5x")
 theme_override_font_sizes/font_size = 12
@@ -139,7 +118,7 @@ theme_override_styles/pressed = ExtResource("9_s1xqu")
 theme_override_styles/focus = ExtResource("9_s1xqu")
 text = "settings"
 
-[node name="Button_Quit" type="Button" parent="CanvasLayer/control_module/main_menu/first_line_stop_menu/main"]
+[node name="Button_Quit" type="Button" parent="control_module/main_menu/first_line_stop_menu/main"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_uje5x")
 theme_override_font_sizes/font_size = 12
@@ -149,17 +128,17 @@ theme_override_styles/pressed = ExtResource("9_s1xqu")
 theme_override_styles/focus = ExtResource("9_s1xqu")
 text = "quit"
 
-[node name="second_line_stop_menu" type="MarginContainer" parent="CanvasLayer/control_module/main_menu"]
+[node name="second_line_stop_menu" type="MarginContainer" parent="control_module/main_menu"]
 layout_mode = 0
-offset_left = 40.0
-offset_top = 38.0
-offset_right = 176.0
-offset_bottom = 71.0
+offset_left = -66.0
+offset_top = -23.5
+offset_right = 70.0
+offset_bottom = 9.5
 
-[node name="main" type="HBoxContainer" parent="CanvasLayer/control_module/main_menu/second_line_stop_menu"]
+[node name="main" type="HBoxContainer" parent="control_module/main_menu/second_line_stop_menu"]
 layout_mode = 2
 
-[node name="Button_Save-" type="Button" parent="CanvasLayer/control_module/main_menu/second_line_stop_menu/main"]
+[node name="Button_Save-" type="Button" parent="control_module/main_menu/second_line_stop_menu/main"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_uje5x")
 theme_override_font_sizes/font_size = 12
@@ -170,7 +149,7 @@ theme_override_styles/focus = ExtResource("9_s1xqu")
 text = "save
 "
 
-[node name="Button_Load" type="Button" parent="CanvasLayer/control_module/main_menu/second_line_stop_menu/main"]
+[node name="Button_Load" type="Button" parent="control_module/main_menu/second_line_stop_menu/main"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_uje5x")
 theme_override_font_sizes/font_size = 12
@@ -180,7 +159,7 @@ theme_override_styles/pressed = ExtResource("9_s1xqu")
 theme_override_styles/focus = ExtResource("9_s1xqu")
 text = "load"
 
-[node name="settings_menu" type="Control" parent="CanvasLayer/control_module"]
+[node name="settings_menu" type="Control" parent="control_module"]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -188,76 +167,73 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = -20.0
-offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="SettingsMenuLarge" type="Sprite2D" parent="CanvasLayer/control_module/settings_menu"]
-position = Vector2(35, -51)
+[node name="SettingsMenuLarge" type="Sprite2D" parent="control_module/settings_menu"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_38uj6")
 
-[node name="Settings_Label" type="Label" parent="CanvasLayer/control_module/settings_menu"]
+[node name="Settings_Label" type="Label" parent="control_module/settings_menu"]
 layout_mode = 2
-offset_left = -25.5
-offset_top = 57.0
-offset_right = 93.5
-offset_bottom = 86.0
+offset_left = -59.5
+offset_top = 107.0
+offset_right = 59.5
+offset_bottom = 136.0
 theme_override_fonts/font = ExtResource("2_uje5x")
 theme_override_font_sizes/font_size = 17
 text = "settings"
 horizontal_alignment = 1
 
-[node name="in_settings_buttons" type="MarginContainer" parent="CanvasLayer/control_module/settings_menu"]
+[node name="in_settings_buttons" type="MarginContainer" parent="control_module/settings_menu"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -71.5
-offset_top = -182.0
-offset_right = 104.5
-offset_bottom = -149.0
+offset_left = -107.0
+offset_top = -138.0
+offset_right = 87.0
+offset_bottom = -70.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="button_list" type="VBoxContainer" parent="CanvasLayer/control_module/settings_menu/in_settings_buttons"]
+[node name="button_list" type="VBoxContainer" parent="control_module/settings_menu/in_settings_buttons"]
 layout_mode = 2
 
-[node name="keymap" type="HBoxContainer" parent="CanvasLayer/control_module/settings_menu/in_settings_buttons/button_list"]
+[node name="keymap" type="HBoxContainer" parent="control_module/settings_menu/in_settings_buttons/button_list"]
 layout_mode = 2
 
-[node name="Button_KeyMap" type="Button" parent="CanvasLayer/control_module/settings_menu/in_settings_buttons/button_list/keymap"]
-layout_mode = 2
-theme = SubResource("Theme_x2boa")
-text = "keymaps"
-
-[node name="window" type="HBoxContainer" parent="CanvasLayer/control_module/settings_menu/in_settings_buttons/button_list"]
-layout_mode = 2
-
-[node name="Button_Window" type="Button" parent="CanvasLayer/control_module/settings_menu/in_settings_buttons/button_list/window"]
+[node name="Button_KeyMap" type="Button" parent="control_module/settings_menu/in_settings_buttons/button_list/keymap"]
 layout_mode = 2
 theme = SubResource("Theme_x2boa")
-text = "window"
+text = "   keymaps"
+icon = ExtResource("8_5iyqc")
 
-[node name="settings_menu" type="MarginContainer" parent="CanvasLayer/control_module/settings_menu"]
+[node name="window" type="HBoxContainer" parent="control_module/settings_menu/in_settings_buttons/button_list"]
+layout_mode = 2
+
+[node name="Button_Window" type="Button" parent="control_module/settings_menu/in_settings_buttons/button_list/window"]
+layout_mode = 2
+theme = SubResource("Theme_x2boa")
+text = "   window settings"
+icon = ExtResource("9_1ahi7")
+
+[node name="settings_menu" type="MarginContainer" parent="control_module/settings_menu"]
 layout_mode = 0
-offset_left = 81.5
-offset_top = 7.0
-offset_right = 146.5
-offset_bottom = 40.0
+offset_left = 47.5
+offset_top = 57.0
+offset_right = 112.5
+offset_bottom = 90.0
 
-[node name="settings" type="HBoxContainer" parent="CanvasLayer/control_module/settings_menu/settings_menu"]
+[node name="settings" type="HBoxContainer" parent="control_module/settings_menu/settings_menu"]
 layout_mode = 2
 
-[node name="Button_Back" type="Button" parent="CanvasLayer/control_module/settings_menu/settings_menu/settings"]
+[node name="Button_Back" type="Button" parent="control_module/settings_menu/settings_menu/settings"]
 layout_mode = 2
 theme = SubResource("Theme_x2boa")
 theme_override_styles/normal = ExtResource("8_s0dyy")
@@ -266,14 +242,14 @@ theme_override_styles/pressed = ExtResource("9_s1xqu")
 theme_override_styles/focus = ExtResource("9_s1xqu")
 text = "back"
 
-[node name="brightness" type="Control" parent="CanvasLayer/control_module/settings_menu"]
+[node name="brightness" type="Control" parent="control_module/settings_menu"]
 anchors_preset = 0
-offset_left = -69.5
-offset_top = -223.0
-offset_right = -29.5
-offset_bottom = -183.0
+offset_left = -103.5
+offset_top = -173.0
+offset_right = -63.5
+offset_bottom = -133.0
 
-[node name="slider" type="HSlider" parent="CanvasLayer/control_module/settings_menu/brightness"]
+[node name="slider" type="HSlider" parent="control_module/settings_menu/brightness"]
 layout_mode = 0
 offset_left = -3.5
 offset_top = 14.0
@@ -282,7 +258,7 @@ offset_bottom = 30.0
 max_value = 1.5
 step = 0.1
 
-[node name="slider_lable" type="Label" parent="CanvasLayer/control_module/settings_menu/brightness"]
+[node name="slider_lable" type="Label" parent="control_module/settings_menu/brightness"]
 layout_mode = 0
 offset_left = -5.0
 offset_top = -6.5
@@ -293,7 +269,7 @@ theme_override_font_sizes/font_size = 10
 text = "brightness 0"
 horizontal_alignment = 1
 
-[node name="settings_keybinds" type="Control" parent="CanvasLayer/control_module"]
+[node name="settings_keybinds" type="Control" parent="control_module"]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -301,33 +277,28 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = -20.0
-offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="SettingsMenuLarge" type="Sprite2D" parent="CanvasLayer/control_module/settings_keybinds"]
-position = Vector2(35, -51)
+[node name="SettingsMenuLarge" type="Sprite2D" parent="control_module/settings_keybinds"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_38uj6")
 
-[node name="Settings_Label" type="Label" parent="CanvasLayer/control_module/settings_keybinds"]
+[node name="Settings_Label" type="Label" parent="control_module/settings_keybinds"]
 layout_mode = 2
-offset_left = -25.5
-offset_top = 57.0
-offset_right = 93.5
-offset_bottom = 86.0
+offset_left = -58.5
+offset_top = 106.0
+offset_right = 60.5
+offset_bottom = 135.0
 theme_override_fonts/font = ExtResource("2_uje5x")
 theme_override_font_sizes/font_size = 17
 text = "settings"
 horizontal_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/control_module/settings_keybinds"]
+[node name="ScrollContainer" type="ScrollContainer" parent="control_module/settings_keybinds"]
 layout_direction = 2
 layout_mode = 1
 anchors_preset = 8
@@ -335,34 +306,35 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -78.0
-offset_top = -232.0
-offset_right = 148.0
-offset_bottom = 1.0
+offset_left = -111.0
+offset_top = -183.0
+offset_right = 115.0
+offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("10_ywde3")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/control_module/settings_keybinds/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="control_module/settings_keybinds/ScrollContainer"]
 layout_mode = 2
 theme_override_constants/separation = 38
 
-[node name="settings_menu" type="MarginContainer" parent="CanvasLayer/control_module/settings_keybinds"]
+[node name="settings_menu" type="MarginContainer" parent="control_module/settings_keybinds"]
 layout_mode = 0
-offset_left = 81.5
-offset_top = 7.0
-offset_right = 146.5
-offset_bottom = 40.0
+offset_left = 48.5
+offset_top = 56.0
+offset_right = 113.5
+offset_bottom = 89.0
 
-[node name="settings" type="HBoxContainer" parent="CanvasLayer/control_module/settings_keybinds/settings_menu"]
+[node name="settings" type="HBoxContainer" parent="control_module/settings_keybinds/settings_menu"]
 layout_mode = 2
 
-[node name="Button_Back" type="Button" parent="CanvasLayer/control_module/settings_keybinds/settings_menu/settings"]
+[node name="Button_Back" type="Button" parent="control_module/settings_keybinds/settings_menu/settings"]
 layout_mode = 2
 theme = SubResource("Theme_x2boa")
 text = "back"
 
-[node name="settings_window" type="Control" parent="CanvasLayer/control_module"]
+[node name="settings_window" type="Control" parent="control_module"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -374,65 +346,81 @@ grow_vertical = 2
 scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
+metadata/_edit_use_anchors_ = true
 
-[node name="SettingsMenuLarge" type="Sprite2D" parent="CanvasLayer/control_module/settings_window"]
-position = Vector2(-3, 12.5)
+[node name="SettingsMenuLarge" type="Sprite2D" parent="control_module/settings_window"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_38uj6")
 
-[node name="Settings_Label" type="Label" parent="CanvasLayer/control_module/settings_window"]
+[node name="Settings_Label" type="Label" parent="control_module/settings_window"]
 layout_mode = 2
-offset_left = -63.5
-offset_top = 120.5
-offset_right = 55.5
-offset_bottom = 149.5
+offset_left = -60.0
+offset_top = 110.0
+offset_right = 59.0
+offset_bottom = 139.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_uje5x")
 theme_override_font_sizes/font_size = 17
 text = "settings"
 horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
 
-[node name="button_list" type="MarginContainer" parent="CanvasLayer/control_module/settings_window"]
+[node name="button_list" type="MarginContainer" parent="control_module/settings_window"]
 layout_mode = 0
 offset_left = -109.0
 offset_top = -161.5
 offset_right = 4.0
 offset_bottom = -126.5
+metadata/_edit_use_anchors_ = true
 
-[node name="button_list" type="HBoxContainer" parent="CanvasLayer/control_module/settings_window/button_list"]
+[node name="button_list" type="HBoxContainer" parent="control_module/settings_window/button_list"]
 layout_mode = 2
 
-[node name="in_settings_buttons" type="VBoxContainer" parent="CanvasLayer/control_module/settings_window/button_list/button_list"]
+[node name="in_settings_buttons" type="VBoxContainer" parent="control_module/settings_window/button_list/button_list"]
 layout_mode = 2
 theme_override_constants/separation = 35
 
-[node name="fullscreen" type="Panel" parent="CanvasLayer/control_module/settings_window/button_list/button_list/in_settings_buttons"]
+[node name="fullscreen" type="Panel" parent="control_module/settings_window/button_list/button_list/in_settings_buttons"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="CanvasLayer/control_module/settings_window/button_list/button_list/in_settings_buttons/fullscreen"]
-layout_mode = 2
-offset_left = 4.0
-offset_right = 105.0
-offset_bottom = 25.0
+[node name="fscron" type="Button" parent="control_module/settings_window/button_list/button_list/in_settings_buttons/fullscreen"]
+texture_filter = 2
+layout_mode = 0
+offset_left = 3.0
+offset_top = -3.0
+offset_right = 56.0
+offset_bottom = 24.0
 theme_override_fonts/font = ExtResource("2_uje5x")
 theme_override_font_sizes/font_size = 11
-text = "fullscreen"
+text = "on"
 
-[node name="Label" type="Label" parent="CanvasLayer/control_module/settings_window/button_list/button_list/in_settings_buttons/fullscreen"]
+[node name="fscroff" type="Button" parent="control_module/settings_window/button_list/button_list/in_settings_buttons/fullscreen"]
+texture_filter = 2
+layout_mode = 2
+offset_left = 65.0
+offset_top = -3.0
+offset_right = 118.0
+offset_bottom = 24.0
+theme_override_fonts/font = ExtResource("2_uje5x")
+theme_override_font_sizes/font_size = 11
+disabled = true
+text = "off
+"
+
+[node name="Label" type="Label" parent="control_module/settings_window/button_list/button_list/in_settings_buttons/fullscreen"]
 layout_mode = 0
-offset_left = 168.0
-offset_top = 2.0
-offset_right = 208.0
-offset_bottom = 25.0
+offset_left = 132.5
+offset_right = 253.5
+offset_bottom = 23.0
 theme_override_fonts/font = ExtResource("2_uje5x")
 theme_override_font_sizes/font_size = 13
-text = "off"
+text = "fullscr"
 
-[node name="resolution" type="Panel" parent="CanvasLayer/control_module/settings_window/button_list/button_list/in_settings_buttons"]
+[node name="resolution" type="Panel" parent="control_module/settings_window/button_list/button_list/in_settings_buttons"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/control_module/settings_window/button_list/button_list/in_settings_buttons/resolution"]
+[node name="Label" type="Label" parent="control_module/settings_window/button_list/button_list/in_settings_buttons/resolution"]
 layout_mode = 0
 offset_left = 130.0
 offset_top = 2.0
@@ -442,7 +430,7 @@ theme_override_fonts/font = ExtResource("2_uje5x")
 theme_override_font_sizes/font_size = 12
 text = "1900x1080"
 
-[node name="HSlider" type="HSlider" parent="CanvasLayer/control_module/settings_window/button_list/button_list/in_settings_buttons/resolution"]
+[node name="HSlider" type="HSlider" parent="control_module/settings_window/button_list/button_list/in_settings_buttons/resolution"]
 layout_mode = 0
 offset_left = -2.0
 offset_top = 3.5
@@ -452,32 +440,34 @@ min_value = 1.0
 max_value = 6.0
 value = 4.0
 
-[node name="settings_menu" type="MarginContainer" parent="CanvasLayer/control_module/settings_window"]
+[node name="settings_menu" type="MarginContainer" parent="control_module/settings_window"]
 layout_mode = 0
-offset_left = -106.0
-offset_top = 75.0
-offset_right = 99.0
-offset_bottom = 108.0
+offset_left = -102.5
+offset_top = 65.0
+offset_right = 102.5
+offset_bottom = 98.0
+metadata/_edit_use_anchors_ = true
 
-[node name="settings" type="HBoxContainer" parent="CanvasLayer/control_module/settings_window/settings_menu"]
+[node name="settings" type="HBoxContainer" parent="control_module/settings_window/settings_menu"]
 layout_mode = 2
 
-[node name="Button_Reset" type="Button" parent="CanvasLayer/control_module/settings_window/settings_menu/settings"]
+[node name="Button_Reset" type="Button" parent="control_module/settings_window/settings_menu/settings"]
 layout_mode = 2
 theme = SubResource("Theme_x2boa")
 text = "reset"
 
-[node name="Button_Confirm" type="Button" parent="CanvasLayer/control_module/settings_window/settings_menu/settings"]
+[node name="Button_Confirm" type="Button" parent="control_module/settings_window/settings_menu/settings"]
 layout_mode = 2
 theme = SubResource("Theme_x2boa")
 text = "confirm"
 
-[node name="Button_Back" type="Button" parent="CanvasLayer/control_module/settings_window/settings_menu/settings"]
+[node name="Button_Back" type="Button" parent="control_module/settings_window/settings_menu/settings"]
 layout_mode = 2
 theme = SubResource("Theme_x2boa")
 text = "back"
 
-[node name="LineEdit" type="LineEdit" parent="CanvasLayer/control_module"]
+[node name="LineEdit" type="LineEdit" parent="control_module"]
+visible = false
 layout_mode = 0
 offset_left = -960.0
 offset_top = -540.0
@@ -487,8 +477,9 @@ theme_override_styles/normal = ExtResource("2_j2qry")
 theme_override_styles/focus = ExtResource("2_j2qry")
 placeholder_text = "console"
 alignment = 2
+metadata/_edit_use_anchors_ = true
 
-[node name="LineEdit" type="LineEdit" parent="CanvasLayer/control_module/LineEdit"]
+[node name="LineEdit" type="LineEdit" parent="control_module/LineEdit"]
 layout_mode = 0
 offset_top = 1056.0
 offset_right = 1920.0
@@ -497,9 +488,4 @@ theme_override_styles/normal = ExtResource("2_j2qry")
 theme_override_styles/focus = ExtResource("2_j2qry")
 placeholder_text = "console"
 alignment = 2
-
-[node name="Bgimg" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(1348.5, 730.5)
-scale = Vector2(1.40156, 1.34722)
-texture = ExtResource("1_ftatt")
+metadata/_edit_use_anchors_ = true

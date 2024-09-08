@@ -31,7 +31,7 @@ static var temp_sprint = sprint
 
 
 var anim_attack_block: bool = false
-var hud_loaded: bool = true
+var start: bool = true
 var player_align: String
 var last_anim: String
 var damage_active: bool = false
@@ -43,6 +43,7 @@ var attack_ift: bool = true
 @onready var player = $"."
 @onready var loading_animation = $"Waiting_Animation"
 @onready var interactive = $Interactive
+@onready var pickup = $Pickup
 @onready var cooldown_damage_timer = $Cooldown_Damage_Timer
 @onready var attack_timer = $Attack_Timer
 @onready var damage_area = $Damage_Zone_Detection
@@ -102,44 +103,51 @@ func _ready():
 	damage_area.connect("area_entered", damage_area_enter)
 	damage_area.connect("area_exited", damage_area_exit)
 
-func hud_load():
-	if hud_loaded:
-		hud_loaded = false
-		global.hud_load()
-		#get_viewport().position = Vector2i(0,0)
-		#get_viewport().size = DisplayServer.screen_get_size()
+func starter_module():
+	if start:
+		start = false
+		global.buttons_lock = false
+		
+		global.add_scene("hud")
+		
+		global.add_scene("inventory")
+		global.add_scene("shop")
+		global.add_scene("stop_screen")
+		
+		#global.visible_scene("inventory",false)
+		global.visible_scene("shop",false)
+		global.visible_scene("stop_screen",false)
 
 		
 
 func _physics_process(_delta):
-	
-	hud_load()
+	starter_module()
 	get_input()
+	#print("***")
+	#print(global.buttons_lock)
 	debug_buttons()
-	
-	state_switcher()
-	movement()
-	attack()	
+	if global.buttons_lock == false:
+		state_switcher()
+		movement()
+		attack()
+		match state:
+			State.IDLE:
+				animation("idle")
+			State.WALK:
+				animation("walk")
+				move_and_slide()
+			State.DAMAGE:
+				if ift:
+					cooldown_damage_timer.start(global.player_damage("damage_throw", 0, "get") * 0.01)
+					ift = false
+				else:
+					move(current_area, speed * 2 * -1)
+					if cooldown_damage_timer.time_left < 0.1:
+						state = State.WALK
+						ift = true
 
-	
-	match state:
-		State.IDLE:
-			animation("idle")
-		State.WALK:
-			animation("walk")
-			move_and_slide()
-		State.DAMAGE:
-			if ift:
-				cooldown_damage_timer.start(global.player_damage("damage_throw", 0, "get") * 0.01)
-				ift = false
-			else:
-				move(current_area, speed * 2 * -1)
-				if cooldown_damage_timer.time_left < 0.1:
-					state = State.WALK
-					ift = true
-
-	hands_control()
-	interactive_control()
+		hands_control()
+		interactive_control()
 
 func move(target, spd):
 
@@ -151,6 +159,11 @@ func move(target, spd):
 		return true
 
 func interactive_control():
+	if global.pickup_toggle:
+		pickup.visible = true
+	else:
+		pickup.visible = false 
+	
 	if global.action_toggle and not global.loading_toggle:
 		interactive.set_visible(true)
 	else:
@@ -240,8 +253,9 @@ func movement():
 	velocity = Input.get_vector("move_left", "move_right", "move_up", "move_down") * (speed + sprint)
 				
 func get_input():
-	if Input.is_action_just_released("special_back"):
-		global.add_scene("stop_screen")
+	if Input.is_action_just_released("special_back") and !global.buttons_lock:
+		global.visible_scene("stop_screen",true)
+		global.buttons_lock = true
 
 
 func animation(anim: String) -> void:

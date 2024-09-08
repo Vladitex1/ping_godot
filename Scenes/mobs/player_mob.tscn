@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://3nh6n7vhnc8h"]
+[gd_scene load_steps=73 format=3 uid="uid://3nh6n7vhnc8h"]
 
 [ext_resource type="Script" path="res://Scripts/player_movement_script.gd" id="1_f2mdd"]
 [ext_resource type="Texture2D" uid="uid://c64klfpy51u4b" path="res://assets/special/2d_lights_and_shadows_neutral_point_light.webp" id="2_cesop"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://hsw0y25ixquf" path="res://assets/interface/interactive.png" id="5_j5ey8"]
 [ext_resource type="Texture2D" uid="uid://cjoia4dnia1yc" path="res://assets/items/weapons/sword.png" id="6_fntwn"]
 [ext_resource type="Script" path="res://Scripts/Camera.gd" id="7_tbpjk"]
+[ext_resource type="Texture2D" uid="uid://ij0i06u5ohsm" path="res://assets/interface/pick_up.png" id="11_803ew"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ptcxw"]
 size = Vector2(22.449, 32.6531)
@@ -670,6 +671,15 @@ position = Vector2(-1.19209e-07, -29.6072)
 scale = Vector2(0.901786, 0.924102)
 texture = ExtResource("5_j5ey8")
 
+[node name="Pickup" type="Sprite2D" parent="."]
+visible = false
+light_mask = 15
+visibility_layer = 15
+z_index = 2
+position = Vector2(-1.19209e-07, -29.6072)
+scale = Vector2(0.901786, 0.924102)
+texture = ExtResource("11_803ew")
+
 [node name="Weapon" type="Node2D" parent="."]
 z_index = -1
 position = Vector2(-5, 9)
@@ -731,8 +741,8 @@ z_index = 6
 z_as_relative = false
 position = Vector2(0, 9.53674e-07)
 scale = Vector2(0.0853562, 0.0847095)
+enabled = false
 color = Color(0.980149, 0.847807, 0.653115, 1)
-energy = 1.36
 range_item_cull_mask = 7
 shadow_enabled = true
 shadow_filter = 1

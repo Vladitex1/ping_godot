@@ -13,9 +13,9 @@ func _physics_process(_delta):
 		shop_ready = false
 
 func shop_enter():
-	global.del_scene("hud")
-	global.del_scene("inventory")
-	global.add_scene("shop")
+	global.visible_scene("hud",false)
+	global.visible_scene("inventory",false)
+	global.visible_scene("shop",true)
 
 func body_entered(body):
 	if str(body.name) == "player":

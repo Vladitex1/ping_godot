@@ -1,3 +1,6 @@
+Area2D
+CollisionShape2D
+CanvasLayer
 Control
 CollisionPolygon2D
 AnimatedSprite2D
@@ -9,6 +12,3 @@ NavigationAgent2D
 Sprite2D
 TileMap
 NavigationRegion2D
-Area2D
-Timer
-WorldEnvironment

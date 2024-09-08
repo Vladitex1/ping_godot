@@ -1,10 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://dmha2u8dlg5o1"]
+[gd_scene load_steps=14 format=3 uid="uid://dmha2u8dlg5o1"]
 
 [ext_resource type="Texture2D" uid="uid://k5742llj4gq2" path="res://assets/interface/ping_icon_1024x1024.png" id="1_21nmr"]
 [ext_resource type="Script" path="res://Scripts/hud/hud_brain.gd" id="1_sjm8r"]
 [ext_resource type="FontFile" uid="uid://8atws0pc47sn" path="res://fonts/Font1.ttf" id="3_h8id7"]
 [ext_resource type="Texture2D" uid="uid://ddb813dlvbuyj" path="res://assets/interface/hud_status_large.png" id="4_7qmn3"]
-[ext_resource type="Texture2D" uid="uid://cvlnep0argmqv" path="res://assets/interface/animation_large.png" id="4_ktygs"]
 [ext_resource type="Texture2D" uid="uid://ckakw481uj45i" path="res://assets/interface/health.png" id="5_2ykob"]
 [ext_resource type="Texture2D" uid="uid://cx2ip8bilhrg5" path="res://assets/interface/hud_base_large.png" id="5_5t2uc"]
 [ext_resource type="Texture2D" uid="uid://23wurqxer0sb" path="res://assets/interface/stamina.png" id="5_6ne8s"]
@@ -15,207 +14,63 @@
 [ext_resource type="Texture2D" uid="uid://bv6wmrh28yfy8" path="res://assets/interface/coin.png" id="8_e6d1a"]
 [ext_resource type="Texture2D" uid="uid://v8cpya8qx1si" path="res://assets/interface/stamina_back.png" id="8_vvm8o"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wpg7s"]
-atlas = ExtResource("4_ktygs")
-region = Rect2(5120, 0, 640, 660)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_h3lkk"]
-atlas = ExtResource("4_ktygs")
-region = Rect2(5760, 0, 640, 660)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lg2ph"]
-atlas = ExtResource("4_ktygs")
-region = Rect2(6400, 0, 640, 660)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_asxvi"]
-atlas = ExtResource("4_ktygs")
-region = Rect2(7040, 0, 640, 660)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yxjd2"]
-atlas = ExtResource("4_ktygs")
-region = Rect2(7680, 0, 640, 660)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5ljne"]
-atlas = ExtResource("4_ktygs")
-region = Rect2(8320, 0, 640, 660)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_k7le3"]
-atlas = ExtResource("4_ktygs")
-region = Rect2(8960, 0, 640, 660)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1xkfr"]
-atlas = ExtResource("4_ktygs")
-region = Rect2(9600, 0, 640, 660)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_ur0ea"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wpg7s")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_h3lkk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lg2ph")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_asxvi")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yxjd2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5ljne")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_k7le3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1xkfr")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[node name="hud" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1.0
-offset_top = 4.0
-offset_right = 1.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="hud" type="CanvasLayer"]
 script = ExtResource("1_sjm8r")
 
-[node name="plate" type="CanvasLayer" parent="."]
+[node name="control_module" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1500.0
+offset_top = 1000.0
+offset_right = 1500.0
+offset_bottom = 1000.0
+metadata/_edit_use_anchors_ = true
 
-[node name="other" type="CanvasLayer" parent="plate"]
+[node name="HUD" type="Control" parent="control_module"]
+anchors_preset = 0
+offset_left = -952.0
+offset_top = -502.0
+offset_right = -952.0
+offset_bottom = -502.0
 
-[node name="FPS" type="Label" parent="plate/other"]
+[node name="FPS" type="Label" parent="control_module/HUD"]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.011
 anchor_top = 0.015
 anchor_right = 0.032
 anchor_bottom = 0.045
-offset_left = -2.12
-offset_top = 80.8
-offset_right = 60.56
-offset_bottom = 82.4
+offset_left = 85.0
+offset_top = -2.99999
+offset_right = 190.0
+offset_bottom = 30.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_h8id7")
 theme_override_font_sizes/font_size = 20
 text = "fps: 60"
-metadata/_edit_use_anchors_ = true
 
-[node name="icon" type="CanvasLayer" parent="plate"]
-
-[node name="icon_texture" type="TextureRect" parent="plate/icon"]
+[node name="icon_texture" type="TextureRect" parent="control_module/HUD"]
 clip_contents = true
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.0421875
 anchor_top = 0.772222
 anchor_right = 0.124714
 anchor_bottom = 0.924159
-offset_left = 4.0
-offset_top = 8.00024
-offset_right = 901.886
-offset_bottom = 937.855
+offset_left = 85.0
+offset_top = 837.0
+offset_right = 1109.0
+offset_bottom = 1861.0
 grow_vertical = 0
 scale = Vector2(0.15, 0.15)
 size_flags_stretch_ratio = 0.0
 texture = ExtResource("1_21nmr")
 stretch_mode = 2
-metadata/_edit_use_anchors_ = true
 
-[node name="icon_animation" type="AnimatedSprite2D" parent="plate/icon"]
-visible = false
-position = Vector2(162, 918)
-scale = Vector2(0.225, 0.225)
-sprite_frames = SubResource("SpriteFrames_ur0ea")
-frame_progress = 0.594916
-
-[node name="stamina_bar" type="CanvasLayer" parent="plate"]
-
-[node name="stamina_bar_back" type="TextureRect" parent="plate/stamina_bar"]
-offset_left = 249.0
-offset_top = 950.0
-offset_right = 1094.0
-offset_bottom = 1049.0
-scale = Vector2(0.35, 0.35)
-texture = ExtResource("8_vvm8o")
-
-[node name="stamina_bar" type="TextureProgressBar" parent="plate/stamina_bar"]
-custom_minimum_size = Vector2(70, 16)
-offset_left = 260.0
-offset_top = 949.0
-offset_right = 810.0
-offset_bottom = 1013.0
-scale = Vector2(0.5, 0.789)
-max_value = 1000.0
-value = 1000.0
-rounded = true
-texture_progress = ExtResource("5_6ne8s")
-
-[node name="stamina_bar_limit" type="TextureProgressBar" parent="plate/stamina_bar"]
-custom_minimum_size = Vector2(70, 16)
-offset_left = 260.0
-offset_top = 949.0
-offset_right = 810.0
-offset_bottom = 1013.0
-scale = Vector2(0.5, 0.789)
-max_value = 1000.0
-value = 100.0
-rounded = true
-texture_progress = ExtResource("6_guuqj")
-
-[node name="plates" type="CanvasLayer" parent="plate"]
-
-[node name="plate_status_texture" type="TextureRect" parent="plate/plates"]
-offset_left = 48.0
-offset_top = 695.0
-offset_right = 1004.0
-offset_bottom = 1051.0
-scale = Vector2(0.35, 0.35)
-texture = ExtResource("4_7qmn3")
-
-[node name="weapon_texture" type="TextureRect" parent="plate/plates"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -564.0
-offset_top = 159.0
-offset_right = -524.0
-offset_bottom = 259.0
-grow_horizontal = 2
-grow_vertical = 2
-rotation = 1.57079
-scale = Vector2(3, 3)
-size_flags_horizontal = 4
-size_flags_vertical = 4
-size_flags_stretch_ratio = 0.0
-texture = ExtResource("7_ayjy7")
-stretch_mode = 1
-
-[node name="plate_texture" type="TextureRect" parent="plate/plates"]
-offset_left = 55.0
-offset_top = 813.0
-offset_right = 1536.0
-offset_bottom = 1349.0
-scale = Vector2(0.35, 0.35)
-texture = ExtResource("5_5t2uc")
-
-[node name="health_bar" type="CanvasLayer" parent="plate"]
-
-[node name="health_bar" type="TextureProgressBar" parent="plate/health_bar"]
+[node name="health_bar" type="TextureProgressBar" parent="control_module/HUD"]
 z_index = 1
 custom_minimum_size = Vector2(80, 16)
+layout_mode = 0
 offset_left = 266.0
 offset_top = 845.0
 offset_right = 766.0
@@ -227,19 +82,20 @@ texture_over = ExtResource("6_f1kwn")
 texture_progress = ExtResource("5_2ykob")
 texture_progress_offset = Vector2(24, 11)
 
-[node name="healh_count_label" type="Label" parent="plate/health_bar"]
+[node name="healh_count_label" type="Label" parent="control_module/HUD"]
 light_mask = 16
 visibility_layer = 16
 z_index = 2
+layout_mode = 1
 anchors_preset = -1
 anchor_left = -0.0276458
 anchor_top = -0.00262965
 anchor_right = 0.131417
 anchor_bottom = 0.0375556
-offset_left = 333.08
-offset_top = 856.84
-offset_right = 435.68
-offset_bottom = 866.44
+offset_left = 334.212
+offset_top = 856.21
+offset_right = 567.849
+offset_bottom = 897.603
 scale = Vector2(0.6, 0.6)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_h8id7")
@@ -247,21 +103,93 @@ theme_override_font_sizes/font_size = 26
 text = "health - 120"
 horizontal_alignment = 1
 vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
 
-[node name="items" type="CanvasLayer" parent="plate"]
+[node name="plate_status_texture" type="TextureRect" parent="control_module/HUD"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 695.0
+offset_right = 1004.0
+offset_bottom = 1051.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("4_7qmn3")
 
-[node name="coins_count_label" type="Label" parent="plate/items"]
+[node name="weapon_texture" type="TextureRect" parent="control_module/HUD"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 392.0
+offset_top = 695.0
+offset_right = 432.0
+offset_bottom = 795.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.57079
+scale = Vector2(3, 3)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("7_ayjy7")
+stretch_mode = 1
+
+[node name="stamina_bar_back" type="TextureRect" parent="control_module/HUD"]
+layout_mode = 0
+offset_left = 249.0
+offset_top = 950.0
+offset_right = 1094.0
+offset_bottom = 1049.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("8_vvm8o")
+
+[node name="stamina_bar" type="TextureProgressBar" parent="control_module/HUD"]
+custom_minimum_size = Vector2(70, 16)
+layout_mode = 0
+offset_left = 260.0
+offset_top = 949.0
+offset_right = 810.0
+offset_bottom = 1013.0
+scale = Vector2(0.5, 0.789)
+max_value = 1000.0
+value = 1000.0
+rounded = true
+texture_progress = ExtResource("5_6ne8s")
+
+[node name="stamina_bar_limit" type="TextureProgressBar" parent="control_module/HUD"]
+custom_minimum_size = Vector2(70, 16)
+layout_mode = 0
+offset_left = 260.0
+offset_top = 949.0
+offset_right = 810.0
+offset_bottom = 1013.0
+scale = Vector2(0.5, 0.789)
+max_value = 1000.0
+value = 100.0
+rounded = true
+texture_progress = ExtResource("6_guuqj")
+
+[node name="plate_texture" type="TextureRect" parent="control_module/HUD"]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 813.0
+offset_right = 1536.0
+offset_bottom = 1349.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("5_5t2uc")
+
+[node name="coins_count_label" type="Label" parent="control_module/HUD"]
 light_mask = 4
+layout_mode = 1
 anchors_preset = -1
 anchor_left = -0.00160416
 anchor_top = 0.00199998
 anchor_right = 0.0207917
 anchor_bottom = 0.00199998
-offset_left = 443.08
-offset_top = 907.84
-offset_right = 462.08
-offset_bottom = 940.84
+offset_left = 457.128
+offset_top = 909.84
+offset_right = 476.128
+offset_bottom = 942.84
 scale = Vector2(0.9, 0.9)
 theme_override_colors/font_color = Color(0.0962047, 0.0962048, 0.0962047, 1)
 theme_override_fonts/font = ExtResource("3_h8id7")
@@ -269,19 +197,19 @@ theme_override_font_sizes/font_size = 20
 text = "8"
 horizontal_alignment = 1
 vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
 
-[node name="keys_count_label" type="Label" parent="plate/items"]
+[node name="keys_count_label" type="Label" parent="control_module/HUD"]
 light_mask = 4
+layout_mode = 1
 anchors_preset = -1
 anchor_left = -0.00160416
 anchor_top = 0.00199998
 anchor_right = 0.0824583
 anchor_bottom = 0.032
-offset_left = 331.08
-offset_top = 907.84
-offset_right = 231.68
-offset_bottom = 908.44
+offset_left = 345.128
+offset_top = 909.84
+offset_right = 360.766
+offset_bottom = 941.64
 scale = Vector2(0.9, 0.9)
 theme_override_colors/font_color = Color(0.0962047, 0.0962048, 0.0962047, 1)
 theme_override_fonts/font = ExtResource("3_h8id7")
@@ -289,10 +217,10 @@ theme_override_font_sizes/font_size = 20
 text = "9"
 horizontal_alignment = 1
 vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
 
-[node name="key_texture" type="TextureRect" parent="plate/items"]
+[node name="key_texture" type="TextureRect" parent="control_module/HUD"]
 visibility_layer = 4
+layout_mode = 0
 offset_left = 294.0
 offset_top = 908.0
 offset_right = 334.0
@@ -300,7 +228,8 @@ offset_bottom = 948.0
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("7_2srnd")
 
-[node name="coin_texture" type="TextureRect" parent="plate/items"]
+[node name="coin_texture" type="TextureRect" parent="control_module/HUD"]
+layout_mode = 0
 offset_left = 405.0
 offset_top = 908.0
 offset_right = 445.0

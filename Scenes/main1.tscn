@@ -120,6 +120,7 @@ navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_2rsk1")
 
 [node name="main" type="Node2D"]
+process_priority = 1
 
 [node name="Level" type="Node2D" parent="."]
 
@@ -156,10 +157,10 @@ position = Vector2(799, 159)
 
 [node name="position1" parent="Level/navigation_checkpoint" instance=ExtResource("4_i1u4j")]
 position = Vector2(544, 416)
-list_num = 1
 
 [node name="position2" parent="Level/navigation_checkpoint" instance=ExtResource("4_i1u4j")]
 position = Vector2(800, 288)
+list_num = 1
 
 [node name="position3" parent="Level/navigation_checkpoint" instance=ExtResource("4_i1u4j")]
 position = Vector2(795, 613)
@@ -171,7 +172,7 @@ list_num = 1
 position = Vector2(223, 284)
 
 [node name="skeleton" parent="Entities" instance=ExtResource("6_6ajqg")]
-position = Vector2(777, 151)
+position = Vector2(793, 159)
 
 [node name="skeleton2" parent="Entities" instance=ExtResource("6_6ajqg")]
 position = Vector2(789, 575)

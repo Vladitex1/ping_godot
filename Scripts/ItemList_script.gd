@@ -44,6 +44,7 @@ var keybinds = {
 	5: ["console", 96,"special_console"],
 	6: ["sprint", 4194325, "special_shift"],
 	7: ["menu", 4194305, "special_back"],
-	8: ["null", null, "null"], ##Костыль :)
+	8: ["drop", 71, "special_drop"],
+	9: ["null", null, "null"], ##Костыль :)
 	}
 

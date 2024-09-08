@@ -48,5 +48,6 @@ light_mask = 0
 shape = SubResource("RectangleShape2D_l2tgv")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+visible = false
 occluder = SubResource("OccluderPolygon2D_w4qjn")
 occluder_light_mask = 2

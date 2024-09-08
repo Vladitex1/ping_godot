@@ -470,7 +470,7 @@ collision_mask = 4
 [node name="enemy_detection_colision" type="CollisionPolygon2D" parent="detection"]
 visible = false
 rotation = -1.5708
-polygon = PackedVector2Array(-9.10001, -5.0068e-07, -49, 93.8, 49.7001, 93.8001, 8.40001, 0)
+polygon = PackedVector2Array(-9.10001, -5.0068e-07, -49, 93.8, 49.7001, 93.8001, 8.40001, 0, 16.1001, -17.5, -16.8, -16.8001)
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_vt04j")

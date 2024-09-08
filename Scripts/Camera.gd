@@ -2,8 +2,8 @@ extends Camera2D
 
 class_name camera
 static var step = 0.5
-static var min_zoom = 3
-static var max_zoom = 1
+static var min_zoom = 4
+static var max_zoom = 2
 
 
 func zooming():

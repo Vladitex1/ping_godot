@@ -1,3 +1,5 @@
+res://Scripts/objects
+res://Scenes
 res://Scripts/stop_screen
 res://assets/Ping
 res://assets/interface
@@ -7,7 +9,6 @@ res://
 G:/godot/ping/export
 G:/godot/ping/export/rcedit
 res://Scenes/shop
-res://Scenes
 res://assets/Tilemap
 res://Scenes/mobs
 res://debug_scenes
@@ -19,4 +20,3 @@ res://Scripts
 res://Scripts/hud
 res://Scripts/shop
 res://Scripts/inventory_scripts
-res://assets/special

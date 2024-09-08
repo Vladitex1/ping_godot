@@ -11,14 +11,14 @@ resource_name = "inventory_show_animation"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/Control:position")
+tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.7, 1),
+"transitions": PackedFloat32Array(0.466517, 1, 0.287174),
 "update": 0,
-"values": [Vector2(1204, 1077), Vector2(1204, 590), Vector2(1204, 610)]
+"values": [Vector2(890, 1100), Vector2(890, 500), Vector2(890, 570)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5uifj"]
@@ -26,33 +26,22 @@ _data = {
 "inventory_show_animation": SubResource("Animation_tuau0")
 }
 
-[node name="inventory" type="Control"]
-top_level = true
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1.0
-offset_top = -1.0
-offset_right = 1.0
-offset_bottom = -1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="inventory" type="CanvasLayer"]
+layer = 2
+scale = Vector2(2, 2)
+transform = Transform2D(2, 0, 0, 2, 0, 0)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Control" type="Control" parent="CanvasLayer"]
+[node name="control_module" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 1204.0
-offset_top = 1077.0
-offset_right = 1204.0
-offset_bottom = 1077.0
-scale = Vector2(2, 2)
+offset_left = 890.0
+offset_top = 1100.0
+offset_right = 890.0
+offset_bottom = 1100.0
+scale = Vector2(1.6, 1.6)
 script = ExtResource("2_bi0ni")
-metadata/_edit_use_anchors_ = true
 
-[node name="mouse_equip_item" type="TextureRect" parent="CanvasLayer/Control"]
+[node name="mouse_equip_item" type="TextureRect" parent="control_module"]
 visible = false
 light_mask = 1048575
 visibility_layer = 1048575
@@ -65,7 +54,7 @@ offset_bottom = -5.0
 scale = Vector2(0.07, 0.07)
 texture = ExtResource("5_146gb")
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]
+[node name="TextureRect" type="TextureRect" parent="control_module"]
 layout_mode = 0
 offset_right = 1000.0
 offset_bottom = 1000.0
@@ -73,7 +62,7 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_nbj8i")
 metadata/_edit_use_anchors_ = true
 
-[node name="GridContainer" type="GridContainer" parent="CanvasLayer/Control"]
+[node name="GridContainer" type="GridContainer" parent="control_module"]
 layout_mode = 0
 offset_left = 26.0
 offset_top = 23.0
@@ -85,14 +74,14 @@ theme_override_constants/v_separation = 4
 columns = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="Slot1" type="Panel" parent="CanvasLayer/Control/GridContainer"]
+[node name="Slot1" type="Panel" parent="control_module/GridContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("3_guuq7")
 
-[node name="Button" type="Button" parent="CanvasLayer/Control/GridContainer/Slot1"]
+[node name="Button" type="Button" parent="control_module/GridContainer/Slot1"]
 visibility_layer = 28
 layout_mode = 0
 offset_right = 9.0
@@ -103,18 +92,18 @@ theme_override_styles/hover = ExtResource("3_guuq7")
 theme_override_styles/focus = ExtResource("3_guuq7")
 button_mask = 7
 
-[node name="Item1" parent="CanvasLayer/Control/GridContainer/Slot1/Button" instance=ExtResource("4_v2hlw")]
+[node name="Item1" parent="control_module/GridContainer/Slot1/Button" instance=ExtResource("4_v2hlw")]
 position = Vector2(1.86029, 13.3022)
 scale = Vector2(0.0676467, 0.613946)
 
-[node name="Slot2" type="Panel" parent="CanvasLayer/Control/GridContainer"]
+[node name="Slot2" type="Panel" parent="control_module/GridContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("3_guuq7")
 
-[node name="Button" type="Button" parent="CanvasLayer/Control/GridContainer/Slot2"]
+[node name="Button" type="Button" parent="control_module/GridContainer/Slot2"]
 visibility_layer = 28
 layout_mode = 0
 offset_right = 9.0
@@ -125,18 +114,18 @@ theme_override_styles/hover = ExtResource("3_guuq7")
 theme_override_styles/focus = ExtResource("3_guuq7")
 button_mask = 7
 
-[node name="Item2" parent="CanvasLayer/Control/GridContainer/Slot2/Button" instance=ExtResource("4_v2hlw")]
+[node name="Item2" parent="control_module/GridContainer/Slot2/Button" instance=ExtResource("4_v2hlw")]
 position = Vector2(1.86029, 13.3022)
 scale = Vector2(0.0676467, 0.613946)
 
-[node name="Slot3" type="Panel" parent="CanvasLayer/Control/GridContainer"]
+[node name="Slot3" type="Panel" parent="control_module/GridContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("3_guuq7")
 
-[node name="Button" type="Button" parent="CanvasLayer/Control/GridContainer/Slot3"]
+[node name="Button" type="Button" parent="control_module/GridContainer/Slot3"]
 visibility_layer = 28
 layout_mode = 0
 offset_right = 9.0
@@ -147,18 +136,18 @@ theme_override_styles/hover = ExtResource("3_guuq7")
 theme_override_styles/focus = ExtResource("3_guuq7")
 button_mask = 7
 
-[node name="Item3" parent="CanvasLayer/Control/GridContainer/Slot3/Button" instance=ExtResource("4_v2hlw")]
+[node name="Item3" parent="control_module/GridContainer/Slot3/Button" instance=ExtResource("4_v2hlw")]
 position = Vector2(1.86029, 13.3022)
 scale = Vector2(0.0676467, 0.613946)
 
-[node name="Slot4" type="Panel" parent="CanvasLayer/Control/GridContainer"]
+[node name="Slot4" type="Panel" parent="control_module/GridContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("3_guuq7")
 
-[node name="Button" type="Button" parent="CanvasLayer/Control/GridContainer/Slot4"]
+[node name="Button" type="Button" parent="control_module/GridContainer/Slot4"]
 visibility_layer = 28
 layout_mode = 0
 offset_right = 9.0
@@ -169,18 +158,18 @@ theme_override_styles/hover = ExtResource("3_guuq7")
 theme_override_styles/focus = ExtResource("3_guuq7")
 button_mask = 7
 
-[node name="Item4" parent="CanvasLayer/Control/GridContainer/Slot4/Button" instance=ExtResource("4_v2hlw")]
+[node name="Item4" parent="control_module/GridContainer/Slot4/Button" instance=ExtResource("4_v2hlw")]
 position = Vector2(1.86029, 13.3022)
 scale = Vector2(0.0676467, 0.613946)
 
-[node name="Slot5" type="Panel" parent="CanvasLayer/Control/GridContainer"]
+[node name="Slot5" type="Panel" parent="control_module/GridContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("3_guuq7")
 
-[node name="Button" type="Button" parent="CanvasLayer/Control/GridContainer/Slot5"]
+[node name="Button" type="Button" parent="control_module/GridContainer/Slot5"]
 visibility_layer = 28
 layout_mode = 0
 offset_right = 9.0
@@ -191,18 +180,18 @@ theme_override_styles/hover = ExtResource("3_guuq7")
 theme_override_styles/focus = ExtResource("3_guuq7")
 button_mask = 7
 
-[node name="Item5" parent="CanvasLayer/Control/GridContainer/Slot5/Button" instance=ExtResource("4_v2hlw")]
+[node name="Item5" parent="control_module/GridContainer/Slot5/Button" instance=ExtResource("4_v2hlw")]
 position = Vector2(1.86029, 13.3022)
 scale = Vector2(0.0676467, 0.613946)
 
-[node name="Slot6" type="Panel" parent="CanvasLayer/Control/GridContainer"]
+[node name="Slot6" type="Panel" parent="control_module/GridContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("3_guuq7")
 
-[node name="Button" type="Button" parent="CanvasLayer/Control/GridContainer/Slot6"]
+[node name="Button" type="Button" parent="control_module/GridContainer/Slot6"]
 visibility_layer = 28
 layout_mode = 0
 offset_right = 9.0
@@ -213,18 +202,18 @@ theme_override_styles/hover = ExtResource("3_guuq7")
 theme_override_styles/focus = ExtResource("3_guuq7")
 button_mask = 7
 
-[node name="Item6" parent="CanvasLayer/Control/GridContainer/Slot6/Button" instance=ExtResource("4_v2hlw")]
+[node name="Item6" parent="control_module/GridContainer/Slot6/Button" instance=ExtResource("4_v2hlw")]
 position = Vector2(1.86029, 13.3022)
 scale = Vector2(0.0676467, 0.613946)
 
-[node name="Slot7" type="Panel" parent="CanvasLayer/Control/GridContainer"]
+[node name="Slot7" type="Panel" parent="control_module/GridContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("3_guuq7")
 
-[node name="Button" type="Button" parent="CanvasLayer/Control/GridContainer/Slot7"]
+[node name="Button" type="Button" parent="control_module/GridContainer/Slot7"]
 visibility_layer = 28
 layout_mode = 0
 offset_right = 9.0
@@ -235,18 +224,18 @@ theme_override_styles/hover = ExtResource("3_guuq7")
 theme_override_styles/focus = ExtResource("3_guuq7")
 button_mask = 7
 
-[node name="Item7" parent="CanvasLayer/Control/GridContainer/Slot7/Button" instance=ExtResource("4_v2hlw")]
+[node name="Item7" parent="control_module/GridContainer/Slot7/Button" instance=ExtResource("4_v2hlw")]
 position = Vector2(1.86029, 13.3022)
 scale = Vector2(0.0676467, 0.613946)
 
-[node name="Slot8" type="Panel" parent="CanvasLayer/Control/GridContainer"]
+[node name="Slot8" type="Panel" parent="control_module/GridContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("3_guuq7")
 
-[node name="Button" type="Button" parent="CanvasLayer/Control/GridContainer/Slot8"]
+[node name="Button" type="Button" parent="control_module/GridContainer/Slot8"]
 visibility_layer = 28
 layout_mode = 0
 offset_right = 9.0
@@ -257,18 +246,18 @@ theme_override_styles/hover = ExtResource("3_guuq7")
 theme_override_styles/focus = ExtResource("3_guuq7")
 button_mask = 7
 
-[node name="Item8" parent="CanvasLayer/Control/GridContainer/Slot8/Button" instance=ExtResource("4_v2hlw")]
+[node name="Item8" parent="control_module/GridContainer/Slot8/Button" instance=ExtResource("4_v2hlw")]
 position = Vector2(1.86029, 13.3022)
 scale = Vector2(0.0676467, 0.613946)
 
-[node name="Slot9" type="Panel" parent="CanvasLayer/Control/GridContainer"]
+[node name="Slot9" type="Panel" parent="control_module/GridContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("3_guuq7")
 
-[node name="Button" type="Button" parent="CanvasLayer/Control/GridContainer/Slot9"]
+[node name="Button" type="Button" parent="control_module/GridContainer/Slot9"]
 visibility_layer = 28
 layout_mode = 0
 offset_right = 9.0
@@ -279,18 +268,18 @@ theme_override_styles/hover = ExtResource("3_guuq7")
 theme_override_styles/focus = ExtResource("3_guuq7")
 button_mask = 7
 
-[node name="Item9" parent="CanvasLayer/Control/GridContainer/Slot9/Button" instance=ExtResource("4_v2hlw")]
+[node name="Item9" parent="control_module/GridContainer/Slot9/Button" instance=ExtResource("4_v2hlw")]
 position = Vector2(1.86029, 13.3022)
 scale = Vector2(0.0676467, 0.613946)
 
-[node name="Slot10" type="Panel" parent="CanvasLayer/Control/GridContainer"]
+[node name="Slot10" type="Panel" parent="control_module/GridContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("3_guuq7")
 
-[node name="Button" type="Button" parent="CanvasLayer/Control/GridContainer/Slot10"]
+[node name="Button" type="Button" parent="control_module/GridContainer/Slot10"]
 visibility_layer = 28
 layout_mode = 0
 offset_right = 9.0
@@ -301,18 +290,18 @@ theme_override_styles/hover = ExtResource("3_guuq7")
 theme_override_styles/focus = ExtResource("3_guuq7")
 button_mask = 7
 
-[node name="Item10" parent="CanvasLayer/Control/GridContainer/Slot10/Button" instance=ExtResource("4_v2hlw")]
+[node name="Item10" parent="control_module/GridContainer/Slot10/Button" instance=ExtResource("4_v2hlw")]
 position = Vector2(1.86029, 13.3022)
 scale = Vector2(0.0676467, 0.613946)
 
-[node name="Slot11" type="Panel" parent="CanvasLayer/Control/GridContainer"]
+[node name="Slot11" type="Panel" parent="control_module/GridContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("3_guuq7")
 
-[node name="Button" type="Button" parent="CanvasLayer/Control/GridContainer/Slot11"]
+[node name="Button" type="Button" parent="control_module/GridContainer/Slot11"]
 visibility_layer = 28
 layout_mode = 0
 offset_right = 9.0
@@ -323,18 +312,18 @@ theme_override_styles/hover = ExtResource("3_guuq7")
 theme_override_styles/focus = ExtResource("3_guuq7")
 button_mask = 7
 
-[node name="Item11" parent="CanvasLayer/Control/GridContainer/Slot11/Button" instance=ExtResource("4_v2hlw")]
+[node name="Item11" parent="control_module/GridContainer/Slot11/Button" instance=ExtResource("4_v2hlw")]
 position = Vector2(1.86029, 13.3022)
 scale = Vector2(0.0676467, 0.613946)
 
-[node name="Slot12" type="Panel" parent="CanvasLayer/Control/GridContainer"]
+[node name="Slot12" type="Panel" parent="control_module/GridContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("3_guuq7")
 
-[node name="Button" type="Button" parent="CanvasLayer/Control/GridContainer/Slot12"]
+[node name="Button" type="Button" parent="control_module/GridContainer/Slot12"]
 visibility_layer = 28
 layout_mode = 0
 offset_right = 9.0
@@ -345,18 +334,18 @@ theme_override_styles/hover = ExtResource("3_guuq7")
 theme_override_styles/focus = ExtResource("3_guuq7")
 button_mask = 7
 
-[node name="Item12" parent="CanvasLayer/Control/GridContainer/Slot12/Button" instance=ExtResource("4_v2hlw")]
+[node name="Item12" parent="control_module/GridContainer/Slot12/Button" instance=ExtResource("4_v2hlw")]
 position = Vector2(1.86029, 13.3022)
 scale = Vector2(0.0676467, 0.613946)
 
-[node name="Slot13" type="Panel" parent="CanvasLayer/Control/GridContainer"]
+[node name="Slot13" type="Panel" parent="control_module/GridContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("3_guuq7")
 
-[node name="Button" type="Button" parent="CanvasLayer/Control/GridContainer/Slot13"]
+[node name="Button" type="Button" parent="control_module/GridContainer/Slot13"]
 visibility_layer = 28
 layout_mode = 0
 offset_right = 9.0
@@ -367,18 +356,18 @@ theme_override_styles/hover = ExtResource("3_guuq7")
 theme_override_styles/focus = ExtResource("3_guuq7")
 button_mask = 7
 
-[node name="Item13" parent="CanvasLayer/Control/GridContainer/Slot13/Button" instance=ExtResource("4_v2hlw")]
+[node name="Item13" parent="control_module/GridContainer/Slot13/Button" instance=ExtResource("4_v2hlw")]
 position = Vector2(1.86029, 13.3022)
 scale = Vector2(0.0676467, 0.613946)
 
-[node name="Slot14" type="Panel" parent="CanvasLayer/Control/GridContainer"]
+[node name="Slot14" type="Panel" parent="control_module/GridContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("3_guuq7")
 
-[node name="Button" type="Button" parent="CanvasLayer/Control/GridContainer/Slot14"]
+[node name="Button" type="Button" parent="control_module/GridContainer/Slot14"]
 visibility_layer = 28
 layout_mode = 0
 offset_right = 9.0
@@ -389,18 +378,18 @@ theme_override_styles/hover = ExtResource("3_guuq7")
 theme_override_styles/focus = ExtResource("3_guuq7")
 button_mask = 7
 
-[node name="Item14" parent="CanvasLayer/Control/GridContainer/Slot14/Button" instance=ExtResource("4_v2hlw")]
+[node name="Item14" parent="control_module/GridContainer/Slot14/Button" instance=ExtResource("4_v2hlw")]
 position = Vector2(1.86029, 13.3022)
 scale = Vector2(0.0676467, 0.613946)
 
-[node name="Slot15" type="Panel" parent="CanvasLayer/Control/GridContainer"]
+[node name="Slot15" type="Panel" parent="control_module/GridContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("3_guuq7")
 
-[node name="Button" type="Button" parent="CanvasLayer/Control/GridContainer/Slot15"]
+[node name="Button" type="Button" parent="control_module/GridContainer/Slot15"]
 visibility_layer = 28
 layout_mode = 0
 offset_right = 9.0
@@ -411,18 +400,18 @@ theme_override_styles/hover = ExtResource("3_guuq7")
 theme_override_styles/focus = ExtResource("3_guuq7")
 button_mask = 7
 
-[node name="Item15" parent="CanvasLayer/Control/GridContainer/Slot15/Button" instance=ExtResource("4_v2hlw")]
+[node name="Item15" parent="control_module/GridContainer/Slot15/Button" instance=ExtResource("4_v2hlw")]
 position = Vector2(1.86029, 13.3022)
 scale = Vector2(0.0676467, 0.613946)
 
-[node name="Slot16" type="Panel" parent="CanvasLayer/Control/GridContainer"]
+[node name="Slot16" type="Panel" parent="control_module/GridContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("3_guuq7")
 
-[node name="Button" type="Button" parent="CanvasLayer/Control/GridContainer/Slot16"]
+[node name="Button" type="Button" parent="control_module/GridContainer/Slot16"]
 visibility_layer = 28
 layout_mode = 0
 offset_right = 9.0
@@ -433,12 +422,11 @@ theme_override_styles/hover = ExtResource("3_guuq7")
 theme_override_styles/focus = ExtResource("3_guuq7")
 button_mask = 7
 
-[node name="Item16" parent="CanvasLayer/Control/GridContainer/Slot16/Button" instance=ExtResource("4_v2hlw")]
+[node name="Item16" parent="control_module/GridContainer/Slot16/Button" instance=ExtResource("4_v2hlw")]
 position = Vector2(1.86029, 13.3022)
 scale = Vector2(0.0676467, 0.613946)
 
-[node name="inventory_pos_animation" type="AnimationPlayer" parent="CanvasLayer/Control"]
-root_node = NodePath("../../..")
+[node name="inventory_pos_animation" type="AnimationPlayer" parent="control_module"]
 libraries = {
 "": SubResource("AnimationLibrary_5uifj")
 }

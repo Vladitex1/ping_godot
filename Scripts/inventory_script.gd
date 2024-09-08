@@ -23,15 +23,22 @@ func _ready():
 
 func inventory_toggle():
 	if !open:
+		show_animation.play("inventory_show_animation")
 		open = true
 		global.attack_block = true
-		show_animation.play("inventory_show_animation")
 	else:
 		open = false
 		global.attack_block = false
-		show_animation.play_backwards("inventory_show_animation")	
+		show_animation.play_backwards("inventory_show_animation")
+		
+		
 
 func _process(_delta):
+	if open and Input.is_action_just_released("special_back"):
+		open = false
+		global.attack_block = false
+		show_animation.play_backwards("inventory_show_animation")	
+	
 	if Input.is_action_just_released("special_tab"):
 		inventory_toggle()
 		print("inventory work - inventory_script")
@@ -89,7 +96,7 @@ func slot(slot_number,num):
 
 ##фидбек кнопки - Возвращает что за предмет в слоте ID
 
-
+###заполнение руки
 func pickup(path,slotNum):
 	if mousetoggle == true: ##запоминается айди в руку
 		mouse_touge()
