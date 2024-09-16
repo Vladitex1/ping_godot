@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/skeleton_script.gd" id="1_uml16"]
 [ext_resource type="Texture2D" uid="uid://pl513b6xupyn" path="res://assets/interface/hb1.png" id="2_dgof6"]
 [ext_resource type="Texture2D" uid="uid://ckakw481uj45i" path="res://assets/interface/health.png" id="3_s44k5"]
-[ext_resource type="FontFile" uid="uid://8atws0pc47sn" path="res://fonts/Font1.ttf" id="4_gsiy2"]
+[ext_resource type="FontFile" uid="uid://dus86kp12bin7" path="res://fonts/Font1.ttf" id="4_gsiy2"]
 [ext_resource type="Texture2D" uid="uid://5hbacs6p7kj0" path="res://assets/Tilemap/Skeleton.png" id="5_3k3yb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_joesn"]
@@ -417,24 +417,24 @@ anchor_left = -0.0276458
 anchor_top = -0.00262965
 anchor_right = 0.131417
 anchor_bottom = 0.0375556
-offset_left = -14.6089
-offset_top = -39.8945
-offset_right = 225.391
-offset_bottom = 3.10548
+offset_left = -29.8942
+offset_top = -40.8948
+offset_right = 420.743
+offset_bottom = 8.49778
 scale = Vector2(0.14, 0.197)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("4_gsiy2")
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 42
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 1
+texture_filter = 3
 position = Vector2(0, 9.53674e-07)
 scale = Vector2(2.0625, 2.0625)
 sprite_frames = SubResource("SpriteFrames_tswkv")
-animation = &"skeleton_idle_down"
-frame_progress = 0.0804547
+animation = &"skeleton_death_side"
 
 [node name="Skeleton" type="CollisionShape2D" parent="."]
 position = Vector2(-4.76837e-07, 0.214267)

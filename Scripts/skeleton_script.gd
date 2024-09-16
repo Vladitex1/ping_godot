@@ -91,13 +91,8 @@ func _ready():
 	$damage_area.connect("area_exited", DamageArea_exit)
 
 func _physics_process(_delta) -> void:
+	healh_control()
 	health_bar_control()
-	if health_value <= 0:
-		damage_area = false
-		animation(target_position,"death")
-		speed = 1
-		if enemy_animation.get_frame() == 3:
-			death()
 	if attack_area and state != State.DAMAGE:
 		attack()
 	if damage_area and global.player_attack("damage", 0, "get") > 0:
@@ -120,7 +115,7 @@ func _physics_process(_delta) -> void:
 				nav.target_position = global.get_player_pos()
 				move(nav.get_next_path_position(),speed)
 				detectiron_area.look_at(global.get_player_pos())
-				if position.distance_to(nav.target_position) < 10:
+				if position.distance_to(nav.target_position) < 5:
 					speed = 0
 					animation(nav.get_next_path_position(),"idle")
 				else:
@@ -143,8 +138,9 @@ func _physics_process(_delta) -> void:
 				if cooldown_timer.time_left < 0.01:
 					state = State.PATROL
 				animation(Vector2(0,0),"idle")
-				
-
+			State.DEATH:
+				pass
+			
 ###############
 
 func move(target_pos, spd) -> void:
@@ -172,6 +168,17 @@ func animation(to_position,condition) -> void:
 	last_movement = direction_str
 	 
 ###############health_bar_conrol######################
+
+func healh_control() -> void:
+	if health_value < 1:
+		health_value = 0
+		damage_area = false
+		animation(target_position,"death")
+		speed = 1
+		state = State.DEATH
+		if enemy_animation.get_frame() == 3:
+			death()
+	
 
 func health_bar_control() -> void:
 	health_count_label.text = str(health_value)

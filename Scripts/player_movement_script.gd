@@ -4,8 +4,8 @@ static var speed: int = 120
 static var sprint: int = 50
 static var max_health: int = 100
 static var max_stamina: int = 1000
-const attack_strength: int = 25
-const attack_throw: int = 15
+const attack_strength: int = 25##25
+const attack_throw: int = 15##15
 
 static var starter_health: int = max_health
 static var starter_stamina: int = max_stamina
@@ -163,6 +163,8 @@ func interactive_control():
 		pickup.visible = true
 	else:
 		pickup.visible = false 
+		
+
 	
 	if global.action_toggle and not global.loading_toggle:
 		interactive.set_visible(true)
@@ -256,8 +258,7 @@ func get_input():
 	if Input.is_action_just_released("special_back") and !global.buttons_lock:
 		global.visible_scene("stop_screen",true)
 		global.buttons_lock = true
-
-
+		
 func animation(anim: String) -> void:
 	
 	match anim:

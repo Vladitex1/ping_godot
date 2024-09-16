@@ -22,15 +22,20 @@ var active_resolution
 
 @onready var window_res_slider= $control_module/settings_window/button_list/button_list/in_settings_buttons/resolution/HSlider
 @onready var window_res_label = $control_module/settings_window/button_list/button_list/in_settings_buttons/resolution/Label
+@onready var settings_back = $control_module/settings
 
 func _ready():
 	####main_menu####
+	
+	
+	
+	
 	print(get_viewport().size)
-	var continue_but = $control_module/main_menu/first_line_stop_menu/main/Button_Continue
+	var continue_but = $control_module/main_menu/first_line_stop_menu/VBoxContainer/main/Button_Continue
 	continue_but.connect("button_up",continue_button)
-	var settings_but = $control_module/main_menu/first_line_stop_menu/main/Button_Settings
+	var settings_but = $control_module/main_menu/first_line_stop_menu/VBoxContainer/main/Button_Settings
 	settings_but.connect("button_up",settings_button)
-	var quit_but = $control_module/main_menu/first_line_stop_menu/main/Button_Quit
+	var quit_but = $control_module/main_menu/first_line_stop_menu/VBoxContainer/main2/Button_Quit
 	quit_but.connect("button_up",quit_button)
 	
 	####settings_menu####
@@ -144,6 +149,7 @@ func continue_button():
 	
 func settings_button():
 	main_menu.hide()
+	settings_back.visible = true
 	settings_menu.show()
 
 func quit_button():
@@ -154,6 +160,7 @@ func quit_button():
 func back_button():
 	settings_menu.hide()
 	main_menu.show()
+	settings_back.visible = false
 	
 func keymap_button():
 	settings_menu.hide()

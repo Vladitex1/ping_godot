@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://k5742llj4gq2" path="res://assets/interface/ping_icon_1024x1024.png" id="1_21nmr"]
 [ext_resource type="Script" path="res://Scripts/hud/hud_brain.gd" id="1_sjm8r"]
-[ext_resource type="FontFile" uid="uid://8atws0pc47sn" path="res://fonts/Font1.ttf" id="3_h8id7"]
+[ext_resource type="FontFile" uid="uid://dus86kp12bin7" path="res://fonts/Font1.ttf" id="3_h8id7"]
 [ext_resource type="Texture2D" uid="uid://ddb813dlvbuyj" path="res://assets/interface/hud_status_large.png" id="4_7qmn3"]
 [ext_resource type="Texture2D" uid="uid://ckakw481uj45i" path="res://assets/interface/health.png" id="5_2ykob"]
 [ext_resource type="Texture2D" uid="uid://cx2ip8bilhrg5" path="res://assets/interface/hud_base_large.png" id="5_5t2uc"]
@@ -46,10 +46,13 @@ offset_right = 190.0
 offset_bottom = 30.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_h8id7")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 27
 text = "fps: 60"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="icon_texture" type="TextureRect" parent="control_module/HUD"]
+texture_filter = 5
 clip_contents = true
 layout_mode = 1
 anchors_preset = -1
@@ -92,19 +95,20 @@ anchor_left = -0.0276458
 anchor_top = -0.00262965
 anchor_right = 0.131417
 anchor_bottom = 0.0375556
-offset_left = 334.212
-offset_top = 856.21
-offset_right = 567.849
-offset_bottom = 897.603
+offset_left = 279.0
+offset_top = 853.0
+offset_right = 691.0
+offset_bottom = 910.0
 scale = Vector2(0.6, 0.6)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_h8id7")
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 38
 text = "health - 120"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="plate_status_texture" type="TextureRect" parent="control_module/HUD"]
+texture_filter = 5
 layout_mode = 0
 offset_left = 48.0
 offset_top = 695.0
@@ -114,6 +118,7 @@ scale = Vector2(0.35, 0.35)
 texture = ExtResource("4_7qmn3")
 
 [node name="weapon_texture" type="TextureRect" parent="control_module/HUD"]
+texture_filter = 5
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -170,6 +175,7 @@ rounded = true
 texture_progress = ExtResource("6_guuqj")
 
 [node name="plate_texture" type="TextureRect" parent="control_module/HUD"]
+texture_filter = 5
 layout_mode = 0
 offset_left = 55.0
 offset_top = 813.0
@@ -186,14 +192,14 @@ anchor_left = -0.00160416
 anchor_top = 0.00199998
 anchor_right = 0.0207917
 anchor_bottom = 0.00199998
-offset_left = 457.128
-offset_top = 909.84
-offset_right = 476.128
-offset_bottom = 942.84
+offset_left = 440.0
+offset_top = 910.0
+offset_right = 501.0
+offset_bottom = 942.0
 scale = Vector2(0.9, 0.9)
 theme_override_colors/font_color = Color(0.0962047, 0.0962048, 0.0962047, 1)
 theme_override_fonts/font = ExtResource("3_h8id7")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 30
 text = "8"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -206,20 +212,21 @@ anchor_left = -0.00160416
 anchor_top = 0.00199998
 anchor_right = 0.0824583
 anchor_bottom = 0.032
-offset_left = 345.128
-offset_top = 909.84
-offset_right = 360.766
-offset_bottom = 941.64
+offset_left = 329.0
+offset_top = 910.0
+offset_right = 390.0
+offset_bottom = 942.0
 scale = Vector2(0.9, 0.9)
 theme_override_colors/font_color = Color(0.0962047, 0.0962048, 0.0962047, 1)
 theme_override_fonts/font = ExtResource("3_h8id7")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 30
 text = "9"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="key_texture" type="TextureRect" parent="control_module/HUD"]
 visibility_layer = 4
+texture_filter = 5
 layout_mode = 0
 offset_left = 294.0
 offset_top = 908.0
@@ -229,6 +236,7 @@ scale = Vector2(0.8, 0.8)
 texture = ExtResource("7_2srnd")
 
 [node name="coin_texture" type="TextureRect" parent="control_module/HUD"]
+texture_filter = 5
 layout_mode = 0
 offset_left = 405.0
 offset_top = 908.0

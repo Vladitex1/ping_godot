@@ -1,7 +1,9 @@
 Area2D
+Sprite2D
+Control
+VBoxContainer
 CollisionShape2D
 CanvasLayer
-Control
 CollisionPolygon2D
 AnimatedSprite2D
 Node2D
@@ -9,6 +11,4 @@ AnimationPlayer
 NavigationObstacle2D
 NavigationLink2D
 NavigationAgent2D
-Sprite2D
 TileMap
-NavigationRegion2D

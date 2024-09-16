@@ -650,6 +650,7 @@ shape = SubResource("RectangleShape2D_ptcxw")
 
 [node name="Ping_Animation" type="AnimatedSprite2D" parent="."]
 z_index = 2
+texture_filter = 3
 scale = Vector2(1, 1.15)
 sprite_frames = SubResource("SpriteFrames_cvcsf")
 animation = &"attack"
@@ -657,6 +658,7 @@ animation = &"attack"
 [node name="Waiting_Animation" type="AnimatedSprite2D" parent="."]
 visible = false
 z_index = 2
+texture_filter = 3
 position = Vector2(0, -30)
 scale = Vector2(1.10714, 1.10714)
 sprite_frames = SubResource("SpriteFrames_u5bdv")
@@ -667,6 +669,7 @@ visible = false
 light_mask = 15
 visibility_layer = 15
 z_index = 2
+texture_filter = 3
 position = Vector2(-1.19209e-07, -29.6072)
 scale = Vector2(0.901786, 0.924102)
 texture = ExtResource("5_j5ey8")
@@ -676,6 +679,7 @@ visible = false
 light_mask = 15
 visibility_layer = 15
 z_index = 2
+texture_filter = 3
 position = Vector2(-1.19209e-07, -29.6072)
 scale = Vector2(0.901786, 0.924102)
 texture = ExtResource("11_803ew")
@@ -714,8 +718,9 @@ collision_mask = 12
 
 [node name="HandsColision" type="CollisionPolygon2D" parent="hands"]
 visible = false
-position = Vector2(17.5005, -52.5026)
-polygon = PackedVector2Array(586.269, -90, 586.269, 228, 96.253, 228, 96.253, -90)
+position = Vector2(53.4393, -52.5026)
+scale = Vector2(0.535714, 1)
+polygon = PackedVector2Array(586.269, -52.5027, 586.269, 183.759, 96.253, 183.759, 96.253, -52.5027)
 
 [node name="WeaponIcon" type="Sprite2D" parent="hands"]
 visible = false
@@ -766,6 +771,6 @@ one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-1.19209e-07, 1.19209e-07)
-zoom = Vector2(2, 2)
+zoom = Vector2(5, 5)
 position_smoothing_enabled = true
 script = ExtResource("7_tbpjk")

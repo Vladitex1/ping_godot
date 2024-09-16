@@ -37,6 +37,7 @@ func _ready():
 			print("предустановленное разрешение:",resolution_list[i][0],"x", resolution_list[i][1])
 			BASE_RES_NUM = i
 			TEMP_RES = i
+			break
 
 'func window_reset_button():
 	var scaled = 1.53

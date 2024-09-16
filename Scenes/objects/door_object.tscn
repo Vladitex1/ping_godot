@@ -250,11 +250,13 @@ occluder_light_mask = 1048575
 light_mask = 7
 visibility_layer = 7
 z_index = 1
+texture_filter = 3
 position = Vector2(-2.98023e-08, -47)
 scale = Vector2(1.01563, 1.03571)
 texture = ExtResource("2_iijqy")
 
 [node name="animation" type="AnimatedSprite2D" parent="."]
+texture_filter = 3
 position = Vector2(0, 2)
 sprite_frames = SubResource("SpriteFrames_cuqtx")
 animation = &"door_open"

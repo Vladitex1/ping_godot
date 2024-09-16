@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b53v1iodgybwr" path="res://assets/interface/buybutton.png" id="4_skoxh"]
 [ext_resource type="Texture2D" uid="uid://c8e60181qtnia" path="res://assets/interface/exitshopbutton.png" id="5_ke4qd"]
 [ext_resource type="Theme" uid="uid://7xlrsebp7r3g" path="res://font_gray_theme.tres" id="6_xbq1c"]
-[ext_resource type="FontFile" uid="uid://8atws0pc47sn" path="res://fonts/Font1.ttf" id="7_u30p0"]
+[ext_resource type="FontFile" uid="uid://dus86kp12bin7" path="res://fonts/Font1.ttf" id="7_u30p0"]
 [ext_resource type="Texture2D" uid="uid://bjh66o0mr2my2" path="res://assets/Tilemap/intresting_item_spritesheet.png" id="9_gt45h"]
 [ext_resource type="Texture2D" uid="uid://cok61u06k8a5v" path="res://assets/interface/plusbutton_large.png" id="9_x3u8a"]
 [ext_resource type="PackedScene" uid="uid://bdgtifol1pjro" path="res://Scenes/shop/shop_item.tscn" id="11_g3vq1"]
@@ -606,9 +606,9 @@ offset_bottom = 621.0
 theme = ExtResource("6_xbq1c")
 theme_override_colors/font_color = Color(0.458405, 0.458405, 0.458405, 1)
 theme_override_fonts/font = ExtResource("7_u30p0")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 32
 text = "name"
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="cost2" type="Label" parent="control_module/shop_plate/text"]
@@ -620,9 +620,9 @@ offset_bottom = 622.0
 theme = ExtResource("6_xbq1c")
 theme_override_colors/font_color = Color(0.458405, 0.458405, 0.458405, 1)
 theme_override_fonts/font = ExtResource("7_u30p0")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 32
 text = "cost"
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="sell_cost2" type="Label" parent="control_module/shop_plate/text"]
@@ -634,9 +634,9 @@ offset_bottom = 622.0
 theme = ExtResource("6_xbq1c")
 theme_override_colors/font_color = Color(0.458405, 0.458405, 0.458405, 1)
 theme_override_fonts/font = ExtResource("7_u30p0")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 32
 text = "sell"
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="count2" type="Label" parent="control_module/shop_plate/text"]
@@ -648,24 +648,26 @@ offset_bottom = 682.0
 theme = ExtResource("6_xbq1c")
 theme_override_colors/font_color = Color(0.458405, 0.458405, 0.458405, 1)
 theme_override_fonts/font = ExtResource("7_u30p0")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 28
 text = "count"
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="SHOP" type="Label" parent="control_module/shop_plate/text"]
 layout_mode = 0
-offset_left = 597.0
-offset_top = 248.0
-offset_right = 761.0
-offset_bottom = 306.0
+offset_left = 582.0
+offset_top = 246.0
+offset_right = 778.0
+offset_bottom = 313.0
 theme = ExtResource("6_xbq1c")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("7_u30p0")
-theme_override_font_sizes/font_size = 35
+theme_override_font_sizes/font_size = 66
 text = "SHOP"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="name" type="Label" parent="control_module/shop_plate/text"]
 visible = false
@@ -677,7 +679,7 @@ offset_bottom = 621.0
 theme = ExtResource("6_xbq1c")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("7_u30p0")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 32
 text = "name"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -692,7 +694,7 @@ offset_bottom = 622.0
 theme = ExtResource("6_xbq1c")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("7_u30p0")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 32
 text = "cost"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -707,7 +709,7 @@ offset_bottom = 622.0
 theme = ExtResource("6_xbq1c")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("7_u30p0")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 32
 text = "sell"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -722,34 +724,38 @@ offset_bottom = 682.0
 theme = ExtResource("6_xbq1c")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("7_u30p0")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 28
 text = "count"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="keys" type="Label" parent="control_module/shop_plate/text"]
 layout_mode = 0
-offset_left = 482.0
-offset_top = 650.0
-offset_right = 556.0
-offset_bottom = 683.0
+offset_left = 469.0
+offset_top = 647.0
+offset_right = 513.0
+offset_bottom = 687.0
 theme = ExtResource("6_xbq1c")
 theme_override_colors/font_color = Color(0.329158, 0.329158, 0.329158, 1)
 theme_override_fonts/font = ExtResource("7_u30p0")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 36
 text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="coins" type="Label" parent="control_module/shop_plate/text"]
 layout_mode = 0
-offset_left = 637.0
-offset_top = 651.0
-offset_right = 711.0
-offset_bottom = 684.0
+offset_left = 623.0
+offset_top = 646.0
+offset_right = 675.0
+offset_bottom = 687.0
 theme = ExtResource("6_xbq1c")
 theme_override_colors/font_color = Color(0.329158, 0.329158, 0.329158, 1)
 theme_override_fonts/font = ExtResource("7_u30p0")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 36
 text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="eyes" type="Control" parent="control_module"]
 anchors_preset = 0

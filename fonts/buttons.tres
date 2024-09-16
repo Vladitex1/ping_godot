@@ -1,0 +1,8 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://btx7s0cgjap3o"]
+
+[ext_resource type="FontFile" uid="uid://dus86kp12bin7" path="res://fonts/Font1.ttf" id="1_b6lc4"]
+
+[resource]
+default_base_scale = 1.0
+default_font = ExtResource("1_b6lc4")
+default_font_size = 15

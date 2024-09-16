@@ -141,6 +141,7 @@ script = ExtResource("1_wkv1h")
 
 [node name="TileMap" type="TileMap" parent="Level"]
 z_index = -1
+texture_filter = 5
 tile_set = SubResource("TileSet_atgsl")
 rendering_quadrant_size = 64
 format = 2
@@ -202,4 +203,4 @@ position = Vector2(197, 122)
 position = Vector2(436, 333)
 
 [node name="lamp2" parent="Objects/Lights" instance=ExtResource("9_r5iot")]
-position = Vector2(439, 217)
+position = Vector2(435, 218)

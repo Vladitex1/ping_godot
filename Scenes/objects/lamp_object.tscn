@@ -1,11 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://dq7ffxogb6nrp"]
+[gd_scene load_steps=7 format=3 uid="uid://dq7ffxogb6nrp"]
 
 [ext_resource type="Texture2D" uid="uid://hfryu6gwfls3" path="res://assets/LVL/lamp_test.png" id="1_1dt8p"]
 [ext_resource type="Script" path="res://Scripts/objects/lamp_object.gd" id="1_3v8fh"]
 [ext_resource type="Texture2D" uid="uid://c64klfpy51u4b" path="res://assets/special/2d_lights_and_shadows_neutral_point_light.webp" id="2_d03s5"]
+[ext_resource type="Texture2D" uid="uid://b5wane8wbx8sk" path="res://assets/items/loot/coin.png" id="4_8sm87"]
+[ext_resource type="Texture2D" uid="uid://bsnxfsk116nns" path="res://assets/items/loot/health_icon.png" id="5_0fjvj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_amcqt"]
-radius = 22.0227
+radius = 14.0357
 
 [node name="lamp" type="StaticBody2D"]
 collision_layer = 15
@@ -14,6 +16,11 @@ script = ExtResource("1_3v8fh")
 
 [node name="lamp_texture" type="Sprite2D" parent="."]
 position = Vector2(0, -2)
+texture = ExtResource("1_1dt8p")
+
+[node name="lamp_drop_texture" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -1)
 texture = ExtResource("1_1dt8p")
 
 [node name="light_point" type="PointLight2D" parent="."]
@@ -37,3 +44,13 @@ collision_mask = 4
 
 [node name="pickup" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_amcqt")
+
+[node name="Coin" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-24, -26)
+texture = ExtResource("4_8sm87")
+
+[node name="HealthIcon" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(21, -25)
+texture = ExtResource("5_0fjvj")

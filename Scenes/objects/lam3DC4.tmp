@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://dq7ffxogb6nrp"]
+
+[ext_resource type="Texture2D" uid="uid://hfryu6gwfls3" path="res://assets/LVL/lamp_test.png" id="1_1dt8p"]
+[ext_resource type="Script" path="res://Scripts/objects/lamp_object.gd" id="1_3v8fh"]
+[ext_resource type="Texture2D" uid="uid://c64klfpy51u4b" path="res://assets/special/2d_lights_and_shadows_neutral_point_light.webp" id="2_d03s5"]
+[ext_resource type="Texture2D" uid="uid://b5wane8wbx8sk" path="res://assets/items/loot/coin.png" id="4_8sm87"]
+[ext_resource type="Texture2D" uid="uid://bsnxfsk116nns" path="res://assets/items/loot/health_icon.png" id="5_0fjvj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_amcqt"]
+radius = 22.0227
+
+[node name="lamp" type="StaticBody2D"]
+collision_layer = 15
+collision_mask = 15
+script = ExtResource("1_3v8fh")
+
+[node name="lamp_texture" type="Sprite2D" parent="."]
+position = Vector2(0, -2)
+texture = ExtResource("1_1dt8p")
+
+[node name="lamp_drop_texture" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(32, -2)
+texture = ExtResource("1_1dt8p")
+
+[node name="light_point" type="PointLight2D" parent="."]
+scale = Vector2(0.554688, 0.598958)
+color = Color(0.980149, 0.847807, 0.653115, 1)
+energy = 2.2
+range_item_cull_mask = 15
+shadow_enabled = true
+shadow_filter = 1
+shadow_item_cull_mask = 7
+texture = ExtResource("2_d03s5")
+height = 3.0
+
+[node name="colision" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, -2)
+polygon = PackedVector2Array(-4, 0, 4, 0, 7, 3, 7, 11, 4, 14, -4, 14, -7, 11, -7, 3)
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+collision_layer = 4
+collision_mask = 4
+
+[node name="pickup" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_amcqt")
+
+[node name="Coin" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-24, -26)
+texture = ExtResource("4_8sm87")
+
+[node name="HealthIcon" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(21, -25)
+texture = ExtResource("5_0fjvj")

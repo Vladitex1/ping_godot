@@ -1,3 +1,4 @@
+res://fonts
 res://Scripts/objects
 res://Scenes
 res://Scripts/stop_screen
@@ -19,4 +20,3 @@ G:/godot/ping/Scripts/shop
 res://Scripts
 res://Scripts/hud
 res://Scripts/shop
-res://Scripts/inventory_scripts

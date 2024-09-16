@@ -36,15 +36,15 @@ var inventory_storage = {
 		0,0,0,0]}
 
 var keybinds = {	
-	0: ["up", 87, "move_up"],
-	1: ["down", 83, "move_down"],
-	2: ["left", 65, "move_left"],
-	3: ["right", 68, "move_right"],
-	4: ["spawn_unite", 73, "debug2"],
-	5: ["console", 96,"special_console"],
-	6: ["sprint", 4194325, "special_shift"],
-	7: ["menu", 4194305, "special_back"],
-	8: ["drop", 71, "special_drop"],
+	0: ["UP", 87, "move_up"],
+	1: ["DOWN", 83, "move_down"],
+	2: ["LEFT", 65, "move_left"],
+	3: ["RIGHT", 68, "move_right"],
+	4: ["Sprint", 4194325, "special_shift"],
+	5: ["drop item", 71, "special_drop"],
+	6: ["BACK", 4194305, "special_back"],
+	7: ["Spawn_Unite", 73, "debug2"],
+	8: ["Console", 96,"special_console"],
 	9: ["null", null, "null"], ##Костыль :)
 	}
 

@@ -2,19 +2,15 @@
 
 [ext_resource type="Script" path="res://Scripts/stop_screen/stop_screen.gd" id="1_s6u6m"]
 [ext_resource type="StyleBox" uid="uid://b1j6fi831qnyn" path="res://Thems/console_stylebox_0.tres" id="2_j2qry"]
-[ext_resource type="FontFile" uid="uid://8atws0pc47sn" path="res://fonts/Font1.ttf" id="2_uje5x"]
+[ext_resource type="FontFile" uid="uid://dus86kp12bin7" path="res://fonts/Font1.ttf" id="2_uje5x"]
 [ext_resource type="Texture2D" uid="uid://v1aa4m8uhjnd" path="res://assets/interface/ingamemenu.png" id="3_p1mqc"]
+[ext_resource type="Theme" uid="uid://btx7s0cgjap3o" path="res://fonts/buttons.tres" id="5_ghcns"]
 [ext_resource type="Texture2D" uid="uid://cgxj5mj8ejqc8" path="res://assets/interface/menu/settings_menu_large.png" id="7_38uj6"]
 [ext_resource type="Texture2D" uid="uid://nxywjy43sduu" path="res://assets/interface/menu/keymap_icon.png" id="8_5iyqc"]
 [ext_resource type="StyleBox" uid="uid://bmuedaydehnq7" path="res://Thems/button_fixed_unpress.tres" id="8_s0dyy"]
 [ext_resource type="Texture2D" uid="uid://cyp5o7nwo8w32" path="res://assets/interface/menu/window_icon.png" id="9_1ahi7"]
 [ext_resource type="StyleBox" uid="uid://dsiifa1jr66sg" path="res://Thems/button_fixed_pressed.tres" id="9_s1xqu"]
 [ext_resource type="Script" path="res://Scripts/stop_screen/keybinds_script.gd" id="10_ywde3"]
-
-[sub_resource type="Theme" id="Theme_x2boa"]
-default_base_scale = 1.0
-default_font = ExtResource("2_uje5x")
-default_font_size = 12
 
 [node name="stop_screen" type="CanvasLayer"]
 process_priority = 1
@@ -38,23 +34,45 @@ visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = -945.0
-offset_top = -602.0
+offset_top = -543.0
 offset_right = -945.0
-offset_bottom = -602.0
+offset_bottom = -543.0
 mouse_filter = 2
 
 [node name="LineEdit" type="LineEdit" parent="control_module/console"]
 layout_mode = 0
-offset_left = -1.0
+offset_left = -571.0
 offset_top = 13.0
-offset_right = 1919.0
+offset_right = 2607.0
 offset_bottom = 37.0
+theme_override_fonts/font = ExtResource("2_uje5x")
 theme_override_styles/normal = ExtResource("2_j2qry")
 theme_override_styles/focus = ExtResource("2_j2qry")
 placeholder_text = "console"
+alignment = 1
 
 [node name="DelayTimer" type="Timer" parent="control_module"]
 one_shot = true
+
+[node name="settings" type="Control" parent="control_module"]
+visible = false
+anchors_preset = 0
+
+[node name="SettingsMenuLarge" type="Sprite2D" parent="control_module/settings"]
+texture_filter = 3
+texture = ExtResource("7_38uj6")
+
+[node name="Settings_Label" type="Label" parent="control_module/settings"]
+layout_mode = 0
+offset_left = -136.0
+offset_top = 204.0
+offset_right = 131.0
+offset_bottom = 292.0
+theme_override_fonts/font = ExtResource("2_uje5x")
+theme_override_font_sizes/font_size = 40
+text = "settings"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="main_menu" type="Control" parent="control_module"]
 layout_mode = 1
@@ -70,94 +88,79 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="Ingamemenu" type="Sprite2D" parent="control_module/main_menu"]
+texture_filter = 3
 scale = Vector2(0.55, 0.55)
 texture = ExtResource("3_p1mqc")
 
 [node name="Pause_Label" type="Label" parent="control_module/main_menu"]
 layout_mode = 2
-offset_left = -34.5
-offset_top = 22.5
-offset_right = 44.5
-offset_bottom = 51.5
+offset_left = -69.0
+offset_top = 18.0
+offset_right = 68.0
+offset_bottom = 61.0
 theme_override_fonts/font = ExtResource("2_uje5x")
-theme_override_font_sizes/font_size = 17
-text = "pause
-"
+theme_override_font_sizes/font_size = 25
+text = "MENU"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="first_line_stop_menu" type="MarginContainer" parent="control_module/main_menu"]
-layout_direction = 1
 layout_mode = 0
-offset_left = -111.0
+offset_left = -119.0
 offset_top = -62.0
-offset_right = 300.0
-offset_bottom = -29.0
+offset_right = 178.0
+offset_bottom = 14.0
 scale = Vector2(0.798685, 0.93892)
 
-[node name="main" type="HBoxContainer" parent="control_module/main_menu/first_line_stop_menu"]
+[node name="VBoxContainer" type="VBoxContainer" parent="control_module/main_menu/first_line_stop_menu"]
 layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
 
-[node name="Button_Continue" type="Button" parent="control_module/main_menu/first_line_stop_menu/main"]
+[node name="main" type="HBoxContainer" parent="control_module/main_menu/first_line_stop_menu/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/h_separation = 0
-theme_override_fonts/font = ExtResource("2_uje5x")
-theme_override_font_sizes/font_size = 12
+alignment = 1
+
+[node name="Button_Continue" type="Button" parent="control_module/main_menu/first_line_stop_menu/VBoxContainer/main"]
+layout_mode = 2
+theme = ExtResource("5_ghcns")
 theme_override_styles/normal = ExtResource("8_s0dyy")
 theme_override_styles/hover = ExtResource("9_s1xqu")
 theme_override_styles/pressed = ExtResource("9_s1xqu")
 theme_override_styles/focus = ExtResource("9_s1xqu")
 text = "continue"
 
-[node name="Button_Settings" type="Button" parent="control_module/main_menu/first_line_stop_menu/main"]
+[node name="Button_Settings" type="Button" parent="control_module/main_menu/first_line_stop_menu/VBoxContainer/main"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_uje5x")
-theme_override_font_sizes/font_size = 12
+theme = ExtResource("5_ghcns")
 theme_override_styles/normal = ExtResource("8_s0dyy")
 theme_override_styles/hover = ExtResource("9_s1xqu")
 theme_override_styles/pressed = ExtResource("9_s1xqu")
 theme_override_styles/focus = ExtResource("9_s1xqu")
 text = "settings"
 
-[node name="Button_Quit" type="Button" parent="control_module/main_menu/first_line_stop_menu/main"]
+[node name="main2" type="HBoxContainer" parent="control_module/main_menu/first_line_stop_menu/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_uje5x")
-theme_override_font_sizes/font_size = 12
-theme_override_styles/normal = ExtResource("8_s0dyy")
-theme_override_styles/hover = ExtResource("9_s1xqu")
-theme_override_styles/pressed = ExtResource("9_s1xqu")
-theme_override_styles/focus = ExtResource("9_s1xqu")
-text = "quit"
+alignment = 1
 
-[node name="second_line_stop_menu" type="MarginContainer" parent="control_module/main_menu"]
-layout_mode = 0
-offset_left = -66.0
-offset_top = -23.5
-offset_right = 70.0
-offset_bottom = 9.5
-
-[node name="main" type="HBoxContainer" parent="control_module/main_menu/second_line_stop_menu"]
+[node name="Button_Load" type="Button" parent="control_module/main_menu/first_line_stop_menu/VBoxContainer/main2"]
 layout_mode = 2
-
-[node name="Button_Save-" type="Button" parent="control_module/main_menu/second_line_stop_menu/main"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_uje5x")
-theme_override_font_sizes/font_size = 12
-theme_override_styles/normal = ExtResource("8_s0dyy")
-theme_override_styles/hover = ExtResource("9_s1xqu")
-theme_override_styles/pressed = ExtResource("9_s1xqu")
-theme_override_styles/focus = ExtResource("9_s1xqu")
-text = "save
-"
-
-[node name="Button_Load" type="Button" parent="control_module/main_menu/second_line_stop_menu/main"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_uje5x")
-theme_override_font_sizes/font_size = 12
+theme = ExtResource("5_ghcns")
 theme_override_styles/normal = ExtResource("8_s0dyy")
 theme_override_styles/hover = ExtResource("9_s1xqu")
 theme_override_styles/pressed = ExtResource("9_s1xqu")
 theme_override_styles/focus = ExtResource("9_s1xqu")
 text = "load"
+
+[node name="Button_Quit" type="Button" parent="control_module/main_menu/first_line_stop_menu/VBoxContainer/main2"]
+layout_mode = 2
+theme = ExtResource("5_ghcns")
+theme_override_fonts/font = ExtResource("2_uje5x")
+theme_override_styles/normal = ExtResource("8_s0dyy")
+theme_override_styles/hover = ExtResource("9_s1xqu")
+theme_override_styles/pressed = ExtResource("9_s1xqu")
+theme_override_styles/focus = ExtResource("9_s1xqu")
+text = "quit"
 
 [node name="settings_menu" type="Control" parent="control_module"]
 visible = false
@@ -172,21 +175,6 @@ grow_vertical = 2
 scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
-
-[node name="SettingsMenuLarge" type="Sprite2D" parent="control_module/settings_menu"]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_38uj6")
-
-[node name="Settings_Label" type="Label" parent="control_module/settings_menu"]
-layout_mode = 2
-offset_left = -59.5
-offset_top = 107.0
-offset_right = 59.5
-offset_bottom = 136.0
-theme_override_fonts/font = ExtResource("2_uje5x")
-theme_override_font_sizes/font_size = 17
-text = "settings"
-horizontal_alignment = 1
 
 [node name="in_settings_buttons" type="MarginContainer" parent="control_module/settings_menu"]
 layout_mode = 1
@@ -210,7 +198,7 @@ layout_mode = 2
 
 [node name="Button_KeyMap" type="Button" parent="control_module/settings_menu/in_settings_buttons/button_list/keymap"]
 layout_mode = 2
-theme = SubResource("Theme_x2boa")
+theme = ExtResource("5_ghcns")
 text = "   keymaps"
 icon = ExtResource("8_5iyqc")
 
@@ -219,7 +207,7 @@ layout_mode = 2
 
 [node name="Button_Window" type="Button" parent="control_module/settings_menu/in_settings_buttons/button_list/window"]
 layout_mode = 2
-theme = SubResource("Theme_x2boa")
+theme = ExtResource("5_ghcns")
 text = "   window settings"
 icon = ExtResource("9_1ahi7")
 
@@ -235,7 +223,7 @@ layout_mode = 2
 
 [node name="Button_Back" type="Button" parent="control_module/settings_menu/settings_menu/settings"]
 layout_mode = 2
-theme = SubResource("Theme_x2boa")
+theme = ExtResource("5_ghcns")
 theme_override_styles/normal = ExtResource("8_s0dyy")
 theme_override_styles/hover = ExtResource("9_s1xqu")
 theme_override_styles/pressed = ExtResource("9_s1xqu")
@@ -265,7 +253,7 @@ offset_top = -6.5
 offset_right = 114.0
 offset_bottom = 22.5
 theme_override_fonts/font = ExtResource("2_uje5x")
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 14
 text = "brightness 0"
 horizontal_alignment = 1
 
@@ -282,21 +270,6 @@ grow_vertical = 2
 scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
-
-[node name="SettingsMenuLarge" type="Sprite2D" parent="control_module/settings_keybinds"]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_38uj6")
-
-[node name="Settings_Label" type="Label" parent="control_module/settings_keybinds"]
-layout_mode = 2
-offset_left = -58.5
-offset_top = 106.0
-offset_right = 60.5
-offset_bottom = 135.0
-theme_override_fonts/font = ExtResource("2_uje5x")
-theme_override_font_sizes/font_size = 17
-text = "settings"
-horizontal_alignment = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="control_module/settings_keybinds"]
 layout_direction = 2
@@ -330,7 +303,7 @@ layout_mode = 2
 
 [node name="Button_Back" type="Button" parent="control_module/settings_keybinds/settings_menu/settings"]
 layout_mode = 2
-theme = SubResource("Theme_x2boa")
+theme = ExtResource("5_ghcns")
 text = "back"
 
 [node name="settings_window" type="Control" parent="control_module"]
@@ -346,24 +319,6 @@ grow_vertical = 2
 scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
-metadata/_edit_use_anchors_ = true
-
-[node name="SettingsMenuLarge" type="Sprite2D" parent="control_module/settings_window"]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_38uj6")
-
-[node name="Settings_Label" type="Label" parent="control_module/settings_window"]
-layout_mode = 2
-offset_left = -60.0
-offset_top = 110.0
-offset_right = 59.0
-offset_bottom = 139.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("2_uje5x")
-theme_override_font_sizes/font_size = 17
-text = "settings"
-horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="button_list" type="MarginContainer" parent="control_module/settings_window"]
@@ -391,8 +346,7 @@ offset_left = 3.0
 offset_top = -3.0
 offset_right = 56.0
 offset_bottom = 24.0
-theme_override_fonts/font = ExtResource("2_uje5x")
-theme_override_font_sizes/font_size = 11
+theme = ExtResource("5_ghcns")
 text = "on"
 
 [node name="fscroff" type="Button" parent="control_module/settings_window/button_list/button_list/in_settings_buttons/fullscreen"]
@@ -402,33 +356,37 @@ offset_left = 65.0
 offset_top = -3.0
 offset_right = 118.0
 offset_bottom = 24.0
-theme_override_fonts/font = ExtResource("2_uje5x")
-theme_override_font_sizes/font_size = 11
+theme = ExtResource("5_ghcns")
 disabled = true
 text = "off
 "
 
 [node name="Label" type="Label" parent="control_module/settings_window/button_list/button_list/in_settings_buttons/fullscreen"]
 layout_mode = 0
-offset_left = 132.5
-offset_right = 253.5
-offset_bottom = 23.0
+offset_left = 115.5
+offset_top = -0.5
+offset_right = 236.5
+offset_bottom = 22.5
 theme_override_fonts/font = ExtResource("2_uje5x")
-theme_override_font_sizes/font_size = 13
+theme_override_font_sizes/font_size = 15
 text = "fullscr"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="resolution" type="Panel" parent="control_module/settings_window/button_list/button_list/in_settings_buttons"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="control_module/settings_window/button_list/button_list/in_settings_buttons/resolution"]
 layout_mode = 0
-offset_left = 130.0
-offset_top = 2.0
-offset_right = 221.0
-offset_bottom = 25.0
+offset_left = 119.0
+offset_top = 2.5
+offset_right = 228.0
+offset_bottom = 25.5
 theme_override_fonts/font = ExtResource("2_uje5x")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 15
 text = "1900x1080"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="HSlider" type="HSlider" parent="control_module/settings_window/button_list/button_list/in_settings_buttons/resolution"]
 layout_mode = 0
@@ -453,17 +411,17 @@ layout_mode = 2
 
 [node name="Button_Reset" type="Button" parent="control_module/settings_window/settings_menu/settings"]
 layout_mode = 2
-theme = SubResource("Theme_x2boa")
+theme = ExtResource("5_ghcns")
 text = "reset"
 
 [node name="Button_Confirm" type="Button" parent="control_module/settings_window/settings_menu/settings"]
 layout_mode = 2
-theme = SubResource("Theme_x2boa")
+theme = ExtResource("5_ghcns")
 text = "confirm"
 
 [node name="Button_Back" type="Button" parent="control_module/settings_window/settings_menu/settings"]
 layout_mode = 2
-theme = SubResource("Theme_x2boa")
+theme = ExtResource("5_ghcns")
 text = "back"
 
 [node name="LineEdit" type="LineEdit" parent="control_module"]

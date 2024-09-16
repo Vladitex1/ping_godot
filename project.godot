@@ -37,6 +37,10 @@ window/stretch/aspect="expand"
 
 enabled=PackedStringArray()
 
+[gui]
+
+fonts/dynamic_fonts/use_oversampling=false
+
 [importer_defaults]
 
 animation_library={

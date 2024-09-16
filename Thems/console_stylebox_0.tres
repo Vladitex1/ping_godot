@@ -4,5 +4,3 @@
 content_margin_right = 9.0
 bg_color = Color(0.144063, 0.144063, 0.144062, 1)
 corner_detail = 18
-shadow_color = Color(0.727922, 9.14484e-07, 0.427706, 0.6)
-shadow_size = 15
