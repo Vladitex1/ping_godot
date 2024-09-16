@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bkr7jbi6doumd"]
+[gd_scene load_steps=14 format=3 uid="uid://bkr7jbi6doumd"]
 
 [ext_resource type="Script" path="res://Scripts/stop_screen/stop_screen.gd" id="1_s6u6m"]
 [ext_resource type="StyleBox" uid="uid://b1j6fi831qnyn" path="res://Thems/console_stylebox_0.tres" id="2_j2qry"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://cyp5o7nwo8w32" path="res://assets/interface/menu/window_icon.png" id="9_1ahi7"]
 [ext_resource type="StyleBox" uid="uid://dsiifa1jr66sg" path="res://Thems/button_fixed_pressed.tres" id="9_s1xqu"]
 [ext_resource type="Script" path="res://Scripts/stop_screen/keybinds_script.gd" id="10_ywde3"]
+[ext_resource type="StyleBox" uid="uid://duaeradrxgcf5" path="res://Thems/button_green.tres" id="12_diken"]
+[ext_resource type="StyleBox" uid="uid://61kmy65latma" path="res://Thems/button_red.tres" id="13_nu4we"]
 
 [node name="stop_screen" type="CanvasLayer"]
 process_priority = 1
@@ -347,6 +349,8 @@ offset_top = -3.0
 offset_right = 56.0
 offset_bottom = 24.0
 theme = ExtResource("5_ghcns")
+theme_override_constants/outline_size = 0
+theme_override_styles/normal = ExtResource("12_diken")
 text = "on"
 
 [node name="fscroff" type="Button" parent="control_module/settings_window/button_list/button_list/in_settings_buttons/fullscreen"]
@@ -357,6 +361,7 @@ offset_top = -3.0
 offset_right = 118.0
 offset_bottom = 24.0
 theme = ExtResource("5_ghcns")
+theme_override_styles/normal = ExtResource("13_nu4we")
 disabled = true
 text = "off
 "

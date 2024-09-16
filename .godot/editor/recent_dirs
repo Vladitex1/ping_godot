@@ -1,3 +1,4 @@
+res://Thems
 res://fonts
 res://Scripts/objects
 res://Scenes
@@ -14,7 +15,6 @@ res://assets/Tilemap
 res://Scenes/mobs
 res://debug_scenes
 res://Scenes/stop_screen
-res://Thems
 G:/godot/ping/Scripts
 G:/godot/ping/Scripts/shop
 res://Scripts

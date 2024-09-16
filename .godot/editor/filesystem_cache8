@@ -1,5 +1,5 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1726519405
+::res://::1726519864
 font_gray_theme.tres::Theme::2294222881843504530::1725184251::0::1::::<><>::uid://8atws0pc47sn::::res://fonts/Font1.ttf
 icon.svg::CompressedTexture2D::5764739941042704505::1725184251::1725184251::1::::<><>::
 inventory.tscn::PackedScene::3607794303987784512::1725184251::0::1::::<><>::uid://bebfv6ulkwc7::::res://assets/interface/inventory_large.png<>res://Scripts/inventory_script.gd
