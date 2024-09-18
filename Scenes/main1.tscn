@@ -1,12 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://do42rlis6it6d"]
+[gd_scene load_steps=15 format=3 uid="uid://do42rlis6it6d"]
 
 [ext_resource type="Script" path="res://Scripts/level/darkness.gd" id="1_wkv1h"]
 [ext_resource type="Script" path="res://Scripts/level/position_notes.gd" id="3_lf1wf"]
 [ext_resource type="Texture2D" uid="uid://drjcqu76ga1a2" path="res://assets/Tilemap/Tilemap1.png" id="3_yi0xa"]
 [ext_resource type="PackedScene" uid="uid://w5qk1r0cogdd" path="res://Scenes/objects/navigation_point.tscn" id="4_i1u4j"]
 [ext_resource type="PackedScene" uid="uid://3nh6n7vhnc8h" path="res://Scenes/mobs/player_mob.tscn" id="4_r16yv"]
-[ext_resource type="PackedScene" uid="uid://ch2tgjjy03a8s" path="res://Scenes/mobs/skeleton_mob.tscn" id="6_6ajqg"]
+[ext_resource type="PackedScene" uid="uid://d1mjni8drulph" path="res://Scenes/objects/door_opener.tscn" id="7_i71r5"]
 [ext_resource type="PackedScene" uid="uid://chsnegkawbbdb" path="res://Scenes/objects/door_object.tscn" id="7_s40s2"]
+[ext_resource type="Script" path="res://Scripts/objects/door_opener_list.gd" id="7_yiegh"]
 [ext_resource type="PackedScene" uid="uid://dq6ushunyiy23" path="res://Scenes/objects/shop_object.tscn" id="9_bb57y"]
 [ext_resource type="PackedScene" uid="uid://dq7ffxogb6nrp" path="res://Scenes/objects/lamp_object.tscn" id="9_r5iot"]
 
@@ -134,6 +135,7 @@ color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="Lights" type="Node2D" parent="Level"]
+visible = false
 
 [node name="darkness" type="CanvasModulate" parent="Level/Lights"]
 color = Color(0.377919, 0.377919, 0.377919, 1)
@@ -170,27 +172,47 @@ list_num = 1
 [node name="Entities" type="Node2D" parent="."]
 
 [node name="player" parent="Entities" instance=ExtResource("4_r16yv")]
-position = Vector2(223, 284)
-
-[node name="skeleton" parent="Entities" instance=ExtResource("6_6ajqg")]
-position = Vector2(793, 159)
-
-[node name="skeleton2" parent="Entities" instance=ExtResource("6_6ajqg")]
-position = Vector2(789, 575)
-list_num = 1
+position = Vector2(21, 324)
 
 [node name="Objects" type="Node2D" parent="."]
 
+[node name="Door_Openers" type="Node2D" parent="Objects"]
+
+[node name="door_opener" parent="Objects/Door_Openers" instance=ExtResource("7_i71r5")]
+position = Vector2(-55, 341)
+door_num = 1
+door_opener_num = 1
+opener_lvl_tx = 1
+
+[node name="door_opener2" parent="Objects/Door_Openers" instance=ExtResource("7_i71r5")]
+position = Vector2(-44, 463)
+door_num = 2
+door_opener_num = 1
+opener_lvl_tx = 2
+side = 2
+
+[node name="door_opener3" parent="Objects/Door_Openers" instance=ExtResource("7_i71r5")]
+position = Vector2(-46, 514)
+door_num = 2
+door_opener_num = 2
+opener_lvl_tx = 2
+side = 2
+
 [node name="Doors" type="Node2D" parent="Objects"]
+script = ExtResource("7_yiegh")
 
 [node name="door" parent="Objects/Doors" instance=ExtResource("7_s40s2")]
-position = Vector2(480, 273)
+position = Vector2(-167, 336)
+door_lvl = 1
+door_num = 1
 
 [node name="door2" parent="Objects/Doors" instance=ExtResource("7_s40s2")]
-position = Vector2(480, 589)
+position = Vector2(-153, 490)
+door_lvl = 2
+door_num = 2
 
 [node name="door3" parent="Objects/Doors" instance=ExtResource("7_s40s2")]
-position = Vector2(97, 209)
+position = Vector2(-159, 199)
 
 [node name="Shops" type="Node2D" parent="Objects"]
 

@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://d1mjni8drulph"]
+
+[ext_resource type="Script" path="res://Scripts/objects/door_opener.gd" id="1_58pkv"]
+[ext_resource type="Texture2D" uid="uid://bvx58q675g58n" path="res://assets/LVL/door_opener_1_LS.png" id="3_en2vu"]
+[ext_resource type="Texture2D" uid="uid://c64klfpy51u4b" path="res://assets/special/2d_lights_and_shadows_neutral_point_light.webp" id="3_mkhdf"]
+[ext_resource type="Texture2D" uid="uid://ct2jkc8rq23lp" path="res://assets/LVL/door_opener_1_RS.png" id="4_v0ngq"]
+[ext_resource type="Texture2D" uid="uid://cw66y6gw5hpsd" path="res://assets/LVL/door_opener_2_LS.png" id="5_d67kf"]
+[ext_resource type="Texture2D" uid="uid://j1xxk4dwb602" path="res://assets/LVL/door_opener_2_RS.png" id="6_5c707"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wdgmf"]
+size = Vector2(25, 12)
+
+[node name="door_opener" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_58pkv")
+
+[node name="lamp_texture" type="Sprite2D" parent="."]
+modulate = Color(0.745885, 0.000118615, 0.636831, 1)
+position = Vector2(0, -2)
+
+[node name="light_point" type="PointLight2D" parent="."]
+visible = false
+scale = Vector2(0.554688, 0.598958)
+color = Color(0.980149, 0.847807, 0.653115, 1)
+energy = 2.2
+range_item_cull_mask = 15
+shadow_enabled = true
+shadow_filter = 1
+shadow_item_cull_mask = 7
+texture = ExtResource("3_mkhdf")
+height = 3.0
+
+[node name="colision" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, -2)
+polygon = PackedVector2Array(-2, -10, 7, -10, 7, 14, -2, 14)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="area" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(2.5, 0)
+shape = SubResource("RectangleShape2D_wdgmf")
+
+[node name="DoorOpener1Ls" type="Sprite2D" parent="."]
+texture_filter = 5
+texture = ExtResource("3_en2vu")
+
+[node name="DoorOpener1Rs" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 5
+position = Vector2(5, 0)
+texture = ExtResource("4_v0ngq")
+
+[node name="DoorOpener2Ls" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 5
+texture = ExtResource("5_d67kf")
+
+[node name="DoorOpener2Rs" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 5
+position = Vector2(5, 0)
+texture = ExtResource("6_5c707")

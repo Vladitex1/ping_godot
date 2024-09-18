@@ -31,6 +31,15 @@ offset_right = 62.4999
 offset_bottom = 74.074
 metadata/_edit_use_anchors_ = true
 
+[node name="background" type="ColorRect" parent="control_module"]
+z_index = -1
+offset_left = -1477.0
+offset_top = -1631.0
+offset_right = 3523.0
+offset_bottom = 3369.0
+color = Color(0.607843, 0.607843, 0.607843, 0.27451)
+metadata/_edit_use_anchors_ = true
+
 [node name="console" type="Control" parent="control_module"]
 visible = false
 layout_mode = 3

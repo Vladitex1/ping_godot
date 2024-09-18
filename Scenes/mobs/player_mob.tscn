@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://3nh6n7vhnc8h"]
+[gd_scene load_steps=63 format=3 uid="uid://3nh6n7vhnc8h"]
 
 [ext_resource type="Script" path="res://Scripts/player_movement_script.gd" id="1_f2mdd"]
 [ext_resource type="Texture2D" uid="uid://c64klfpy51u4b" path="res://assets/special/2d_lights_and_shadows_neutral_point_light.webp" id="2_cesop"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://co7fma77gsww3" path="res://assets/Ping/damage.png" id="3_15utc"]
 [ext_resource type="Texture2D" uid="uid://b6wioesllg003" path="res://assets/Tilemap/pingtilemap.png" id="3_belul"]
 [ext_resource type="Texture2D" uid="uid://b1cpxvfd70d41" path="res://assets/Ping/walk_down.png" id="4_6i6fg"]
-[ext_resource type="Texture2D" uid="uid://oagg074dneb7" path="res://assets/Tilemap/loading_tileset_small.png" id="4_6tkma"]
 [ext_resource type="Texture2D" uid="uid://ct7ly4kgbpc3a" path="res://assets/Ping/walk_up.png" id="4_jy78k"]
 [ext_resource type="Texture2D" uid="uid://c8ibgunb74ycb" path="res://assets/Ping/walk_left.png" id="4_ucl8d"]
 [ext_resource type="Texture2D" uid="uid://hsw0y25ixquf" path="res://assets/interface/interactive.png" id="5_j5ey8"]
@@ -368,70 +367,6 @@ animations = [{
 "speed": 8.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0m2ht"]
-atlas = ExtResource("4_6tkma")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_snih8"]
-atlas = ExtResource("4_6tkma")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0wc2f"]
-atlas = ExtResource("4_6tkma")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ovd5r"]
-atlas = ExtResource("4_6tkma")
-region = Rect2(48, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0use7"]
-atlas = ExtResource("4_6tkma")
-region = Rect2(64, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_f7ui5"]
-atlas = ExtResource("4_6tkma")
-region = Rect2(80, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_odxts"]
-atlas = ExtResource("4_6tkma")
-region = Rect2(96, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yc01d"]
-atlas = ExtResource("4_6tkma")
-region = Rect2(112, 0, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_u5bdv"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0m2ht")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_snih8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0wc2f")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ovd5r")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0use7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_f7ui5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_odxts")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yc01d")
-}],
-"loop": true,
-"name": &"wait_circle",
-"speed": 8.0
-}]
-
 [sub_resource type="Animation" id="Animation_bu6ly"]
 resource_name = "attack_left"
 length = 0.4
@@ -654,15 +589,6 @@ texture_filter = 3
 scale = Vector2(1, 1.15)
 sprite_frames = SubResource("SpriteFrames_cvcsf")
 animation = &"attack"
-
-[node name="Waiting_Animation" type="AnimatedSprite2D" parent="."]
-visible = false
-z_index = 2
-texture_filter = 3
-position = Vector2(0, -30)
-scale = Vector2(1.10714, 1.10714)
-sprite_frames = SubResource("SpriteFrames_u5bdv")
-animation = &"wait_circle"
 
 [node name="Interactive" type="Sprite2D" parent="."]
 visible = false

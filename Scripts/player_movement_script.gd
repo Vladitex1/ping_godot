@@ -41,7 +41,7 @@ var attack_ift: bool = true
 
 @onready var player_animation = $Ping_Animation
 @onready var player = $"."
-@onready var loading_animation = $"Waiting_Animation"
+
 @onready var interactive = $Interactive
 @onready var pickup = $Pickup
 @onready var cooldown_damage_timer = $Cooldown_Damage_Timer
@@ -166,16 +166,10 @@ func interactive_control():
 		
 
 	
-	if global.action_toggle and not global.loading_toggle:
+	if global.action_toggle:
 		interactive.set_visible(true)
 	else:
 		interactive.set_visible(false)
-	if global.loading_toggle:
-		loading_animation.play()
-		loading_animation.set_visible(true)
-	else:
-		loading_animation.set_visible(false)
-		loading_animation.stop()
 
 func damage(dmg: int):
 	animation("damage")

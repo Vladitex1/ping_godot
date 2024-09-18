@@ -325,7 +325,7 @@ offset_bottom = -168.0
 
 [node name="IntrestingSlot" type="AnimatedSprite2D" parent="control_module/shop_plate"]
 z_index = 1
-position = Vector2(213, 135)
+position = Vector2(212.5, 135.7)
 sprite_frames = SubResource("SpriteFrames_slgu8")
 animation = &"intresting_item_play"
 frame_progress = 0.583279

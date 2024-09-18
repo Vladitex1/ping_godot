@@ -4,7 +4,7 @@ extends Node
 var shop_toggle:bool = false
 var action_toggle:bool = false
 var pickup_toggle: bool = false
-var loading_toggle:bool = false
+
 var heat_toggle:bool = false
 var buttons_lock: bool = false
 var hold_in_hands: bool = false
