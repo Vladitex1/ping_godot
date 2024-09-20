@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 
 @onready var door_mask = $door_colisions/door_mask
 @export var door_lvl: int
@@ -31,15 +31,12 @@ func _process(_delta):
 			if Input.is_action_just_released("special_use") and door_ready == true:
 				door_lvl0()
 		1:
-			if IFT == false:
-				door_lvl1()
-				IFT = true
-			
+			door_lvl1()
 		2:
-			if IFT == false:
-				door_lvl2()
-				IFT = true
-			
+			door_lvl2()
+	if door_ready == true:
+		node.PROCESS_MODE_DISABLED
+				
 func door_lvl0():
 	if door_toggle == false: ##Если дверь не активна, ее следует открыть
 		door_toggle = true
@@ -63,23 +60,25 @@ func door_lvl0():
 func door_lvl1():
 	var opener_node = node.get_parent().opener_list[door_num][0][1]
 	if opener_node:
-		#opener_node = false
 		animation(true)
 		door_ready = false
 	
 func door_lvl2():
 	var door_opener_1_status = node.get_parent().opener_list[door_num][0][1] 
-	var door_opener_2_status = node.get_parent().opener_list[door_num][0][2] 
+	var door_opener_2_status = node.get_parent().opener_list[door_num][0][2]
 	if door_opener_1_status and door_opener_2_status:
-		animation(true)		
+		animation(true)	
 		door_ready = false
 		
 func animation(animation_bool):
 	if animation_bool:
 		door_mask.play("door_mask_open")
-		await get_tree().create_timer(0.83).timeout 
+		await get_tree().create_timer(0.83).timeout
+		door_mask.pause()
 	else:
 		door_mask.play_backwards("door_mask_open")
+		await get_tree().create_timer(0.83).timeout
+		door_mask.pause()
 		if door_lvl == 1 or door_lvl == 2:
 			opener_area.disabled = true
 		
@@ -93,4 +92,6 @@ func body_exited(body):
 		door_ready = false
 		global.action_toggle = false
 		
-
+####
+####await get_tree().create_timer(1).timeout 	
+####

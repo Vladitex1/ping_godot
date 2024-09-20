@@ -115,8 +115,8 @@ func _physics_process(_delta) -> void:
 				nav.target_position = global.get_player_pos()
 				move(nav.get_next_path_position(),speed)
 				detectiron_area.look_at(global.get_player_pos())
-				if position.distance_to(nav.target_position) < 5:
-					speed = 0
+				if position.distance_to(nav.target_position) < 15:
+					speed = -1
 					animation(nav.get_next_path_position(),"idle")
 				else:
 					speed = STANDARD_SPEED
@@ -239,8 +239,18 @@ func get_circle_position():
 #################states########################
 
 func death():
-	global.player_indicators("coin", 1, "set")	
+	loot_drop(2)
 	$".".queue_free()
+
+func loot_drop(item:int):
+	var spawn = load("res://Scenes/objects/dynamic_loot.tscn").instantiate()
+	spawn.position = global_position
+	var node = $"../..".get_child(3)
+	spawn.item = 2
+	#print(node)
+	#print(spawn.item)
+	
+	node.add_child(spawn)
 
 func attack():
 	if attack_timer.time_left < 0.1:

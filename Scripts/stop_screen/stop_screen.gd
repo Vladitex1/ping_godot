@@ -116,9 +116,19 @@ func _process(_delta):
 			
 
 func console_text_parse(text : String):
-	text = text.lstrip(" ").rstrip(" ")
-	var firstSpace : int = text.find(" ")
-	var secondSpace : int = text.find(" ",firstSpace+1)
+	var space = " "
+	text = text.lstrip("").rstrip(space)
+	var firstSpace : int = text.find(space)
+	
+	###loot1key21
+	###012345678
+	
+	var secondSpace : int = text.find(space,firstSpace+1)
+	var error_mode = false
+	
+	
+	if secondSpace == -1:
+		error_mode = true
 	var command : String
 	var value1 : String
 	var value2 : String
@@ -126,8 +136,13 @@ func console_text_parse(text : String):
 		command = text
 	else:
 		command = text.substr(0, firstSpace)
-		value1 = text.substr(firstSpace+1,secondSpace - firstSpace-1)
-		value2 = text.substr(secondSpace+1,len(text))
+	
+		if !error_mode:
+			value1 = text.substr(firstSpace+1,secondSpace - firstSpace-1)
+			value2 = text.substr(secondSpace+1,len(text))
+		else:
+			value1 = text.substr(firstSpace+1,len(text))
+			value2 = ""
 	var text2
 	if value1 == null:
 		text2 = "input_error"

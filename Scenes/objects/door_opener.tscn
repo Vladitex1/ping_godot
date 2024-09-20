@@ -1,18 +1,23 @@
-[gd_scene load_steps=12 format=3 uid="uid://d1mjni8drulph"]
+[gd_scene load_steps=19 format=3 uid="uid://d1mjni8drulph"]
 
 [ext_resource type="Script" path="res://Scripts/objects/door_opener.gd" id="1_58pkv"]
-[ext_resource type="Texture2D" uid="uid://bvx58q675g58n" path="res://assets/LVL/door_opener_1_LS.png" id="3_en2vu"]
 [ext_resource type="Texture2D" uid="uid://c64klfpy51u4b" path="res://assets/special/2d_lights_and_shadows_neutral_point_light.webp" id="3_mkhdf"]
-[ext_resource type="Texture2D" uid="uid://ct2jkc8rq23lp" path="res://assets/LVL/door_opener_1_RS.png" id="4_v0ngq"]
-[ext_resource type="Texture2D" uid="uid://cw66y6gw5hpsd" path="res://assets/LVL/door_opener_2_LS.png" id="5_d67kf"]
-[ext_resource type="Texture2D" uid="uid://j1xxk4dwb602" path="res://assets/LVL/door_opener_2_RS.png" id="6_5c707"]
-[ext_resource type="Texture2D" uid="uid://bpvp2wt6kdsdg" path="res://assets/LVL/door_opener_1_LS_ON.png" id="7_l1qu1"]
-[ext_resource type="Texture2D" uid="uid://ckkvrhsrl1f28" path="res://assets/LVL/door_opener_1_RS_ON.png" id="8_ri20p"]
-[ext_resource type="Texture2D" uid="uid://ca8k3k3ikpaqs" path="res://assets/LVL/door_opener_2_LS.ON.png" id="9_m6mxx"]
-[ext_resource type="Texture2D" uid="uid://dwg2ysbct1ied" path="res://assets/LVL/door_opener_2_RS.ON.png" id="10_atyuk"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wdgmf"]
-size = Vector2(25, 12)
+[ext_resource type="Texture2D" uid="uid://doy2tfp7weeks" path="res://assets/LVL/buttons/door_opener_1_LS.png" id="3_rvj0u"]
+[ext_resource type="Texture2D" uid="uid://dwdkvh3ym0rnm" path="res://assets/LVL/buttons/door_opener_1_LS_ON.png" id="4_rweqt"]
+[ext_resource type="Texture2D" uid="uid://b1mi35he1ttwr" path="res://assets/LVL/buttons/door_opener_2_LS.png" id="5_555ax"]
+[ext_resource type="Texture2D" uid="uid://dgoe8is8fouw1" path="res://assets/LVL/buttons/door_opener_2_LS.ON.png" id="6_gonty"]
+[ext_resource type="Texture2D" uid="uid://d30un2jynkveh" path="res://assets/LVL/buttons/door_opener_1_RS.png" id="7_w7ldr"]
+[ext_resource type="Texture2D" uid="uid://bmtvdaih7bubl" path="res://assets/LVL/buttons/door_opener_1_RS_ON.png" id="8_2nc25"]
+[ext_resource type="Texture2D" uid="uid://8htplegud7pw" path="res://assets/LVL/buttons/door_opener_2_RS.png" id="9_f0ijv"]
+[ext_resource type="Texture2D" uid="uid://7k7c3pru7m8j" path="res://assets/LVL/buttons/door_opener_2_RS.ON.png" id="10_fv4aw"]
+[ext_resource type="Texture2D" uid="uid://ditee3tiukocf" path="res://assets/LVL/buttons/door_opener_1_US.png" id="11_iiiop"]
+[ext_resource type="Texture2D" uid="uid://c1d0kwh126ivn" path="res://assets/LVL/buttons/door_opener_1_US_ON.png" id="12_07sdi"]
+[ext_resource type="Texture2D" uid="uid://bq05qynyosr66" path="res://assets/LVL/buttons/door_opener_2_US.png" id="13_bo6qn"]
+[ext_resource type="Texture2D" uid="uid://b73qn8a7bfafp" path="res://assets/LVL/buttons/door_opener_2_US_ON.png" id="14_grql6"]
+[ext_resource type="Texture2D" uid="uid://behqp337ktkqb" path="res://assets/LVL/buttons/door_opener_1_DS.png" id="15_cycib"]
+[ext_resource type="Texture2D" uid="uid://chqgufojefu7i" path="res://assets/LVL/buttons/door_opener_1_DS_ON.png" id="16_5p85v"]
+[ext_resource type="Texture2D" uid="uid://dtoqfq8ebfrpq" path="res://assets/LVL/buttons/door_opener_2_DS.png" id="17_yvyro"]
+[ext_resource type="Texture2D" uid="uid://emmiqym6mn6g" path="res://assets/LVL/buttons/door_opener_2_DS_ON.png" id="18_ihnuy"]
 
 [node name="door_opener" type="StaticBody2D"]
 collision_layer = 4
@@ -35,58 +40,112 @@ shadow_item_cull_mask = 7
 texture = ExtResource("3_mkhdf")
 height = 3.0
 
-[node name="colision" type="CollisionPolygon2D" parent="."]
+[node name="colisionS" type="CollisionPolygon2D" parent="."]
 position = Vector2(0, -2)
 polygon = PackedVector2Array(-2, -10, 7, -10, 7, 14, -2, 14)
+disabled = true
+
+[node name="colisionUD" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, -2)
+polygon = PackedVector2Array(12, 1, 12, 8, -8, 8, -8, 1)
+disabled = true
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
 collision_mask = 4
 
-[node name="area" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(2.5, 0)
-shape = SubResource("RectangleShape2D_wdgmf")
+[node name="colision" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(0, -2)
+polygon = PackedVector2Array(-7, -4, 12, -4, 12, 9, -7, 9)
 
 [node name="DoorOpener1Ls" type="Sprite2D" parent="."]
 visible = false
 texture_filter = 5
-texture = ExtResource("3_en2vu")
+texture = ExtResource("3_rvj0u")
+
+[node name="DoorOpener1LsON" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 5
+texture = ExtResource("4_rweqt")
+
+[node name="DoorOpener2Ls" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 5
+texture = ExtResource("5_555ax")
+
+[node name="DoorOpener2LsON" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 5
+texture = ExtResource("6_gonty")
 
 [node name="DoorOpener1Rs" type="Sprite2D" parent="."]
 visible = false
 texture_filter = 5
 position = Vector2(5, 0)
-texture = ExtResource("4_v0ngq")
-
-[node name="DoorOpener2Ls" type="Sprite2D" parent="."]
-visible = false
-texture_filter = 5
-texture = ExtResource("5_d67kf")
-
-[node name="DoorOpener2Rs" type="Sprite2D" parent="."]
-visible = false
-texture_filter = 5
-position = Vector2(5, 0)
-texture = ExtResource("6_5c707")
-
-[node name="DoorOpener1LsON" type="Sprite2D" parent="."]
-visible = false
-texture_filter = 5
-texture = ExtResource("7_l1qu1")
+texture = ExtResource("7_w7ldr")
 
 [node name="DoorOpener1RsON" type="Sprite2D" parent="."]
 visible = false
 texture_filter = 5
 position = Vector2(5, 0)
-texture = ExtResource("8_ri20p")
+texture = ExtResource("8_2nc25")
 
-[node name="DoorOpener2LsON" type="Sprite2D" parent="."]
+[node name="DoorOpener2Rs" type="Sprite2D" parent="."]
 visible = false
 texture_filter = 5
-texture = ExtResource("9_m6mxx")
+position = Vector2(5, 0)
+texture = ExtResource("9_f0ijv")
 
 [node name="DoorOpener2RsON" type="Sprite2D" parent="."]
 visible = false
 texture_filter = 5
 position = Vector2(5, 0)
-texture = ExtResource("10_atyuk")
+texture = ExtResource("10_fv4aw")
+
+[node name="DoorOpener1Us" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 5
+position = Vector2(2, -1)
+texture = ExtResource("11_iiiop")
+
+[node name="DoorOpener1UsON" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 5
+position = Vector2(2, -1)
+texture = ExtResource("12_07sdi")
+
+[node name="DoorOpener2Us" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 5
+position = Vector2(2, -1)
+texture = ExtResource("13_bo6qn")
+
+[node name="DoorOpener2UsON" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 5
+position = Vector2(2, -1)
+texture = ExtResource("14_grql6")
+
+[node name="DoorOpener1Ds" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 5
+position = Vector2(2, 4)
+texture = ExtResource("15_cycib")
+
+[node name="DoorOpener1DsON" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 5
+position = Vector2(2, 4)
+texture = ExtResource("16_5p85v")
+
+[node name="DoorOpener2Ds" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 5
+position = Vector2(2, 4)
+texture = ExtResource("17_yvyro")
+
+[node name="DoorOpener2DsON" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 5
+position = Vector2(2, 5)
+texture = ExtResource("18_ihnuy")

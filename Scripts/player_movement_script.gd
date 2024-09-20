@@ -309,20 +309,14 @@ func animation(anim: String) -> void:
 							player_animation.play("idle")
 				if Input.get_vector("move_left", "move_right", "move_up", "move_down") != Vector2(0,0):
 					update_player_position(velocity)
-							
+				global.set_player_pos(global_position)
 
 
 func hands_control():
 	hands.rotation = get_local_mouse_position().angle()
 
 func update_player_position(align):
-	var node = $"."
-	var node2 = node.get_parent().get_parent().get_parent()
-	for i in node2.get_child_count():
-		print(node2.get_child(i).name)
-	print("*********")
 	
-	global.set_player_pos(global_position)
 	if align[0] >= 0:
 		player_align = "left"
 		player_animation.flip_h = false
@@ -332,12 +326,13 @@ func update_player_position(align):
 
 func debug_buttons():
 	
-	if Input.is_action_just_pressed("debug1"):
+	if Input.is_action_just_pressed("debug1") and !global.buttons_lock:
 		global.player_indicators("key", 1, "set")
 
-	if Input.is_action_just_released("debug2"):
-		var node = $"../..".get_child(1)
-		var spawn = load("res://Scenes/mobs/skeleton_mob.tscn").instantiate()
+	if Input.is_action_just_released("debug2") and !global.buttons_lock:
+		var node = $"../..".get_child(1) 
+		#var spawn = load("res://Scenes/mobs/skeleton_mob.tscn").instantiate()
+		var spawn = load("res://Scenes/objects/dynamic_loot.tscn").instantiate()
 		spawn.position = get_global_mouse_position()
 		node.add_child(spawn)
 
@@ -349,3 +344,12 @@ func damage_area_enter(area):
 func damage_area_exit(area):
 	if str(area.name) == "enemy_hands":
 		damage_active = false
+
+
+
+func DEBUG():
+	var node = $"."
+	var node2 = node.get_parent().get_parent().get_parent()
+	for i in node2.get_child_count():
+		print(node2.get_child(i).name)
+	print("*********")

@@ -21,10 +21,12 @@ script = ExtResource("3_yg55v")
 position = Vector2(0, 8)
 
 [node name="Shop1" type="Sprite2D" parent="Textures"]
+texture_filter = 5
 position = Vector2(0, -38)
 texture = ExtResource("1_xt8la")
 
 [node name="Shop2" type="Sprite2D" parent="Textures"]
+texture_filter = 5
 position = Vector2(0, 25)
 texture = ExtResource("2_2wknm")
 

@@ -434,7 +434,7 @@ texture_filter = 3
 position = Vector2(0, 9.53674e-07)
 scale = Vector2(2.0625, 2.0625)
 sprite_frames = SubResource("SpriteFrames_tswkv")
-animation = &"skeleton_death_side"
+animation = &"skeleton_idle_down"
 
 [node name="Skeleton" type="CollisionShape2D" parent="."]
 position = Vector2(-4.76837e-07, 0.214267)

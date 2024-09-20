@@ -1,14 +1,14 @@
+Node
 Node2D
-StaticBody2D
+CollisionShape2D
 Area2D
+StaticBody2D
 Sprite2D
 Control
 VBoxContainer
-CollisionShape2D
 CanvasLayer
 CollisionPolygon2D
 AnimatedSprite2D
 AnimationPlayer
 NavigationObstacle2D
 NavigationLink2D
-NavigationAgent2D

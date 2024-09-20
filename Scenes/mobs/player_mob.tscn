@@ -588,7 +588,7 @@ z_index = 2
 texture_filter = 3
 scale = Vector2(1, 1.15)
 sprite_frames = SubResource("SpriteFrames_cvcsf")
-animation = &"attack"
+animation = &"idle"
 
 [node name="Interactive" type="Sprite2D" parent="."]
 visible = false

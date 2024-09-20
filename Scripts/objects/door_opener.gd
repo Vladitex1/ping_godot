@@ -5,6 +5,11 @@ extends StaticBody2D
 @onready var opener_area = $Area2D
 @onready var node = $"."
 
+##Colisions
+
+@onready var colisionS = $colisionS
+@onready var colisionUD = $colisionUD
+
 ###textures
 
 @onready var LS1tex = $DoorOpener1Ls
@@ -16,6 +21,17 @@ extends StaticBody2D
 @onready var LS2texON = $DoorOpener2LsON
 @onready var RS2texON = $DoorOpener2RsON
 
+@onready var DS1tex = $DoorOpener1Ds
+@onready var DS1texON = $DoorOpener1DsON
+@onready var DS2tex = $DoorOpener2Ds
+@onready var DS2texON = $DoorOpener2DsON
+
+@onready var US1tex = $DoorOpener1Us
+@onready var US1texON = $DoorOpener1UsON
+@onready var US2tex = $DoorOpener2Us
+@onready var US2texON = $DoorOpener2UsON
+
+
 var current_tex
 var status: bool = false
 
@@ -25,8 +41,7 @@ enum side_state {
 	UP,
 	DOWN,
 	LEFT,
-	RIGHT,
-}
+	RIGHT,}
 
 var opener_ready: bool = false
 
@@ -34,6 +49,15 @@ func _ready():
 	opener_area.connect("body_entered",body_entered)
 	opener_area.connect("body_exited",body_exited)
 	LS1tex.visible = false
+	
+	match side:
+		side_state.UP:
+			colisionUD.disabled = false
+		side_state.DOWN:
+			pass
+		_:
+			colisionS.disabled = false
+	
 	match opener_lvl_tx:
 		0:
 			pass
@@ -45,6 +69,14 @@ func _ready():
 				side_state.RIGHT:
 					RS1tex.visible = true
 					current_tex = "RS1tex"
+					
+				side_state.UP:
+					US1tex.visible = true
+					current_tex = "US1tex"
+					
+				side_state.DOWN:
+					DS1tex.visible = true
+					current_tex = "DS1tex"
 		2:
 			match side:
 				side_state.LEFT:
@@ -55,12 +87,16 @@ func _ready():
 					RS2tex.visible = true
 					current_tex = "RS2tex"
 					
-	
-	
+				side_state.UP:
+					US2tex.visible = true
+					current_tex = "US2tex"
+					
+				side_state.DOWN:
+					DS2tex.visible = true
+					current_tex = "DS2tex"
+					
 func _process(delta):
 	var target_door = node.get_parent().get_parent().get_child(1).opener_list[door_num]
-	print(target_door)
-	print("*******")
 	if opener_ready == true:
 		if Input.is_action_just_released("special_use"):
 			global.action_toggle = false
@@ -72,7 +108,7 @@ func _process(delta):
 				
 			target_door[0][door_opener_num] = status
 			
-			print(target_door)
+			#print(target_door)
 
 func buttons_texture(name,status):
 	match name:
@@ -88,18 +124,33 @@ func buttons_texture(name,status):
 		"RS2tex":
 			RS2tex.visible = status
 			RS2texON.visible = !status
+			
+		"US1tex":
+			US1tex.visible = status
+			US1texON.visible = !status
+		"US2tex":
+			US2tex.visible = status
+			US2texON.visible = !status
+		"DS1tex":
+			DS1tex.visible = status
+			DS1texON.visible = !status
+		"DS2tex":
+			DS2tex.visible = status
+			DS2texON.visible = !status
 		
 
 func body_entered(body):
-	print(body.name)
 	if body.name == "player" and !status:
 		opener_ready = true
 		global.action_toggle = true
-		print("**********")
 		
 func body_exited(body):
 	if body.name == "player":
 		opener_ready = false
 		global.action_toggle = false
 
-
+###
+###	var td = node.get_parent().get_parent().get_child(1).opener_list
+###	for i in td:
+###		print(td[i])
+###	print("*******")

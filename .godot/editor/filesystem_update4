@@ -10,6 +10,7 @@ res://Thems/button_fixed_unpress.tres
 res://Thems/button_green.tres
 res://Thems/button_red.tres
 res://Thems/inventory.tres
+res://Scripts/objects/door_opener.gd
 res://Scenes/objects/door_object.tscn
 res://Scenes/objects/door_opener.tscn
 res://Scenes/mobs/player_mob.tscn
@@ -23,4 +24,12 @@ res://Scenes/shop/shop_item.tscn
 res://Scenes/objects/shop_object.tscn
 res://Scenes/objects/navigation_point.tscn
 res://Scenes/inventory.tscn
-res://Scripts/objects/door_opener.gd
+res://Scripts/skeleton_script.gd
+res://Scenes/objects/drop_item.tscn
+res://Scenes/objects/dynamic_loot.tscn
+res://Scripts/loot/dynamic_loot_script.gd
+res://Scripts/console.gd
+res://Scripts/global.gd
+res://Scripts/stop_screen/stop_screen.gd
+res://Scripts/shop/shop_brain.gd
+res://Scripts/objects/lamp_object.gd

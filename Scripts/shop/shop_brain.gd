@@ -83,7 +83,9 @@ func _process(_delta):
 	sell_cost_lable.text = str(sell_cost)
 	name_lable.text = itemlist.itemlist[selected_item_ID][2]
 	count_lable.text = str(count)
-	
+	if Input.is_action_just_released("special_back"):
+		exit_button()
+		
 	if Input.is_action_just_released("debug1"):
 		num123 = num123 + 1
 		if num123 > 3:

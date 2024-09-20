@@ -39,7 +39,7 @@ static var camera_zoom: Vector2
 static var stamina_limit: int
 static var dragging:bool = false
 
-
+var mouse_pos: Vector2
 
 func change_scene(namestr):
 	get_tree().change_scene_to_file("res://Scenes/"+namestr+".tscn")
@@ -125,8 +125,12 @@ func player_indicators(namestr, delta, GSet):
 						player_health = 0
 				"coin":
 					player_coins = player_coins + delta
+					if player_coins <= 0:
+						player_coins = 0
 				"key":
 					player_keys = player_keys + delta
+					if player_keys <= 0:
+						player_keys = 0
 				"stamina":
 					player_stamina = player_stamina + delta
 					if player_stamina > max_stamina:

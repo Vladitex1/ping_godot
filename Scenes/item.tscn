@@ -15,6 +15,7 @@ show_behind_parent = true
 clip_children = 2
 z_as_relative = false
 y_sort_enabled = true
+texture_filter = 5
 offset_left = -9.0
 offset_top = -5.0
 offset_right = 67.0

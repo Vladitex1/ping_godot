@@ -224,6 +224,7 @@ resource_local_to_scene = true
 polygon = PackedVector2Array(-19.6, -28.7, -19.6, 4.9, 21, 4.9, 21, -28.7)
 
 [node name="door" type="Node2D"]
+texture_filter = 5
 script = ExtResource("3_ec11f")
 
 [node name="opener_area" type="Area2D" parent="."]

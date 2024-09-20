@@ -1,8 +1,10 @@
-res://Scripts/objects
+res://Scenes
 res://Scenes/objects
+res://Scenes/stop_screen
+res://Scripts/loot
+res://Scripts/objects
 res://Thems
 res://fonts
-res://Scenes
 res://Scripts/stop_screen
 res://assets/Ping
 res://assets/interface
@@ -14,9 +16,7 @@ res://Scenes/shop
 res://assets/Tilemap
 res://Scenes/mobs
 res://debug_scenes
-res://Scenes/stop_screen
 G:/godot/ping/Scripts
 G:/godot/ping/Scripts/shop
 res://Scripts
 res://Scripts/hud
-res://Scripts/shop

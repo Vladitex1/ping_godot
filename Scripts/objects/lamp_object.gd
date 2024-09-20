@@ -32,6 +32,9 @@ func _process(delta):
 		drop_place = true
 	elif Input.is_action_just_released("attack") and lamp_pickup and currect_position and drop_place:
 		drop()
+	elif Input.is_action_just_released("scope"):
+		drop_place = false
+		drop_tex.visible = false
 
 func update_pos(update_position: bool,drop_place: bool):
 	var radius = 55
