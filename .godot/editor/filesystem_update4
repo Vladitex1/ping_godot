@@ -1,4 +1,4 @@
-res://Scenes/stop_screen.tscn
+res://Scenes/main1.tscn
 res://Scripts/inventory_scripts/Slot.gd
 res://Scripts/level/position.gd
 res://Scripts/CollisionShape2D.gd
@@ -10,12 +10,12 @@ res://Thems/button_fixed_unpress.tres
 res://Thems/button_green.tres
 res://Thems/button_red.tres
 res://Thems/inventory.tres
-res://Scenes/main1.tscn
-res://Scenes/objects/lamp_object.tscn
 res://Scenes/objects/door_object.tscn
+res://Scenes/objects/door_opener.tscn
 res://Scenes/mobs/player_mob.tscn
 res://Scenes/mobs/skeleton_mob.tscn
 res://Scenes/shop.tscn
+res://Scenes/stop_screen.tscn
 res://Scenes/hud.tscn
 res://Scenes/item.tscn
 res://debug_scenes/battle_debug_scene.tscn
@@ -23,8 +23,4 @@ res://Scenes/shop/shop_item.tscn
 res://Scenes/objects/shop_object.tscn
 res://Scenes/objects/navigation_point.tscn
 res://Scenes/inventory.tscn
-res://Scripts/global.gd
-res://Scripts/objects/door_opener_list.gd
-res://Scripts/level/position_notes.gd
-res://Scenes/objects/door_opener.tscn
 res://Scripts/objects/door_opener.gd

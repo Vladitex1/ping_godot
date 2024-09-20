@@ -16,6 +16,7 @@ extends Node2D
 var door_toggle = false
 var door_ready = false
 var door_block = false
+var IFT = false
 
 func _ready():
 	opener_area.connect("body_entered",body_entered)
@@ -30,9 +31,14 @@ func _process(_delta):
 			if Input.is_action_just_released("special_use") and door_ready == true:
 				door_lvl0()
 		1:
-			door_lvl1()
+			if IFT == false:
+				door_lvl1()
+				IFT = true
+			
 		2:
-			door_lvl2()
+			if IFT == false:
+				door_lvl2()
+				IFT = true
 			
 func door_lvl0():
 	if door_toggle == false: ##Если дверь не активна, ее следует открыть
@@ -71,14 +77,10 @@ func door_lvl2():
 func animation(animation_bool):
 	if animation_bool:
 		door_mask.play("door_mask_open")
-		if door_lvl == 1 or door_lvl == 2:
-			await get_tree().create_timer(0.83).timeout 
-			door_mask.pause()
+		await get_tree().create_timer(0.83).timeout 
 	else:
 		door_mask.play_backwards("door_mask_open")
 		if door_lvl == 1 or door_lvl == 2:
-			await get_tree().create_timer(0.83).timeout 
-			door_mask.pause()
 			opener_area.disabled = true
 		
 func body_entered(body):

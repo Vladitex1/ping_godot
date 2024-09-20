@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d1mjni8drulph"]
+[gd_scene load_steps=12 format=3 uid="uid://d1mjni8drulph"]
 
 [ext_resource type="Script" path="res://Scripts/objects/door_opener.gd" id="1_58pkv"]
 [ext_resource type="Texture2D" uid="uid://bvx58q675g58n" path="res://assets/LVL/door_opener_1_LS.png" id="3_en2vu"]
@@ -6,6 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://ct2jkc8rq23lp" path="res://assets/LVL/door_opener_1_RS.png" id="4_v0ngq"]
 [ext_resource type="Texture2D" uid="uid://cw66y6gw5hpsd" path="res://assets/LVL/door_opener_2_LS.png" id="5_d67kf"]
 [ext_resource type="Texture2D" uid="uid://j1xxk4dwb602" path="res://assets/LVL/door_opener_2_RS.png" id="6_5c707"]
+[ext_resource type="Texture2D" uid="uid://bpvp2wt6kdsdg" path="res://assets/LVL/door_opener_1_LS_ON.png" id="7_l1qu1"]
+[ext_resource type="Texture2D" uid="uid://ckkvrhsrl1f28" path="res://assets/LVL/door_opener_1_RS_ON.png" id="8_ri20p"]
+[ext_resource type="Texture2D" uid="uid://ca8k3k3ikpaqs" path="res://assets/LVL/door_opener_2_LS.ON.png" id="9_m6mxx"]
+[ext_resource type="Texture2D" uid="uid://dwg2ysbct1ied" path="res://assets/LVL/door_opener_2_RS.ON.png" id="10_atyuk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wdgmf"]
 size = Vector2(25, 12)
@@ -44,6 +48,7 @@ position = Vector2(2.5, 0)
 shape = SubResource("RectangleShape2D_wdgmf")
 
 [node name="DoorOpener1Ls" type="Sprite2D" parent="."]
+visible = false
 texture_filter = 5
 texture = ExtResource("3_en2vu")
 
@@ -63,3 +68,25 @@ visible = false
 texture_filter = 5
 position = Vector2(5, 0)
 texture = ExtResource("6_5c707")
+
+[node name="DoorOpener1LsON" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 5
+texture = ExtResource("7_l1qu1")
+
+[node name="DoorOpener1RsON" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 5
+position = Vector2(5, 0)
+texture = ExtResource("8_ri20p")
+
+[node name="DoorOpener2LsON" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 5
+texture = ExtResource("9_m6mxx")
+
+[node name="DoorOpener2RsON" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 5
+position = Vector2(5, 0)
+texture = ExtResource("10_atyuk")

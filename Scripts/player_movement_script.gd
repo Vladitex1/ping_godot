@@ -316,6 +316,11 @@ func hands_control():
 	hands.rotation = get_local_mouse_position().angle()
 
 func update_player_position(align):
+	var node = $"."
+	var node2 = node.get_parent().get_parent().get_parent()
+	for i in node2.get_child_count():
+		print(node2.get_child(i).name)
+	print("*********")
 	
 	global.set_player_pos(global_position)
 	if align[0] >= 0:

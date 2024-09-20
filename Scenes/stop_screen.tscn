@@ -33,6 +33,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="background" type="ColorRect" parent="control_module"]
 z_index = -1
+layout_mode = 0
 offset_left = -1477.0
 offset_top = -1631.0
 offset_right = 3523.0

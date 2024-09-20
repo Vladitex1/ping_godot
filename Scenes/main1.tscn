@@ -172,42 +172,41 @@ list_num = 1
 [node name="Entities" type="Node2D" parent="."]
 
 [node name="player" parent="Entities" instance=ExtResource("4_r16yv")]
-position = Vector2(21, 324)
+position = Vector2(263, 279)
 
 [node name="Objects" type="Node2D" parent="."]
 
 [node name="Door_Openers" type="Node2D" parent="Objects"]
 
 [node name="door_opener" parent="Objects/Door_Openers" instance=ExtResource("7_i71r5")]
-position = Vector2(-55, 341)
+position = Vector2(441, 403)
 door_num = 1
 door_opener_num = 1
 opener_lvl_tx = 1
+side = 2
 
 [node name="door_opener2" parent="Objects/Door_Openers" instance=ExtResource("7_i71r5")]
-position = Vector2(-44, 463)
+position = Vector2(131, 330)
 door_num = 2
 door_opener_num = 1
 opener_lvl_tx = 2
-side = 2
 
 [node name="door_opener3" parent="Objects/Door_Openers" instance=ExtResource("7_i71r5")]
-position = Vector2(-46, 514)
+position = Vector2(130, 387)
 door_num = 2
 door_opener_num = 2
 opener_lvl_tx = 2
-side = 2
 
 [node name="Doors" type="Node2D" parent="Objects"]
 script = ExtResource("7_yiegh")
 
 [node name="door" parent="Objects/Doors" instance=ExtResource("7_s40s2")]
-position = Vector2(-167, 336)
+position = Vector2(481, 281)
 door_lvl = 1
 door_num = 1
 
 [node name="door2" parent="Objects/Doors" instance=ExtResource("7_s40s2")]
-position = Vector2(-153, 490)
+position = Vector2(97, 209)
 door_lvl = 2
 door_num = 2
 
