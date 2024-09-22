@@ -14,8 +14,9 @@ var temp_delay: bool
 @onready var brightness_slider_lable = $control_module/settings_menu/brightness/slider_lable
 @onready var keymap_menu = $control_module/settings_keybinds
 @onready var window_menu = $control_module/settings_window
-
-
+@onready var load_menu = $control_module/load_menu
+@onready var buton = $control_module/settings_window/button_list/button_list/in_settings_buttons/fullscreen/fscron
+@onready var butoff = $control_module/settings_window/button_list/button_list/in_settings_buttons/fullscreen/fscroff
 var active_resolution
 
 ###Window_Settings####
@@ -23,6 +24,7 @@ var active_resolution
 @onready var window_res_slider= $control_module/settings_window/button_list/button_list/in_settings_buttons/resolution/HSlider
 @onready var window_res_label = $control_module/settings_window/button_list/button_list/in_settings_buttons/resolution/Label
 @onready var settings_back = $control_module/settings
+@onready var load_back = $control_module/load
 
 func _ready():
 	####main_menu####
@@ -35,8 +37,16 @@ func _ready():
 	continue_but.connect("button_up",continue_button)
 	var settings_but = $control_module/main_menu/first_line_stop_menu/VBoxContainer/main/Button_Settings
 	settings_but.connect("button_up",settings_button)
+	var load_but = $control_module/main_menu/first_line_stop_menu/VBoxContainer/main2/Button_Load
+	load_but.connect("button_up",load_button)
+	
 	var quit_but = $control_module/main_menu/first_line_stop_menu/VBoxContainer/main2/Button_Quit
 	quit_but.connect("button_up",quit_button)
+	####load_menu####
+	
+	var back_load_but = $control_module/load_menu/settings_menu/settings/Button_Back
+	back_load_but.connect("button_up",load_back_button)
+	
 	
 	####settings_menu####
 	
@@ -120,9 +130,6 @@ func console_text_parse(text : String):
 	text = text.lstrip("").rstrip(space)
 	var firstSpace : int = text.find(space)
 	
-	###loot1key21
-	###012345678
-	
 	var secondSpace : int = text.find(space,firstSpace+1)
 	var error_mode = false
 	
@@ -167,8 +174,21 @@ func settings_button():
 	settings_back.visible = true
 	settings_menu.show()
 
+func load_button():
+	main_menu.hide()
+	load_back.visible = true
+	load_menu.show()
+
 func quit_button():
 	get_tree().quit()
+
+###load menu###
+
+
+func load_back_button():
+	load_menu.hide()
+	main_menu.show()
+	load_back.visible = false
 
 ###settings menu
 
@@ -222,19 +242,15 @@ func settings_brightness_slider():
 		brightness_slider_lable.text = "brightness:  "+str(brightness_slider.value)
 
 func window_fscr_button_on():
-	var buton = $control_module/settings_window/button_list/button_list/in_settings_buttons/fullscreen/fscron
-	var butoff = $control_module/settings_window/button_list/button_list/in_settings_buttons/fullscreen/fscroff
 	DisplayServer.window_set_mode(3)
 	buton.disabled = true
 	butoff.disabled = false
 
 func window_fscr_button_off():
-	var buton = $control_module/settings_window/button_list/button_list/in_settings_buttons/fullscreen/fscron
-	var butoff = $control_module/settings_window/button_list/button_list/in_settings_buttons/fullscreen/fscroff
 	DisplayServer.window_set_mode(0)
+	
 	buton.disabled = false
 	butoff.disabled = true
-
 
 func window_resolution_slider():
 	var num = window_res_slider.value
@@ -260,5 +276,7 @@ func window_confirm_button():
 	print("control_module.position: ",$control_module.position)
 
 	config.BASE_RES_NUM = window_res_slider.value
+	
+	SaveScript.config_save(window_res_slider.value,buton.disabled)
 
 

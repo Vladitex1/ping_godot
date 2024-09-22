@@ -21,7 +21,7 @@ var IFT = false
 func _ready():
 	opener_area.connect("body_entered",body_entered)
 	opener_area.connect("body_exited",body_exited)
-	node.get_parent().add_in_list(door_num,door_lvl)
+	OpenerList.add_in_list(door_num,door_lvl)
 	if door_lvl != 0:
 		opener_area.monitoring = false
 	
@@ -58,14 +58,14 @@ func door_lvl0():
 	global.action_toggle = false
 	
 func door_lvl1():
-	var opener_node = node.get_parent().opener_list[door_num][0][1]
+	var opener_node = OpenerList.opener_list[door_num][0][1]
 	if opener_node:
 		animation(true)
 		door_ready = false
 	
 func door_lvl2():
-	var door_opener_1_status = node.get_parent().opener_list[door_num][0][1] 
-	var door_opener_2_status = node.get_parent().opener_list[door_num][0][2]
+	var door_opener_1_status = OpenerList.opener_list[door_num][0][1] 
+	var door_opener_2_status = OpenerList.opener_list[door_num][0][2]
 	if door_opener_1_status and door_opener_2_status:
 		animation(true)	
 		door_ready = false

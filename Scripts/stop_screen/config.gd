@@ -5,6 +5,14 @@ var BASE_SCALE: Vector2 = Vector2(1,1)
 var BASE_RES_NUM: int = 0
 var TEMP_RES: int = 0
 
+
+var base_config = {
+	"res_id": 4,
+	"flscr": false,
+	"brightness": 0.4,
+}
+
+
 const resolution_list2:Dictionary = {
 	####width,height,interface_scale
 	1: [500,500,0.4,250,825],

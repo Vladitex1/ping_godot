@@ -1,5 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://do42rlis6it6d"]
+[gd_scene load_steps=18 format=3 uid="uid://do42rlis6it6d"]
 
+[ext_resource type="Script" path="res://Scripts/logic/general_script.gd" id="1_fjv78"]
 [ext_resource type="Script" path="res://Scripts/level/darkness.gd" id="1_wkv1h"]
 [ext_resource type="Script" path="res://Scripts/level/position_notes.gd" id="3_lf1wf"]
 [ext_resource type="Texture2D" uid="uid://drjcqu76ga1a2" path="res://assets/Tilemap/Tilemap1.png" id="3_yi0xa"]
@@ -11,6 +12,7 @@
 [ext_resource type="Script" path="res://Scripts/objects/door_opener_list.gd" id="7_yiegh"]
 [ext_resource type="PackedScene" uid="uid://dq6ushunyiy23" path="res://Scenes/objects/shop_object.tscn" id="9_bb57y"]
 [ext_resource type="PackedScene" uid="uid://dq7ffxogb6nrp" path="res://Scenes/objects/lamp_object.tscn" id="9_r5iot"]
+[ext_resource type="PackedScene" uid="uid://dyxev6ymdfist" path="res://Scenes/objects/save_point.tscn" id="13_r8ymt"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_rwlgk"]
 polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
@@ -123,6 +125,8 @@ sources/0 = SubResource("TileSetAtlasSource_2rsk1")
 
 [node name="main" type="Node2D"]
 process_priority = 1
+script = ExtResource("1_fjv78")
+active_save = 1
 
 [node name="Level" type="Node2D" parent="."]
 
@@ -162,7 +166,7 @@ position = Vector2(799, 159)
 position = Vector2(544, 416)
 
 [node name="position2" parent="Level/navigation_checkpoint" instance=ExtResource("4_i1u4j")]
-position = Vector2(800, 288)
+position = Vector2(656, 413)
 list_num = 1
 
 [node name="position3" parent="Level/navigation_checkpoint" instance=ExtResource("4_i1u4j")]
@@ -175,10 +179,10 @@ list_num = 1
 position = Vector2(263, 279)
 
 [node name="skeleton" parent="Entities" instance=ExtResource("6_66lmp")]
-position = Vector2(743, 166)
+position = Vector2(778, 158)
 
 [node name="skeleton2" parent="Entities" instance=ExtResource("6_66lmp")]
-position = Vector2(805, 385)
+position = Vector2(795, 585)
 list_num = 1
 
 [node name="Objects" type="Node2D" parent="."]
@@ -208,7 +212,7 @@ opener_lvl_tx = 2
 script = ExtResource("7_yiegh")
 
 [node name="door" parent="Objects/Doors" instance=ExtResource("7_s40s2")]
-position = Vector2(478, 274)
+position = Vector2(480, 274)
 door_lvl = 1
 door_num = 1
 
@@ -227,7 +231,9 @@ position = Vector2(197, 122)
 [node name="lamp" parent="Objects/Lights" instance=ExtResource("9_r5iot")]
 position = Vector2(436, 333)
 
-[node name="lamp2" parent="Objects/Lights" instance=ExtResource("9_r5iot")]
-position = Vector2(435, 218)
+[node name="Saves" type="Node2D" parent="Objects"]
+
+[node name="save1" parent="Objects/Saves" instance=ExtResource("13_r8ymt")]
+position = Vector2(398, 133)
 
 [node name="Drop" type="Node2D" parent="."]

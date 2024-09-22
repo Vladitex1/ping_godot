@@ -8,7 +8,7 @@ var pickup_toggle: bool = false
 var heat_toggle:bool = false
 var buttons_lock: bool = false
 var hold_in_hands: bool = false
-
+var inventory: Dictionary = {}
 
 static var drag_toggle:bool = false
 static var brightness:float = 0.4
@@ -45,7 +45,16 @@ func change_scene(namestr):
 	get_tree().change_scene_to_file("res://Scenes/"+namestr+".tscn")
 	
 func add_scene(namestr):#add_child(
-	var new_scene: Object = load("res://Scenes/"+namestr+".tscn").instantiate()
+	var new_scene: Object
+	match namestr:
+		"shop":
+			new_scene = load("res://Scenes/shop/shop.tscn").instantiate()
+		"stop_screen":
+			new_scene = load("res://Scenes/stop_screen/stop_screen.tscn").instantiate()
+		"inventory":
+			new_scene = load("res://Scenes/inventory/inventory.tscn").instantiate()
+		_:
+			new_scene = load("res://Scenes/"+namestr+".tscn").instantiate()
 	get_tree().root.add_child(new_scene)
 
 func visible_scene(namestr: String, status: bool):

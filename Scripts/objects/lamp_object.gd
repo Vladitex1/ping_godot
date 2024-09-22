@@ -1,24 +1,17 @@
 extends StaticBody2D
 
 @onready var lamp_detect = $Area2D
-
 @onready var lamp_col = $colision
-
 @onready var drop_tex = $lamp_drop_texture
-
-
 
 var lamp_pickup = false
 var ready_update_pos = false
 var currect_position:bool = false
 var drop_place = false
 
-
 func _ready():
-
 	lamp_detect.connect("body_entered",body_entered)
 	lamp_detect.connect("body_exited",body_exited)
-
 
 func _process(delta):
 	update_pos(ready_update_pos,drop_place) ## обновление позиции предмета
@@ -51,6 +44,7 @@ func update_pos(update_position: bool,drop_place: bool):
 		else:
 			drop_tex.modulate = Color(1,1,1,0.5)
 			currect_position = true
+
 func drop():
 	position = get_global_mouse_position()
 	lamp_col.disabled = false

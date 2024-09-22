@@ -1,5 +1,6 @@
 extends Control
 
+@export var shopLVL = 1
 @onready var cost_lable = $shop_plate/text/cost
 @onready var sell_cost_lable = $shop_plate/text/sell_cost
 @onready var name_lable = $shop_plate/text/name
@@ -13,8 +14,9 @@ extends Control
 @onready var intresting_slot = $shop_plate/IntrestingSlot
 static var standart_label = ["name","count","cost","sell"]
 var num123 = -1 ##debug
-var count:int = 1
 
+
+var count:int = 1
 var cost:int
 var sell_cost:int
 var coststr:String

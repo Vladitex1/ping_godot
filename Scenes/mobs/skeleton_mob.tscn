@@ -385,6 +385,7 @@ script = ExtResource("1_uml16")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_postprocessing = 1
+time_horizon_agents = 20.0
 
 [node name="health_bar" type="Control" parent="."]
 layout_mode = 3

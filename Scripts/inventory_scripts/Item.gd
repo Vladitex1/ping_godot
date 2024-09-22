@@ -9,4 +9,6 @@ func slot(num):
 	$TextureRect.texture = itemlist.itemlist[num][1]
 	CurrentID = num
 
+	
+	
 

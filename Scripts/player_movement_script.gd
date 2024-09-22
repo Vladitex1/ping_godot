@@ -62,24 +62,19 @@ enum State {
 	GET,
 	SET,
 	ATTACK,
-	DAMAGE,
-}
-
+	DAMAGE,}
 
 enum Attack_State {
 	ATTACK,
 	COOLDOWNZERO,
 	COOLDOWN,
-	HOLD,
-}
+	HOLD,}
 
 enum Stamina_State {
 	RUN,
 	COOLDOWN,
-	HOLD,
-}
-
-
+	HOLD,}
+	
 var state = State.WALK
 var temp_state = State.WALK
 
@@ -118,8 +113,6 @@ func starter_module():
 		global.visible_scene("shop",false)
 		global.visible_scene("stop_screen",false)
 
-		
-
 func _physics_process(_delta):
 	starter_module()
 	get_input()
@@ -137,6 +130,7 @@ func _physics_process(_delta):
 				animation("walk")
 				move_and_slide()
 			State.DAMAGE:
+				global.hold_in_hands = false
 				if ift:
 					cooldown_damage_timer.start(global.player_damage("damage_throw", 0, "get") * 0.01)
 					ift = false
@@ -145,7 +139,7 @@ func _physics_process(_delta):
 					if cooldown_damage_timer.time_left < 0.1:
 						state = State.WALK
 						ift = true
-
+		
 		hands_control()
 		interactive_control()
 
@@ -177,8 +171,8 @@ func damage(dmg: int):
 	state = State.DAMAGE
 
 func attack():
-	
 	var input: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	
 	match atck_state:
 		Attack_State.ATTACK:
 			animation("attack")
@@ -186,7 +180,6 @@ func attack():
 				atck_state = Attack_State.COOLDOWNZERO
 			else:
 				atck_state = Attack_State.COOLDOWN
-			
 				
 		Attack_State.COOLDOWNZERO:
 			attack_timer.start(cooldown_attack)
@@ -249,12 +242,12 @@ func movement():
 	velocity = Input.get_vector("move_left", "move_right", "move_up", "move_down") * (speed + sprint)
 				
 func get_input():
+	global.set_player_pos(global_position)
 	if Input.is_action_just_released("special_back") and !global.buttons_lock:
 		global.visible_scene("stop_screen",true)
 		global.buttons_lock = true
 		
 func animation(anim: String) -> void:
-	
 	match anim:
 		"attack":
 			var attack_align = player.get_global_position() - get_global_mouse_position()
@@ -309,8 +302,6 @@ func animation(anim: String) -> void:
 							player_animation.play("idle")
 				if Input.get_vector("move_left", "move_right", "move_up", "move_down") != Vector2(0,0):
 					update_player_position(velocity)
-				global.set_player_pos(global_position)
-
 
 func hands_control():
 	hands.rotation = get_local_mouse_position().angle()

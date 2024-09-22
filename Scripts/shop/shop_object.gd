@@ -1,5 +1,5 @@
 extends Node2D
-
+@export var shopLVL = 1
 var shop_ready = false
 
 func _ready():

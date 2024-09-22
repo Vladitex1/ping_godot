@@ -96,7 +96,7 @@ func _ready():
 					current_tex = "DS2tex"
 					
 func _process(delta):
-	var target_door = node.get_parent().get_parent().get_child(1).opener_list[door_num]
+	var target_door = OpenerList.opener_list[door_num]
 	if opener_ready == true:
 		if Input.is_action_just_released("special_use"):
 			global.action_toggle = false

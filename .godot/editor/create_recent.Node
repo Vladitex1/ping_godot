@@ -1,7 +1,9 @@
-Node
-Node2D
 CollisionShape2D
 Area2D
+Node2D
+TextEdit
+NavigationObstacle2D
+Node
 StaticBody2D
 Sprite2D
 Control
@@ -10,5 +12,3 @@ CanvasLayer
 CollisionPolygon2D
 AnimatedSprite2D
 AnimationPlayer
-NavigationObstacle2D
-NavigationLink2D
