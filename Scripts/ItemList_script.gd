@@ -4,8 +4,8 @@ var CurrentID: int = -1
 
 var itemlist = {
 	##ID#####COST##TEXTURE######################NAME####SELLCOST
-	0: [0, load("res://assets/items/loot/none.png"), "null",0],
 	-1: [0, load("res://assets/items/loot/block_large.png"),"blocked",0],
+	0: [0, load("res://assets/items/loot/none.png"), "null",0],
 	1: [2, load("res://assets/items/loot/key_icon_large.png"),"key",1],
 	2: [1, load("res://assets/items/loot/coin_icon_large.png"),"coin",1],
 	3: [1, load("res://assets/items/loot/health_icon_large.png"),"health",1],
@@ -56,6 +56,3 @@ var keybinds = {
 	}
 
 
-var savelist = {
-	####ID: [checkpoint_name, hp, coins, keys]
-}

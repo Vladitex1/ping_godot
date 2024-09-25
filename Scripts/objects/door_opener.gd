@@ -96,18 +96,17 @@ func _ready():
 					current_tex = "DS2tex"
 					
 func _process(delta):
-	var target_door = OpenerList.opener_list[door_num]
+	#print(OpenerList.opener_list)
+	var target_door = OpenerList.opener_list[str(door_num)]
+	#print(target_door)
 	if opener_ready == true:
+		
 		if Input.is_action_just_released("special_use"):
 			global.action_toggle = false
-			
 			if target_door[0][door_opener_num] == false:
 				status = true
-		
 			buttons_texture(current_tex,!status)
-				
 			target_door[0][door_opener_num] = status
-			
 			#print(target_door)
 
 func buttons_texture(name,status):
@@ -149,8 +148,3 @@ func body_exited(body):
 		opener_ready = false
 		global.action_toggle = false
 
-###
-###	var td = node.get_parent().get_parent().get_child(1).opener_list
-###	for i in td:
-###		print(td[i])
-###	print("*******")

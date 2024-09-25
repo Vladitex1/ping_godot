@@ -25,6 +25,7 @@ console="*res://Scripts/console.gd"
 config="*res://Scripts/stop_screen/config.gd"
 SaveScript="*res://Scripts/logic/save_script.gd"
 OpenerList="*res://Scripts/objects/door_opener_list.gd"
+Entities="*res://Scripts/logic/Entities.gd"
 
 [display]
 

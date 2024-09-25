@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://do42rlis6it6d"]
+[gd_scene load_steps=19 format=3 uid="uid://do42rlis6it6d"]
 
 [ext_resource type="Script" path="res://Scripts/logic/general_script.gd" id="1_fjv78"]
 [ext_resource type="Script" path="res://Scripts/level/darkness.gd" id="1_wkv1h"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://w5qk1r0cogdd" path="res://Scenes/objects/navigation_point.tscn" id="4_i1u4j"]
 [ext_resource type="PackedScene" uid="uid://3nh6n7vhnc8h" path="res://Scenes/mobs/player_mob.tscn" id="4_r16yv"]
 [ext_resource type="PackedScene" uid="uid://ch2tgjjy03a8s" path="res://Scenes/mobs/skeleton_mob.tscn" id="6_66lmp"]
+[ext_resource type="Script" path="res://Scripts/logic/Entities.gd" id="6_g23yq"]
 [ext_resource type="PackedScene" uid="uid://d1mjni8drulph" path="res://Scenes/objects/door_opener.tscn" id="7_i71r5"]
 [ext_resource type="PackedScene" uid="uid://chsnegkawbbdb" path="res://Scenes/objects/door_object.tscn" id="7_s40s2"]
 [ext_resource type="Script" path="res://Scripts/objects/door_opener_list.gd" id="7_yiegh"]
@@ -126,7 +127,7 @@ sources/0 = SubResource("TileSetAtlasSource_2rsk1")
 [node name="main" type="Node2D"]
 process_priority = 1
 script = ExtResource("1_fjv78")
-active_save = 1
+active_save = 4
 
 [node name="Level" type="Node2D" parent="."]
 
@@ -174,16 +175,19 @@ position = Vector2(795, 613)
 list_num = 1
 
 [node name="Entities" type="Node2D" parent="."]
+script = ExtResource("6_g23yq")
 
 [node name="player" parent="Entities" instance=ExtResource("4_r16yv")]
 position = Vector2(263, 279)
 
-[node name="skeleton" parent="Entities" instance=ExtResource("6_66lmp")]
+[node name="enemy" type="Node2D" parent="Entities"]
+
+[node name="skeleton" parent="Entities/enemy" instance=ExtResource("6_66lmp")]
 position = Vector2(778, 158)
 
-[node name="skeleton2" parent="Entities" instance=ExtResource("6_66lmp")]
-position = Vector2(795, 585)
-list_num = 1
+[node name="skeleton2" parent="Entities/enemy" instance=ExtResource("6_66lmp")]
+position = Vector2(794, 459)
+route = 1
 
 [node name="Objects" type="Node2D" parent="."]
 
@@ -235,5 +239,6 @@ position = Vector2(436, 333)
 
 [node name="save1" parent="Objects/Saves" instance=ExtResource("13_r8ymt")]
 position = Vector2(398, 133)
+save_area_name = "savepoint1"
 
 [node name="Drop" type="Node2D" parent="."]

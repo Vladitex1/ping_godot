@@ -58,14 +58,14 @@ func door_lvl0():
 	global.action_toggle = false
 	
 func door_lvl1():
-	var opener_node = OpenerList.opener_list[door_num][0][1]
+	var opener_node = OpenerList.opener_list[str(door_num)][0][1]
 	if opener_node:
 		animation(true)
 		door_ready = false
 	
 func door_lvl2():
-	var door_opener_1_status = OpenerList.opener_list[door_num][0][1] 
-	var door_opener_2_status = OpenerList.opener_list[door_num][0][2]
+	var door_opener_1_status = OpenerList.opener_list[str(door_num)][0][1] 
+	var door_opener_2_status = OpenerList.opener_list[str(door_num)][0][2]
 	if door_opener_1_status and door_opener_2_status:
 		animation(true)	
 		door_ready = false

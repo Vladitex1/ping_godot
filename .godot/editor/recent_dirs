@@ -1,9 +1,14 @@
+G:/godot/ping/Scripts
+res://Scenes/mobs
+res://Scripts/logic
+G:/godot/ping/Scripts/inventory_scripts
+G:/godot/ping/Scripts/objects
+G:/godot/ping/Saves
 res://Scenes/stop_screen
 res://Scenes/inventory
 res://Scenes
 res://Scripts/objects
 res://Scenes/objects
-res://Scripts/logic
 res://debug_scenes
 res://Scripts
 res://Scripts/stop_screen
@@ -15,10 +20,3 @@ res://assets/Ping
 res://assets/interface
 res://Scripts/level
 res://
-G:/godot/ping/export
-G:/godot/ping/export/rcedit
-res://Scenes/shop
-res://assets/Tilemap
-res://Scenes/mobs
-G:/godot/ping/Scripts
-G:/godot/ping/Scripts/shop

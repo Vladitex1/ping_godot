@@ -32,6 +32,7 @@ var temp_hp:int = player_health
 var temp_coins:int = player_coins
 var temp_keys:int = player_keys
 var temp_stamina:int = player_stamina
+var player_body
 
 static var player_position: Vector2
 static var camera_position: Vector2
@@ -57,6 +58,12 @@ func add_scene(namestr):#add_child(
 			new_scene = load("res://Scenes/"+namestr+".tscn").instantiate()
 	get_tree().root.add_child(new_scene)
 
+func spawner(name: String):
+	match name:
+		"skeleton":
+			var new_scene = load("res://Scenes/mobs/skeleton_mob.tscn").initiate()
+			return new_scene 
+	
 func visible_scene(namestr: String, status: bool):
 	for i in get_tree().root.get_child_count():
 		if get_tree().root.get_child(i).name == namestr:
@@ -67,6 +74,11 @@ func viev_scene_list():
 		print(get_tree().root.get_child(i).name)
 		
 	print("~~~~~~~~~~~~~~~~~~~~~~~~~")
+
+func get_global_scene(nameS:String):
+	for i in get_tree().root.get_child_count():
+		if get_tree().root.get_child(i).name == nameS:
+			return get_tree().root.get_child(i)
 	
 func reload_scene(namestr):	
 	del_scene(namestr)
@@ -79,13 +91,16 @@ func del_scene(namestr):
 			print(get_tree().root.get_child(i).name)
 			scene = get_tree().root.get_child(i)
 			scene.queue_free()
-		
-
+	
 func set_player_pos(vector: Vector2):
 	player_position = vector
 
 func get_player_pos():
 	return player_position
+
+func teleport(vector:Vector2):
+	var node = $"/root/main".get_child(1).get_child(0)
+	node.player.set_global_position(vector)
 
 func player_attack(namestr, delta, GSET):
 	match GSET:
@@ -156,7 +171,16 @@ func player_indicators(namestr, delta, GSet):
 					return player_keys
 				"stamina":
 					return player_stamina
-
+		"lock":
+			match namestr:
+				"hp":
+					player_health = delta
+				"coin":
+					player_coins = delta
+				"key":
+					player_keys = delta
+				"stamina":
+					player_stamina = delta
 	if temp_hp != player_health: 
 		pass
 		#print("Player Health: "+ str(player_health) + " Delta " + str(delta) + " - global")

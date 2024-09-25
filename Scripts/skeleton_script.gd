@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
-@export var list_num: int
-
+@export var route: int
+@onready var node = $"."
 @onready var detectiron_area = $detection
 @onready var attack_timer = $AttackTimer
 @onready var cooldown_timer = $CooldownTimer
@@ -73,13 +73,18 @@ var direction = Vector2()
 var target_position: Vector2
 var is_in_pursuit = true
 
+
+var creature_id: int
+
 func _ready():
+	creature_id = Entities.add_entities_in_list("skeleton",position,route,current_checkpoint,health_value)
+
 	cooldown_timer.start(0.001)
 	attack_timer.start(0.001)
 	health_value = MAX_HEALTH
 	health_progress_bar.max_value = MAX_HEALTH
 	health_bar.visible = false
-	target_position = get_circle_position()
+	target_position = get_route()
 	
 	$enemy_hands.connect("body_entered", AttackArea_enter)
 	$enemy_hands.connect("body_exited", AttackArea_exit)
@@ -93,6 +98,9 @@ func _ready():
 func _physics_process(_delta) -> void:
 	healh_control()
 	health_bar_control()
+	Entities.update_entities(creature_id,1,position)
+	Entities.update_entities(creature_id,3,current_checkpoint)
+	Entities.update_entities(creature_id,4,health_value)
 	if attack_area and state != State.DAMAGE:
 		attack()
 	if damage_area and global.player_attack("damage", 0, "get") > 0:
@@ -106,7 +114,7 @@ func _physics_process(_delta) -> void:
 				speed = STANDARD_SPEED/2
 				if global_position.distance_to(target_position) < 20:
 					cooldown_timer.start(3)
-					target_position = get_circle_position()
+					target_position = get_route()
 					state = State.IDLE
 				detectiron_area.look_at(nav.get_next_path_position())
 				animation(nav.get_next_path_position(),"walk")
@@ -141,9 +149,8 @@ func _physics_process(_delta) -> void:
 			State.DEATH:
 				pass
 			
-###############
-
-func move(target_pos, spd) -> void:
+	
+func move(target_pos:Vector2, spd) -> void:
 	nav.target_position = target_pos
 	var direction = to_local(nav.get_next_path_position()).normalized()
 	velocity = direction * spd
@@ -212,29 +219,18 @@ func state_switcher(object: String, in_or_out: String):
 
 ###############patrol######################
 
-func get_circle_position():
-	var node = $".".get_parent().get_parent()
-	var node1 = node.get_child(0).get_child(3)
+func get_route():
+	var node = global.get_global_scene("main").get_child(0).get_child(3)
 	#print(node1.position_list)
-	if !node1.position_list.has(list_num):
-		list_num = 0
-	if current_checkpoint == len(node1.position_list)-1:
+	if !node.position_list.has(route):
+		route = 0
+	if current_checkpoint == len(node.position_list)-1:
 		current_checkpoint = 0
 	else:
 		current_checkpoint += 1
-	var naem = node1.position_list[list_num][current_checkpoint]
+	var naem = node.position_list[route][current_checkpoint]
 	var Vector: Vector2 = Vector2(naem[0],naem[1])
 	return Vector
-	
-	
-	
-	'	#print(naem)
-	var max = 30
-	var min = -30
-	var randnum1 = randi_range(min, max)
-	var randnum2 = randi_range(min, max)
-	var num = Vector2(cos(randnum1), sin(randnum2)) * 100
-	#var Vector:Vector2 = global_position + num '
 	
 #################states########################
 
@@ -245,7 +241,7 @@ func death():
 func loot_drop(item:int):
 	var spawn = load("res://Scenes/objects/dynamic_loot.tscn").instantiate()
 	spawn.position = global_position
-	var node = $"../..".get_child(3)
+	var node = $"../../../Drop"
 	spawn.item = 2
 	#print(node)
 	#print(spawn.item)

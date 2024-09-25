@@ -80,6 +80,7 @@ var temp_state = State.WALK
 
 func _ready():
 	# Инициализация глобальных переменных
+	global.player_body = $"."
 	if weapon == 1:
 		weapon_icon.visible = true
 		
@@ -246,6 +247,7 @@ func get_input():
 	if Input.is_action_just_released("special_back") and !global.buttons_lock:
 		global.visible_scene("stop_screen",true)
 		global.buttons_lock = true
+		#Entities.load_entities()
 		
 func animation(anim: String) -> void:
 	match anim:

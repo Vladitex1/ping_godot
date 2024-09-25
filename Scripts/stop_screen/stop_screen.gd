@@ -4,6 +4,10 @@ var console_visible = false
 
 var temp_delay: bool
 
+
+@onready var active_save_num_lable = $control_module/load_menu/num_label
+
+
 @onready var window = $"."
 @onready var settings_menu = $control_module/settings_menu
 @onready var main_menu = $control_module/main_menu
@@ -25,6 +29,8 @@ var active_resolution
 @onready var window_res_label = $control_module/settings_window/button_list/button_list/in_settings_buttons/resolution/Label
 @onready var settings_back = $control_module/settings
 @onready var load_back = $control_module/load
+
+
 
 func _ready():
 	####main_menu####
@@ -81,6 +87,8 @@ func _ready():
 	
 	var reset_window_but = $control_module/settings_window/settings_menu/settings/Button_Reset
 	reset_window_but.connect("button_down",window_reset_button)
+	
+
 	
 	window_res_slider.value = config.BASE_RES_NUM
 	window_reset(config.BASE_RES_NUM)
@@ -178,6 +186,8 @@ func load_button():
 	main_menu.hide()
 	load_back.visible = true
 	load_menu.show()
+	active_save_num_lable.text = str(global.get_global_scene("main").active_save)
+	#SaveScript.print_save_all_info(4)
 
 func quit_button():
 	get_tree().quit()
@@ -266,7 +276,6 @@ func window_confirm_button():
 	
 	$control_module.position = Vector2(active_resolution[3],active_resolution[4])
 	$control_module.scale = Scale
-	
 	
 	DisplayServer.window_set_size(Screen_Size)
 	get_viewport().size = Screen_Size

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bkr7jbi6doumd"]
+[gd_scene load_steps=15 format=3 uid="uid://bkr7jbi6doumd"]
 
 [ext_resource type="Script" path="res://Scripts/stop_screen/stop_screen.gd" id="1_vxumt"]
 [ext_resource type="FontFile" uid="uid://dus86kp12bin7" path="res://fonts/Font1.ttf" id="2_bqap6"]
@@ -14,9 +14,6 @@
 [ext_resource type="Script" path="res://Scripts/stop_screen/keybinds_script.gd" id="12_t14mq"]
 [ext_resource type="StyleBox" uid="uid://duaeradrxgcf5" path="res://Thems/button_green.tres" id="13_rvd3y"]
 [ext_resource type="StyleBox" uid="uid://61kmy65latma" path="res://Thems/button_red.tres" id="14_ku7wl"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vs7rs"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="stop_screen" type="CanvasLayer"]
 process_priority = 1
@@ -231,43 +228,38 @@ script = ExtResource("9_50h83")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="control_module/load_menu/ScrollContainer"]
 layout_mode = 2
-theme_override_constants/separation = 38
-
-[node name="TextEdit" type="TextEdit" parent="control_module/load_menu"]
-visible = false
-layout_mode = 2
-offset_left = -112.0
-offset_top = 54.0
-offset_right = 5.0
-offset_bottom = 85.0
-theme_override_constants/line_spacing = 6
-theme_override_fonts/font = ExtResource("2_bqap6")
-theme_override_styles/focus = SubResource("StyleBoxFlat_vs7rs")
-text = "save_name"
-placeholder_text = "save_name"
-drag_and_drop_selection_enabled = false
-autowrap_mode = 1
+theme_override_constants/separation = 58
 
 [node name="settings_menu" type="MarginContainer" parent="control_module/load_menu"]
 layout_mode = 0
-offset_left = 7.5
-offset_top = 53.0
-offset_right = 109.5
-offset_bottom = 86.0
+offset_left = 41.0
+offset_top = 56.0
+offset_right = 97.0
+offset_bottom = 87.0
 
 [node name="settings" type="HBoxContainer" parent="control_module/load_menu/settings_menu"]
 layout_mode = 2
-
-[node name="Button_New" type="Button" parent="control_module/load_menu/settings_menu/settings"]
-visible = false
-layout_mode = 2
-theme = ExtResource("6_b2bat")
-text = "new"
 
 [node name="Button_Back" type="Button" parent="control_module/load_menu/settings_menu/settings"]
 layout_mode = 2
 theme = ExtResource("6_b2bat")
 text = "back"
+
+[node name="active_save_label" type="Label" parent="control_module/load_menu"]
+layout_mode = 0
+offset_left = -108.0
+offset_top = 58.5
+offset_right = 1.0
+offset_bottom = 81.5
+text = "active_save №"
+
+[node name="num_label" type="Label" parent="control_module/load_menu"]
+layout_mode = 2
+offset_left = 5.0
+offset_top = 59.0
+offset_right = 29.0
+offset_bottom = 82.0
+text = "4"
 
 [node name="settings_menu" type="Control" parent="control_module"]
 visible = false

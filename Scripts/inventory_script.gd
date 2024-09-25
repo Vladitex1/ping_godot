@@ -14,7 +14,7 @@ func _ready():
 	create_slots()
 	connect_slots()
 	inventory_load() ###загрузка
-	inventory_reload(8) ###подгруз содержимого инвентаря
+	#inventory_reload(8) ###подгруз содержимого инвентаря
 	#slot(3,2)
 	#random_items_in_slots()
 	#inventory_save() ###сохранение
@@ -27,10 +27,12 @@ func _process(_delta):
 		show_animation.play_backwards("inventory_show_animation")
 			
 	if Input.is_action_just_released("special_tab"):
+		#print(itemlist.inventory)
+		inventory_load()
 		inventory_toggle()
 		#print(itemlist.inventory)
 		#global.inventory = inventory
-		print("inventory work - inventory_script")
+		print("inventory open - inventory_script")
 	if Input.is_action_just_released("debug1"):
 		inventory_reload(2)	
 	
@@ -59,12 +61,12 @@ func inventory_save(): ###Сохранение инвентаря в itemlist
 		itemlist.inventory[slot_number] = item_path.get_slot_info()
 	#print(itemlist.inventory)
 
-func inventory_load(): ###загрузка инвентаря из itemlist
+func inventory_load(): ###Загрузка инвентаря из itemlist
 	var button_path = get_node("GridContainer")
 	for slot_number in 16:
 		var item_path = button_path.get_child(slot_number).get_child(0).get_child(1)
 		slot(slot_number,itemlist.inventory[slot_number])
-	inventory_reload(8) ###подгруз содержимого инвентаря
+	#inventory_reload(8) ###подгруз содержимого инвентаря
 	
 func inventory_reload(slot_limiter): ###конфигурация слота 
 	for i in $GridContainer.get_child_count():
@@ -72,6 +74,7 @@ func inventory_reload(slot_limiter): ###конфигурация слота
 			slot(i,0)
 		else:
 			slot(i,-1)
+	inventory_save()
 
 func slotnum(slot_number):
 	var button_path = get_node("GridContainer")
