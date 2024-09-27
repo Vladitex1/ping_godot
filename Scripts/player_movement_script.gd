@@ -112,7 +112,7 @@ func starter_module():
 		
 		#global.visible_scene("inventory",false)
 		global.visible_scene("shop",false)
-		global.visible_scene("stop_screen",false)
+		#global.visible_scene("stop_screen",false)
 
 func _physics_process(_delta):
 	starter_module()
@@ -244,9 +244,9 @@ func movement():
 				
 func get_input():
 	global.set_player_pos(global_position)
-	if Input.is_action_just_released("special_back") and !global.buttons_lock:
-		global.visible_scene("stop_screen",true)
-		global.buttons_lock = true
+	#if Input.is_action_just_released("special_back") and !global.buttons_lock:
+		#global.visible_scene("stop_screen",true)
+		#global.buttons_lock = true
 		#Entities.load_entities()
 		
 func animation(anim: String) -> void:

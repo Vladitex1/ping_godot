@@ -76,7 +76,9 @@ func viev_scene_list():
 	print("~~~~~~~~~~~~~~~~~~~~~~~~~")
 
 func get_global_scene(nameS:String):
+	#print("***********")
 	for i in get_tree().root.get_child_count():
+		#print(get_tree().root.get_child(i))
 		if get_tree().root.get_child(i).name == nameS:
 			return get_tree().root.get_child(i)
 	

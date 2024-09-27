@@ -133,10 +133,10 @@ active_save = 4
 
 [node name="background" type="ColorRect" parent="Level"]
 z_index = -1
-offset_left = -2100.0
-offset_top = -2158.0
-offset_right = 2900.0
-offset_bottom = 2842.0
+offset_left = -2090.0
+offset_top = -2053.0
+offset_right = 2910.0
+offset_bottom = 2947.0
 color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 

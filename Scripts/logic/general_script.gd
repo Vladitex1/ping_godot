@@ -5,4 +5,3 @@ extends Node2D
 
 func _ready():
 	SaveScript.config_load()
-	
