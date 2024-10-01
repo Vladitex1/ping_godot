@@ -1,7 +1,7 @@
 extends ScrollContainer
 
 ###СКРИПТ НА СОХРАНЕНИЕ/Загрузку
-
+@onready var parent_node = $"../../.."
 @onready var node = $".."
 @onready var Rnode = $VBoxContainer
 var savelist
@@ -54,12 +54,13 @@ func create_save_slot(slotnum,i): ###Непостредственное созд
 	path.get_child(slotnum).slot_id = i
 	path.get_child(slotnum).slot_num = slotnum
 	
-	var label1 = path.get_child(slotnum).get_child(0).get_child(0)
-	var label2 = path.get_child(slotnum).get_child(0).get_child(1)
-	var label3 = path.get_child(slotnum).get_child(0).get_child(2).get_child(0)
-	var label4 = path.get_child(slotnum).get_child(0).get_child(2).get_child(1)
-	var label5 = path.get_child(slotnum).get_child(0).get_child(2).get_child(2)
-	var label6 = path.get_child(slotnum).get_child(2).get_child(1)
+	var label1 = path.get_child(slotnum).get_child(1).get_child(0)
+	var label2 = path.get_child(slotnum).get_child(1).get_child(1)
+	var label6 = path.get_child(slotnum).get_child(1).get_child(2)
+	var label3 = path.get_child(slotnum).get_child(1).get_child(3).get_child(0)
+	var label4 = path.get_child(slotnum).get_child(1).get_child(3).get_child(1)
+	var label5 = path.get_child(slotnum).get_child(1).get_child(3).get_child(2)
+	
 	
 	var label1_text = "save " + str(savelist[i][0])
 	var label2_text = str(savelist[i][1])
@@ -81,7 +82,7 @@ func create_save_slot(slotnum,i): ###Непостредственное созд
 
 func connect_slot_buttons(): ###подключение кнопок
 	for i in Rnode.get_child_count():
-		var button_dir = Rnode.get_child(i).get_child(1)
+		var button_dir = Rnode.get_child(i).get_child(3)
 		var load_button = button_dir.get_child(0)
 		var del_button = button_dir.get_child(1)
 		load_button.connect("button_up",Callable(self, "load_button").bind(i))
@@ -90,19 +91,20 @@ func connect_slot_buttons(): ###подключение кнопок
 	
 func load_button(i:int):
 	var slot_id = Rnode.get_child(i).slot_id
-	SaveScript.load_game(slot_id)
-	
-	
+	await parent_node.get_confirm("LOAD SAVE?","SaveScript","load_game",slot_id)
+
+
 func del_button(i:int):
 	var slot_id = Rnode.get_child(i).slot_id
-	SaveScript.delete_save(slot_id)
+	var toggle: bool ####костыль, но работает :э
+	await parent_node.get_confirm("ARE YOU SHOORE?","SaveScript","delete_save",slot_id)
 	savelist = SaveScript.show_save_dir()
 	child_del()
 	refresh()
 	print("Удаление слота: ",slot_id)
 	
 	
-	
+
 	
 	
 	

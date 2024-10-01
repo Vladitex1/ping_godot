@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dq6ushunyiy23"]
+[gd_scene load_steps=8 format=3 uid="uid://dq6ushunyiy23"]
 
 [ext_resource type="Texture2D" uid="uid://cox6xqgcbinmp" path="res://assets/LVL/shop1.png" id="1_xt8la"]
 [ext_resource type="Texture2D" uid="uid://knkg3hrtqc35" path="res://assets/LVL/shop2.png" id="2_2wknm"]
 [ext_resource type="Script" path="res://Scripts/shop/shop_object.gd" id="3_yg55v"]
+[ext_resource type="Texture2D" uid="uid://c64klfpy51u4b" path="res://assets/special/2d_lights_and_shadows_neutral_point_light.webp" id="4_p4d4o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2lhi3"]
 size = Vector2(58, 89)
@@ -11,8 +12,9 @@ size = Vector2(58, 89)
 size = Vector2(58, 46)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_w4qjn"]
-cull_mode = 1
-polygon = PackedVector2Array(-29, -40, -29, 45, 29, 45, 29, -40, 26, -44, -25, -44)
+closed = false
+cull_mode = 2
+polygon = PackedVector2Array(-30, 65, -27, -38, 24, -38, 28, 65)
 
 [node name="shop_object" type="Node2D"]
 script = ExtResource("3_yg55v")
@@ -31,6 +33,7 @@ position = Vector2(0, 25)
 texture = ExtResource("2_2wknm")
 
 [node name="Colision" type="StaticBody2D" parent="."]
+visible = false
 collision_layer = 8
 collision_mask = 8
 
@@ -50,6 +53,20 @@ light_mask = 0
 shape = SubResource("RectangleShape2D_l2tgv")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-visible = false
+position = Vector2(2, 7)
 occluder = SubResource("OccluderPolygon2D_w4qjn")
 occluder_light_mask = 2
+
+[node name="light_point" type="PointLight2D" parent="."]
+position = Vector2(-1, 12.1667)
+scale = Vector2(0.554688, 0.811198)
+color = Color(0.928247, 0.991818, 0.805137, 1)
+energy = 1.22
+range_item_cull_mask = 15
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.792157)
+shadow_filter = 1
+shadow_filter_smooth = 13.6
+shadow_item_cull_mask = 7
+texture = ExtResource("4_p4d4o")
+height = 3.0

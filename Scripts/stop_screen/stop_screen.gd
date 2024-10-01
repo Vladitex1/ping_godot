@@ -8,7 +8,7 @@ var menu_state
 var menu_dict = {}
 
 var menu_open:bool = false
-
+var console_open:bool = false
 
 func _ready():
 	set_menu_list()
@@ -20,10 +20,15 @@ func _process(delta):
 				select_menu(0)
 			true:
 				exit_menu()
-		
-	
+	elif Input.is_action_just_released("special_console"):
+		match console_open:
+			false:
+				select_menu(6)
+			true:
+				exit_menu
+			
 func set_menu_list():
-	var menu_start_num = 4
+	var menu_start_num = 3
 	var menu = $".".get_child(0)
 	var menu_count = 0
 	for i in menu.get_child_count():
@@ -31,8 +36,8 @@ func set_menu_list():
 			menu_dict[menu_count] = menu.get_child(i).name
 			menu_count += 1
 	
-func select_menu(menu_state):
-	if menu_state == -1:
+func select_menu(state):
+	if state == -1:
 		for i in menu_dict:
 			var menu_node: String = "control_module/"+str(menu_dict[i])
 			get_node(menu_node).visible = false
@@ -40,7 +45,7 @@ func select_menu(menu_state):
 		menu_open = true
 		global.buttons_lock = true	
 		for i in menu_dict:
-			if i == menu_state:
+			if i == state:
 				var menu_node: String = "control_module/"+str(menu_dict[i])
 				back_plate.get_child(1).text = menu_dict[i]
 				back_plate.visible = true
@@ -54,3 +59,14 @@ func exit_menu():
 	menu_open = false
 	global.buttons_lock = false
 	back_plate.visible = false
+
+func get_confirm(queston: String,global_variable: String,function_name: String,value):# -> bool:
+	$control_module/confirm_panel.visible = true
+	$control_module/confirm_panel/VBoxContainer/Label.text = queston
+	await $control_module/confirm_panel/VBoxContainer/HBoxContainer/YES.button_down
+	if global.get_global_scene(global_variable).get_method_argument_count(function_name) == 1:
+		global.get_global_scene(global_variable).call(function_name,value)
+	$control_module/confirm_panel.visible = false
+	if $control_module/confirm_panel/VBoxContainer/HBoxContainer/YES.button_down:
+		return true
+	return false

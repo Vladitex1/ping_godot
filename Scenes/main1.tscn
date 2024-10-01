@@ -1,9 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://do42rlis6it6d"]
+[gd_scene load_steps=15 format=3 uid="uid://do42rlis6it6d"]
 
 [ext_resource type="Script" path="res://Scripts/logic/general_script.gd" id="1_fjv78"]
 [ext_resource type="Script" path="res://Scripts/level/darkness.gd" id="1_wkv1h"]
+[ext_resource type="TileSet" uid="uid://c5js4k5u6lmhl" path="res://Thems/tileset.tres" id="3_hdhdp"]
 [ext_resource type="Script" path="res://Scripts/level/position_notes.gd" id="3_lf1wf"]
-[ext_resource type="Texture2D" uid="uid://drjcqu76ga1a2" path="res://assets/Tilemap/Tilemap1.png" id="3_yi0xa"]
 [ext_resource type="PackedScene" uid="uid://w5qk1r0cogdd" path="res://Scenes/objects/navigation_point.tscn" id="4_i1u4j"]
 [ext_resource type="PackedScene" uid="uid://3nh6n7vhnc8h" path="res://Scenes/mobs/player_mob.tscn" id="4_r16yv"]
 [ext_resource type="PackedScene" uid="uid://ch2tgjjy03a8s" path="res://Scenes/mobs/skeleton_mob.tscn" id="6_66lmp"]
@@ -14,115 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://dq6ushunyiy23" path="res://Scenes/objects/shop_object.tscn" id="9_bb57y"]
 [ext_resource type="PackedScene" uid="uid://dq7ffxogb6nrp" path="res://Scenes/objects/lamp_object.tscn" id="9_r5iot"]
 [ext_resource type="PackedScene" uid="uid://dyxev6ymdfist" path="res://Scenes/objects/save_point.tscn" id="13_r8ymt"]
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_rwlgk"]
-polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_0n84a"]
-vertices = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)])
-source_geometry_group_name = &"navigation_polygon_source_group"
-agent_radius = 0.0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2rsk1"]
-texture = ExtResource("3_yi0xa")
-texture_region_size = Vector2i(64, 64)
-0:0/0 = 0
-0:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_rwlgk")
-0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/0/physics_layer_0/angular_velocity = 0.0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
-1:0/0 = 0
-1:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_rwlgk")
-1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:0/0/physics_layer_0/angular_velocity = 0.0
-1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
-2:0/0 = 0
-2:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_rwlgk")
-2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-2:0/0/physics_layer_0/angular_velocity = 0.0
-2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 13.3466, -32, 13.6118)
-3:0/0 = 0
-3:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_rwlgk")
-3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-3:0/0/physics_layer_0/angular_velocity = 0.0
-3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 13.3466, -32, 13.6118)
-3:1/0 = 0
-3:1/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_rwlgk")
-3:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-3:1/0/physics_layer_0/angular_velocity = 0.0
-3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
-2:1/0 = 0
-2:1/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_rwlgk")
-2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-2:1/0/physics_layer_0/angular_velocity = 0.0
-2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
-1:1/0 = 0
-1:1/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_rwlgk")
-1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:1/0/physics_layer_0/angular_velocity = 0.0
-1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 13.3466, -32, 13.6118)
-0:1/0 = 0
-0:1/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_rwlgk")
-0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:1/0/physics_layer_0/angular_velocity = 0.0
-0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 13.3466, -32, 13.6118)
-0:2/0 = 0
-0:2/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_rwlgk")
-0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:2/0/physics_layer_0/angular_velocity = 0.0
-0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
-1:2/0 = 0
-1:2/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_rwlgk")
-1:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:2/0/physics_layer_0/angular_velocity = 0.0
-1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
-2:2/0 = 0
-2:2/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_rwlgk")
-2:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-2:2/0/physics_layer_0/angular_velocity = 0.0
-2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 13.5, -32, 13.2583)
-3:2/0 = 0
-3:2/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_rwlgk")
-3:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-3:2/0/physics_layer_0/angular_velocity = 0.0
-3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 13.5, -32, 13.2583)
-3:3/0 = 0
-3:3/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_rwlgk")
-3:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-3:3/0/physics_layer_0/angular_velocity = 0.0
-3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 13.3466, -32, 13.6118)
-2:3/0 = 0
-2:3/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_rwlgk")
-2:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-2:3/0/physics_layer_0/angular_velocity = 0.0
-2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 13.3466, -32, 13.6118)
-1:3/0 = 0
-1:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:3/0/physics_layer_0/angular_velocity = 0.0
-0:3/0 = 0
-0:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:3/0/physics_layer_0/angular_velocity = 0.0
-0:3/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_0n84a")
-2:4/0 = 0
-2:4/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_rwlgk")
-2:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-2:4/0/physics_layer_0/angular_velocity = 0.0
-2:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
-3:4/0 = 0
-3:4/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_rwlgk")
-3:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-3:4/0/physics_layer_0/angular_velocity = 0.0
-3:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
-
-[sub_resource type="TileSet" id="TileSet_atgsl"]
-tile_size = Vector2i(64, 64)
-occlusion_layer_0/light_mask = 1
-physics_layer_0/collision_layer = 14
-physics_layer_0/collision_mask = 14
-navigation_layer_0/layers = 1
-sources/0 = SubResource("TileSetAtlasSource_2rsk1")
 
 [node name="main" type="Node2D"]
 process_priority = 1
@@ -149,7 +40,7 @@ script = ExtResource("1_wkv1h")
 [node name="TileMap" type="TileMap" parent="Level"]
 z_index = -1
 texture_filter = 5
-tile_set = SubResource("TileSet_atgsl")
+tile_set = ExtResource("3_hdhdp")
 rendering_quadrant_size = 64
 format = 2
 layer_0/name = "ground"
@@ -228,16 +119,16 @@ door_num = 2
 [node name="Shops" type="Node2D" parent="Objects"]
 
 [node name="shop_object" parent="Objects/Shops" instance=ExtResource("9_bb57y")]
-position = Vector2(197, 122)
+position = Vector2(219, 124)
 
 [node name="Lights" type="Node2D" parent="Objects"]
 
 [node name="lamp" parent="Objects/Lights" instance=ExtResource("9_r5iot")]
 position = Vector2(436, 333)
 
-[node name="Saves" type="Node2D" parent="Objects"]
+[node name="SavePoint" type="Node2D" parent="Objects"]
 
-[node name="save1" parent="Objects/Saves" instance=ExtResource("13_r8ymt")]
+[node name="save1" parent="Objects/SavePoint" instance=ExtResource("13_r8ymt")]
 position = Vector2(398, 133)
 save_area_name = "savepoint1"
 

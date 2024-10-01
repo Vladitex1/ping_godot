@@ -183,4 +183,3 @@ func random_items_in_slots():
 	while slotnumber < 16:
 		slot(slotnumber,randi_range(0,4))
 		slotnumber = slotnumber + 1
-

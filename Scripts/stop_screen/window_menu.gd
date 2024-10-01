@@ -7,6 +7,9 @@ extends Control
 @onready var buton = $button_list/button_list/in_settings_buttons/fullscreen/fscron
 @onready var butoff = $button_list/button_list/in_settings_buttons/fullscreen/fscroff
 @onready var control_module = $".."
+
+
+
 var active_resolution
 
 
@@ -96,4 +99,3 @@ func window_resolution_slider():
 func settings_brightness_slider():
 	global.brightness = brightness_slider.value
 	brightness_slider_lable.text = str(brightness_slider.value)
-

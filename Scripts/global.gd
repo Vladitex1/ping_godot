@@ -1,6 +1,7 @@
 extends Node
 
 
+class_name AsyncTask
 var shop_toggle:bool = false
 var action_toggle:bool = false
 var pickup_toggle: bool = false
@@ -45,17 +46,9 @@ var mouse_pos: Vector2
 func change_scene(namestr):
 	get_tree().change_scene_to_file("res://Scenes/"+namestr+".tscn")
 	
-func add_scene(namestr):#add_child(
+func add_scene(namestr:String) -> void:
 	var new_scene: Object
-	match namestr:
-		"shop":
-			new_scene = load("res://Scenes/shop/shop.tscn").instantiate()
-		"stop_screen":
-			new_scene = load("res://Scenes/stop_screen/stop_screen.tscn").instantiate()
-		"inventory":
-			new_scene = load("res://Scenes/inventory/inventory.tscn").instantiate()
-		_:
-			new_scene = load("res://Scenes/"+namestr+".tscn").instantiate()
+	new_scene = load("res://Scenes/"+namestr+".tscn").instantiate()
 	get_tree().root.add_child(new_scene)
 
 func spawner(name: String):
@@ -190,5 +183,3 @@ func player_indicators(namestr, delta, GSet):
 		print("Player Coins: "+ str(player_coins) + " Delta " + str(delta) + " - global")
 	if temp_keys != player_keys:
 		print("Player Keys: "+ str(player_keys) + " Delta " + str(delta) + " - global")
-
-

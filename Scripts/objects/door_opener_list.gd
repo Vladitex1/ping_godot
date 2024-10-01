@@ -10,4 +10,3 @@ func add_in_list(door_num:int, door_lvl:int):
 	var opener_status = [door_lvl,opener_status_1,opener_status_2]
 	opener_list[str(door_num)].append(opener_status)
 				
-

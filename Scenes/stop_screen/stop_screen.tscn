@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bkr7jbi6doumd"]
+[gd_scene load_steps=23 format=3 uid="uid://bkr7jbi6doumd"]
 
 [ext_resource type="Script" path="res://Scripts/stop_screen/stop_screen.gd" id="1_vxumt"]
 [ext_resource type="FontFile" uid="uid://dus86kp12bin7" path="res://fonts/Font1.ttf" id="2_bqap6"]
@@ -18,6 +18,15 @@
 [ext_resource type="StyleBox" uid="uid://61kmy65latma" path="res://Thems/button_red.tres" id="14_ku7wl"]
 [ext_resource type="Script" path="res://Scripts/stop_screen/keybinds_menu.gd" id="14_sd1qt"]
 [ext_resource type="Script" path="res://Scripts/stop_screen/window_menu.gd" id="17_mjnis"]
+[ext_resource type="Script" path="res://Scripts/logic/confirm_panel.gd" id="19_dx42u"]
+[ext_resource type="Theme" uid="uid://ciwnfws6sc4ds" path="res://Thems/main_menu.tres" id="20_8en8u"]
+[ext_resource type="Script" path="res://Scripts/console.gd" id="21_16mym"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vk14c"]
+bg_color = Color(1, 1, 1, 0)
+draw_center = false
+border_color = Color(0.377748, 0.943253, 0.218026, 1)
+border_blend = true
 
 [node name="stop_screen" type="CanvasLayer"]
 process_priority = 1
@@ -36,13 +45,20 @@ grow_vertical = 2
 
 [node name="debug" type="LineEdit" parent="control_module"]
 visible = false
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -960.0
-offset_top = -540.0
+offset_top = -15.5
 offset_right = 960.0
-offset_bottom = -516.0
-theme_override_styles/normal = ExtResource("3_gkq36")
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_styles/focus = ExtResource("3_gkq36")
+theme_override_styles/normal = ExtResource("3_gkq36")
 placeholder_text = "console"
 alignment = 2
 metadata/_edit_use_anchors_ = true
@@ -52,33 +68,11 @@ layout_mode = 0
 offset_top = 1056.0
 offset_right = 1920.0
 offset_bottom = 1080.0
-theme_override_styles/normal = ExtResource("3_gkq36")
 theme_override_styles/focus = ExtResource("3_gkq36")
+theme_override_styles/normal = ExtResource("3_gkq36")
 placeholder_text = "console"
 alignment = 2
 metadata/_edit_use_anchors_ = true
-
-[node name="console" type="Control" parent="control_module"]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_left = -945.0
-offset_top = -543.0
-offset_right = -945.0
-offset_bottom = -543.0
-mouse_filter = 2
-
-[node name="LineEdit" type="LineEdit" parent="control_module/console"]
-layout_mode = 0
-offset_left = -571.0
-offset_top = 13.0
-offset_right = 2607.0
-offset_bottom = 37.0
-theme_override_fonts/font = ExtResource("2_bqap6")
-theme_override_styles/normal = ExtResource("3_gkq36")
-theme_override_styles/focus = ExtResource("3_gkq36")
-placeholder_text = "console"
-alignment = 1
 
 [node name="DelayTimer" type="Timer" parent="control_module"]
 one_shot = true
@@ -179,38 +173,38 @@ alignment = 1
 [node name="Button_Continue" type="Button" parent="control_module/main/first_line_stop_menu/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("6_b2bat")
-theme_override_styles/normal = ExtResource("7_48bwr")
+theme_override_styles/focus = ExtResource("8_3ivjo")
 theme_override_styles/hover = ExtResource("8_3ivjo")
 theme_override_styles/pressed = ExtResource("8_3ivjo")
-theme_override_styles/focus = ExtResource("8_3ivjo")
+theme_override_styles/normal = ExtResource("7_48bwr")
 text = "continue"
-
-[node name="Button_Settings" type="Button" parent="control_module/main/first_line_stop_menu/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("6_b2bat")
-theme_override_styles/normal = ExtResource("7_48bwr")
-theme_override_styles/hover = ExtResource("8_3ivjo")
-theme_override_styles/pressed = ExtResource("8_3ivjo")
-theme_override_styles/focus = ExtResource("8_3ivjo")
-text = "settings"
 
 [node name="Button_Load" type="Button" parent="control_module/main/first_line_stop_menu/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("6_b2bat")
-theme_override_styles/normal = ExtResource("7_48bwr")
+theme_override_styles/focus = ExtResource("8_3ivjo")
 theme_override_styles/hover = ExtResource("8_3ivjo")
 theme_override_styles/pressed = ExtResource("8_3ivjo")
-theme_override_styles/focus = ExtResource("8_3ivjo")
+theme_override_styles/normal = ExtResource("7_48bwr")
 text = "load"
+
+[node name="Button_Settings" type="Button" parent="control_module/main/first_line_stop_menu/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("6_b2bat")
+theme_override_styles/focus = ExtResource("8_3ivjo")
+theme_override_styles/hover = ExtResource("8_3ivjo")
+theme_override_styles/pressed = ExtResource("8_3ivjo")
+theme_override_styles/normal = ExtResource("7_48bwr")
+text = "settings"
 
 [node name="Button_Quit" type="Button" parent="control_module/main/first_line_stop_menu/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("6_b2bat")
 theme_override_fonts/font = ExtResource("2_bqap6")
-theme_override_styles/normal = ExtResource("7_48bwr")
+theme_override_styles/focus = ExtResource("8_3ivjo")
 theme_override_styles/hover = ExtResource("8_3ivjo")
 theme_override_styles/pressed = ExtResource("8_3ivjo")
-theme_override_styles/focus = ExtResource("8_3ivjo")
+theme_override_styles/normal = ExtResource("7_48bwr")
 text = "quit"
 
 [node name="load" type="Control" parent="control_module"]
@@ -229,19 +223,19 @@ size_flags_vertical = 4
 script = ExtResource("11_q4umf")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="control_module/load"]
-clip_contents = false
-layout_direction = 1
 layout_mode = 0
 offset_left = -115.0
-offset_top = -179.0
-offset_right = 109.0
-offset_bottom = 40.0
+offset_top = -180.0
+offset_right = 116.0
+offset_bottom = 50.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_vk14c")
+follow_focus = true
 horizontal_scroll_mode = 0
 script = ExtResource("9_50h83")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="control_module/load/ScrollContainer"]
 layout_mode = 2
-theme_override_constants/separation = 19
+theme_override_constants/separation = 11
 alignment = 1
 
 [node name="settings_menu" type="MarginContainer" parent="control_module/load"]
@@ -338,10 +332,10 @@ layout_mode = 2
 [node name="Button_Back" type="Button" parent="control_module/settings/settings_menu/settings"]
 layout_mode = 2
 theme = ExtResource("6_b2bat")
-theme_override_styles/normal = ExtResource("7_48bwr")
+theme_override_styles/focus = ExtResource("8_3ivjo")
 theme_override_styles/hover = ExtResource("8_3ivjo")
 theme_override_styles/pressed = ExtResource("8_3ivjo")
-theme_override_styles/focus = ExtResource("8_3ivjo")
+theme_override_styles/normal = ExtResource("7_48bwr")
 text = "back"
 
 [node name="keybind" type="Control" parent="control_module"]
@@ -549,3 +543,85 @@ text = "confirm"
 layout_mode = 2
 theme = ExtResource("6_b2bat")
 text = "back"
+
+[node name="confirm_panel" type="MarginContainer" parent="control_module"]
+visible = false
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -100.0
+offset_right = 200.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("19_dx42u")
+
+[node name="Panel" type="Panel" parent="control_module/confirm_panel"]
+layout_mode = 2
+theme = ExtResource("20_8en8u")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="control_module/confirm_panel"]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="Label" type="Label" parent="control_module/confirm_panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_bqap6")
+theme_override_font_sizes/font_size = 25
+text = "ARE YOU SHOORE????"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="control_module/confirm_panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="YES" type="Button" parent="control_module/confirm_panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("20_8en8u")
+theme_override_colors/font_color = Color(0, 0.649973, 0.0590359, 1)
+theme_override_fonts/font = ExtResource("2_bqap6")
+theme_override_font_sizes/font_size = 27
+text = "YES"
+
+[node name="NO" type="Button" parent="control_module/confirm_panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("20_8en8u")
+theme_override_colors/font_color = Color(0.739789, 1.93726e-06, 9.62615e-07, 1)
+theme_override_fonts/font = ExtResource("2_bqap6")
+theme_override_font_sizes/font_size = 27
+text = "No"
+
+[node name="console" type="Control" parent="control_module"]
+visible = false
+z_index = -1
+layout_mode = 2
+anchors_preset = 0
+offset_left = -945.0
+offset_top = -543.0
+offset_right = -945.0
+offset_bottom = -543.0
+mouse_filter = 2
+script = ExtResource("21_16mym")
+
+[node name="LineEdit" type="LineEdit" parent="control_module/console"]
+layout_mode = 0
+offset_left = 705.0
+offset_top = 165.0
+offset_right = 1172.0
+offset_bottom = 832.0
+theme_override_fonts/font = ExtResource("2_bqap6")
+theme_override_font_sizes/font_size = 33
+theme_override_styles/focus = ExtResource("3_gkq36")
+theme_override_styles/normal = ExtResource("3_gkq36")
+placeholder_text = "input command"
+alignment = 1
+caret_blink = true
+caret_blink_interval = 0.3

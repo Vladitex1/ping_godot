@@ -21,6 +21,3 @@ func settings_button():
 
 func quit_button():
 	get_tree().quit()
-
-
-

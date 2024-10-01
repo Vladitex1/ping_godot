@@ -30,4 +30,3 @@ func body_exited(body):
 		global.action_toggle = false
 		global.attack_block = false
 		shop_ready = false
-

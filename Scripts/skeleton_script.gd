@@ -97,10 +97,7 @@ func _ready():
 
 func _physics_process(_delta) -> void:
 	healh_control()
-	health_bar_control()
-	Entities.update_entities(creature_id,1,position)
-	Entities.update_entities(creature_id,3,current_checkpoint)
-	Entities.update_entities(creature_id,4,health_value)
+	health_bar_control()	
 	if attack_area and state != State.DAMAGE:
 		attack()
 	if damage_area and global.player_attack("damage", 0, "get") > 0:
@@ -185,6 +182,10 @@ func healh_control() -> void:
 		state = State.DEATH
 		if enemy_animation.get_frame() == 3:
 			death()
+	else:
+		Entities.update_entities(creature_id,1,position)
+		Entities.update_entities(creature_id,3,current_checkpoint)
+		Entities.update_entities(creature_id,4,health_value)
 	
 
 func health_bar_control() -> void:
@@ -236,6 +237,7 @@ func get_route():
 
 func death():
 	loot_drop(2)
+	Entities.del_entitie_from_list(creature_id)
 	$".".queue_free()
 
 func loot_drop(item:int):
@@ -243,9 +245,6 @@ func loot_drop(item:int):
 	spawn.position = global_position
 	var node = $"../../../Drop"
 	spawn.item = 2
-	#print(node)
-	#print(spawn.item)
-	
 	node.add_child(spawn)
 
 func attack():

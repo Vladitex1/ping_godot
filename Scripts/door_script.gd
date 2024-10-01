@@ -16,26 +16,25 @@ extends Node
 var door_toggle = false
 var door_ready = false
 var door_block = false
-var IFT = false
+var IFT = true
 
 func _ready():
 	opener_area.connect("body_entered",body_entered)
 	opener_area.connect("body_exited",body_exited)
 	OpenerList.add_in_list(door_num,door_lvl)
-	if door_lvl != 0:
-		opener_area.monitoring = false
 	
 func _process(_delta):
-	match door_lvl:
-		0:
-			if Input.is_action_just_released("special_use") and door_ready == true:
-				door_lvl0()
-		1:
-			door_lvl1()
-		2:
-			door_lvl2()
-	if door_ready == true:
-		node.PROCESS_MODE_DISABLED
+	if IFT:
+		match door_lvl:
+			0:
+				if Input.is_action_just_released("special_use") and door_ready == true:
+					door_lvl0()
+			1:
+				door_lvl1()
+			2:
+				door_lvl2()
+		if door_ready == true:
+			node.PROCESS_MODE_DISABLED
 				
 func door_lvl0():
 	if door_toggle == false: ##Если дверь не активна, ее следует открыть
@@ -71,17 +70,14 @@ func door_lvl2():
 		door_ready = false
 		
 func animation(animation_bool):
+	if door_lvl == 1 or door_lvl == 2:
+		opener_area.monitoring = false
+		IFT = false
 	if animation_bool:
 		door_mask.play("door_mask_open")
-		await get_tree().create_timer(0.83).timeout
-		door_mask.pause()
 	else:
 		door_mask.play_backwards("door_mask_open")
-		await get_tree().create_timer(0.83).timeout
-		door_mask.pause()
-		if door_lvl == 1 or door_lvl == 2:
-			opener_area.disabled = true
-		
+
 func body_entered(body):
 	if str(body.name) == "player":
 		door_ready = true
@@ -92,6 +88,22 @@ func body_exited(body):
 		door_ready = false
 		global.action_toggle = false
 		
-####
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ####await get_tree().create_timer(1).timeout 	
-####

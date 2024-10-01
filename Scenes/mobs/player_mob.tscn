@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://ij0i06u5ohsm" path="res://assets/interface/pick_up.png" id="11_803ew"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ptcxw"]
-size = Vector2(22.449, 32.6531)
+size = Vector2(16.3265, 32.6531)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_35sgd"]
 atlas = ExtResource("2_crj1b")
@@ -367,6 +367,10 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xsvsp"]
+cull_mode = 2
+polygon = PackedVector2Array(-5.60001, -11.2, -5.60001, 10.5, 5.60001, 10.5, 5.60001, -11.2)
+
 [sub_resource type="Animation" id="Animation_bu6ly"]
 resource_name = "attack_left"
 length = 0.4
@@ -564,10 +568,6 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qnhbi"]
 size = Vector2(22, 38)
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xsvsp"]
-cull_mode = 1
-polygon = PackedVector2Array(7.70001, 13.3, 7.70001, 8.40001, 6.30001, 8.40001, 6.30001, -13.3, -5.60001, -13.3, -5.60001, 8.40001, -7.00001, 8.40001, -7.00001, 13.3)
-
 [node name="player" type="CharacterBody2D"]
 collision_layer = 14
 collision_mask = 14
@@ -579,7 +579,7 @@ script = ExtResource("1_f2mdd")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="PingColision" type="CollisionShape2D" parent="."]
-position = Vector2(2.21729e-07, 3)
+position = Vector2(2.38419e-07, 3)
 scale = Vector2(0.98, 0.98)
 shape = SubResource("RectangleShape2D_ptcxw")
 
@@ -590,8 +590,13 @@ scale = Vector2(1, 1.15)
 sprite_frames = SubResource("SpriteFrames_cvcsf")
 animation = &"idle"
 
+[node name="inter_ocluder" type="LightOccluder2D" parent="."]
+position = Vector2(5.82077e-11, 1.19209e-07)
+scale = Vector2(1.42857, 1.42857)
+occluder = SubResource("OccluderPolygon2D_xsvsp")
+occluder_light_mask = 0
+
 [node name="Interactive" type="Sprite2D" parent="."]
-visible = false
 light_mask = 15
 visibility_layer = 15
 z_index = 2
@@ -668,6 +673,7 @@ position = Vector2(1.36424e-12, -7.15256e-07)
 shape = SubResource("RectangleShape2D_qnhbi")
 
 [node name="light_point" type="PointLight2D" parent="."]
+visible = false
 z_index = 6
 z_as_relative = false
 position = Vector2(0, 9.53674e-07)
@@ -683,11 +689,9 @@ texture_scale = 4.98
 height = 3.0
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-visible = false
 position = Vector2(5.82077e-11, 1.19209e-07)
 scale = Vector2(1.42857, 1.42857)
 occluder = SubResource("OccluderPolygon2D_xsvsp")
-occluder_light_mask = 0
 
 [node name="Cooldown_Damage_Timer" type="Timer" parent="."]
 one_shot = true

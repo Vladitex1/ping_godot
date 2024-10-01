@@ -1,0 +1,56 @@
+[gd_scene load_steps=4 format=3 uid="uid://by0apdufcnp01"]
+
+[ext_resource type="Script" path="res://Scripts/logic/confirm_panel.gd" id="1_002ge"]
+[ext_resource type="Theme" uid="uid://ciwnfws6sc4ds" path="res://Thems/main_menu.tres" id="2_goit8"]
+[ext_resource type="FontFile" uid="uid://dus86kp12bin7" path="res://fonts/Font1.ttf" id="3_ylqt4"]
+
+[node name="confirm_panel" type="MarginContainer"]
+custom_minimum_size = Vector2(400, 200)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1183.0
+offset_top = 820.0
+offset_right = -1517.0
+offset_bottom = -987.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_002ge")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+theme = ExtResource("2_goit8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ylqt4")
+theme_override_font_sizes/font_size = 25
+text = "ARE YOU SHOORE????"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="YES" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_goit8")
+theme_override_colors/font_color = Color(0, 0.649973, 0.0590359, 1)
+theme_override_fonts/font = ExtResource("3_ylqt4")
+theme_override_font_sizes/font_size = 27
+text = "YES"
+
+[node name="NO" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_goit8")
+theme_override_colors/font_color = Color(0.739789, 1.93726e-06, 9.62615e-07, 1)
+theme_override_fonts/font = ExtResource("3_ylqt4")
+theme_override_font_sizes/font_size = 27
+text = "No"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dq7ffxogb6nrp"]
+[gd_scene load_steps=8 format=3 uid="uid://dq7ffxogb6nrp"]
 
 [ext_resource type="Texture2D" uid="uid://hfryu6gwfls3" path="res://assets/LVL/lamp_test.png" id="1_1dt8p"]
 [ext_resource type="Script" path="res://Scripts/objects/lamp_object.gd" id="1_3v8fh"]
@@ -8,6 +8,10 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_amcqt"]
 radius = 14.0357
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xl8at"]
+cull_mode = 2
+polygon = PackedVector2Array(2.8, 8.40001, 4.9, 6.30001, 4.9, 0.700001, 2.8, -1.4, -2.8, -1.4, -4.9, 0.700001, -4.9, 6.30001, -2.8, 8.40001)
 
 [node name="lamp" type="StaticBody2D"]
 collision_layer = 15
@@ -54,3 +58,9 @@ texture = ExtResource("4_8sm87")
 visible = false
 position = Vector2(21, -25)
 texture = ExtResource("5_0fjvj")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+texture_filter = 5
+scale = Vector2(1.42857, 1.42857)
+occluder = SubResource("OccluderPolygon2D_xl8at")
+occluder_light_mask = 2

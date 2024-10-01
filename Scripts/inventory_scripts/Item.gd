@@ -11,4 +11,3 @@ func slot(num:int):
 
 	
 	
-

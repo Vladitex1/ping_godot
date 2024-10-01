@@ -99,28 +99,10 @@ func _ready():
 	damage_area.connect("area_entered", damage_area_enter)
 	damage_area.connect("area_exited", damage_area_exit)
 
-func starter_module():
-	if start:
-		start = false
-		global.buttons_lock = false
-		
-		global.add_scene("hud")
-		
-		global.add_scene("inventory")
-		global.add_scene("shop")
-		global.add_scene("stop_screen")
-		
-		#global.visible_scene("inventory",false)
-		global.visible_scene("shop",false)
-		#global.visible_scene("stop_screen",false)
-
 func _physics_process(_delta):
-	starter_module()
 	get_input()
-	#print("***")
-	#print(global.buttons_lock)
 	debug_buttons()
-	if global.buttons_lock == false:
+	if !global.buttons_lock:
 		state_switcher()
 		movement()
 		attack()
@@ -159,17 +141,17 @@ func interactive_control():
 	else:
 		pickup.visible = false 
 		
-
-	
 	if global.action_toggle:
-		interactive.set_visible(true)
+		interactive.visible = true
 	else:
-		interactive.set_visible(false)
+		interactive.visible = false
+		
 
 func damage(dmg: int):
 	animation("damage")
 	global.player_indicators("hp", dmg * -1, "set")
 	state = State.DAMAGE
+	print(global.player_indicators("hp", 0, "get"))
 
 func attack():
 	var input: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -207,14 +189,14 @@ func attack():
 		global.player_attack("damage_throw", 0, "set")
 
 func death():
-	global.player_indicators("hp", max_health, "set")
+	global.player_indicators("hp", global.max_health, "set")
 
 func state_switcher():
 	if damage_active and global.player_damage("damage", 0, "get") > 0:
 		damage(global.player_damage("damage", 0, "get"))
 		state = State.DAMAGE
 
-	if global.player_indicators("hp", 0, "get") < 0:
+	if global.player_indicators("hp", 0, "get") <= 0:
 		death()
 			
 func movement():
@@ -224,7 +206,7 @@ func movement():
 		Stamina_State.RUN:
 			if stmn == 0:
 				stmn_state = Stamina_State.COOLDOWN
-			if stmn != 0 and Input.is_action_just_released("special_shift"):
+			if stmn != 0 and Input.is_action_just_released("special_shift") or input == Vector2(0,0):
 				stmn_state = Stamina_State.HOLD
 		Stamina_State.COOLDOWN:
 			if stmn >= stamina_cooldown_limit:
@@ -243,11 +225,8 @@ func movement():
 	velocity = Input.get_vector("move_left", "move_right", "move_up", "move_down") * (speed + sprint)
 				
 func get_input():
+	global.mouse_pos = get_global_mouse_position()
 	global.set_player_pos(global_position)
-	#if Input.is_action_just_released("special_back") and !global.buttons_lock:
-		#global.visible_scene("stop_screen",true)
-		#global.buttons_lock = true
-		#Entities.load_entities()
 		
 func animation(anim: String) -> void:
 	match anim:
