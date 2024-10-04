@@ -33,7 +33,7 @@ func update_pos(update_position: bool,drop_place: bool):
 	var radius = 55
 	var pos = get_global_mouse_position() - global.get_player_pos()
 	if update_position:
-		position = global.get_player_pos() + Vector2(10,5)
+		position = global.get_player_pos() + Vector2(5,5)
 		drop_tex.position = get_local_mouse_position()
 		
 	if drop_place == true: ##если функция выбора позиции включено

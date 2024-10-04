@@ -13,13 +13,15 @@ func _process(delta):
 		await get_tree().create_timer(2).timeout
 		console_line.set_text("")
 		#					#0     1        2   3
-	console_text_parse("spawn unite skeleton 500")
+	#console_text_parse("spawn unite")
 
 
 func teleport(x,y):
 	var vector
 	if x == "spawn":
 		vector = Vector2(250,250)
+	elif x == "cursor":
+		vector = global.mouse_pos
 	else:
 		vector = Vector2(int(x),int(y))
 	var node = $"/root/main".get_child(1).get_child(0)
@@ -60,7 +62,7 @@ func mob(value1,value2):
 	drop_node.add_child(spawn)
 	
 var pos	
-func input(command,value1,value2,value3):
+func input(command,value1,value2,value3,value4):
 	var text 
 	match command:
 		"hello":
@@ -88,6 +90,7 @@ func input(command,value1,value2,value3):
 	return text
 
 func console_text_parse(text: String):
+	var debug:bool = false
 	var command: String
 	var error_mode: int
 	var word0: String
@@ -101,17 +104,17 @@ func console_text_parse(text: String):
 	var zeroSpace: int = text.find(space)
 	var firstSpace: int = text.find(space,zeroSpace+1)
 	var secondSpace: int = text.find(space,firstSpace+1)
-	var thirdSpace: int = text.find(space,secondSpace+1)
+	var thirdSpace: int = text.find(space,secondSpace)
 	
 
 	if thirdSpace == -1:
-		error_mode = 3
+		error_mode = 1
 	elif secondSpace == -1:
 		error_mode = 2
 	elif firstSpace == -1:
-		error_mode = 1
-	else:
-		error_mode = 0
+		error_mode = 3
+	elif zeroSpace == -1:
+		error_mode = 4
 	
 	match error_mode:
 		0:
@@ -132,44 +135,27 @@ func console_text_parse(text: String):
 		3:
 			command = text.substr(0, zeroSpace)
 			word0 = text.substr(zeroSpace+1,len(text))
+		4:
+			command = text.substr(0, zeroSpace)
 			
-	
-	print("Исходный текст: ",text)
-	print(".........")
-	print("zeroSpace: ",zeroSpace)
-	print("firstSpace: ",firstSpace)
-	print("secondSpace: ",secondSpace)
-	print("thirdSpace: ",thirdSpace)
+	if debug:
+		print("Исходный текст: ",text)
+		print(".........")
+		print("zeroSpace: ",zeroSpace)
+		print("firstSpace: ",firstSpace)
+		print("secondSpace: ",secondSpace)
+		print("thirdSpace: ",thirdSpace)
+		print("error_mode: ",error_mode)
+		print("command: ",command)
+		print("word0: ",word0)
+		print("word1: ",word1)
+		print("word2: ",word2)
+		print("word3: ",word3)
 
-	print("error_mode: ",error_mode)
-	print("command: ",command)
-	print("word0: ",word0)
-	print("word1: ",word1)
-	print("word2: ",word2)
-	print("word3: ",word3)
-
-		
-	#if !error_mode:
-		#value1 = text.substr(firstSpace+1,secondSpace - firstSpace-1)
-		#value2 = text.substr(secondSpace+1,thirdSpace - secondSpace-1)
-		#value3 = text.substr(thirdSpace+1,len(text))
-	#else:
-	#	value1 = text.substr(firstSpace+1,len(text))
-	#	value2 = ""
-		
-	#if firstSpace == -1:
-	#	command = text
-	#else:
-	#	command = text.substr(0, firstSpace)
-
-	#print(error_mode)
-	#var text2
-	#if value1 == null:
-	#	text2 = "input_error"
-	#	return text2
-	#print(value1,value2,value3)
-	#print(value1,":")
-	#return input(str(command),value1,value2,value3)
+	if command == null:
+		var text2: String = "input_error"
+		return text2
+	return input(str(command),word0,word1,word2,word3)
 
 func position_parser(line:String): ###Парсер инфы из сейва (Технический)
 	var text:String = line

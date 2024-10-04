@@ -27,20 +27,23 @@ visible = false
 position = Vector2(0, -1)
 texture = ExtResource("1_1dt8p")
 
-[node name="light_point" type="PointLight2D" parent="."]
-scale = Vector2(0.554688, 0.598958)
-color = Color(0.980149, 0.847807, 0.653115, 1)
-energy = 2.2
-range_item_cull_mask = 15
-shadow_enabled = true
-shadow_filter = 1
-shadow_item_cull_mask = 7
-texture = ExtResource("2_d03s5")
-height = 3.0
-
 [node name="colision" type="CollisionPolygon2D" parent="."]
 position = Vector2(0, -2)
 polygon = PackedVector2Array(-4, 0, 4, 0, 7, 3, 7, 11, 4, 14, -4, 14, -7, 11, -7, 3)
+
+[node name="light_point" type="PointLight2D" parent="."]
+position = Vector2(-1.19209e-07, 1)
+scale = Vector2(0.558594, 0.523438)
+color = Color(0.928247, 0.991818, 0.805137, 1)
+energy = 2.2
+range_item_cull_mask = 15
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.792157)
+shadow_filter = 1
+shadow_filter_smooth = 13.6
+shadow_item_cull_mask = 7
+texture = ExtResource("2_d03s5")
+height = 3.0
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4

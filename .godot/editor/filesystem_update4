@@ -1,4 +1,6 @@
-res://Scenes/mobs/player_mob.tscn
+res://Scenes/main1.tscn
+res://Scripts/inventory_scripts/Slot.gd
+res://Scripts/CollisionShape2D.gd
 res://Thems/tileset.tres
 res://Scripts/level/position.gd
 res://Scripts/player_movement_script.gd
@@ -12,9 +14,8 @@ res://Thems/button_red.tres
 res://Scripts/stop_screen/keybinds_menu.gd
 res://Thems/main_menu.tres
 res://Thems/inventory.tres
-res://Scripts/console.gd
-res://Scenes/main1.tscn
 res://Scenes/stop_screen/stop_screen.tscn
+res://Scenes/mobs/player_mob.tscn
 res://Scenes/objects/lamp_object.tscn
 res://Scenes/debug.tscn
 res://Scenes/objects/save_point.tscn
@@ -24,3 +25,6 @@ res://Scenes/inventory/inventory_slot.tscn
 res://Scenes/stop_screen/save_slot.tscn
 res://Scenes/shop/shop.tscn
 res://Scenes/objects/shop_object.tscn
+res://Scripts/console.gd
+res://Scripts/ItemList_script.gd
+res://Scripts/objects/lamp_object.gd

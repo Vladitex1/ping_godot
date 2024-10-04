@@ -51,8 +51,6 @@ var keybinds = {
 	5: ["drop item", 71, "special_drop"],
 	6: ["BACK", 4194305, "special_back"],
 	7: ["Spawn_Unite", 73, "debug2"],
-	8: ["Console", 96,"special_console"],
+	8: ["Console", 16777240,"special_console"],
 	9: ["null", null, "null"], ##Костыль :)
 	}
-
-
