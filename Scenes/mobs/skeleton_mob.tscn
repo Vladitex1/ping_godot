@@ -372,8 +372,9 @@ size = Vector2(28, 34)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dnpgc"]
 size = Vector2(24, 30)
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_vt04j"]
-polygon = PackedVector2Array(12, 15, -12, 15, -12, -15, 12, -15)
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_tvtal"]
+cull_mode = 2
+polygon = PackedVector2Array(-5.60001, -11.2, -5.60001, 10.5, 5.60001, 10.5, 5.60001, -11.2)
 
 [node name="skeleton" type="CharacterBody2D"]
 collision_layer = 15
@@ -474,5 +475,6 @@ rotation = -1.5708
 polygon = PackedVector2Array(-9.10001, -5.0068e-07, -49, 93.8, 49.7001, 93.8001, 8.40001, 0, 16.1001, -17.5, -16.8, -16.8001)
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-occluder = SubResource("OccluderPolygon2D_vt04j")
-occluder_light_mask = 8
+position = Vector2(5.82077e-11, 1.19209e-07)
+scale = Vector2(1.42857, 1.42857)
+occluder = SubResource("OccluderPolygon2D_tvtal")

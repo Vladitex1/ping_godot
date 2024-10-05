@@ -13,8 +13,10 @@ extends Control
 @onready var eye_left = $eyes/eye_left
 @onready var intresting_slot = $shop_plate/IntrestingSlot
 static var standart_label = ["name","count","cost","sell"]
-var num123 = -1 ##debug
 
+var shop_num: int
+var shop_lvl:int = 1
+var ift: bool = false
 
 var count:int = 1
 var cost:int
@@ -34,37 +36,23 @@ func _ready():
 	$shop_plate/buttons/sell_button.connect("button_up",sell_button_func)
 	$shop_plate/buttons/exit_button.connect("button_up",exit_button)
 
-	##buttons
-	
-	for slotnum in get_node("shop_plate/items/GridContainer").get_child_count():
-		#print(slotnum+1)
-		slotnum = slotnum + 1
-		var node_path: String = "shop_plate/items/GridContainer/Slot"+str(slotnum)+"/Button"
-		var button = get_node(node_path)
-		button.connect("button_down",Callable(self, "slotnum").bind(slotnum))
-
-	shop_info_storage(0)#randi_range(0,3))
-	##shop inventory
+	create_shop_slots()
+	connect_shop_slots()
 	node_reset(config.BASE_RES_NUM)
 	
-func node_reset(res):
-	var scaled = config.resolution_list[res][2]
-	var positioned = Vector2(config.resolution_list[res][3],config.resolution_list[res][4])
-	scale = Vector2(scaled,scaled)
-	position = positioned	
-
-	
-	
-	
-func eyes():
-	var mouse_pos = get_local_mouse_position().angle()
-	eye_left.rotation = mouse_pos
-	eye_right.rotation = mouse_pos
-	
-	
 func _process(_delta):
+	if $"..".visible == true and ift == true:
+		shop_lvl = global.shop_lvl
+		load_shop_info()
+		ift = false
+	else:
+		ift = true
+	
+	
 	eyes()
 	buttons_control()
+	if Input.is_action_just_released("special_back"):
+		exit_button()
 
 	var state: bool
 	if selected_item_ID == -2 or selected_item_ID == -1:
@@ -85,31 +73,44 @@ func _process(_delta):
 	sell_cost_lable.text = str(sell_cost)
 	name_lable.text = itemlist.itemlist[selected_item_ID][2]
 	count_lable.text = str(count)
-	if Input.is_action_just_released("special_back"):
-		exit_button()
+
 		
-	if Input.is_action_just_released("debug1"):
-		num123 = num123 + 1
-		if num123 > 3:
-			num123 = 0
-			shop_info_storage(num123)
-		else:
-			shop_info_storage(num123)
 
 ###################Содержимое магазина###################
+
+func create_shop_slots():
+	var node = $".".get_child(0).get_child(4).get_child(0)
+	for i in len(itemlist.shop_storage[shop_lvl]):
+		var new_scene: Object = load("res://Scenes/shop/shop_item.tscn").instantiate()
+		node.add_child(new_scene)
+
+func connect_shop_slots():
+	var node = $".".get_child(0).get_child(4).get_child(0)
+	for i in node.get_child_count():
+		node.get_child(i).get_child(0).connect("button_down",Callable(self, "slotnum").bind(i))
+		
+func load_shop_info():
+	var node = $".".get_child(0).get_child(4).get_child(0)
+	for i in node.get_child_count():
+		slot(i,itemlist.shop_storage[shop_lvl][i])
+
+func slot(slotnum,num): ##задать содержимое слота (изначально)
+	var node = $".".get_child(0).get_child(4).get_child(0)
+	node.get_child(slotnum).get_child(0).get_child(0).slot(num)
 	
-func shop_info_storage(num1):
-	var slotnumber = 1
-	while slotnumber <= 8:
-		slot(slotnumber,itemlist.shop_storage[num1][slotnumber-1])
-		slotnumber = slotnumber + 1
-		
-func random_items_in_slots():
-	var slotnumber = 0
-	while slotnumber != 8:
-		slotnumber = slotnumber + 1
-		slot(slotnumber,randi_range(0,4))
-		
+#################Окно магазина##########################
+
+func node_reset(res):
+	var scaled = config.resolution_list[res][2]
+	var positioned = Vector2(config.resolution_list[res][3],config.resolution_list[res][4])
+	scale = Vector2(scaled,scaled)
+	position = positioned	
+
+func eyes():
+	var mouse_pos = get_local_mouse_position().angle()
+	eye_left.rotation = mouse_pos
+	eye_right.rotation = mouse_pos
+	
 #########################Кнопки##########################
 func minus_button():
 	if count <= 1:
@@ -170,16 +171,10 @@ func exit_button():
 	
 	#global.add_scene("inventory")
 	
-
-################## Задать содержимое слота
-
-func slot(slotnum,num):
-	var slotnum2 = str(slotnum)
-	var node_path = "shop_plate/items/GridContainer/Slot" + slotnum2 + "/Button/shop_item_" + slotnum2
-	get_node(node_path).slot(num)
+##################Технические##########################
 	
-func slotnum(slotnum):
-	var slotnum2 = str(slotnum)
-	var node_path = "shop_plate/items/GridContainer/Slot" + slotnum2 + "/Button/shop_item_" + slotnum2
-	selected_item_ID = get_node(node_path).get_slot_info()
+func slotnum(slotnum): ##получение информации от слота
+	var node: Object = $shop_plate/items/GridContainer
+	selected_item_ID = node.get_child(slotnum).get_child(0).get_child(0).get_slot_info()
 	count = 1
+	

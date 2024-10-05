@@ -120,7 +120,7 @@ func slot(slot_number,num): ###Редактирование слота (Техн
 	item_path.slot(num)
 
 func _input(_event): ###перемещение под указателем (Технический)
-	$mouse_equip_item.global_position = get_global_mouse_position()-Vector2(40,40)		
+	$mouse_equip_item.global_position = get_global_mouse_position()-Vector2(40,30)		
 
 func inventory_toggle(): ###Анимация вкл/выкл (Технический)
 	if !open:

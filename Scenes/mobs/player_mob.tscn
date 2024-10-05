@@ -597,6 +597,7 @@ occluder = SubResource("OccluderPolygon2D_xsvsp")
 occluder_light_mask = 0
 
 [node name="Interactive" type="Sprite2D" parent="."]
+visible = false
 light_mask = 15
 visibility_layer = 15
 z_index = 2

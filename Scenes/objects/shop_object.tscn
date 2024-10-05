@@ -18,13 +18,14 @@ polygon = PackedVector2Array(-30, 65, -27, -38, 24, -38, 28, 65)
 
 [node name="shop_object" type="Node2D"]
 script = ExtResource("3_yg55v")
+shopLVL = 2
 
 [node name="Textures" type="Node2D" parent="."]
 position = Vector2(0, 8)
 
 [node name="Shop1" type="Sprite2D" parent="Textures"]
 texture_filter = 5
-position = Vector2(0, -38)
+position = Vector2(0, -39)
 texture = ExtResource("1_xt8la")
 
 [node name="Shop2" type="Sprite2D" parent="Textures"]
@@ -70,3 +71,20 @@ shadow_filter_smooth = 13.6
 shadow_item_cull_mask = 7
 texture = ExtResource("4_p4d4o")
 height = 3.0
+
+[node name="GridContainer" type="GridContainer" parent="."]
+anchors_preset = -1
+anchor_left = 0.383
+anchor_top = 0.368
+anchor_right = 0.383
+anchor_bottom = 0.368
+offset_left = -16.0
+offset_top = -17.0
+offset_right = 436.0
+offset_bottom = 697.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.07, 0.07)
+theme_override_constants/h_separation = 114
+theme_override_constants/v_separation = 122
+columns = 4

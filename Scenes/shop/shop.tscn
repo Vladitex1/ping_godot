@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://b4pcmlps8caph"]
+[gd_scene load_steps=53 format=3 uid="uid://b4pcmlps8caph"]
 
 [ext_resource type="Script" path="res://Scripts/shop/shop_brain.gd" id="1_6uox3"]
 [ext_resource type="Texture2D" uid="uid://bc35ryqt34r6x" path="res://assets/interface/shop1.png" id="1_y0bcl"]
@@ -10,7 +10,6 @@
 [ext_resource type="FontFile" uid="uid://dus86kp12bin7" path="res://fonts/Font1.ttf" id="7_u30p0"]
 [ext_resource type="Texture2D" uid="uid://bjh66o0mr2my2" path="res://assets/Tilemap/intresting_item_spritesheet.png" id="9_gt45h"]
 [ext_resource type="Texture2D" uid="uid://cok61u06k8a5v" path="res://assets/interface/plusbutton_large.png" id="9_x3u8a"]
-[ext_resource type="PackedScene" uid="uid://bdgtifol1pjro" path="res://Scenes/shop/shop_item.tscn" id="11_g3vq1"]
 [ext_resource type="Texture2D" uid="uid://cv45h4cbwi43d" path="res://assets/interface/minusbutton_large.png" id="11_h1lch"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ptomw"]
@@ -301,10 +300,6 @@ animations = [{
 "speed": 40.0
 }]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f3eqg"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-corner_detail = 7
-
 [node name="shop" type="CanvasLayer"]
 
 [node name="control_module" type="Control" parent="."]
@@ -324,6 +319,7 @@ offset_right = -117.0
 offset_bottom = -168.0
 
 [node name="IntrestingSlot" type="AnimatedSprite2D" parent="control_module/shop_plate"]
+visible = false
 z_index = 1
 position = Vector2(212.5, 135.7)
 sprite_frames = SubResource("SpriteFrames_slgu8")
@@ -457,137 +453,9 @@ offset_bottom = 161.56
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.6, 0.6)
-theme_override_constants/h_separation = 4
-theme_override_constants/v_separation = 11
+theme_override_constants/h_separation = 114
+theme_override_constants/v_separation = 122
 columns = 4
-
-[node name="Slot1" type="Panel" parent="control_module/shop_plate/items/GridContainer"]
-custom_minimum_size = Vector2(110, 110)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_f3eqg")
-
-[node name="Button" type="Button" parent="control_module/shop_plate/items/GridContainer/Slot1"]
-layout_mode = 0
-offset_left = 9.0
-offset_top = 6.0
-offset_right = 101.0
-offset_bottom = 98.0
-
-[node name="shop_item_1" parent="control_module/shop_plate/items/GridContainer/Slot1/Button" instance=ExtResource("11_g3vq1")]
-
-[node name="Slot2" type="Panel" parent="control_module/shop_plate/items/GridContainer"]
-custom_minimum_size = Vector2(110, 110)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_f3eqg")
-
-[node name="Button" type="Button" parent="control_module/shop_plate/items/GridContainer/Slot2"]
-layout_mode = 0
-offset_left = 9.0
-offset_top = 6.0
-offset_right = 101.0
-offset_bottom = 98.0
-
-[node name="shop_item_2" parent="control_module/shop_plate/items/GridContainer/Slot2/Button" instance=ExtResource("11_g3vq1")]
-
-[node name="Slot3" type="Panel" parent="control_module/shop_plate/items/GridContainer"]
-custom_minimum_size = Vector2(110, 110)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_f3eqg")
-
-[node name="Button" type="Button" parent="control_module/shop_plate/items/GridContainer/Slot3"]
-layout_mode = 0
-offset_left = 9.0
-offset_top = 6.0
-offset_right = 101.0
-offset_bottom = 98.0
-
-[node name="shop_item_3" parent="control_module/shop_plate/items/GridContainer/Slot3/Button" instance=ExtResource("11_g3vq1")]
-
-[node name="Slot4" type="Panel" parent="control_module/shop_plate/items/GridContainer"]
-custom_minimum_size = Vector2(110, 110)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_f3eqg")
-
-[node name="Button" type="Button" parent="control_module/shop_plate/items/GridContainer/Slot4"]
-layout_mode = 0
-offset_left = 9.0
-offset_top = 6.0
-offset_right = 101.0
-offset_bottom = 98.0
-
-[node name="shop_item_4" parent="control_module/shop_plate/items/GridContainer/Slot4/Button" instance=ExtResource("11_g3vq1")]
-
-[node name="Slot5" type="Panel" parent="control_module/shop_plate/items/GridContainer"]
-custom_minimum_size = Vector2(110, 110)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_f3eqg")
-
-[node name="Button" type="Button" parent="control_module/shop_plate/items/GridContainer/Slot5"]
-layout_mode = 0
-offset_left = 9.0
-offset_top = 6.0
-offset_right = 101.0
-offset_bottom = 98.0
-
-[node name="shop_item_5" parent="control_module/shop_plate/items/GridContainer/Slot5/Button" instance=ExtResource("11_g3vq1")]
-
-[node name="Slot6" type="Panel" parent="control_module/shop_plate/items/GridContainer"]
-custom_minimum_size = Vector2(110, 110)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_f3eqg")
-
-[node name="Button" type="Button" parent="control_module/shop_plate/items/GridContainer/Slot6"]
-layout_mode = 0
-offset_left = 9.0
-offset_top = 6.0
-offset_right = 101.0
-offset_bottom = 98.0
-
-[node name="shop_item_6" parent="control_module/shop_plate/items/GridContainer/Slot6/Button" instance=ExtResource("11_g3vq1")]
-
-[node name="Slot7" type="Panel" parent="control_module/shop_plate/items/GridContainer"]
-custom_minimum_size = Vector2(110, 110)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_f3eqg")
-
-[node name="Button" type="Button" parent="control_module/shop_plate/items/GridContainer/Slot7"]
-layout_mode = 0
-offset_left = 9.0
-offset_top = 6.0
-offset_right = 101.0
-offset_bottom = 98.0
-
-[node name="shop_item_7" parent="control_module/shop_plate/items/GridContainer/Slot7/Button" instance=ExtResource("11_g3vq1")]
-
-[node name="Slot8" type="Panel" parent="control_module/shop_plate/items/GridContainer"]
-custom_minimum_size = Vector2(110, 110)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_f3eqg")
-
-[node name="Button" type="Button" parent="control_module/shop_plate/items/GridContainer/Slot8"]
-layout_mode = 0
-offset_left = 9.0
-offset_top = 6.0
-offset_right = 101.0
-offset_bottom = 98.0
-
-[node name="shop_item_8" parent="control_module/shop_plate/items/GridContainer/Slot8/Button" instance=ExtResource("11_g3vq1")]
 
 [node name="text" type="Control" parent="control_module/shop_plate"]
 layout_mode = 3

@@ -22,6 +22,8 @@ func _ready():
 	opener_area.connect("body_entered",body_entered)
 	opener_area.connect("body_exited",body_exited)
 	OpenerList.add_in_list(door_num,door_lvl)
+	if door_lvl == 1 or door_lvl == 2:
+		opener_area.monitoring = false
 	
 func _process(_delta):
 	if IFT:
@@ -70,9 +72,7 @@ func door_lvl2():
 		door_ready = false
 		
 func animation(animation_bool):
-	if door_lvl == 1 or door_lvl == 2:
-		opener_area.monitoring = false
-		IFT = false
+	IFT = false
 	if animation_bool:
 		door_mask.play("door_mask_open")
 	else:

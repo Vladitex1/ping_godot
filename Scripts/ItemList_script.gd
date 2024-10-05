@@ -36,7 +36,7 @@ var inventory_storage = {
 		0,0,0,0]}
 
 var inventory: Array = [
-		0,0,0,0,
+		1,2,3,0,
 		0,0,0,0,
 		0,0,0,0,
 		0,0,0,0]

@@ -1,10 +1,11 @@
+CanvasLayer
+Panel
 Node2D
 TileMapLayer
 VBoxContainer
 Label
 HBoxContainer
 Button
-Panel
 MarginContainer
 TextureRect
 SpinBox
@@ -12,4 +13,3 @@ RichTextLabel
 FlowContainer
 AspectRatioContainer
 VFlowContainer
-NinePatchRect

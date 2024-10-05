@@ -12,5 +12,3 @@ func get_slot_info():
 func slot(num):
 	$TextureRect.texture = itemlist.itemlist[num][1]
 	CurrentID = num
-
-

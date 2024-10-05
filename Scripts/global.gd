@@ -15,7 +15,7 @@ static var drag_toggle:bool = false
 static var brightness:float = 0.4
 static var ret: bool = false
 var attack_block:bool = false
-
+var shop_lvl: int = 0
 static var player_health: int
 static var max_health: int
 static var player_stamina: int

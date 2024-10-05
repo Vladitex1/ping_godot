@@ -1,6 +1,4 @@
 res://Scenes/main1.tscn
-res://Scripts/inventory_scripts/Slot.gd
-res://Scripts/CollisionShape2D.gd
 res://Thems/tileset.tres
 res://Scripts/level/position.gd
 res://Scripts/player_movement_script.gd
@@ -25,6 +23,18 @@ res://Scenes/inventory/inventory_slot.tscn
 res://Scenes/stop_screen/save_slot.tscn
 res://Scenes/shop/shop.tscn
 res://Scenes/objects/shop_object.tscn
-res://Scripts/console.gd
+res://Scenes/mobs/skeleton_mob.tscn
+res://Scripts/shop/shop_item.gd
+res://Scripts/shop/shop_list.gd
+res://Scripts/shop/shop_object.gd
+res://Scripts/shop/shop_brain.gd
+res://Scenes/shop/shop_item.tscn
+res://Scripts/global.gd
 res://Scripts/ItemList_script.gd
-res://Scripts/objects/lamp_object.gd
+res://Scripts/inventory_script.gd
+res://Scenes/logic/main_menu.tscn
+res://Scripts/stop_screen/stop_screen.gd
+res://Scripts/logic/main_menu.gd
+res://Scripts/stop_screen/main_menu.gd
+res://Scripts/stop_screen/load_menu.gd
+res://Scripts/stop_screen/settings_menu.gd

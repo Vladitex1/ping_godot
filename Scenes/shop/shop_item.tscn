@@ -3,12 +3,22 @@
 [ext_resource type="Script" path="res://Scripts/shop/shop_item.gd" id="1_n6sg7"]
 [ext_resource type="Texture2D" uid="uid://bv87kk1yo0gh7" path="res://assets/items/loot/coin_icon_large.png" id="2_yx65g"]
 
-[node name="shop_item" type="Node2D"]
+[node name="shop_item" type="Panel"]
+scale = Vector2(0.19, 0.19)
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 8.99998
+offset_top = 6.0
+offset_right = 101.0
+offset_bottom = 98.0
+
+[node name="shop_item_1" type="Node2D" parent="Button"]
 position = Vector2(44, 45)
 scale = Vector2(0.19, 0.19)
 script = ExtResource("1_n6sg7")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="Button/shop_item_1"]
 show_behind_parent = true
 clip_children = 2
 z_as_relative = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://do42rlis6it6d"]
+[gd_scene load_steps=16 format=3 uid="uid://do42rlis6it6d"]
 
 [ext_resource type="Script" path="res://Scripts/logic/general_script.gd" id="1_fjv78"]
 [ext_resource type="Script" path="res://Scripts/level/darkness.gd" id="1_wkv1h"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://Scripts/objects/door_opener_list.gd" id="7_yiegh"]
 [ext_resource type="PackedScene" uid="uid://dq6ushunyiy23" path="res://Scenes/objects/shop_object.tscn" id="9_bb57y"]
 [ext_resource type="PackedScene" uid="uid://dq7ffxogb6nrp" path="res://Scenes/objects/lamp_object.tscn" id="9_r5iot"]
+[ext_resource type="Script" path="res://Scripts/shop/shop_list.gd" id="12_kfuom"]
 [ext_resource type="PackedScene" uid="uid://dyxev6ymdfist" path="res://Scenes/objects/save_point.tscn" id="13_r8ymt"]
 
 [node name="main" type="Node2D"]
@@ -117,9 +118,14 @@ door_lvl = 2
 door_num = 2
 
 [node name="Shops" type="Node2D" parent="Objects"]
+script = ExtResource("12_kfuom")
 
 [node name="shop_object" parent="Objects/Shops" instance=ExtResource("9_bb57y")]
 position = Vector2(219, 124)
+
+[node name="shop_object2" parent="Objects/Shops" instance=ExtResource("9_bb57y")]
+position = Vector2(297, 123)
+shopLVL = 0
 
 [node name="Lights" type="Node2D" parent="Objects"]
 
