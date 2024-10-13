@@ -5,7 +5,7 @@
 [ext_resource type="StyleBox" uid="uid://b1j6fi831qnyn" path="res://Thems/console_stylebox_0.tres" id="3_gkq36"]
 [ext_resource type="Texture2D" uid="uid://c3o68r0fhjmm8" path="res://assets/interface/menu/menu_plate.png" id="5_t0x3m"]
 [ext_resource type="Theme" uid="uid://btx7s0cgjap3o" path="res://fonts/buttons.tres" id="6_b2bat"]
-[ext_resource type="Script" path="res://Scripts/stop_screen/main_menu.gd" id="6_o3pi6"]
+[ext_resource type="Script" path="res://Scripts/stop_screen/ss_main_menu.gd" id="6_o3pi6"]
 [ext_resource type="StyleBox" uid="uid://bmuedaydehnq7" path="res://Thems/button_fixed_unpress.tres" id="7_48bwr"]
 [ext_resource type="StyleBox" uid="uid://dsiifa1jr66sg" path="res://Thems/button_fixed_pressed.tres" id="8_3ivjo"]
 [ext_resource type="Script" path="res://Scripts/stop_screen/load_script.gd" id="9_50h83"]
@@ -73,9 +73,6 @@ theme_override_styles/normal = ExtResource("3_gkq36")
 placeholder_text = "console"
 alignment = 2
 metadata/_edit_use_anchors_ = true
-
-[node name="DelayTimer" type="Timer" parent="control_module"]
-one_shot = true
 
 [node name="back_plate" type="Control" parent="control_module"]
 visible = false
@@ -206,6 +203,12 @@ theme_override_styles/hover = ExtResource("8_3ivjo")
 theme_override_styles/pressed = ExtResource("8_3ivjo")
 theme_override_styles/normal = ExtResource("7_48bwr")
 text = "quit"
+
+[node name="new_game" type="Control" parent="control_module"]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="load" type="Control" parent="control_module"]
 visible = false

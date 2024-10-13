@@ -11,4 +11,4 @@ func _ready():
 	back_load_but.connect("button_up",load_back_button)
 	
 func load_back_button():
-	global.get_global_scene(name2).select_menu(0)
+	global.get_global_scene("stop_screen").select_menu("main")

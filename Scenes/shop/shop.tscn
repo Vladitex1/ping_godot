@@ -641,6 +641,7 @@ offset_right = 12.0
 offset_bottom = 9.0
 
 [node name="ColorRect" type="ColorRect" parent="control_module/eyes/eye_left"]
+texture_filter = 5
 custom_minimum_size = Vector2(8, 8)
 layout_mode = 1
 offset_left = -1.0
@@ -658,6 +659,7 @@ offset_right = -41.0
 offset_bottom = 9.0
 
 [node name="ColorRect" type="ColorRect" parent="control_module/eyes/eye_right"]
+texture_filter = 5
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

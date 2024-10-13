@@ -37,7 +37,7 @@ func _process(delta):
 	window_resolution_slider()
 
 func window_back_button(): #####################################################
-	global.get_global_scene("stop_screen").select_menu(2)	
+	global.get_global_scene("stop_screen").select_menu("settings")	
 
 func window_reset_button(): ####################################################
 	var res = config.resolution_list[config.TEMP_RES]

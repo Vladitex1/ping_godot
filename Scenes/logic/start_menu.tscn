@@ -1,25 +1,25 @@
 [gd_scene load_steps=22 format=3 uid="uid://cl03h8m8uqghl"]
 
-[ext_resource type="Script" path="res://Scripts/logic/main_menu.gd" id="1_748x2"]
-[ext_resource type="StyleBox" uid="uid://b1j6fi831qnyn" path="res://Thems/console_stylebox_0.tres" id="2_76k4l"]
-[ext_resource type="Texture2D" uid="uid://c3o68r0fhjmm8" path="res://assets/interface/menu/menu_plate.png" id="3_0qopg"]
-[ext_resource type="Script" path="res://Scripts/stop_screen/main_menu.gd" id="4_cikrd"]
-[ext_resource type="Theme" uid="uid://btx7s0cgjap3o" path="res://fonts/buttons.tres" id="5_7uwk6"]
-[ext_resource type="StyleBox" uid="uid://dsiifa1jr66sg" path="res://Thems/button_fixed_pressed.tres" id="6_qilha"]
-[ext_resource type="StyleBox" uid="uid://bmuedaydehnq7" path="res://Thems/button_fixed_unpress.tres" id="7_yoriw"]
-[ext_resource type="FontFile" uid="uid://dus86kp12bin7" path="res://fonts/Font1.ttf" id="8_2iqi0"]
-[ext_resource type="Script" path="res://Scripts/stop_screen/load_menu.gd" id="9_uksgj"]
-[ext_resource type="Script" path="res://Scripts/stop_screen/load_script.gd" id="10_yhrxe"]
-[ext_resource type="Script" path="res://Scripts/stop_screen/settings_menu.gd" id="11_rmces"]
-[ext_resource type="Texture2D" uid="uid://nxywjy43sduu" path="res://assets/interface/menu/keymap_icon.png" id="12_yqell"]
-[ext_resource type="Texture2D" uid="uid://cyp5o7nwo8w32" path="res://assets/interface/menu/window_icon.png" id="13_6inyc"]
-[ext_resource type="Script" path="res://Scripts/stop_screen/keybinds_menu.gd" id="14_hinxp"]
-[ext_resource type="Script" path="res://Scripts/stop_screen/keybinds_script.gd" id="15_yl0iq"]
-[ext_resource type="Script" path="res://Scripts/stop_screen/window_menu.gd" id="16_fkw50"]
-[ext_resource type="StyleBox" uid="uid://duaeradrxgcf5" path="res://Thems/button_green.tres" id="17_hauwt"]
-[ext_resource type="StyleBox" uid="uid://61kmy65latma" path="res://Thems/button_red.tres" id="18_h2eeg"]
-[ext_resource type="Script" path="res://Scripts/logic/confirm_panel.gd" id="19_62ps0"]
-[ext_resource type="Theme" uid="uid://ciwnfws6sc4ds" path="res://Thems/main_menu.tres" id="20_3gvok"]
+[ext_resource type="Script" path="res://Scripts/logic/main_menu.gd" id="1_gdw4y"]
+[ext_resource type="StyleBox" uid="uid://b1j6fi831qnyn" path="res://Thems/console_stylebox_0.tres" id="2_3p8do"]
+[ext_resource type="Texture2D" uid="uid://c3o68r0fhjmm8" path="res://assets/interface/menu/menu_plate.png" id="3_n2usp"]
+[ext_resource type="Script" path="res://Scripts/logic/sm_main_menu.gd" id="4_gu0sj"]
+[ext_resource type="Theme" uid="uid://btx7s0cgjap3o" path="res://fonts/buttons.tres" id="5_xxgc5"]
+[ext_resource type="StyleBox" uid="uid://dsiifa1jr66sg" path="res://Thems/button_fixed_pressed.tres" id="6_2sw0q"]
+[ext_resource type="StyleBox" uid="uid://bmuedaydehnq7" path="res://Thems/button_fixed_unpress.tres" id="7_p8pcp"]
+[ext_resource type="FontFile" uid="uid://dus86kp12bin7" path="res://fonts/Font1.ttf" id="8_tmlcn"]
+[ext_resource type="Script" path="res://Scripts/stop_screen/sm_load_menu.gd" id="9_3315r"]
+[ext_resource type="Script" path="res://Scripts/stop_screen/load_script.gd" id="10_yhca8"]
+[ext_resource type="Script" path="res://Scripts/stop_screen/sm_settings_menu.gd" id="11_1wmpv"]
+[ext_resource type="Texture2D" uid="uid://nxywjy43sduu" path="res://assets/interface/menu/keymap_icon.png" id="12_kbb56"]
+[ext_resource type="Texture2D" uid="uid://cyp5o7nwo8w32" path="res://assets/interface/menu/window_icon.png" id="13_x8wng"]
+[ext_resource type="Script" path="res://Scripts/stop_screen/sm_keybinds_menu.gd" id="14_nnowt"]
+[ext_resource type="Script" path="res://Scripts/stop_screen/keybinds_script.gd" id="15_xc80t"]
+[ext_resource type="Script" path="res://Scripts/stop_screen/sm_window_menu.gd" id="16_32ow1"]
+[ext_resource type="StyleBox" uid="uid://duaeradrxgcf5" path="res://Thems/button_green.tres" id="17_xspah"]
+[ext_resource type="StyleBox" uid="uid://61kmy65latma" path="res://Thems/button_red.tres" id="18_w1mug"]
+[ext_resource type="Script" path="res://Scripts/logic/confirm_panel.gd" id="19_617sg"]
+[ext_resource type="Theme" uid="uid://ciwnfws6sc4ds" path="res://Thems/main_menu.tres" id="20_whvwo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vk14c"]
 bg_color = Color(1, 1, 1, 0)
@@ -27,8 +27,8 @@ draw_center = false
 border_color = Color(0.377748, 0.943253, 0.218026, 1)
 border_blend = true
 
-[node name="main_menu" type="CanvasLayer"]
-script = ExtResource("1_748x2")
+[node name="start_menu" type="CanvasLayer"]
+script = ExtResource("1_gdw4y")
 
 [node name="control_module" type="Control" parent="."]
 layout_mode = 3
@@ -54,8 +54,8 @@ offset_right = 960.0
 offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/focus = ExtResource("2_76k4l")
-theme_override_styles/normal = ExtResource("2_76k4l")
+theme_override_styles/focus = ExtResource("2_3p8do")
+theme_override_styles/normal = ExtResource("2_3p8do")
 placeholder_text = "console"
 alignment = 2
 metadata/_edit_use_anchors_ = true
@@ -65,14 +65,11 @@ layout_mode = 0
 offset_top = 1056.0
 offset_right = 1920.0
 offset_bottom = 1080.0
-theme_override_styles/focus = ExtResource("2_76k4l")
-theme_override_styles/normal = ExtResource("2_76k4l")
+theme_override_styles/focus = ExtResource("2_3p8do")
+theme_override_styles/normal = ExtResource("2_3p8do")
 placeholder_text = "console"
 alignment = 2
 metadata/_edit_use_anchors_ = true
-
-[node name="DelayTimer" type="Timer" parent="control_module"]
-one_shot = true
 
 [node name="back_plate" type="Control" parent="control_module"]
 layout_mode = 3
@@ -97,7 +94,7 @@ offset_bottom = -87.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(5, 5)
-texture = ExtResource("3_0qopg")
+texture = ExtResource("3_n2usp")
 region_rect = Rect2(1, 3, 126, 124)
 patch_margin_left = 32
 patch_margin_top = 32
@@ -136,7 +133,7 @@ grow_vertical = 2
 scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource("4_cikrd")
+script = ExtResource("4_gu0sj")
 
 [node name="first_line_stop_menu" type="MarginContainer" parent="control_module/main"]
 layout_mode = 1
@@ -160,40 +157,57 @@ alignment = 1
 
 [node name="Button_Continue" type="Button" parent="control_module/main/first_line_stop_menu/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("5_7uwk6")
-theme_override_styles/focus = ExtResource("6_qilha")
-theme_override_styles/hover = ExtResource("6_qilha")
-theme_override_styles/pressed = ExtResource("6_qilha")
-theme_override_styles/normal = ExtResource("7_yoriw")
+theme = ExtResource("5_xxgc5")
+theme_override_styles/focus = ExtResource("6_2sw0q")
+theme_override_styles/hover = ExtResource("6_2sw0q")
+theme_override_styles/pressed = ExtResource("6_2sw0q")
+theme_override_styles/normal = ExtResource("7_p8pcp")
 text = "continue"
+
+[node name="Button_New_Game" type="Button" parent="control_module/main/first_line_stop_menu/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_xxgc5")
+theme_override_styles/focus = ExtResource("6_2sw0q")
+theme_override_styles/hover = ExtResource("6_2sw0q")
+theme_override_styles/pressed = ExtResource("6_2sw0q")
+theme_override_styles/normal = ExtResource("7_p8pcp")
+text = "new game"
 
 [node name="Button_Load" type="Button" parent="control_module/main/first_line_stop_menu/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("5_7uwk6")
-theme_override_styles/focus = ExtResource("6_qilha")
-theme_override_styles/hover = ExtResource("6_qilha")
-theme_override_styles/pressed = ExtResource("6_qilha")
-theme_override_styles/normal = ExtResource("7_yoriw")
+theme = ExtResource("5_xxgc5")
+theme_override_styles/focus = ExtResource("6_2sw0q")
+theme_override_styles/hover = ExtResource("6_2sw0q")
+theme_override_styles/pressed = ExtResource("6_2sw0q")
+theme_override_styles/normal = ExtResource("7_p8pcp")
 text = "load"
 
 [node name="Button_Settings" type="Button" parent="control_module/main/first_line_stop_menu/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("5_7uwk6")
-theme_override_styles/focus = ExtResource("6_qilha")
-theme_override_styles/hover = ExtResource("6_qilha")
-theme_override_styles/pressed = ExtResource("6_qilha")
-theme_override_styles/normal = ExtResource("7_yoriw")
+theme = ExtResource("5_xxgc5")
+theme_override_styles/focus = ExtResource("6_2sw0q")
+theme_override_styles/hover = ExtResource("6_2sw0q")
+theme_override_styles/pressed = ExtResource("6_2sw0q")
+theme_override_styles/normal = ExtResource("7_p8pcp")
 text = "settings"
 
 [node name="Button_Quit" type="Button" parent="control_module/main/first_line_stop_menu/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("5_7uwk6")
-theme_override_fonts/font = ExtResource("8_2iqi0")
-theme_override_styles/focus = ExtResource("6_qilha")
-theme_override_styles/hover = ExtResource("6_qilha")
-theme_override_styles/pressed = ExtResource("6_qilha")
-theme_override_styles/normal = ExtResource("7_yoriw")
+theme = ExtResource("5_xxgc5")
+theme_override_fonts/font = ExtResource("8_tmlcn")
+theme_override_styles/focus = ExtResource("6_2sw0q")
+theme_override_styles/hover = ExtResource("6_2sw0q")
+theme_override_styles/pressed = ExtResource("6_2sw0q")
+theme_override_styles/normal = ExtResource("7_p8pcp")
 text = "quit"
+
+[node name="new_game" type="Control" parent="control_module"]
+visible = false
+anchors_preset = 0
+offset_left = -572.0
+offset_top = 128.0
+offset_right = -532.0
+offset_bottom = 168.0
 
 [node name="load" type="Control" parent="control_module"]
 visible = false
@@ -208,7 +222,7 @@ grow_vertical = 2
 scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource("9_uksgj")
+script = ExtResource("9_3315r")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="control_module/load"]
 layout_mode = 0
@@ -219,7 +233,7 @@ offset_bottom = 158.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_vk14c")
 follow_focus = true
 horizontal_scroll_mode = 0
-script = ExtResource("10_yhrxe")
+script = ExtResource("10_yhca8")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="control_module/load/ScrollContainer"]
 layout_mode = 2
@@ -238,7 +252,7 @@ layout_mode = 2
 
 [node name="Button_Back" type="Button" parent="control_module/load/settings_menu/settings"]
 layout_mode = 2
-theme = ExtResource("5_7uwk6")
+theme = ExtResource("5_xxgc5")
 text = "back"
 
 [node name="active_save_label" type="Label" parent="control_module/load"]
@@ -270,7 +284,7 @@ grow_vertical = 2
 scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource("11_rmces")
+script = ExtResource("11_1wmpv")
 
 [node name="in_settings_buttons" type="MarginContainer" parent="control_module/settings"]
 layout_mode = 1
@@ -294,18 +308,18 @@ layout_mode = 2
 
 [node name="Button_KeyMap" type="Button" parent="control_module/settings/in_settings_buttons/button_list/keymap"]
 layout_mode = 2
-theme = ExtResource("5_7uwk6")
+theme = ExtResource("5_xxgc5")
 text = "   keymaps"
-icon = ExtResource("12_yqell")
+icon = ExtResource("12_kbb56")
 
 [node name="window" type="HBoxContainer" parent="control_module/settings/in_settings_buttons/button_list"]
 layout_mode = 2
 
 [node name="Button_Window" type="Button" parent="control_module/settings/in_settings_buttons/button_list/window"]
 layout_mode = 2
-theme = ExtResource("5_7uwk6")
+theme = ExtResource("5_xxgc5")
 text = "   window settings"
-icon = ExtResource("13_6inyc")
+icon = ExtResource("13_x8wng")
 
 [node name="settings_menu" type="MarginContainer" parent="control_module/settings"]
 layout_mode = 0
@@ -319,11 +333,11 @@ layout_mode = 2
 
 [node name="Button_Back" type="Button" parent="control_module/settings/settings_menu/settings"]
 layout_mode = 2
-theme = ExtResource("5_7uwk6")
-theme_override_styles/focus = ExtResource("6_qilha")
-theme_override_styles/hover = ExtResource("6_qilha")
-theme_override_styles/pressed = ExtResource("6_qilha")
-theme_override_styles/normal = ExtResource("7_yoriw")
+theme = ExtResource("5_xxgc5")
+theme_override_styles/focus = ExtResource("6_2sw0q")
+theme_override_styles/hover = ExtResource("6_2sw0q")
+theme_override_styles/pressed = ExtResource("6_2sw0q")
+theme_override_styles/normal = ExtResource("7_p8pcp")
 text = "back"
 
 [node name="keybind" type="Control" parent="control_module"]
@@ -339,7 +353,7 @@ grow_vertical = 2
 scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource("14_hinxp")
+script = ExtResource("14_nnowt")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="control_module/keybind"]
 layout_direction = 2
@@ -355,7 +369,7 @@ offset_right = -178.0
 offset_bottom = 148.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("15_yl0iq")
+script = ExtResource("15_xc80t")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="control_module/keybind/ScrollContainer"]
 layout_mode = 2
@@ -373,7 +387,7 @@ layout_mode = 2
 
 [node name="Button_Back" type="Button" parent="control_module/keybind/settings_menu/settings"]
 layout_mode = 2
-theme = ExtResource("5_7uwk6")
+theme = ExtResource("5_xxgc5")
 text = "back"
 
 [node name="window" type="Control" parent="control_module"]
@@ -388,7 +402,7 @@ scale = Vector2(2, 2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 localize_numeral_system = false
-script = ExtResource("16_fkw50")
+script = ExtResource("16_32ow1")
 
 [node name="button_list" type="MarginContainer" parent="control_module/window"]
 layout_mode = 1
@@ -427,7 +441,7 @@ offset_left = 123.5
 offset_top = 8.5
 offset_right = 242.5
 offset_bottom = 34.5
-theme_override_fonts/font = ExtResource("8_2iqi0")
+theme_override_fonts/font = ExtResource("8_tmlcn")
 theme_override_font_sizes/font_size = 14
 text = "0.3"
 vertical_alignment = 1
@@ -438,7 +452,7 @@ offset_left = -1.0
 offset_top = -8.0
 offset_right = 118.0
 offset_bottom = 18.0
-theme_override_fonts/font = ExtResource("8_2iqi0")
+theme_override_fonts/font = ExtResource("8_tmlcn")
 theme_override_font_sizes/font_size = 14
 text = "brightness"
 horizontal_alignment = 1
@@ -454,9 +468,9 @@ offset_left = 3.0
 offset_top = -3.0
 offset_right = 56.0
 offset_bottom = 24.0
-theme = ExtResource("5_7uwk6")
+theme = ExtResource("5_xxgc5")
 theme_override_constants/outline_size = 0
-theme_override_styles/normal = ExtResource("17_hauwt")
+theme_override_styles/normal = ExtResource("17_xspah")
 text = "on"
 
 [node name="fscroff" type="Button" parent="control_module/window/button_list/button_list/in_settings_buttons/fullscreen"]
@@ -466,8 +480,8 @@ offset_left = 65.0
 offset_top = -3.0
 offset_right = 118.0
 offset_bottom = 24.0
-theme = ExtResource("5_7uwk6")
-theme_override_styles/normal = ExtResource("18_h2eeg")
+theme = ExtResource("5_xxgc5")
+theme_override_styles/normal = ExtResource("18_w1mug")
 disabled = true
 text = "off
 "
@@ -478,7 +492,7 @@ offset_left = 124.0
 offset_top = 1.0
 offset_right = 215.0
 offset_bottom = 23.0
-theme_override_fonts/font = ExtResource("8_2iqi0")
+theme_override_fonts/font = ExtResource("8_tmlcn")
 theme_override_font_sizes/font_size = 15
 text = "fullscr"
 horizontal_alignment = 1
@@ -493,7 +507,7 @@ offset_left = 124.0
 offset_top = -5.5
 offset_right = 233.0
 offset_bottom = 17.5
-theme_override_fonts/font = ExtResource("8_2iqi0")
+theme_override_fonts/font = ExtResource("8_tmlcn")
 theme_override_font_sizes/font_size = 15
 text = "1900x1080"
 horizontal_alignment = 1
@@ -527,17 +541,17 @@ layout_mode = 2
 
 [node name="Button_Reset" type="Button" parent="control_module/window/settings_menu/settings"]
 layout_mode = 2
-theme = ExtResource("5_7uwk6")
+theme = ExtResource("5_xxgc5")
 text = "reset"
 
 [node name="Button_Confirm" type="Button" parent="control_module/window/settings_menu/settings"]
 layout_mode = 2
-theme = ExtResource("5_7uwk6")
+theme = ExtResource("5_xxgc5")
 text = "confirm"
 
 [node name="Button_Back" type="Button" parent="control_module/window/settings_menu/settings"]
 layout_mode = 2
-theme = ExtResource("5_7uwk6")
+theme = ExtResource("5_xxgc5")
 text = "back"
 
 [node name="confirm_panel" type="MarginContainer" parent="control_module"]
@@ -555,11 +569,11 @@ offset_right = 200.0
 offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("19_62ps0")
+script = ExtResource("19_617sg")
 
 [node name="Panel" type="Panel" parent="control_module/confirm_panel"]
 layout_mode = 2
-theme = ExtResource("20_3gvok")
+theme = ExtResource("20_whvwo")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="control_module/confirm_panel"]
 layout_mode = 2
@@ -568,7 +582,7 @@ alignment = 1
 
 [node name="Label" type="Label" parent="control_module/confirm_panel/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8_2iqi0")
+theme_override_fonts/font = ExtResource("8_tmlcn")
 theme_override_font_sizes/font_size = 25
 text = "ARE YOU SHOORE????"
 horizontal_alignment = 1
@@ -581,16 +595,16 @@ alignment = 1
 
 [node name="YES" type="Button" parent="control_module/confirm_panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-theme = ExtResource("20_3gvok")
+theme = ExtResource("20_whvwo")
 theme_override_colors/font_color = Color(0, 0.649973, 0.0590359, 1)
-theme_override_fonts/font = ExtResource("8_2iqi0")
+theme_override_fonts/font = ExtResource("8_tmlcn")
 theme_override_font_sizes/font_size = 27
 text = "YES"
 
 [node name="NO" type="Button" parent="control_module/confirm_panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-theme = ExtResource("20_3gvok")
+theme = ExtResource("20_whvwo")
 theme_override_colors/font_color = Color(0.739789, 1.93726e-06, 9.62615e-07, 1)
-theme_override_fonts/font = ExtResource("8_2iqi0")
+theme_override_fonts/font = ExtResource("8_tmlcn")
 theme_override_font_sizes/font_size = 27
 text = "No"

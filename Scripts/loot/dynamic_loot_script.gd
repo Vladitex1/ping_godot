@@ -17,7 +17,7 @@ func _ready():
 	for i in list:
 		if item == i:
 			temp = i
-			texture.texture = list[i][1]
+			texture.texture = list[i]["TEXTURE"]
 
 func pickup(temp):
 	
@@ -35,4 +35,3 @@ func pickup(temp):
 func body(body):
 	if body.name == "player":
 		pickup(temp)
-

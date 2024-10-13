@@ -53,7 +53,25 @@ func connect_slots():	###Подключение кнопок
 		var button_path = get_node("GridContainer")
 		var button = button_path.get_child(num).get_child(0)
 		button.connect("button_up",Callable(self, "slotnum").bind(num))
+		button.connect("mouse_entered",Callable(self, "show_discr").bind(num))
+		button.connect("mouse_exited",Callable(self, "hide_discr").bind(num))
+		#button.connect("focus_exited",xuy)
 
+func show_discr(num:int):
+	var button_path = get_node("GridContainer")
+	var discription = button_path.get_child(num).get_child(1)
+	var need = button_path.get_child(num).get_child(0).get_child(1).get_slot_info()
+	if need == 0 or need == -1:
+		pass
+	else:
+		discription.visible = true
+	
+func hide_discr(num:int):
+	var button_path = get_node("GridContainer")
+	var discription = button_path.get_child(num).get_child(1)
+	discription.visible = false
+	
+	
 func inventory_save(): ###Сохранение инвентаря в itemlist
 	var button_path = get_node("GridContainer")
 	for slot_number in 16:
@@ -77,6 +95,7 @@ func inventory_reload(slot_limiter): ###конфигурация слота
 	inventory_save()
 
 func slotnum(slot_number):
+	hide_discr(slot_number)
 	var button_path = get_node("GridContainer")
 	var item_path = button_path.get_child(slot_number).get_child(0).get_child(1)
 	if mousetoggle == true: ##запоминается айди в руку
@@ -86,12 +105,12 @@ func slotnum(slot_number):
 		match selected_slot_id_start:
 			-1:
 				reset_variable()
-				$mouse_equip_item.texture = itemlist.itemlist[0][1]
+				$mouse_equip_item.texture = itemlist.itemlist[0]["TEXTURE"]
 			0:
-				$mouse_equip_item.texture = itemlist.itemlist[0][1]
+				$mouse_equip_item.texture = itemlist.itemlist[0]["TEXTURE"]
 				reset_variable()
 			_:
-				$mouse_equip_item.texture = itemlist.itemlist[selected_slot_id_start][1]
+				$mouse_equip_item.texture = itemlist.itemlist[selected_slot_id_start]["TEXTURE"]
 				selected_slot_start = slot_number
 				slot(selected_slot_start,0)
 	elif mousetoggle == false:
@@ -118,6 +137,8 @@ func slot(slot_number,num): ###Редактирование слота (Техн
 	var button_path = get_node("GridContainer")
 	var item_path = button_path.get_child(slot_number).get_child(0).get_child(1)
 	item_path.slot(num)
+
+	
 
 func _input(_event): ###перемещение под указателем (Технический)
 	$mouse_equip_item.global_position = get_global_mouse_position()-Vector2(40,30)		

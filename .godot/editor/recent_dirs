@@ -1,3 +1,4 @@
+res://Scripts/stop_screen
 res://Scripts/logic
 res://Scenes/logic
 res://Scenes/shop
@@ -10,7 +11,6 @@ res://Scenes/inventory
 res://Scenes
 G:/godot/ping_godot/Scripts
 G:/godot/ping_godot/Scripts/objects
-res://Scripts/stop_screen
 G:/godot/ping_godot/Scripts/logic
 res://Scripts/objects
 res://debug_scenes

@@ -10,54 +10,23 @@ var menu_dict = {}
 var menu_open:bool = false
 var console_open:bool = false
 
-func _ready():
-	set_menu_list()
-	
-func _process(delta):
-	if Input.is_action_just_released("special_back"):
-		match menu_open:
-			false:
-				select_menu(0)
-			true:
-				exit_menu()
-	elif Input.is_action_just_released("special_console"):
-		match console_open:
-			false:
-				select_menu(6)
-			true:
-				exit_menu
-			
-func set_menu_list():
-	var menu_start_num = 3
-	var menu = $".".get_child(0)
-	var menu_count = 0
-	for i in menu.get_child_count():
-		if i > menu_start_num-1:
-			menu_dict[menu_count] = menu.get_child(i).name
-			menu_count += 1
-	
-func select_menu(state):
-	if state == -1:
-		for i in menu_dict:
-			var menu_node: String = "control_module/"+str(menu_dict[i])
-			get_node(menu_node).visible = false
-	else:
-		menu_open = true
-		global.buttons_lock = true	
-		for i in menu_dict:
-			if i == state:
-				var menu_node: String = "control_module/"+str(menu_dict[i])
-				back_plate.visible = true
-				get_node(menu_node).visible = true
-			else:
-				var menu_node: String = "control_module/"+str(menu_dict[i])
+func select_menu(state:String):
+	match state:
+		"hide":
+			var menu = $".".get_child(0)
+			for i in menu.get_child_count():
+				var menu_node: String = "control_module/"+menu.get_child(i).name
 				get_node(menu_node).visible = false
-		
-func exit_menu():
-	select_menu(-1)
-	menu_open = false
-	global.buttons_lock = false
-	back_plate.visible = false
+		_:
+			menu_open = true
+			global.buttons_lock = true	
+			var menu = $".".get_child(0)
+			for i in menu.get_child_count():
+				if menu.get_child(i).name == state:
+					back_plate.visible = true
+					menu.get_child(i).visible = true
+				else:
+					menu.get_child(i).visible = false
 
 func get_confirm(queston: String,global_variable: String,function_name: String,value):# -> bool:
 	$control_module/confirm_panel.visible = true

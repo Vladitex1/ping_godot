@@ -121,7 +121,8 @@ door_num = 2
 script = ExtResource("12_kfuom")
 
 [node name="shop_object" parent="Objects/Shops" instance=ExtResource("9_bb57y")]
-position = Vector2(219, 124)
+position = Vector2(205, 122)
+shopLVL = 1
 
 [node name="shop_object2" parent="Objects/Shops" instance=ExtResource("9_bb57y")]
 position = Vector2(297, 123)

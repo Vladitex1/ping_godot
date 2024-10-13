@@ -1,0 +1,632 @@
+[gd_scene load_steps=23 format=3 uid="uid://bkr7jbi6doumd"]
+
+[ext_resource type="Script" path="res://Scripts/stop_screen/stop_screen.gd" id="1_vxumt"]
+[ext_resource type="FontFile" uid="uid://dus86kp12bin7" path="res://fonts/Font1.ttf" id="2_bqap6"]
+[ext_resource type="StyleBox" uid="uid://b1j6fi831qnyn" path="res://Thems/console_stylebox_0.tres" id="3_gkq36"]
+[ext_resource type="Texture2D" uid="uid://c3o68r0fhjmm8" path="res://assets/interface/menu/menu_plate.png" id="5_t0x3m"]
+[ext_resource type="Theme" uid="uid://btx7s0cgjap3o" path="res://fonts/buttons.tres" id="6_b2bat"]
+[ext_resource type="Script" path="res://Scripts/stop_screen/main_menu.gd" id="6_o3pi6"]
+[ext_resource type="StyleBox" uid="uid://bmuedaydehnq7" path="res://Thems/button_fixed_unpress.tres" id="7_48bwr"]
+[ext_resource type="StyleBox" uid="uid://dsiifa1jr66sg" path="res://Thems/button_fixed_pressed.tres" id="8_3ivjo"]
+[ext_resource type="Script" path="res://Scripts/stop_screen/load_script.gd" id="9_50h83"]
+[ext_resource type="Texture2D" uid="uid://nxywjy43sduu" path="res://assets/interface/menu/keymap_icon.png" id="10_x3j3i"]
+[ext_resource type="Texture2D" uid="uid://cyp5o7nwo8w32" path="res://assets/interface/menu/window_icon.png" id="11_5blg4"]
+[ext_resource type="Script" path="res://Scripts/stop_screen/load_menu.gd" id="11_q4umf"]
+[ext_resource type="Script" path="res://Scripts/stop_screen/keybinds_script.gd" id="12_t14mq"]
+[ext_resource type="Script" path="res://Scripts/stop_screen/settings_menu.gd" id="13_3sb54"]
+[ext_resource type="StyleBox" uid="uid://duaeradrxgcf5" path="res://Thems/button_green.tres" id="13_rvd3y"]
+[ext_resource type="StyleBox" uid="uid://61kmy65latma" path="res://Thems/button_red.tres" id="14_ku7wl"]
+[ext_resource type="Script" path="res://Scripts/stop_screen/keybinds_menu.gd" id="14_sd1qt"]
+[ext_resource type="Script" path="res://Scripts/stop_screen/window_menu.gd" id="17_mjnis"]
+[ext_resource type="Script" path="res://Scripts/logic/confirm_panel.gd" id="19_dx42u"]
+[ext_resource type="Theme" uid="uid://ciwnfws6sc4ds" path="res://Thems/main_menu.tres" id="20_8en8u"]
+[ext_resource type="Script" path="res://Scripts/console.gd" id="21_16mym"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vk14c"]
+bg_color = Color(1, 1, 1, 0)
+draw_center = false
+border_color = Color(0.377748, 0.943253, 0.218026, 1)
+border_blend = true
+
+[node name="stop_screen" type="CanvasLayer"]
+process_priority = 1
+script = ExtResource("1_vxumt")
+metadata/_edit_use_anchors_ = true
+
+[node name="control_module" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="debug" type="LineEdit" parent="control_module"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -15.5
+offset_right = 960.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = ExtResource("3_gkq36")
+theme_override_styles/normal = ExtResource("3_gkq36")
+placeholder_text = "console"
+alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="LineEdit" type="LineEdit" parent="control_module/debug"]
+layout_mode = 0
+offset_top = 1056.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme_override_styles/focus = ExtResource("3_gkq36")
+theme_override_styles/normal = ExtResource("3_gkq36")
+placeholder_text = "console"
+alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="DelayTimer" type="Timer" parent="control_module"]
+one_shot = true
+
+[node name="back_plate" type="Control" parent="control_module"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="control_module/back_plate"]
+texture_filter = 5
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -326.0
+offset_top = -459.0
+offset_right = -198.0
+offset_bottom = -292.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(5, 5)
+texture = ExtResource("5_t0x3m")
+region_rect = Rect2(1, 3, 126, 124)
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+
+[node name="Menu_Label" type="Label" parent="control_module/back_plate"]
+layout_mode = 0
+offset_left = -136.0
+offset_top = 204.0
+offset_right = 131.0
+offset_bottom = 292.0
+theme_override_colors/font_color = Color(0.87451, 0.87451, 0.87451, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 24
+theme_override_fonts/font = ExtResource("2_bqap6")
+theme_override_font_sizes/font_size = 49
+text = "settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="background" type="ColorRect" parent="control_module/back_plate"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2506.0
+offset_top = -2622.0
+offset_right = 2494.0
+offset_bottom = 2378.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.607843, 0.607843, 0.607843, 0.27451)
+
+[node name="main" type="Control" parent="control_module"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("6_o3pi6")
+
+[node name="first_line_stop_menu" type="MarginContainer" parent="control_module/main"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -101.5
+offset_top = -100.0
+offset_right = 152.5
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.798685, 0.93892)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="control_module/main/first_line_stop_menu"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Button_Continue" type="Button" parent="control_module/main/first_line_stop_menu/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("6_b2bat")
+theme_override_styles/focus = ExtResource("8_3ivjo")
+theme_override_styles/hover = ExtResource("8_3ivjo")
+theme_override_styles/pressed = ExtResource("8_3ivjo")
+theme_override_styles/normal = ExtResource("7_48bwr")
+text = "continue"
+
+[node name="Button_Load" type="Button" parent="control_module/main/first_line_stop_menu/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("6_b2bat")
+theme_override_styles/focus = ExtResource("8_3ivjo")
+theme_override_styles/hover = ExtResource("8_3ivjo")
+theme_override_styles/pressed = ExtResource("8_3ivjo")
+theme_override_styles/normal = ExtResource("7_48bwr")
+text = "load"
+
+[node name="Button_Settings" type="Button" parent="control_module/main/first_line_stop_menu/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("6_b2bat")
+theme_override_styles/focus = ExtResource("8_3ivjo")
+theme_override_styles/hover = ExtResource("8_3ivjo")
+theme_override_styles/pressed = ExtResource("8_3ivjo")
+theme_override_styles/normal = ExtResource("7_48bwr")
+text = "settings"
+
+[node name="Button_Quit" type="Button" parent="control_module/main/first_line_stop_menu/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("6_b2bat")
+theme_override_fonts/font = ExtResource("2_bqap6")
+theme_override_styles/focus = ExtResource("8_3ivjo")
+theme_override_styles/hover = ExtResource("8_3ivjo")
+theme_override_styles/pressed = ExtResource("8_3ivjo")
+theme_override_styles/normal = ExtResource("7_48bwr")
+text = "quit"
+
+[node name="new_game" type="Control" parent="control_module"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="load" type="Control" parent="control_module"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("11_q4umf")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="control_module/load"]
+layout_mode = 0
+offset_left = -115.0
+offset_top = -180.0
+offset_right = 116.0
+offset_bottom = 50.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_vk14c")
+follow_focus = true
+horizontal_scroll_mode = 0
+script = ExtResource("9_50h83")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="control_module/load/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 11
+alignment = 1
+
+[node name="settings_menu" type="MarginContainer" parent="control_module/load"]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 56.0
+offset_right = 97.0
+offset_bottom = 87.0
+
+[node name="settings" type="HBoxContainer" parent="control_module/load/settings_menu"]
+layout_mode = 2
+
+[node name="Button_Back" type="Button" parent="control_module/load/settings_menu/settings"]
+layout_mode = 2
+theme = ExtResource("6_b2bat")
+text = "back"
+
+[node name="active_save_label" type="Label" parent="control_module/load"]
+layout_mode = 0
+offset_left = -108.0
+offset_top = 58.5
+offset_right = 1.0
+offset_bottom = 81.5
+text = "active_save №"
+
+[node name="num_label" type="Label" parent="control_module/load"]
+layout_mode = 2
+offset_left = 5.0
+offset_top = 59.0
+offset_right = 29.0
+offset_bottom = 82.0
+text = "4"
+
+[node name="settings" type="Control" parent="control_module"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("13_3sb54")
+
+[node name="in_settings_buttons" type="MarginContainer" parent="control_module/settings"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -107.0
+offset_top = -177.0
+offset_right = 95.0
+offset_bottom = -109.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="button_list" type="VBoxContainer" parent="control_module/settings/in_settings_buttons"]
+layout_mode = 2
+
+[node name="keymap" type="HBoxContainer" parent="control_module/settings/in_settings_buttons/button_list"]
+layout_mode = 2
+
+[node name="Button_KeyMap" type="Button" parent="control_module/settings/in_settings_buttons/button_list/keymap"]
+layout_mode = 2
+theme = ExtResource("6_b2bat")
+text = "   keymaps"
+icon = ExtResource("10_x3j3i")
+
+[node name="window" type="HBoxContainer" parent="control_module/settings/in_settings_buttons/button_list"]
+layout_mode = 2
+
+[node name="Button_Window" type="Button" parent="control_module/settings/in_settings_buttons/button_list/window"]
+layout_mode = 2
+theme = ExtResource("6_b2bat")
+text = "   window settings"
+icon = ExtResource("11_5blg4")
+
+[node name="settings_menu" type="MarginContainer" parent="control_module/settings"]
+layout_mode = 0
+offset_left = 47.5
+offset_top = 57.0
+offset_right = 112.5
+offset_bottom = 90.0
+
+[node name="settings" type="HBoxContainer" parent="control_module/settings/settings_menu"]
+layout_mode = 2
+
+[node name="Button_Back" type="Button" parent="control_module/settings/settings_menu/settings"]
+layout_mode = 2
+theme = ExtResource("6_b2bat")
+theme_override_styles/focus = ExtResource("8_3ivjo")
+theme_override_styles/hover = ExtResource("8_3ivjo")
+theme_override_styles/pressed = ExtResource("8_3ivjo")
+theme_override_styles/normal = ExtResource("7_48bwr")
+text = "back"
+
+[node name="keybind" type="Control" parent="control_module"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("14_sd1qt")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="control_module/keybind"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -111.0
+offset_top = -183.0
+offset_right = 115.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("12_t14mq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="control_module/keybind/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 38
+
+[node name="settings_menu" type="MarginContainer" parent="control_module/keybind"]
+layout_mode = 0
+offset_left = 48.5
+offset_top = 56.0
+offset_right = 113.5
+offset_bottom = 89.0
+
+[node name="settings" type="HBoxContainer" parent="control_module/keybind/settings_menu"]
+layout_mode = 2
+
+[node name="Button_Back" type="Button" parent="control_module/keybind/settings_menu/settings"]
+layout_mode = 2
+theme = ExtResource("6_b2bat")
+text = "back"
+
+[node name="window" type="Control" parent="control_module"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("17_mjnis")
+
+[node name="button_list" type="MarginContainer" parent="control_module/window"]
+layout_mode = 0
+offset_left = -109.0
+offset_top = -161.5
+offset_right = 4.0
+offset_bottom = -126.5
+metadata/_edit_use_anchors_ = true
+
+[node name="button_list" type="HBoxContainer" parent="control_module/window/button_list"]
+layout_mode = 2
+
+[node name="in_settings_buttons" type="VBoxContainer" parent="control_module/window/button_list/button_list"]
+layout_mode = 2
+theme_override_constants/separation = 42
+
+[node name="brightness" type="Control" parent="control_module/window/button_list/button_list/in_settings_buttons"]
+layout_mode = 2
+
+[node name="slider" type="HSlider" parent="control_module/window/button_list/button_list/in_settings_buttons/brightness"]
+layout_mode = 0
+offset_left = -3.5
+offset_top = 14.0
+offset_right = 118.5
+offset_bottom = 30.0
+max_value = 1.5
+step = 0.1
+
+[node name="slider_lable" type="Label" parent="control_module/window/button_list/button_list/in_settings_buttons/brightness"]
+layout_mode = 0
+offset_left = 123.5
+offset_top = 8.5
+offset_right = 242.5
+offset_bottom = 34.5
+theme_override_fonts/font = ExtResource("2_bqap6")
+theme_override_font_sizes/font_size = 14
+text = "0.3"
+vertical_alignment = 1
+
+[node name="brightness" type="Label" parent="control_module/window/button_list/button_list/in_settings_buttons/brightness"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -8.0
+offset_right = 118.0
+offset_bottom = 18.0
+theme_override_fonts/font = ExtResource("2_bqap6")
+theme_override_font_sizes/font_size = 14
+text = "brightness"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="fullscreen" type="Panel" parent="control_module/window/button_list/button_list/in_settings_buttons"]
+layout_mode = 2
+
+[node name="fscron" type="Button" parent="control_module/window/button_list/button_list/in_settings_buttons/fullscreen"]
+texture_filter = 2
+layout_mode = 0
+offset_left = 3.0
+offset_top = -3.0
+offset_right = 56.0
+offset_bottom = 24.0
+theme = ExtResource("6_b2bat")
+theme_override_constants/outline_size = 0
+theme_override_styles/normal = ExtResource("13_rvd3y")
+text = "on"
+
+[node name="fscroff" type="Button" parent="control_module/window/button_list/button_list/in_settings_buttons/fullscreen"]
+texture_filter = 2
+layout_mode = 2
+offset_left = 65.0
+offset_top = -3.0
+offset_right = 118.0
+offset_bottom = 24.0
+theme = ExtResource("6_b2bat")
+theme_override_styles/normal = ExtResource("14_ku7wl")
+disabled = true
+text = "off
+"
+
+[node name="Label" type="Label" parent="control_module/window/button_list/button_list/in_settings_buttons/fullscreen"]
+layout_mode = 0
+offset_left = 124.0
+offset_top = 1.0
+offset_right = 215.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("2_bqap6")
+theme_override_font_sizes/font_size = 15
+text = "fullscr"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="resolution" type="Panel" parent="control_module/window/button_list/button_list/in_settings_buttons"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="control_module/window/button_list/button_list/in_settings_buttons/resolution"]
+layout_mode = 0
+offset_left = 124.0
+offset_top = -5.5
+offset_right = 233.0
+offset_bottom = 17.5
+theme_override_fonts/font = ExtResource("2_bqap6")
+theme_override_font_sizes/font_size = 15
+text = "1900x1080"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="control_module/window/button_list/button_list/in_settings_buttons/resolution"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -2.5
+offset_right = 121.0
+offset_bottom = 14.5
+min_value = 1.0
+max_value = 6.0
+value = 4.0
+
+[node name="settings_menu" type="MarginContainer" parent="control_module/window"]
+layout_mode = 0
+offset_left = -102.5
+offset_top = 65.0
+offset_right = 102.5
+offset_bottom = 98.0
+metadata/_edit_use_anchors_ = true
+
+[node name="settings" type="HBoxContainer" parent="control_module/window/settings_menu"]
+layout_mode = 2
+
+[node name="Button_Reset" type="Button" parent="control_module/window/settings_menu/settings"]
+layout_mode = 2
+theme = ExtResource("6_b2bat")
+text = "reset"
+
+[node name="Button_Confirm" type="Button" parent="control_module/window/settings_menu/settings"]
+layout_mode = 2
+theme = ExtResource("6_b2bat")
+text = "confirm"
+
+[node name="Button_Back" type="Button" parent="control_module/window/settings_menu/settings"]
+layout_mode = 2
+theme = ExtResource("6_b2bat")
+text = "back"
+
+[node name="confirm_panel" type="MarginContainer" parent="control_module"]
+visible = false
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -100.0
+offset_right = 200.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("19_dx42u")
+
+[node name="Panel" type="Panel" parent="control_module/confirm_panel"]
+layout_mode = 2
+theme = ExtResource("20_8en8u")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="control_module/confirm_panel"]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="Label" type="Label" parent="control_module/confirm_panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_bqap6")
+theme_override_font_sizes/font_size = 25
+text = "ARE YOU SHOORE????"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="control_module/confirm_panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="YES" type="Button" parent="control_module/confirm_panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("20_8en8u")
+theme_override_colors/font_color = Color(0, 0.649973, 0.0590359, 1)
+theme_override_fonts/font = ExtResource("2_bqap6")
+theme_override_font_sizes/font_size = 27
+text = "YES"
+
+[node name="NO" type="Button" parent="control_module/confirm_panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("20_8en8u")
+theme_override_colors/font_color = Color(0.739789, 1.93726e-06, 9.62615e-07, 1)
+theme_override_fonts/font = ExtResource("2_bqap6")
+theme_override_font_sizes/font_size = 27
+text = "No"
+
+[node name="console" type="Control" parent="control_module"]
+visible = false
+z_index = -1
+layout_mode = 2
+anchors_preset = 0
+offset_left = -945.0
+offset_top = -543.0
+offset_right = -945.0
+offset_bottom = -543.0
+mouse_filter = 2
+script = ExtResource("21_16mym")
+
+[node name="LineEdit" type="LineEdit" parent="control_module/console"]
+layout_mode = 0
+offset_left = 705.0
+offset_top = 165.0
+offset_right = 1172.0
+offset_bottom = 832.0
+theme_override_fonts/font = ExtResource("2_bqap6")
+theme_override_font_sizes/font_size = 33
+theme_override_styles/focus = ExtResource("3_gkq36")
+theme_override_styles/normal = ExtResource("3_gkq36")
+placeholder_text = "input command"
+alignment = 1
+caret_blink = true
+caret_blink_interval = 0.3

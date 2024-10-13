@@ -67,11 +67,11 @@ func _process(_delta):
 	
 	coins_lable.text = str(global.player_indicators("coin", 0, "get"))
 	keys_lable.text = str(global.player_indicators("key", 0, "get"))
-	cost = itemlist.itemlist[selected_item_ID][0] * count
-	sell_cost = itemlist.itemlist[selected_item_ID][3] * count
+	cost = itemlist.itemlist[selected_item_ID]["BUYCOST"] * count
+	sell_cost = itemlist.itemlist[selected_item_ID]["SELLCOST"] * count
 	cost_lable.text = str(cost)
 	sell_cost_lable.text = str(sell_cost)
-	name_lable.text = itemlist.itemlist[selected_item_ID][2]
+	name_lable.text = itemlist.itemlist[selected_item_ID]["NAME"]
 	count_lable.text = str(count)
 
 		
@@ -88,6 +88,25 @@ func connect_shop_slots():
 	var node = $".".get_child(0).get_child(4).get_child(0)
 	for i in node.get_child_count():
 		node.get_child(i).get_child(0).connect("button_down",Callable(self, "slotnum").bind(i))
+		node.get_child(i).get_child(0).connect("mouse_entered",Callable(self, "show_discr").bind(i))
+		node.get_child(i).get_child(0).connect("mouse_exited",Callable(self, "hide_discr").bind(i))
+		#button.connect("focus_exited",xuy)
+
+func show_discr(num:int):
+	var button_path:Object = $shop_plate/items/GridContainer
+	var discription = button_path.get_child(num).get_child(1)
+	var need = button_path.get_child(num).get_child(0).get_child(0).get_slot_info()
+	if need == 0 or need == -1:
+		pass
+	else:
+		discription.visible = true
+	
+func hide_discr(num:int):
+	var button_path:Object = $shop_plate/items/GridContainer
+	var discription = button_path.get_child(num).get_child(1)
+	discription.visible = false
+		
+		
 		
 func load_shop_info():
 	var node = $".".get_child(0).get_child(4).get_child(0)
@@ -130,9 +149,9 @@ func buttons_control():
 	else:
 		sell_button.disabled = false
 	###buy
-	if global.player_indicators("coin",0,"get") < itemlist.itemlist[selected_item_ID][0]*count or global.player_indicators("coin",0,"get") <= 0:
+	if global.player_indicators("coin",0,"get") < itemlist.itemlist[selected_item_ID]["BUYCOST"]*count or global.player_indicators("coin",0,"get") <= 0:
 		buy_button.disabled = true
-	elif global.player_indicators("coin",0,"get") < itemlist.itemlist[selected_item_ID][0]*count and selected_item_ID == 3:
+	elif global.player_indicators("coin",0,"get") < itemlist.itemlist[selected_item_ID]["BUYCOST"]*count and selected_item_ID == 3:
 		buy_button.disabled = true
 	elif global.player_indicators("coin",0,"get") > 0:
 		buy_button.disabled = false
