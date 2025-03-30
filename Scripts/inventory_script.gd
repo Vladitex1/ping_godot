@@ -10,6 +10,10 @@ var open = false
 var mousetoggle: bool = true
 var button_num: int
 
+##для работы меню взаимодействия
+var last_button: int = 0
+var menu_toggle: bool = false
+
 func _ready():
 	create_slots()
 	connect_slots()
@@ -25,7 +29,7 @@ func _process(_delta):
 		open = false
 		global.attack_block = false
 		show_animation.play_backwards("inventory_show_animation")
-			
+		menu_toggle = false
 	if Input.is_action_just_released("special_tab"):
 		#print(itemlist.inventory)
 		inventory_load()
@@ -33,12 +37,16 @@ func _process(_delta):
 		#print(itemlist.inventory)
 		#global.inventory = inventory
 		print("inventory open - inventory_script")
-	if Input.is_action_just_released("debug1"):
+	if Input.is_action_just_released("debugU"):
 		inventory_reload(2)	
-	
-	
-	
+	if Input.is_action_just_released("debugI"):
+		use_menu_break()
+	#debug()
 
+func debug():
+	print("menu_toggle ",menu_toggle)
+	#print("count ",itemlist.inventory.size())
+	print("")
 func create_slots(): ###Создание экземпляров кнопок
 	var slot_directory = get_node("GridContainer")
 	var slot_num = 0
@@ -55,7 +63,7 @@ func connect_slots():	###Подключение кнопок
 		button.connect("button_up",Callable(self, "slotnum").bind(num))
 		button.connect("mouse_entered",Callable(self, "show_discr").bind(num))
 		button.connect("mouse_exited",Callable(self, "hide_discr").bind(num))
-		#button.connect("focus_exited",xuy)
+
 
 func show_discr(num:int):
 	var button_path = get_node("GridContainer")
@@ -71,7 +79,31 @@ func hide_discr(num:int):
 	var discription = button_path.get_child(num).get_child(1)
 	discription.visible = false
 	
+func use_menu(num:int,special:bool):
+	var button_path = get_node("GridContainer")
+	var use_menu = button_path.get_child(num).get_child(2)
+	var need = button_path.get_child(num).get_child(0).get_child(1).get_slot_info()
+	if need == 0 or need == -1:
+		pass
+	else:
+		if special == false: ##стандарт
+			match menu_toggle:
+				true:
+					menu_toggle = false
+				false:
+					menu_toggle = true
+			use_menu.visible = menu_toggle	
+		else:
+			menu_toggle = false
+			use_menu.visible = false
+			
 	
+func use_menu_break():
+	var button_path = get_node("GridContainer")
+	for slot_number in 16:
+		var item_path = button_path.get_child(slot_number).get_child(0).get_child(1)
+		use_menu(slot_number,true)
+
 func inventory_save(): ###Сохранение инвентаря в itemlist
 	var button_path = get_node("GridContainer")
 	for slot_number in 16:
@@ -84,9 +116,11 @@ func inventory_load(): ###Загрузка инвентаря из itemlist
 	for slot_number in 16:
 		var item_path = button_path.get_child(slot_number).get_child(0).get_child(1)
 		slot(slot_number,itemlist.inventory[slot_number])
+	use_menu_break()
+
 	#inventory_reload(8) ###подгруз содержимого инвентаря
 	
-func inventory_reload(slot_limiter): ###конфигурация слота 
+func inventory_reload(slot_limiter) -> void: ###конфигурация слота 
 	for i in $GridContainer.get_child_count():
 		if i < slot_limiter:
 			slot(i,0)
@@ -94,55 +128,67 @@ func inventory_reload(slot_limiter): ###конфигурация слота
 			slot(i,-1)
 	inventory_save()
 
-func slotnum(slot_number):
-	hide_discr(slot_number)
-	var button_path = get_node("GridContainer")
-	var item_path = button_path.get_child(slot_number).get_child(0).get_child(1)
-	if mousetoggle == true: ##запоминается айди в руку
-		mouse_toggle()
-		$mouse_equip_item.visible = true
-		selected_slot_id_start = item_path.get_slot_info()
-		match selected_slot_id_start:
-			-1:
-				reset_variable()
-				$mouse_equip_item.texture = itemlist.itemlist[0]["TEXTURE"]
-			0:
-				$mouse_equip_item.texture = itemlist.itemlist[0]["TEXTURE"]
-				reset_variable()
-			_:
-				$mouse_equip_item.texture = itemlist.itemlist[selected_slot_id_start]["TEXTURE"]
-				selected_slot_start = slot_number
-				slot(selected_slot_start,0)
-	elif mousetoggle == false:
-		mouse_toggle()
-		selected_slot_end = slot_number
-		selected_slot_id_end = item_path.get_slot_info()
-		match selected_slot_id_end:
-			0:
-				slot(selected_slot_end,selected_slot_id_start)
-			-1:
-				slot(selected_slot_start,selected_slot_id_start)
-				reset_variable()
-			selected_slot_start:
-				slot(selected_slot_start,selected_slot_id_start)
-				reset_variable()
-			_:
-				slot(selected_slot_end,selected_slot_id_start)
-				slot(selected_slot_start,selected_slot_id_end)
-		$mouse_equip_item.visible = false
-		inventory_save()
-		reset_variable()
+func slotnum(slot_number:int) -> void:
+	if last_button == 1 and !menu_toggle: ##левая кнопка мыши
+		hide_discr(slot_number)
+		var button_path = get_node("GridContainer")
+		var item_path = button_path.get_child(slot_number).get_child(0).get_child(1)
+		if mousetoggle == true: ##запоминается айди в руку
+			mouse_toggle()
+			$mouse_equip_item.visible = true
+			selected_slot_id_start = item_path.get_slot_info()
+			match selected_slot_id_start:
+				-1:
+					reset_variable()
+					$mouse_equip_item.texture = itemlist.itemlist[0]["TEXTURE"]
+				0:
+					$mouse_equip_item.texture = itemlist.itemlist[0]["TEXTURE"]
+					reset_variable()
+				_:
+					$mouse_equip_item.texture = itemlist.itemlist[selected_slot_id_start]["TEXTURE"]
+					selected_slot_start = slot_number
+					slot(selected_slot_start,0)
+		elif mousetoggle == false:
+			mouse_toggle()
+			selected_slot_end = slot_number
+			selected_slot_id_end = item_path.get_slot_info()
+			match selected_slot_id_end:
+				0:
+					slot(selected_slot_end,selected_slot_id_start)
+				-1:
+					slot(selected_slot_start,selected_slot_id_start)
+					reset_variable()
+				selected_slot_start:
+					slot(selected_slot_start,selected_slot_id_start)
+					reset_variable()
+				_:
+					slot(selected_slot_end,selected_slot_id_start)
+					slot(selected_slot_start,selected_slot_id_end)
+			$mouse_equip_item.visible = false
+			inventory_save()
+			reset_variable()
+	if last_button == 2: ##правая кнопка мыши
+		use_menu(slot_number,false)
+		
 
-func slot(slot_number,num): ###Редактирование слота (Технический)
+	
+
+func slot(slot_number,num) -> void: ###Редактирование слота (Технический)
 	var button_path = get_node("GridContainer")
 	var item_path = button_path.get_child(slot_number).get_child(0).get_child(1)
 	item_path.slot(num)
 
 	
-
 func _input(_event): ###перемещение под указателем (Технический)
 	$mouse_equip_item.global_position = get_global_mouse_position()-Vector2(40,30)		
-
+	if _event is InputEventMouseButton and _event.pressed:
+		last_button = _event.button_index
+		match _event.button_index:
+			1:
+				pass
+			_:
+				use_menu_break()
+		
 func inventory_toggle(): ###Анимация вкл/выкл (Технический)
 	if !open:
 		show_animation.play("inventory_show_animation")

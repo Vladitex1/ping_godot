@@ -324,10 +324,10 @@ icon = ExtResource("11_5blg4")
 
 [node name="settings_menu" type="MarginContainer" parent="control_module/settings"]
 layout_mode = 0
-offset_left = 47.5
-offset_top = 57.0
-offset_right = 112.5
-offset_bottom = 90.0
+offset_left = 34.5
+offset_top = 56.0
+offset_right = 99.5
+offset_bottom = 89.0
 
 [node name="settings" type="HBoxContainer" parent="control_module/settings/settings_menu"]
 layout_mode = 2

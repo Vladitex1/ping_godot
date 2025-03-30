@@ -80,7 +80,7 @@ var keybinds = {
 	4: ["Sprint", 4194325, "special_shift"],
 	5: ["drop item", 71, "special_drop"],
 	6: ["BACK", 4194305, "special_back"],
-	7: ["Spawn_Unite", 73, "debug2"],
+	7: ["Spawn_Unite", 73, "debugI"],
 	8: ["Console", 16777240,"special_console"],
 	9: ["null", null, "null"], ##Костыль :)
 	}

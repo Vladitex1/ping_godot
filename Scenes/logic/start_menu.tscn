@@ -109,15 +109,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -1388.0
-offset_top = -2648.0
-offset_right = 3612.0
-offset_bottom = 2352.0
+offset_left = -1538.0
+offset_top = -1048.0
+offset_right = 1582.0
+offset_bottom = 1052.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.89486, 0.410929, 0.686374, 0.27451)
 
 [node name="main" type="Control" parent="control_module"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -272,7 +273,6 @@ offset_bottom = 201.5
 text = "4"
 
 [node name="settings" type="Control" parent="control_module"]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -323,10 +323,10 @@ icon = ExtResource("13_x8wng")
 
 [node name="settings_menu" type="MarginContainer" parent="control_module/settings"]
 layout_mode = 0
-offset_left = -241.5
-offset_top = 174.0
-offset_right = -176.5
-offset_bottom = 207.0
+offset_left = -250.0
+offset_top = 173.5
+offset_right = -185.0
+offset_bottom = 206.5
 
 [node name="settings" type="HBoxContainer" parent="control_module/settings/settings_menu"]
 layout_mode = 2

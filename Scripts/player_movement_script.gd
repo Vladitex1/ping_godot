@@ -298,10 +298,10 @@ func update_player_position(align):
 
 func debug_buttons():
 	
-	if Input.is_action_just_pressed("debug1") and !global.buttons_lock:
+	if Input.is_action_just_pressed("debugU") and !global.buttons_lock:
 		global.player_indicators("key", 1, "set")
 
-	if Input.is_action_just_released("debug2") and !global.buttons_lock:
+	if Input.is_action_just_released("debugI") and !global.buttons_lock:
 		var node = $"../..".get_child(1) 
 		#var spawn = load("res://Scenes/mobs/skeleton_mob.tscn").instantiate()
 		var spawn = load("res://Scenes/objects/dynamic_loot.tscn").instantiate()

@@ -1,7 +1,8 @@
 xxxxxxxxxxxxxxxxxxxxxxxxxxИДЕИxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+Починить работу с магазином3
+
 xxxxxxxxxxxxxxxxxxxxxxxxxГОТОВОxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-Когда шкала пустая, удары слабые/нельзя ударить
-сделать шкалу стамины (маны) для ударов.
 xxxxxxxxxxxxxxxxxxxxxxxxxxВПРОЦЕССЕxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 сделать шкалу брони.
