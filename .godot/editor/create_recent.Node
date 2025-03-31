@@ -1,3 +1,4 @@
+Label
 Button
 Control
 CanvasLayer
@@ -5,7 +6,6 @@ Panel
 Node2D
 TileMapLayer
 VBoxContainer
-Label
 HBoxContainer
 MarginContainer
 TextureRect

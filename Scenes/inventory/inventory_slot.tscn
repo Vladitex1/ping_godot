@@ -44,6 +44,17 @@ position = Vector2(36, 38)
 scale = Vector2(4, 4)
 texture = ExtResource("3_88a4b")
 
+[node name="countlable" type="Label" parent="Button"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 38.0
+offset_right = 60.835
+offset_bottom = 61.0
+scale = Vector2(2, 2)
+text = "2"
+horizontal_alignment = 2
+autowrap_mode = 2
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
 visible = false
 z_index = 1

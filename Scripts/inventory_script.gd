@@ -4,8 +4,10 @@ extends Control
 
 var selected_slot_start: int = -1
 var selected_slot_id_start: int = -1
+var selected_slot_start_count: int = -1
 var selected_slot_end: int = -1
 var selected_slot_id_end: int = -1
+var selected_slot_end_count: int = -1
 var open = false
 var mousetoggle: bool = true
 var button_num: int
@@ -44,8 +46,8 @@ func _process(_delta):
 	#debug()
 
 func debug():
-	print("menu_toggle ",menu_toggle)
-	#print("count ",itemlist.inventory.size())
+	#print("menu_toggle ",menu_toggle)
+	#print("itemlist.itemlist[selected_item_ID][1] ",itemlist.itemlist[3]["SELLCOST"])
 	print("")
 func create_slots(): ###Создание экземпляров кнопок
 	var slot_directory = get_node("GridContainer")
@@ -68,7 +70,7 @@ func connect_slots():	###Подключение кнопок
 func show_discr(num:int):
 	var button_path = get_node("GridContainer")
 	var discription = button_path.get_child(num).get_child(1)
-	var need = button_path.get_child(num).get_child(0).get_child(1).get_slot_info()
+	var need = button_path.get_child(num).get_child(0).get_child(1).get_slot_info(1)
 	if need == 0 or need == -1:
 		pass
 	else:
@@ -82,7 +84,7 @@ func hide_discr(num:int):
 func use_menu(num:int,special:bool):
 	var button_path = get_node("GridContainer")
 	var use_menu = button_path.get_child(num).get_child(2)
-	var need = button_path.get_child(num).get_child(0).get_child(1).get_slot_info()
+	var need = button_path.get_child(num).get_child(0).get_child(1).get_slot_info(1)
 	if need == 0 or need == -1:
 		pass
 	else:
@@ -108,14 +110,14 @@ func inventory_save(): ###Сохранение инвентаря в itemlist
 	var button_path = get_node("GridContainer")
 	for slot_number in 16:
 		var item_path = button_path.get_child(slot_number).get_child(0).get_child(1)
-		itemlist.inventory[slot_number] = item_path.get_slot_info()
+		itemlist.inventory[slot_number][0] = item_path.get_slot_info(1)
+		itemlist.inventory[slot_number][1] = item_path.get_slot_info(2)
 	#print(itemlist.inventory)
 
 func inventory_load(): ###Загрузка инвентаря из itemlist
 	var button_path = get_node("GridContainer")
-	for slot_number in 16:
-		var item_path = button_path.get_child(slot_number).get_child(0).get_child(1)
-		slot(slot_number,itemlist.inventory[slot_number])
+	for slot_number in range(itemlist.inventory.size()):
+		slot(slot_number,itemlist.inventory[slot_number][0],itemlist.inventory[slot_number][1])
 	use_menu_break()
 
 	#inventory_reload(8) ###подгруз содержимого инвентаря
@@ -123,9 +125,9 @@ func inventory_load(): ###Загрузка инвентаря из itemlist
 func inventory_reload(slot_limiter) -> void: ###конфигурация слота 
 	for i in $GridContainer.get_child_count():
 		if i < slot_limiter:
-			slot(i,0)
+			slot(i,0,1)
 		else:
-			slot(i,-1)
+			slot(i,-1,1)
 	inventory_save()
 
 func slotnum(slot_number:int) -> void:
@@ -136,7 +138,8 @@ func slotnum(slot_number:int) -> void:
 		if mousetoggle == true: ##запоминается айди в руку
 			mouse_toggle()
 			$mouse_equip_item.visible = true
-			selected_slot_id_start = item_path.get_slot_info()
+			selected_slot_id_start = item_path.get_slot_info(1)
+			selected_slot_start_count = item_path.get_slot_info(2)
 			match selected_slot_id_start:
 				-1:
 					reset_variable()
@@ -147,23 +150,26 @@ func slotnum(slot_number:int) -> void:
 				_:
 					$mouse_equip_item.texture = itemlist.itemlist[selected_slot_id_start]["TEXTURE"]
 					selected_slot_start = slot_number
-					slot(selected_slot_start,0)
+					slot(selected_slot_start,0,selected_slot_start_count)
 		elif mousetoggle == false:
 			mouse_toggle()
 			selected_slot_end = slot_number
-			selected_slot_id_end = item_path.get_slot_info()
-			match selected_slot_id_end:
-				0:
-					slot(selected_slot_end,selected_slot_id_start)
-				-1:
-					slot(selected_slot_start,selected_slot_id_start)
-					reset_variable()
-				selected_slot_start:
-					slot(selected_slot_start,selected_slot_id_start)
-					reset_variable()
-				_:
-					slot(selected_slot_end,selected_slot_id_start)
-					slot(selected_slot_start,selected_slot_id_end)
+			selected_slot_id_end = item_path.get_slot_info(1)
+			selected_slot_end_count = item_path.get_slot_info(2)
+			
+			if selected_slot_start == selected_slot_end: ##перенос туда же
+				slot(selected_slot_start,selected_slot_id_start,selected_slot_start_count)
+			else:
+				match selected_slot_id_end:
+					-1: ## перенос на закрытый слот
+						slot(selected_slot_start,selected_slot_id_start,selected_slot_start_count)
+					selected_slot_id_start:  ## перенос на аналогичный слот
+						var newcount = selected_slot_start_count+selected_slot_end_count
+						slot(selected_slot_end,selected_slot_id_start,newcount)
+						slot(selected_slot_start,0,1)
+					_: ##перенос на доступный слот
+						slot(selected_slot_end,selected_slot_id_start,selected_slot_start_count)
+						slot(selected_slot_start,selected_slot_id_end,selected_slot_end_count)
 			$mouse_equip_item.visible = false
 			inventory_save()
 			reset_variable()
@@ -173,10 +179,10 @@ func slotnum(slot_number:int) -> void:
 
 	
 
-func slot(slot_number,num) -> void: ###Редактирование слота (Технический)
+func slot(slot_number,num,count) -> void: ###Редактирование слота (Технический)
 	var button_path = get_node("GridContainer")
 	var item_path = button_path.get_child(slot_number).get_child(0).get_child(1)
-	item_path.slot(num)
+	item_path.slot(num,count)
 
 	
 func _input(_event): ###перемещение под указателем (Технический)
@@ -248,5 +254,5 @@ func mouse_toggle(): ###
 func random_items_in_slots():
 	var slotnumber = 0
 	while slotnumber < 16:
-		slot(slotnumber,randi_range(0,4))
+		slot(slotnumber,randi_range(0,4),randi_range(1,4))
 		slotnumber = slotnumber + 1

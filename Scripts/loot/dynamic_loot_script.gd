@@ -25,12 +25,21 @@ func _ready():
 
 func pickup(temp):
 	##Прикрутить добавление в инвентарь	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	var found:bool = false
 	for i in range(itemlist.inventory.size()):
-		if itemlist.inventory[i] == 0:
+		if itemlist.inventory[i][0] == temp:
 			node.queue_free()
-			global.get_global_scene("inventory").get_child(0).slot(i,temp)
+			global.get_global_scene("inventory").get_child(0).slot(i,temp,itemlist.inventory[i][1]+1)
 			global.get_global_scene("inventory").get_child(0).inventory_save()
+			found = true
 			break
+	if !found:
+		for i in range(itemlist.inventory.size()):
+			if itemlist.inventory[i][0] == 0:
+				node.queue_free()
+				global.get_global_scene("inventory").get_child(0).slot(i,temp,1)
+				global.get_global_scene("inventory").get_child(0).inventory_save()
+				break
 			
 
 func zone_entered(body):

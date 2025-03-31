@@ -35,7 +35,7 @@ func delete_save(save_num:int):
 		DirAccess.remove_absolute(save_path)
 		print("delete_complite")
 	
-func create_save(save_num:int,position: Vector2i,keys:int,hp:int,coins:int,doors: Dictionary,inventory:Array,save_name:String,entities:Dictionary):
+func create_save(save_num:int,position: Vector2i,keys:int,hp:int,coins:int,doors: Dictionary,inventory:Dictionary,save_name:String,entities:Dictionary):
 	var save_dict = {
 		"save_num": save_num,
 		"save_name": save_name,
@@ -80,8 +80,7 @@ func get_info_from_save(save_num:int, save_info: String, save_info_name: String)
 
 func load_game(save_num:int):
 	####игрок
-	
-	itemlist.inventory = get_info_from_save(save_num,"information","inventory")
+	itemlist.inventory = inventory_parser(get_info_from_save(save_num,"information","inventory"))
 
 	global.teleport(position_parser(get_info_from_save(save_num,"information","position")))
 	global.player_indicators("hp", get_info_from_save(save_num,"indicators","hp"), "lock")
@@ -97,7 +96,11 @@ func load_game(save_num:int):
 	
 	
 	
-	
+func inventory_parser(IN:Dictionary):
+	var OUT: Dictionary
+	for i in round(IN.size()):
+		OUT[i] = IN[str(i)]
+	return OUT
 
 func position_parser(line:String): ###Парсер инфы из сейва (Технический)
 	var text = line
