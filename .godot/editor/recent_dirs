@@ -1,3 +1,5 @@
+res://Scenes
+res://assets/LVL
 res://Scenes/inventory
 res://Scenes/stop_screen
 res://Scripts/stop_screen
@@ -8,7 +10,6 @@ res://Scripts/shop
 res://Scenes/mobs
 res://Scenes/objects
 res://Thems
-res://Scenes
 res://Scripts/objects
 res://debug_scenes
 res://Scripts

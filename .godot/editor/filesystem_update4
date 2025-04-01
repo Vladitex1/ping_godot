@@ -1,4 +1,4 @@
-res://Scenes/inventory/inventory.tscn
+res://Scenes/hud.tscn
 res://Thems/tileset.tres
 res://Scripts/level/position.gd
 res://Scripts/player_movement_script.gd
@@ -14,6 +14,7 @@ res://Scripts/stop_screen/keybinds_menu.gd
 res://Thems/main_menu.tres
 res://Scripts/stop_screen/sm_keybinds_menu.gd
 res://Thems/inventory.tres
+res://Scripts/hud/hud_brain.gd
 res://Scenes/main1.tscn
 res://Scenes/stop_screen/stop_screen.tscn
 res://Scenes/logic/start_menu.tscn
@@ -25,10 +26,6 @@ res://Scenes/objects/lamp_object.tscn
 res://Scenes/debug.tscn
 res://Scenes/objects/save_point.tscn
 res://Scenes/item.tscn
+res://Scenes/inventory/inventory.tscn
 res://Scenes/inventory/inventory_slot.tscn
-res://Scripts/inventory_script.gd
-res://Scripts/inventory_scripts/Item.gd
-res://Scripts/loot/dynamic_loot_script.gd
-res://Scripts/ItemList_script.gd
-res://Scripts/shop/shop_brain.gd
-res://Scripts/logic/save_script.gd
+res://Scripts/objects/save_point.gd

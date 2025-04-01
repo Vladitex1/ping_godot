@@ -23,3 +23,4 @@ func create_save_point(body):
 		var save_name = str(save_area_name)
 		var entities = Entities.entities
 		SaveScript.create_save(num,pos,key,hp,coin,door,inv,save_name,entities)
+		global.get_global_scene("hud").set_info_label("SAVE COMPLITE",1,0.0001)

@@ -1,0 +1,271 @@
+[gd_scene load_steps=14 format=3 uid="uid://dmha2u8dlg5o1"]
+
+[ext_resource type="Texture2D" uid="uid://k5742llj4gq2" path="res://assets/interface/ping_icon_1024x1024.png" id="1_21nmr"]
+[ext_resource type="Script" path="res://Scripts/hud/hud_brain.gd" id="1_sjm8r"]
+[ext_resource type="FontFile" uid="uid://dus86kp12bin7" path="res://fonts/Font1.ttf" id="3_h8id7"]
+[ext_resource type="Texture2D" uid="uid://ddb813dlvbuyj" path="res://assets/interface/hud_status_large.png" id="4_7qmn3"]
+[ext_resource type="Texture2D" uid="uid://ckakw481uj45i" path="res://assets/interface/health.png" id="5_2ykob"]
+[ext_resource type="Texture2D" uid="uid://cx2ip8bilhrg5" path="res://assets/interface/hud_base_large.png" id="5_5t2uc"]
+[ext_resource type="Texture2D" uid="uid://23wurqxer0sb" path="res://assets/interface/stamina.png" id="5_6ne8s"]
+[ext_resource type="Texture2D" uid="uid://pl513b6xupyn" path="res://assets/interface/hb1.png" id="6_f1kwn"]
+[ext_resource type="Texture2D" uid="uid://bc6xqtorp87xq" path="res://assets/interface/stamina_limit.png" id="6_guuqj"]
+[ext_resource type="Texture2D" uid="uid://cpqe4l277k3fg" path="res://assets/interface/Key1.png" id="7_2srnd"]
+[ext_resource type="Texture2D" uid="uid://cjoia4dnia1yc" path="res://assets/items/weapons/sword.png" id="7_ayjy7"]
+[ext_resource type="Texture2D" uid="uid://bv6wmrh28yfy8" path="res://assets/interface/coin.png" id="8_e6d1a"]
+[ext_resource type="Texture2D" uid="uid://v8cpya8qx1si" path="res://assets/interface/stamina_back.png" id="8_vvm8o"]
+
+[node name="hud" type="CanvasLayer"]
+script = ExtResource("1_sjm8r")
+
+[node name="control_module" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1500.0
+offset_top = 1000.0
+offset_right = 1500.0
+offset_bottom = 1000.0
+metadata/_edit_use_anchors_ = true
+
+[node name="HUD" type="Control" parent="control_module"]
+anchors_preset = 0
+offset_left = -952.0
+offset_top = -502.0
+offset_right = -952.0
+offset_bottom = -502.0
+
+[node name="Timer" type="Timer" parent="control_module/HUD"]
+one_shot = true
+
+[node name="info_label" type="Label" parent="control_module/HUD"]
+light_mask = 4
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.00160416
+anchor_top = 0.00199998
+anchor_right = 0.0824583
+anchor_bottom = 0.032
+offset_left = 988.0
+offset_top = 911.0
+offset_right = 2029.0
+offset_bottom = 1009.0
+scale = Vector2(0.9, 0.9)
+theme_override_colors/font_color = Color(0.745098, 0.745098, 0.745098, 1)
+theme_override_fonts/font = ExtResource("3_h8id7")
+theme_override_font_sizes/font_size = 30
+text = "
+"
+horizontal_alignment = 2
+vertical_alignment = 2
+autowrap_mode = 1
+
+[node name="FPS" type="Label" parent="control_module/HUD"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.011
+anchor_top = 0.015
+anchor_right = 0.032
+anchor_bottom = 0.045
+offset_left = 85.0
+offset_top = -2.99999
+offset_right = 190.0
+offset_bottom = 30.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_h8id7")
+theme_override_font_sizes/font_size = 27
+text = "fps: 60"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="icon_texture" type="TextureRect" parent="control_module/HUD"]
+texture_filter = 5
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0421875
+anchor_top = 0.772222
+anchor_right = 0.124714
+anchor_bottom = 0.924159
+offset_left = 85.0
+offset_top = 837.0
+offset_right = 1109.0
+offset_bottom = 1861.0
+grow_vertical = 0
+scale = Vector2(0.15, 0.15)
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("1_21nmr")
+stretch_mode = 2
+
+[node name="health_bar" type="TextureProgressBar" parent="control_module/HUD"]
+z_index = 1
+custom_minimum_size = Vector2(80, 16)
+layout_mode = 0
+offset_left = 266.0
+offset_top = 845.0
+offset_right = 766.0
+offset_bottom = 909.0
+scale = Vector2(0.544858, 0.767567)
+value = 100.0
+rounded = true
+texture_over = ExtResource("6_f1kwn")
+texture_progress = ExtResource("5_2ykob")
+texture_progress_offset = Vector2(24, 11)
+
+[node name="healh_count_label" type="Label" parent="control_module/HUD"]
+light_mask = 16
+visibility_layer = 16
+z_index = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.0276458
+anchor_top = -0.00262965
+anchor_right = 0.131417
+anchor_bottom = 0.0375556
+offset_left = 279.0
+offset_top = 853.0
+offset_right = 691.0
+offset_bottom = 910.0
+scale = Vector2(0.6, 0.6)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_h8id7")
+theme_override_font_sizes/font_size = 38
+text = "health - 120"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="plate_status_texture" type="TextureRect" parent="control_module/HUD"]
+texture_filter = 5
+layout_mode = 0
+offset_left = 48.0
+offset_top = 695.0
+offset_right = 1004.0
+offset_bottom = 1051.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("4_7qmn3")
+
+[node name="weapon_texture" type="TextureRect" parent="control_module/HUD"]
+texture_filter = 5
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 392.0
+offset_top = 695.0
+offset_right = 432.0
+offset_bottom = 795.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.57079
+scale = Vector2(3, 3)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("7_ayjy7")
+stretch_mode = 1
+
+[node name="stamina_bar_back" type="TextureRect" parent="control_module/HUD"]
+layout_mode = 0
+offset_left = 249.0
+offset_top = 950.0
+offset_right = 1094.0
+offset_bottom = 1049.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("8_vvm8o")
+
+[node name="stamina_bar" type="TextureProgressBar" parent="control_module/HUD"]
+custom_minimum_size = Vector2(70, 16)
+layout_mode = 0
+offset_left = 260.0
+offset_top = 949.0
+offset_right = 810.0
+offset_bottom = 1013.0
+scale = Vector2(0.5, 0.789)
+max_value = 1000.0
+value = 1000.0
+rounded = true
+texture_progress = ExtResource("5_6ne8s")
+
+[node name="stamina_bar_limit" type="TextureProgressBar" parent="control_module/HUD"]
+custom_minimum_size = Vector2(70, 16)
+layout_mode = 0
+offset_left = 260.0
+offset_top = 949.0
+offset_right = 810.0
+offset_bottom = 1013.0
+scale = Vector2(0.5, 0.789)
+max_value = 1000.0
+value = 100.0
+rounded = true
+texture_progress = ExtResource("6_guuqj")
+
+[node name="plate_texture" type="TextureRect" parent="control_module/HUD"]
+texture_filter = 5
+layout_mode = 0
+offset_left = 55.0
+offset_top = 813.0
+offset_right = 1536.0
+offset_bottom = 1349.0
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("5_5t2uc")
+
+[node name="coins_count_label" type="Label" parent="control_module/HUD"]
+light_mask = 4
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.00160416
+anchor_top = 0.00199998
+anchor_right = 0.0207917
+anchor_bottom = 0.00199998
+offset_left = 440.0
+offset_top = 910.0
+offset_right = 501.0
+offset_bottom = 942.0
+scale = Vector2(0.9, 0.9)
+theme_override_colors/font_color = Color(0.0962047, 0.0962048, 0.0962047, 1)
+theme_override_fonts/font = ExtResource("3_h8id7")
+theme_override_font_sizes/font_size = 30
+text = "8"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="keys_count_label" type="Label" parent="control_module/HUD"]
+light_mask = 4
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.00160416
+anchor_top = 0.00199998
+anchor_right = 0.0824583
+anchor_bottom = 0.032
+offset_left = 329.0
+offset_top = 910.0
+offset_right = 390.0
+offset_bottom = 942.0
+scale = Vector2(0.9, 0.9)
+theme_override_colors/font_color = Color(0.0962047, 0.0962048, 0.0962047, 1)
+theme_override_fonts/font = ExtResource("3_h8id7")
+theme_override_font_sizes/font_size = 30
+text = "9"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="key_texture" type="TextureRect" parent="control_module/HUD"]
+visibility_layer = 4
+texture_filter = 5
+layout_mode = 0
+offset_left = 294.0
+offset_top = 908.0
+offset_right = 334.0
+offset_bottom = 948.0
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("7_2srnd")
+
+[node name="coin_texture" type="TextureRect" parent="control_module/HUD"]
+texture_filter = 5
+layout_mode = 0
+offset_left = 405.0
+offset_top = 908.0
+offset_right = 445.0
+offset_bottom = 948.0
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("8_e6d1a")

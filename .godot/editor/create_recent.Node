@@ -1,3 +1,6 @@
+Timer
+Sprite2D
+TextureRect
 Label
 Button
 Control
@@ -8,7 +11,5 @@ TileMapLayer
 VBoxContainer
 HBoxContainer
 MarginContainer
-TextureRect
 SpinBox
 RichTextLabel
-FlowContainer
