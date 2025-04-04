@@ -1,14 +1,14 @@
 res://Scenes
+res://Scenes/stop_screen
+res://Scenes/objects
+res://Scenes/logic
 res://assets/LVL
 res://Scenes/inventory
-res://Scenes/stop_screen
 res://Scripts/stop_screen
 res://Scripts/logic
-res://Scenes/logic
 res://Scenes/shop
 res://Scripts/shop
 res://Scenes/mobs
-res://Scenes/objects
 res://Thems
 res://Scripts/objects
 res://debug_scenes

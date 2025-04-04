@@ -31,18 +31,17 @@ func child_del(): ###Удаление fake слотов (Технический)
 	
 func refresh(): ##Сканирует savelist на сохранения, создает слоты (Технический)
 	var slot_num: int = 0
-	#print(savelist)
 	for i in savelist:
 		if i in savelist:
 			print("найдено сохранение #",i)
+			print(savelist[i])
 			create_save_slot(slot_num,i)
 			slot_num += 1
+	connect_slot_buttons()
 			
 func create_save_slot(slotnum,i): ###Непостредственное создание и заполнение информацией слота
 	####slotnum == номер сейва,записывается в лейбл
 	####i = индекс сейва,записывается слева
-	
-	
 	
 	var path = $".".get_child(0)
 	var slot = load("res://Scenes/stop_screen/save_slot.tscn").instantiate()
@@ -54,27 +53,23 @@ func create_save_slot(slotnum,i): ###Непостредственное созд
 	path.get_child(slotnum).slot_id = i
 	path.get_child(slotnum).slot_num = slotnum
 	
-	var label1 = path.get_child(slotnum).get_child(1).get_child(0)
-	var label2 = path.get_child(slotnum).get_child(1).get_child(1)
-	var label6 = path.get_child(slotnum).get_child(1).get_child(2)
-	var label3 = path.get_child(slotnum).get_child(1).get_child(3).get_child(0)
-	var label4 = path.get_child(slotnum).get_child(1).get_child(3).get_child(1)
-	var label5 = path.get_child(slotnum).get_child(1).get_child(3).get_child(2)
-	
-	
-	var label1_text = "save " + str(savelist[i][0])
+	var label1 = path.get_child(slotnum).get_child(1).get_child(0) ##название сейва место
+	var label2 = path.get_child(slotnum).get_child(1).get_child(1) ##имя профиля
+	var label3 = path.get_child(slotnum).get_child(1).get_child(2).get_child(0) ##HP
+	var label4 = path.get_child(slotnum).get_child(1).get_child(2).get_child(1) ##Coins
+	var label5 = path.get_child(slotnum).get_child(1).get_child(2).get_child(2) ##keys
+
+	var label1_text = str(savelist[i][2])
 	var label2_text = str(savelist[i][1])
-	var label3_text = "hp " + str(savelist[i][2])
-	var label4_text = "coins: " + str(savelist[i][3])
-	var label5_text = "keys " + str(savelist[i][4])
-	var label6_text = str(slotnum+1)
+	var label3_text = "hp " + str(savelist[i][3]) 
+	var label4_text = "coins: " + str(savelist[i][4])
+	var label5_text = "keys " + str(savelist[i][5])
 	
 	label1.text = label1_text
 	label2.text = label2_text
 	label3.text = label3_text
 	label4.text = label4_text
 	label5.text = label5_text
-	label6.text = label6_text
 	
 	if str(savelist[i][1]) == "" or str(savelist[i][1]) == " ": ###Исключения
 		label2.text = "no_name"
@@ -91,17 +86,22 @@ func connect_slot_buttons(): ###подключение кнопок
 	
 func load_button(i:int):
 	var slot_id = Rnode.get_child(i).slot_id
-	await parent_node.get_confirm("LOAD SAVE?","SaveScript","load_game",slot_id)
-
+	var result: bool = false
+	result = await $"../../confirm_panel".confirm_show("LOAD SAVE?")
+	if result:
+		SaveScript.load_game(slot_id)
 
 func del_button(i:int):
 	var slot_id = Rnode.get_child(i).slot_id
-	var toggle: bool ####костыль, но работает :э
-	await parent_node.get_confirm("ARE YOU SHOORE?","SaveScript","delete_save",slot_id)
+	var result: bool = false
+	result = await $"../../confirm_panel".confirm_show("ARE YOU SHOORE123?")
+	if result:
+		SaveScript.delete_save(slot_id)
 	savelist = SaveScript.show_save_dir()
 	child_del()
 	refresh()
 	print("Удаление слота: ",slot_id)
+	
 	
 	
 

@@ -32,8 +32,8 @@ func continue_button():
 	
 	
 func newgame_button():
-	print("ПУК-пук")
-	#global.get_global_scene(name2).select_menu(1)
+	#print("ПУК-пук")
+	global.get_global_scene("start_menu").select_menu("new_game")
 	
 func load_button():
 	global.get_global_scene("start_menu").select_menu("load")

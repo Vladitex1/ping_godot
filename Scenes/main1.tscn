@@ -19,7 +19,7 @@
 [node name="main" type="Node2D"]
 process_priority = 1
 script = ExtResource("1_fjv78")
-active_save = 4
+profile_name = "vladitex1"
 
 [node name="Level" type="Node2D" parent="."]
 
@@ -136,7 +136,11 @@ position = Vector2(436, 333)
 [node name="SavePoint" type="Node2D" parent="Objects"]
 
 [node name="save1" parent="Objects/SavePoint" instance=ExtResource("13_r8ymt")]
-position = Vector2(397, 162)
+position = Vector2(388, 154)
 save_area_name = "savepoint1"
+
+[node name="save2" parent="Objects/SavePoint" instance=ExtResource("13_r8ymt")]
+position = Vector2(370, 231)
+save_area_name = "savepoint2"
 
 [node name="Drop" type="Node2D" parent="."]

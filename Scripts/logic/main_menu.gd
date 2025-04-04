@@ -29,16 +29,8 @@ func select_menu(state:String):
 					menu.get_child(i).visible = false
 
 func get_confirm(queston: String,global_variable: String,function_name: String,value):# -> bool:
-	$control_module/confirm_panel.visible = true
-	$control_module/confirm_panel/VBoxContainer/Label.text = queston
-	await $control_module/confirm_panel/VBoxContainer/HBoxContainer/YES.button_down
-	if global.get_global_scene(global_variable).get_method_argument_count(function_name) == 1:
-		global.get_global_scene(global_variable).call(function_name,value)
-	$control_module/confirm_panel.visible = false
-	if $control_module/confirm_panel/VBoxContainer/HBoxContainer/YES.button_down:
-		return true
-	return false
-
+	pass
+	#print("result: ", result)
 func window_reset(res):#########################################################
 	var scaled = config.resolution_list[res][2]
 	var resolution = Vector2(config.resolution_list[res][0],config.resolution_list[res][1])

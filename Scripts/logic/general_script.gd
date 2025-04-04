@@ -1,6 +1,7 @@
 extends Node2D
 
-@export var active_save: int 
+@export var profile_name: String
+var lvl_start_position: Vector2 = Vector2(263,279)
 var start = false
 
 func _ready():

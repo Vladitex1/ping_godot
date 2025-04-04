@@ -33,19 +33,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="save_num_label" type="Label" parent="labels"]
-layout_mode = 0
-offset_left = -74.5
-offset_top = -27.5
-offset_right = -25.5
-offset_bottom = -12.5
-theme_override_fonts/font = ExtResource("1_5oq87")
-theme_override_font_sizes/font_size = 11
-text = "save1
-"
-vertical_alignment = 1
-autowrap_mode = 1
-
 [node name="save_name_label" type="Label" parent="labels"]
 layout_mode = 0
 offset_left = -103.5
@@ -59,17 +46,16 @@ text = "savename
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="slot_num" type="Label" parent="labels"]
-layout_mode = 2
-offset_left = -110.5
-offset_top = -31.5
-offset_right = -78.5
-offset_bottom = -8.5
+[node name="save_profile_label" type="Label" parent="labels"]
+layout_mode = 0
+offset_left = -104.0
+offset_top = -28.0
+offset_right = -33.0
+offset_bottom = 17.0
 theme_override_fonts/font = ExtResource("1_5oq87")
-theme_override_font_sizes/font_size = 22
-text = "1"
+theme_override_font_sizes/font_size = 11
+text = "name"
 horizontal_alignment = 1
-vertical_alignment = 1
 autowrap_mode = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="labels"]

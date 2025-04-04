@@ -17,7 +17,8 @@ func show_save_dir():
 		var save_path: String = "res://Saves/save"+str(i)+".save"
 		if FileAccess.file_exists(save_path):
 			save_list[i] = []
-			save_list[i].append(get_info_from_save(i,"save_num",""))
+			save_list[i].append(get_info_from_save(i,"save_id",""))
+			save_list[i].append(get_info_from_save(i,"prof_name",""))
 			save_list[i].append(get_info_from_save(i,"save_name",""))
 			save_list[i].append(get_info_from_save(i,"indicators","hp"))
 			save_list[i].append(get_info_from_save(i,"indicators","coins"))
@@ -26,8 +27,8 @@ func show_save_dir():
 	#print("******************")
 	return save_list
 			
-func delete_save(save_num:int):
-	var save_path: String = "res://Saves/save"+str(save_num)+".save"
+func delete_save(save_id:int):
+	var save_path: String = "res://Saves/save"+str(save_id)+".save"
 	if not FileAccess.file_exists(save_path):
 		print("save_not_found")
 		return
@@ -35,9 +36,10 @@ func delete_save(save_num:int):
 		DirAccess.remove_absolute(save_path)
 		print("delete_complite")
 	
-func create_save(save_num:int,position: Vector2i,keys:int,hp:int,coins:int,doors: Dictionary,inventory:Dictionary,save_name:String,entities:Dictionary):
+func create_save(save_id:int, prof_name:String, position: Vector2i,keys:int,hp:int,coins:int,doors: Dictionary,inventory:Dictionary,save_name:String,entities:Dictionary):
 	var save_dict = {
-		"save_num": save_num,
+		"save_id": save_id,
+		"prof_name": prof_name,
 		"save_name": save_name,
 		"information": {
 			"inventory": inventory,
@@ -49,15 +51,15 @@ func create_save(save_num:int,position: Vector2i,keys:int,hp:int,coins:int,doors
 			"keys": keys,},
 		"entities": entities
 		}
-	var save_path: String = "res://Saves/save"+str(save_num)+".save"
+	var save_path: String = "res://Saves/save"+str(save_id)+".save"
 	#var save_game = FileAccess.open_encrypted_with_pass(save_path, FileAccess.WRITE, pswd)
 	var save_game = FileAccess.open(save_path, FileAccess.WRITE)
 	var json_string = JSON.stringify(save_dict)
 	save_game.store_line(json_string)
 	print("save_complite")
 		
-func get_info_from_save(save_num:int, save_info: String, save_info_name: String):
-	var save_path: String = "res://Saves/save"+str(save_num)+".save"
+func get_info_from_save(save_id:int, save_info: String, save_info_name: String):
+	var save_path: String = "res://Saves/save"+str(save_id)+".save"
 	if not FileAccess.file_exists(save_path):
 		return
 
@@ -78,21 +80,20 @@ func get_info_from_save(save_num:int, save_info: String, save_info_name: String)
 			_:
 				return result
 
-func load_game(save_num:int):
+func load_game(save_id:int):
 	####игрок
-	itemlist.inventory = inventory_parser(get_info_from_save(save_num,"information","inventory"))
+	itemlist.inventory = inventory_parser(get_info_from_save(save_id,"information","inventory"))
 
-	global.teleport(position_parser(get_info_from_save(save_num,"information","position")))
-	global.player_indicators("hp", get_info_from_save(save_num,"indicators","hp"), "lock")
-	global.player_indicators("coins", get_info_from_save(save_num,"indicators","coins"), "lock")
-	global.player_indicators("keys", get_info_from_save(save_num,"indicators","keys"), "lock")
-	global.get_global_scene("main").active_save = save_num
-	
+	global.teleport(position_parser(get_info_from_save(save_id,"information","position")))
+	global.player_indicators("hp", get_info_from_save(save_id,"indicators","hp"), "lock")
+	global.player_indicators("coins", get_info_from_save(save_id,"indicators","coins"), "lock")
+	global.player_indicators("keys", get_info_from_save(save_id,"indicators","keys"), "lock")
+	global.get_global_scene("main").profile_name = get_info_from_save(save_id,"prof_name","")
 	####окружение
 	
-	OpenerList.opener_list = get_info_from_save(save_num,"information","doors")
-	#print(get_info_from_save(save_num,"entities",""))
-	Entities.load_entities(get_info_from_save(save_num,"entities",""))
+	OpenerList.opener_list = get_info_from_save(save_id,"information","doors")
+	#print(get_info_from_save(save_id,"entities",""))
+	Entities.load_entities(get_info_from_save(save_id,"entities",""))
 	
 	
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cl03h8m8uqghl"]
+[gd_scene load_steps=24 format=3 uid="uid://cl03h8m8uqghl"]
 
 [ext_resource type="Script" path="res://Scripts/logic/main_menu.gd" id="1_gdw4y"]
 [ext_resource type="StyleBox" uid="uid://b1j6fi831qnyn" path="res://Thems/console_stylebox_0.tres" id="2_3p8do"]
@@ -9,6 +9,7 @@
 [ext_resource type="StyleBox" uid="uid://bmuedaydehnq7" path="res://Thems/button_fixed_unpress.tres" id="7_p8pcp"]
 [ext_resource type="FontFile" uid="uid://dus86kp12bin7" path="res://fonts/Font1.ttf" id="8_tmlcn"]
 [ext_resource type="Script" path="res://Scripts/stop_screen/sm_load_menu.gd" id="9_3315r"]
+[ext_resource type="Script" path="res://Scenes/stop_screen/sm_new_game.gd" id="9_kr0c5"]
 [ext_resource type="Script" path="res://Scripts/stop_screen/load_script.gd" id="10_yhca8"]
 [ext_resource type="Script" path="res://Scripts/stop_screen/sm_settings_menu.gd" id="11_1wmpv"]
 [ext_resource type="Texture2D" uid="uid://nxywjy43sduu" path="res://assets/interface/menu/keymap_icon.png" id="12_kbb56"]
@@ -20,6 +21,7 @@
 [ext_resource type="StyleBox" uid="uid://61kmy65latma" path="res://Thems/button_red.tres" id="18_w1mug"]
 [ext_resource type="Script" path="res://Scripts/logic/confirm_panel.gd" id="19_617sg"]
 [ext_resource type="Theme" uid="uid://ciwnfws6sc4ds" path="res://Thems/main_menu.tres" id="20_whvwo"]
+[ext_resource type="Texture2D" uid="uid://23wurqxer0sb" path="res://assets/interface/stamina.png" id="21_117cd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vk14c"]
 bg_color = Color(1, 1, 1, 0)
@@ -109,16 +111,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -1538.0
-offset_top = -1048.0
-offset_right = 1582.0
-offset_bottom = 1052.0
+offset_left = -950.0
+offset_top = -1189.0
+offset_right = 2170.0
+offset_bottom = 911.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.89486, 0.410929, 0.686374, 0.27451)
 
 [node name="main" type="Control" parent="control_module"]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -204,11 +205,103 @@ text = "quit"
 
 [node name="new_game" type="Control" parent="control_module"]
 visible = false
-anchors_preset = 0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -572.0
 offset_top = 128.0
-offset_right = -532.0
-offset_bottom = 168.0
+offset_right = -572.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("9_kr0c5")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="control_module/new_game"]
+layout_mode = 0
+offset_left = -122.0
+offset_top = -37.0
+offset_right = 109.0
+offset_bottom = 109.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_vk14c")
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="control_module/new_game/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 11
+alignment = 1
+
+[node name="profile_name" type="Label" parent="control_module/new_game/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Имя профиля:"
+
+[node name="profile_name_lineedit" type="LineEdit" parent="control_module/new_game/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer1" type="HBoxContainer" parent="control_module/new_game/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="difficulty_label" type="Label" parent="control_module/new_game/ScrollContainer/VBoxContainer/HBoxContainer1"]
+layout_mode = 2
+text = "Сложность:"
+
+[node name="difficulty_label_editable" type="Label" parent="control_module/new_game/ScrollContainer/VBoxContainer/HBoxContainer1"]
+layout_mode = 2
+
+[node name="difficulty_slider" type="HSlider" parent="control_module/new_game/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+max_value = 1.5
+step = 0.1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="control_module/new_game/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="character_label" type="Label" parent="control_module/new_game/ScrollContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Персонаж:"
+
+[node name="character_label_editable" type="Label" parent="control_module/new_game/ScrollContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "
+"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="control_module/new_game/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="character_button_1" type="Button" parent="control_module/new_game/ScrollContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Пингвин"
+
+[node name="character_button2" type="Button" parent="control_module/new_game/ScrollContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+disabled = true
+text = "В разработке"
+
+[node name="newgame_menu" type="MarginContainer" parent="control_module/new_game"]
+layout_mode = 0
+offset_left = -17.5
+offset_top = 119.0
+offset_right = 109.5
+offset_bottom = 150.0
+
+[node name="settings" type="HBoxContainer" parent="control_module/new_game/newgame_menu"]
+layout_mode = 2
+
+[node name="Button_Create" type="Button" parent="control_module/new_game/newgame_menu/settings"]
+layout_mode = 2
+theme = ExtResource("5_xxgc5")
+text = "create"
+
+[node name="Button_Back" type="Button" parent="control_module/new_game/newgame_menu/settings"]
+layout_mode = 2
+theme = ExtResource("5_xxgc5")
+text = "back"
 
 [node name="load" type="Control" parent="control_module"]
 visible = false
@@ -273,6 +366,7 @@ offset_bottom = 201.5
 text = "4"
 
 [node name="settings" type="Control" parent="control_module"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -570,6 +664,24 @@ offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("19_617sg")
+
+[node name="Control" type="Control" parent="control_module/confirm_panel"]
+layout_mode = 2
+
+[node name="bar" type="TextureProgressBar" parent="control_module/confirm_panel/Control"]
+z_index = 1
+custom_minimum_size = Vector2(72.53, 16)
+offset_left = -1.0
+offset_top = 182.0
+offset_right = 549.0
+offset_bottom = 224.0
+scale = Vector2(0.732, 0.495)
+max_value = 3.0
+value = 1.0
+rounded = true
+texture_progress = ExtResource("21_117cd")
+
+[node name="Timer" type="Timer" parent="control_module/confirm_panel/Control"]
 
 [node name="Panel" type="Panel" parent="control_module/confirm_panel"]
 layout_mode = 2

@@ -147,4 +147,3 @@ func body_exited(body):
 	if body.name == "player":
 		opener_ready = false
 		global.action_toggle = false
-
