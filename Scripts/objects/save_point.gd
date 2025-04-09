@@ -1,28 +1,35 @@
 extends Node2D
 @onready var AnimPlayer = $AnimationPlayer
 @export var save_area_name: String
+var area_ready:bool = false
 #print("вход ",num)
+
 func _ready():
 	$brain/Area2D.connect("body_entered",create_save_point)
+	$brain/Area2D.connect("body_exited",debug)
 	AnimPlayer.play("wobling")
 
+func debug(body):
+	area_ready = true
+
 func create_save_point(body):
-	var save_found:bool
-	var prof_name = global.get_global_scene("main").profile_name
-	if body.name == "player":
-		var savelist = SaveScript.show_save_dir()
-		if savelist.size() == 0:
-			save(0)
-		else:
-			for i in savelist:
-				if savelist[i][1] == prof_name:
-					print("найдена запись, перезапись файла сохранения ",i)
-					save(i)
-					save_found = true
-					break
-			if !save_found:
-				print("не найдена запись, запись нового сохранения ")
-				create_new_save_point()
+	if area_ready:
+		var save_found:bool
+		var prof_name = global.get_global_scene("main").profile_name
+		if body.name == "player":
+			var savelist = SaveScript.show_save_dir()
+			if savelist.size() == 0:
+				save(0)
+			else:
+				for i in savelist:
+					if savelist[i][1] == prof_name:
+						print("найдена запись, перезапись файла сохранения ",i)
+						save(i)
+						save_found = true
+						break
+				if !save_found:
+					print("не найдена запись, запись нового сохранения ")
+					create_new_save_point()
 	
 func create_new_save_point():
 	print("write")

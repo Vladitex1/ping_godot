@@ -11,6 +11,7 @@ var selected_slot_end_count: int = -1
 var open = false
 var mousetoggle: bool = true
 var button_num: int
+@onready var count_mouse_label: Object = $mouse_equip_item/countlable
 
 ##для работы меню взаимодействия
 var last_button: int = 0
@@ -137,20 +138,23 @@ func slotnum(slot_number:int) -> void:
 		var item_path = button_path.get_child(slot_number).get_child(0).get_child(1)
 		if mousetoggle == true: ##запоминается айди в руку
 			mouse_toggle()
-			$mouse_equip_item.visible = true
+			
 			selected_slot_id_start = item_path.get_slot_info(1)
-			selected_slot_start_count = item_path.get_slot_info(2)
+			selected_slot_start_count = item_path.get_slot_info(2) ##количество в ячейке из которой берем
+			if selected_slot_id_start > 0:
+				$mouse_equip_item.visible = true
+				count_mouse_label.text = str(item_path.get_slot_info(2)) ##перекидываем в label
 			match selected_slot_id_start:
-				-1:
+				-1: ##если берем из закрытой ячейки
 					reset_variable()
 					$mouse_equip_item.texture = itemlist.itemlist[0]["TEXTURE"]
-				0:
-					$mouse_equip_item.texture = itemlist.itemlist[0]["TEXTURE"]
+				0: ##если берем из пустой ячейки
 					reset_variable()
-				_:
+					$mouse_equip_item.texture = itemlist.itemlist[0]["TEXTURE"]
+				_: ##в останльных случаях
 					$mouse_equip_item.texture = itemlist.itemlist[selected_slot_id_start]["TEXTURE"]
 					selected_slot_start = slot_number
-					slot(selected_slot_start,0,selected_slot_start_count)
+					slot(selected_slot_start,0,0)
 		elif mousetoggle == false:
 			mouse_toggle()
 			selected_slot_end = slot_number

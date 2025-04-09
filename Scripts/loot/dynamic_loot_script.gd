@@ -5,6 +5,7 @@ extends Node2D
 @onready var texture = $TextureRect
 @export var item = loot_list.HEALTH
 var pickup_block:bool = true
+var pickup_wait: int = 0
 
 
 enum loot_list {
@@ -21,19 +22,19 @@ func _ready():
 		if item == i:
 			temp = i
 			texture.texture = list[i]["TEXTURE"]
-	pickup_block = true
+	await get_tree().create_timer(1.0).timeout
 
 func pickup(temp):
 	##Прикрутить добавление в инвентарь	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	var found:bool = false
+	var pickup_block:bool = false
 	for i in range(itemlist.inventory.size()):
 		if itemlist.inventory[i][0] == temp:
 			node.queue_free()
 			global.get_global_scene("inventory").get_child(0).slot(i,temp,itemlist.inventory[i][1]+1)
 			global.get_global_scene("inventory").get_child(0).inventory_save()
-			found = true
+			pickup_block = true
 			break
-	if !found:
+	if !pickup_block:
 		for i in range(itemlist.inventory.size()):
 			if itemlist.inventory[i][0] == 0:
 				node.queue_free()
@@ -43,9 +44,11 @@ func pickup(temp):
 			
 
 func zone_entered(body):
-	if body.name == "player" and !pickup_block:
-		pickup(temp)
+	if body.name == "player":
+		pickup_wait+=1
+		if pickup_wait > 1:
+			pickup(temp)
 		
 func zone_exited(body):
-	if body.name == "player" and pickup_block:
+	if body.name == "player":
 		pickup_block = false

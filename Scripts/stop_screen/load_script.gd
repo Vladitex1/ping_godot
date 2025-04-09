@@ -6,6 +6,7 @@ extends ScrollContainer
 @onready var Rnode = $VBoxContainer
 var savelist
 var IFT:bool = false
+var current_menu = -1
 
 func _ready():
 	savelist = SaveScript.show_save_dir()
@@ -89,6 +90,9 @@ func load_button(i:int):
 	var result: bool = false
 	result = await $"../../confirm_panel".confirm_show("LOAD SAVE?")
 	if result:
+		if current_menu == 0:
+			global.del_scene("start_menu")
+			global.add_scene("main1")
 		SaveScript.load_game(slot_id)
 
 func del_button(i:int):

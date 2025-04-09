@@ -1,13 +1,13 @@
+TextureRect
+Button
+Label
 Timer
 Control
-Button
 HBoxContainer
 LineEdit
 Node2D
 AnimationPlayer
 Sprite2D
-TextureRect
-Label
 CanvasLayer
 Panel
 TileMapLayer

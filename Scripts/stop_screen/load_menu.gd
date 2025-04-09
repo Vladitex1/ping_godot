@@ -6,7 +6,7 @@ func _ready():
 	
 	var name1 = $"../.."
 	name2 = name1.name
-	
+	$".".get_child(0).current_menu = 1
 	var back_load_but = $settings_menu/settings/Button_Back
 	back_load_but.connect("button_up",load_back_button)
 	

@@ -26,15 +26,16 @@ func create_button():
 	print("запись по новому id: ", save_id)
 	print("имя: ", str(profile_name_lideedit.get_text()))
 	
+	### СТАРТОВЫЕ ЗНАЧЕНИЯ
 	var profN = str(profile_name_lideedit.get_text())
-	var pos = Vector2(0,0)
+	var pos = Vector2(263, 279)
 	var key:int = 0
-	var hp:int = 0
-	var coin:int = 0
-	var door: Dictionary = {}
-	var inv: Dictionary = {}
+	var hp:int = 100
+	var coin:int = 5
+	var door: Dictionary = {1:[[1,false,false]],2:[[2,false,false]]}
+	var inv: Dictionary = {0:[1,1],1:[2,3],2:[3,6],3:[0,1],4:[-1,1],5:[-1,1],6:[-1,1],7:[-1,1],8:[-1,1],9:[-1,1],10:[-1,1],11:[-1,1],12:[-1,1],13:[-1,1],14:[-1,1],15:[-1,1]}
 	var save_name = "new_save"
-	var entities: Dictionary = {}
+	var entities: Dictionary = {0:["skeleton","(773.002, 158.1351)",0,1,150], 1:["skeleton","(794.5625, 463.9682)",1,1,150]}
 	SaveScript.create_save(save_id,profN,pos,key,hp,coin,door,inv,save_name,entities)
 	var result: bool = false
 	result = await $"../confirm_panel".confirm_show("Confirm?")

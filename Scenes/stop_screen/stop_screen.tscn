@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bkr7jbi6doumd"]
+[gd_scene load_steps=24 format=3 uid="uid://bkr7jbi6doumd"]
 
 [ext_resource type="Script" path="res://Scripts/stop_screen/stop_screen.gd" id="1_vxumt"]
 [ext_resource type="FontFile" uid="uid://dus86kp12bin7" path="res://fonts/Font1.ttf" id="2_bqap6"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" path="res://Scripts/stop_screen/window_menu.gd" id="17_mjnis"]
 [ext_resource type="Script" path="res://Scripts/logic/confirm_panel.gd" id="19_dx42u"]
 [ext_resource type="Theme" uid="uid://ciwnfws6sc4ds" path="res://Thems/main_menu.tres" id="20_8en8u"]
+[ext_resource type="Texture2D" uid="uid://23wurqxer0sb" path="res://assets/interface/stamina.png" id="20_a01ts"]
 [ext_resource type="Script" path="res://Scripts/console.gd" id="21_16mym"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vk14c"]
@@ -563,6 +564,25 @@ offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("19_dx42u")
+
+[node name="Control" type="Control" parent="control_module/confirm_panel"]
+layout_mode = 2
+
+[node name="bar" type="TextureProgressBar" parent="control_module/confirm_panel/Control"]
+z_index = 1
+custom_minimum_size = Vector2(72.53, 16)
+layout_mode = 0
+offset_left = -1.0
+offset_top = 182.0
+offset_right = 549.0
+offset_bottom = 224.0
+scale = Vector2(0.732, 0.495)
+max_value = 3.0
+value = 1.0
+rounded = true
+texture_progress = ExtResource("20_a01ts")
+
+[node name="Timer" type="Timer" parent="control_module/confirm_panel/Control"]
 
 [node name="Panel" type="Panel" parent="control_module/confirm_panel"]
 layout_mode = 2

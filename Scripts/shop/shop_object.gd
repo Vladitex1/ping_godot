@@ -1,5 +1,5 @@
 extends Node2D
-@export var shopLVL:int = 1
+@export var shopLVL:int
 var shop_ready:bool = false
 var shop_num: int
 func _ready():
@@ -19,7 +19,6 @@ func shop_enter():
 	global.visible_scene("hud",false)
 	global.visible_scene("inventory",false)
 	global.visible_scene("shop",true)
-	global.shop_lvl = shopLVL
 
 
 func create_shop_slots():
@@ -31,11 +30,14 @@ func create_shop_slots():
 func load_shop_info():
 	var node = $".".get_child(4)
 	for i in node.get_child_count():
-		slot(i,itemlist.shop_storage[shopLVL][i])
+		slot(i,itemlist.shop_storage[shopLVL][i],false)
 
-func slot(slotnum,num): ##задать содержимое слота (изначально)
+func slot(slotnum:int ,num:int,discription:bool): ##задать содержимое слота (изначально)
 	var node = $".".get_child(4)
-	node.get_child(slotnum).get_child(0).get_child(0).slot(num)
+	if num == -1:
+		num = 0
+	node.get_child(slotnum).get_child(0).disabled = true
+	node.get_child(slotnum).get_child(0).get_child(0).slot(num,false,discription)
 
 
 func body_entered(body):
@@ -44,6 +46,7 @@ func body_entered(body):
 		global.action_toggle = true
 		global.attack_block = true
 		shop_ready = true
+		global.shop_lvl = shopLVL
 
 func body_exited(body):
 	if str(body.name) == "player":

@@ -46,8 +46,8 @@ texture = ExtResource("2_d03s5")
 height = 3.0
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 4
+collision_layer = 14
+collision_mask = 14
 
 [node name="pickup" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_amcqt")

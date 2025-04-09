@@ -12,7 +12,7 @@ var drop_place = false
 func _ready():
 	lamp_detect.connect("body_entered",body_entered)
 	lamp_detect.connect("body_exited",body_exited)
-
+	
 func _process(delta):
 	update_pos(ready_update_pos,drop_place) ## обновление позиции предмета
 	if Input.is_action_just_released("special_use") and lamp_pickup and !global.hold_in_hands:
@@ -34,16 +34,24 @@ func update_pos(update_position: bool,drop_place: bool):
 	var pos = get_global_mouse_position() - global.get_player_pos()
 	if update_position:
 		position = global.get_player_pos() + Vector2(5,5)
+
 		drop_tex.position = get_local_mouse_position()
+
 		
 	if drop_place == true: ##если функция выбора позиции включено
 		drop_tex.visible = true
 		if (pos[0] > radius or pos[0] < radius * -1) or (pos[1] > radius or pos[1] < radius * -1):
+			
 			drop_tex.modulate = Color(1,0,0,1)
 			currect_position = false
 		else:
 			drop_tex.modulate = Color(1,1,1,0.5)
 			currect_position = true
+		
+
+
+	#print("Точка пересекается со стеной")
+
 
 func drop():
 	position = get_global_mouse_position()

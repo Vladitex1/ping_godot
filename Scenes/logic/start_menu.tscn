@@ -671,6 +671,7 @@ layout_mode = 2
 [node name="bar" type="TextureProgressBar" parent="control_module/confirm_panel/Control"]
 z_index = 1
 custom_minimum_size = Vector2(72.53, 16)
+layout_mode = 0
 offset_left = -1.0
 offset_top = 182.0
 offset_right = 549.0

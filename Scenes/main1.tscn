@@ -19,7 +19,6 @@
 [node name="main" type="Node2D"]
 process_priority = 1
 script = ExtResource("1_fjv78")
-profile_name = "vladitex1"
 
 [node name="Level" type="Node2D" parent="."]
 
@@ -122,11 +121,10 @@ script = ExtResource("12_kfuom")
 
 [node name="shop_object" parent="Objects/Shops" instance=ExtResource("9_bb57y")]
 position = Vector2(205, 122)
-shopLVL = 1
 
 [node name="shop_object2" parent="Objects/Shops" instance=ExtResource("9_bb57y")]
-position = Vector2(297, 123)
-shopLVL = 0
+position = Vector2(297, 122)
+shopLVL = 1
 
 [node name="Lights" type="Node2D" parent="Objects"]
 

@@ -11,15 +11,17 @@ var answer: bool = false
 var result: bool = false
 var time: int = 3
 
-func _process(delta: float) -> void:
-	bar.value = timer.time_left
+#func _process(delta: float) -> void:
+	#bar.value = timer.time_left
 
 func _ready():
-	bar.max_value = 3 
+	#bar.max_value = 3.0
 	button_yes.connect("button_down",func(): result = true)
 	button_yes.connect("pressed",func(): visible = false)
 	button_no.connect("button_down",func(): result = false)
 	button_no.connect("pressed",func(): visible = false)
+	button_yes.connect("button_down",func(): timer.start(0.01))
+	button_no.connect("button_down",func(): timer.start(0.01))
 	
 func confirm_show(text:String):
 	question_label.text = text
@@ -28,4 +30,3 @@ func confirm_show(text:String):
 	await timer.timeout
 	visible = false
 	return result
-	
